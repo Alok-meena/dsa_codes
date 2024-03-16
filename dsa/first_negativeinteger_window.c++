@@ -1,3 +1,4 @@
+#Approach 1...
 vector<long long> printFirstNegativeInteger(long long int A[],
                                              long long int N, long long int K) {
          deque<long long int> dq;
@@ -44,3 +45,37 @@ vector<long long> printFirstNegativeInteger(long long int A[],
          }
          return ans;
  }
+
+#Approach 2....
+
+( easy one )
+#include <queue>
+vector<int> firstNegative(vector<int> arr, int n, int k) {
+	// Write your code here.
+	deque<int>d;
+	vector<int>ans;
+	int i=0;
+	int j=0;
+	while(j<n){
+		if(arr[j]<0){
+			d.push_back(arr[j]);
+		}
+		if(j-i+1<k){
+			j++;
+		}
+		else if(j-i+1==k){
+			if(d.size()==0){
+ans.push_back(0);			}
+			else{
+							ans.push_back(d.front());
+							if(arr[i]==d.front()){
+								d.pop_front();
+							}
+
+			}
+													i++;j++;
+
+		}
+	}
+	return ans;
+}
