@@ -1,0 +1,126 @@
+queue using stack...
+
+class Queue {
+    // Define the data members(if any) here.
+    stack<int>s1;
+    stack<int>s2;
+    
+    public:
+    Queue() {
+        // Initialize your data structure here.
+    }
+
+    void enQueue(int val) {
+        // Implement the enqueue() function.
+        s1.push(val);
+    }
+
+    int deQueue() {
+        // Implement the dequeue() function.
+        if(s1.empty()){
+            return -1;
+        }
+        while(!s1.empty()){
+            s2.push(s1.top());
+            s1.pop();
+        }
+        int val=s2.top();
+        s2.pop();
+        while(!s2.empty()){
+            s1.push(s2.top());
+            s2.pop();
+        }
+        return val;
+    }
+
+    int peek() {
+        // Implement the peek() function here.
+        if(s1.empty()){
+            return -1;
+        }
+        while(!s1.empty()){
+            s2.push(s1.top());
+            s1.pop();
+        }
+        int val=s2.top();
+        while(!s2.empty()){
+            s1.push(s2.top());
+            s2.pop();
+        }
+        return val;
+    }
+
+    bool isEmpty() {
+        // Implement the isEmpty() function here.
+        if(s1.empty()){
+            return true;
+        }
+        return false;
+    }
+};
+
+
+
+stack using two queues....
+
+class Stack {
+	// Define the data members.
+    queue<int>q1;
+    queue<int>q2;
+
+   public:
+    Stack() {
+        // Implement the Constructor.
+    }
+
+    /*----------------- Public Functions of Stack -----------------*/
+
+    int getSize() {
+        // Implement the getSize() function.
+        int size=q1.size();
+        return size;
+    }
+
+    bool isEmpty() {
+        // Implement the isEmpty() function.
+        if(q1.empty()){
+            return true;
+        }
+        return false;
+    }
+
+    void push(int element) {
+        // Implement the push() function.
+        while(!q1.empty()){
+            q2.push(q1.front());
+            q1.pop();
+        }
+        q1.push(element);
+        while(!q2.empty()){
+            q1.push(q2.front());
+            q2.pop();
+        }
+    }
+
+    int pop() {
+        // Implement the pop() function.
+        if(q1.empty()){
+            return -1;
+        }
+        else{
+            int val=q1.front();
+            q1.pop();
+            return val;
+        }
+    }
+
+    int top() {
+        // Implement the top() function.
+        if(q1.empty()){
+            return -1;
+        }
+        else{
+            return q1.front();
+        }
+    }
+};
