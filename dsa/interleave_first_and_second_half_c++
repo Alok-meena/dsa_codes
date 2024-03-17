@@ -1,0 +1,67 @@
+ Interleave The First Half Of The Queue With The Second Half
+Problem statement
+You have been given a queue of integers. You need to rearrange the elements of the queue by interleaving the elements of the first half of the queue with the second half.
+
+Note :
+The given queue will always be of even length.
+For example :
+If N= 10
+and Q = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+then the output will be
+
+
+approach 1:
+
+  #include <bits/stdc++.h> 
+void interLeaveQueue(queue < int > & q) {
+    // Write your code here.
+    int n=q.size();
+    int *arr=new int[n];
+    for(int i=0;i<n;i++){
+        arr[i]=q.front();
+        q.pop();
+    }
+    int count=0;
+    int i=0;
+    int j=(n/2);
+    while(i<n/2 || j<n){
+        if(count%2==0){
+            q.push(arr[i]);
+            i++;
+        }
+        else if(count%2!=0){
+            q.push(arr[j]);
+            j++;
+        }
+        count++;
+    }
+    delete[]  arr;
+   
+    
+}
+
+approach 2:
+   using a queue
+
+  #include <bits/stdc++.h> 
+#include <queue>
+void interLeaveQueue(queue < int > & q) {
+    // Write your code here.
+    queue<int>newq;
+    int n=q.size();
+    for(int i=0;i<n/2;i++){
+        int val=q.front();
+        q.pop();
+        newq.push(val);
+    }
+    while(!newq.empty()){
+        int val1=newq.front();
+        newq.pop();
+        q.push(val1);
+        int val2=q.front();
+        q.pop();
+        q.push(val2);
+    }
+   
+    
+}
