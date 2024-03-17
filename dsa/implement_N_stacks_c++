@@ -1,4 +1,4 @@
-implement N stacks in a array 
+implement N stacks in a array of size S
 
 
 #include <bits/stdc++.h> 
