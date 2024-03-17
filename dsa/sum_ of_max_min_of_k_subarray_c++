@@ -1,0 +1,41 @@
+You are given an array consisting of N integers, and an integer, K. Your task is to determine the total sum of the minimum element and the maximum element of all subarrays of size K.
+
+Note :
+
+The array may contain duplicate elements.
+The array can also contain negative integers.
+The size of the array is at least 2.
+There exists at least one such subarray of size k.
+
+
+approach 1 : Brute force approach  (O(N2)) may cause tle 
+
+vector<int> ans;
+    
+    for(int i = 0; i < n; i++) {
+        int min = INT_MAX;
+        int max = INT_MIN;
+        int j = i;
+        int count = 0;
+        while(count < k && j < n) { // Adjust loop condition
+            if(nums[j] > max) {
+                max = nums[j];
+            }
+            if(nums[j] < min) {
+                min = nums[j];
+            }
+            j++;
+            count++;
+        }
+        
+        if(count == k) { // Only consider if the subarray size is exactly k
+            int sum = min + max;
+            ans.push_back(sum);
+        }
+    }
+    
+    long long totalSum = 0;
+    for(int i = 0; i < ans.size(); i++) {
+        totalSum += ans[i];
+    }
+    return totalSum;
