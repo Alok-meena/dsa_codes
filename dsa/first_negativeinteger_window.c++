@@ -35,7 +35,7 @@ vector<long long> printFirstNegativeInteger(long long int A[],
 	     //to 0 vala out of loop ho gya because ye <k hona chaihe to be in the window yhi condition imp hai then simple ager current element negative h
 	     // to q me dal do aor fir se q ki size>0 to ans me dal do nhi h to 0 dal to if not found ;
              if(!dq.empty() && (i - dq.front())>=K ) {
-                 dq.pop_front();
+                 dq.pop_front(); // DHYAN SE front element ko pop krnege na ki pop_back ookkkk
              }
              
              //then push current element
@@ -43,7 +43,7 @@ vector<long long> printFirstNegativeInteger(long long int A[],
                 dq.push_back(i);
              
             // put in ans
-            if(dq.size() > 0) {
+            if(dq.size() > 0) { // queue ki size check karna na ki q.empty() karna...
                  ans.push_back(A[dq.front()]);
             }
             else
