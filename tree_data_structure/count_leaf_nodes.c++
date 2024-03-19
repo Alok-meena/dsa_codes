@@ -17,3 +17,6 @@ void inorder(BinaryTreeNode<int> *root,int &count){
     inorder(root,count);
     return count;
 }
+
+
+time complexity is O(N).....
