@@ -16,4 +16,4 @@ class Solution{
 
 
 T.C:-O(N)
-S.C:-O(S) where s is the no. of recursion calls
+S.C:-O(H) where h is the height of the tree;
