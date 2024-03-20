@@ -46,13 +46,14 @@ class Solution {
             return p;
         }
         
-        pair<int,int>left=diameterFast(root->left);
+        pair<int,int>left=diameterFast(root->left);// to lef vale me lef ke sare diameter aa jayenge aor same for right aor left ke second me height hogi same
+        //for right
         pair<int,int>right=diameterFast(root->right);
         
         
         int a1=left.first;//getting diameter of first
         int a2=right.first;//getting diameter of second
-        int a3=left.second + right.second + 1;//getting height of left and right subtree
+        int a3=left.second + right.second + 1;//getting height of left and right subtree #### if no. of edges we have to calculate just remove this +1 from here
         // then adding 1 also in it to include the root node
         
         pair<int,int>ans;//then making ans to return it
