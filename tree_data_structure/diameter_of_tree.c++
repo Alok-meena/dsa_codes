@@ -69,3 +69,6 @@ class Solution {
         return diameterFast(root).first;//aor return first krvaya because first contain the diameter and second one height
     }
 };
+
+T.C:-O(N)
+S.C:-O(H) H--->height of the tree
