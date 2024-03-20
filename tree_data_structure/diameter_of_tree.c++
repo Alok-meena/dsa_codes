@@ -66,6 +66,6 @@ class Solution {
     int diameter(Node* root) {
         
         
-        return diameterFast(root).first;
+        return diameterFast(root).first;//aor return first krvaya because first contain the diameter and second one height
     }
 };
