@@ -71,12 +71,12 @@ public:
             return ans;
         }
         ans.push_back(root->data);
-        lefttraversal(root->left,ans);
+        lefttraversal(root->left,ans);//ye only left elements ke liye h 
         
-        leaftraversal(root->left,ans);
-        leaftraversal(root->right,ans);
+        leaftraversal(root->left,ans); // to jb call kiya pahle left subtree ke liye then isme left aor right ko function sambhal lega
+        leaftraversal(root->right,ans);// then right subtree isme bhi function sambhal lega
         
-        righttraversal(root->right,ans);
+        righttraversal(root->right,ans);// then right most elements at boundary ko print krne ke liye  ye function
         
         return ans;
     }
