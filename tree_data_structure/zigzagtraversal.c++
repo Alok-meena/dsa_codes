@@ -18,19 +18,20 @@ class Solution{
     vector <int> zigZagTraversal(Node* root)
     {
     	// Code here
-    	vector<int>result;
+    	vector<int>result;//to store the final result
     	if(root==NULL){
     	    return result;
     	}
     	queue<Node*>q;
     	q.push(root);
     	
-    	bool lefttoright=true;
+    	bool lefttoright=true;// ye use kiya mtlb pahle ke liye true to normal left to right traversal in level order then aage false kr denge to reverse 
+            //me right to left traversal hoga
     	
     	while(!q.empty()){
     	    int size=q.size();
     	     
-    	    vector<int>ans(size);
+    	    vector<int>ans(size);//ans ko size dena jruri h because isme hm data dal rhe hbar bar har ek level ka then isme se hm result me dal rhe aage
     	    //Level Process
 
     	    for(int i=0;i<size;i++){
@@ -38,8 +39,8 @@ class Solution{
     	        q.pop();
     	         //normal insert or reverse insert 
 
-    	        int index=lefttoright?i:size-i-1;
-    	        ans[index]=frontnode->data;
+    	        int index=lefttoright?i:size-i-1; /// vhi mtlb ki ager lefttoright true then i only in left ot right ow in reverse order
+    	        ans[index]=frontnode->data;//fir answer me dal diya
     	        
     	        if(frontnode->left){
     	            q.push(frontnode->left);
@@ -52,8 +53,10 @@ class Solution{
 
     	    lefttoright=!lefttoright;
     	    for(auto i:ans){
-    	        result.push_back(i);
-    	    }
+    	        result.push_back(i);//result.push_back(i): This line adds each element i from the ans vector to the result vector using the push_back function.
+    	    }//auto i: This syntax is a range-based for loop in C++, where auto is used to automatically infer the type of elements in ans
+                ///very imp that if we have to append the entire ans vector in result then we have to return vector<vector<int>> here we dont have to return 
+                //vector of vector that's why we push one by one
     	}
     	return result;
     }
