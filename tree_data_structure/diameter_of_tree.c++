@@ -58,7 +58,7 @@ class Solution {
         
         pair<int,int>ans;//then making ans to return it
         ans.first=max(a1,max(a2,a3));//same as old concept
-        ans.second=max(left.second,right.second)+1;
+        ans.second=max(left.second,right.second)+1; // ye hmne height bhejne ke liye kiya hai bs use nhi hui because we want diameter which we get from first
         
         return ans;
     }
