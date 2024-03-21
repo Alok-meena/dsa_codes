@@ -69,5 +69,5 @@ pair<bool,int> balance(TreeNode<int>* root){
 }
 bool isBalancedBT(TreeNode<int>* root){
     // Write your code here.
-    return balance(root).first;
+    return balance(root).first;  //O(N)
 }
