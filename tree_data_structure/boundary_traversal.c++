@@ -70,7 +70,7 @@ public:
         if(root==NULL){
             return ans;
         }
-        ans.push_back(root->data);
+        ans.push_back(root->data); // tree ke root ki value store krayi then baki functions me left or right subtree ki roots hai vo na ki ye vali
         lefttraversal(root->left,ans);//ye only left elements ke liye h 
         
         leaftraversal(root->left,ans); // to jb call kiya pahle left subtree ke liye then isme left aor right ko function sambhal lega
