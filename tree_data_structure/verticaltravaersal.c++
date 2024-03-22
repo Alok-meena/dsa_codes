@@ -17,13 +17,17 @@ class solution {
     vector<int> verticalOrder(Node *root)
     {
         //Your code here
+        vector<int>ans;//answer jo hai vector type ka return karna hai to bna liya
+        if(root==NULL){
+            return ans;
+        }
+
         map<int,map<int,vector<int>>>nodes;// to pahla int btayega horizontal distance doosra konsi level h
         // aor then we have a list of nodes or node->data
         queue<pair<Node*,pair<int,int>>>q;// to queue ka use kiya for level order traversal jo node ke sath
         //sath pair contain krega pahla horizontal distance aor doosra level ko darshayega
         // aor queue bhi pair store kr rhi to pair lga diya
         
-        vector<int>ans;//answer jo hai vector type ka return karna hai to bna liya
         //then push the fisrt node and we know that at starting level is 0 and horizontal distance hd is also 0
         q.push(make_pair(root,make_pair(0,0)));
         while(!q.empty()){
