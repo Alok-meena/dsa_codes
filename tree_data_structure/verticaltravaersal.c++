@@ -37,7 +37,7 @@ class solution {
             int hd=temp.second.first;// and temp ke second ke first me hd and second me level
             int level=temp.second.second;
             
-            nodes[hd][level].push_back(frontnode->data);//yha vector me value dal rhe isliye pushback aayega
+            nodes[hd][level].push_back(frontnode->data);//yha vector me value dal rhe isliye pushback aayega aor [hd][level] se vecetor tk pahuche h hm
             //to kya kiya hd level likha to map me vector tk pahuch gye to usme ans dal diya
             if(frontnode->left){
                 q.push(make_pair(frontnode->left,make_pair(hd-1,level+1)));// to hd left left me -- hoga and level har ek level ke sath increase by 1
