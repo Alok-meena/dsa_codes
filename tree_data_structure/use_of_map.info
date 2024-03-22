@@ -1,0 +1,2 @@
+Map is use for reduce the time complexity.
+When we have to compare thing and for that we use looping which have more complexity  (O(NXM)) so we replace it using map by which their complexity educe to O(N) .
