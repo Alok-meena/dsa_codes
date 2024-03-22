@@ -55,3 +55,11 @@ class Solution
     }
 
 };
+
+Expected Time Complexity: O(NlogN)
+Expected Auxiliary Space: O(N).
+
+
+but in reality of our code
+Time Complexity: O(n)
+Space Complexity: O(n)
