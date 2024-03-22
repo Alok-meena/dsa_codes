@@ -54,6 +54,6 @@ public:
     }
 };
 
-Time Complexity: O(n)
+Time Complexity: O(n)//in case of worst case for skewed tree and ow it is also n becasue we have to traverse each and every node of the tree
  Auxiliary Space: O(n)
 
