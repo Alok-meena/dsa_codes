@@ -17,32 +17,30 @@ non adjacent.
 
 
 
+
 class Solution{
   public:
     //Function to return the maximum sum of non-adjacent nodes.
-    pair<int,int> solve(Node* root) {
-        //base case
-        if(root == NULL) {
-            pair<int,int> p = make_pair(0,0);
+    pair<int,int> solve(Node *root){
+        if(root==NULL){
+            pair<int,int>p=make_pair(0,0);
             return p;
         }
         
-        pair<int,int> left = solve(root->left);
-        pair<int,int> right = solve(root->right);
+        pair<int,int>left=solve(root->left);
+        pair<int,int>right=solve(root->right);
         
-        pair<int,int> res;
-        
-        res.first = root->data + left.second + right.second;
-        
-        res.second = max(left.first, left.second) + max(right.first, right.second);
-        
-        return res;
-        
+        pair<int,int>ans;
+        ans.first=root->data+left.second+right.second;// yha pe root ko include kiya to baki jo return aaya hai uske first ko ignore / exclude and 
+            //aor second ko utha lo
+        ans.second=max(left.first,left.second)+max(right.first,right.second);// then second me hm current ko ignore krenge to bche hue sb me se max le lenge
+        return ans;
     }
+    
     int getMaxSum(Node *root) 
     {
-        pair<int,int> ans = solve(root);
-        return max(ans.first, ans.second);
+        pair<int,int>ans=solve(root);//to hmne ans me int,int bnaya jisme pahla vala store krega by including current and excluding other to uper dekho
+        return max(ans.first,ans.second);
     }
 };
 
