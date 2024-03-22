@@ -61,3 +61,6 @@ class solution {
         return ans;
     }
 };
+
+Expected Time Complexity: O(N*log(N)) // but yha O(N) hi hai
+Expected Auxiliary Space: O(N)
