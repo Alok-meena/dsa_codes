@@ -44,3 +44,46 @@ vector<int> leftView(Node *root)
 
 Time Complexity: O(N).
 Auxiliary Space: O(N).
+
+
+Right view of the tree:-
+
+            10
+    /   \
+  20     30
+ /   \
+40  60 
+Output: 10 30 60
+
+          
+class Solution
+{
+    private:
+    void solve(Node *root,vector<int>&v,int level){
+    if(root==NULL){
+        return ;
+    }
+    
+    if(level==v.size()){
+        v.push_back(root->data);
+    }
+    
+        solve(root->right,v,level+1); // just one change pahle right ke liye call karna aor right to left traverse karna
+
+    
+    solve(root->left,v,level+1);
+}
+    public:
+    //Function to return list containing elements of right view of binary tree.
+    vector<int> rightView(Node *root)
+    {
+       // Your Code here
+       vector<int>v;
+   solve(root,v,0);
+   return v;
+    }
+};
+
+
+ Time Complexity: O(N).
+ Auxiliary Space: O(Height of the Tree).
