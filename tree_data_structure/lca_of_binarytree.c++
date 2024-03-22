@@ -52,7 +52,7 @@ class Solution
 
 
 Time Complexity:O(N).
-Auxiliary Space:O(Height of Tree).
+Auxiliary Space:O(Height of Tree). //and O(N) in case of skewed tree
 
 
 //And instead of node if we have to return a int value then the code is like :- 
