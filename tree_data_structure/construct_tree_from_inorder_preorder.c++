@@ -66,6 +66,10 @@ class Solution{
  Auxiliary Space: O(N).
 
 
+in these questions, maps is useful in cases that have no equal values of nodes.
+but if there are... then you've to go for the first approach whose TC is o(n^2). Correct me if I'm wrong
+If you're trying with maps and gfg is not accepting, do it by the 1st approach
+
 approach 2:-
 using a map instead of finding the position of the element in N time which cause t.c to N2 we can use mapping 
 
@@ -105,3 +109,22 @@ class Solution{
         return ans;
     }
 };
+
+T.c:-O(N)
+S.C:-O(N)
+
+
+
+@aayushiagarwal8797
+10 months ago
+Thank you sir :), for making tree simple and understandable .
+I would like to highlight one point : 
+Mapping solution will give wrong answer in case of duplicated nodes..... in such case , we can optimize findpos() function by checking from  inStart to inEND ..
+ int findpos(int in[],int x,int n,int s,int e)
+    {
+        for(int i=s;i<=e;i++)
+        {
+            if(in[i]==x)
+            return i;
+        }
+    }😇
