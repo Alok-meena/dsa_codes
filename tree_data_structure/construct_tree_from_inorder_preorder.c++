@@ -110,7 +110,7 @@ class Solution{
     }
 };
 
-T.c:-O(N)
+T.c:-O(N*logN)  // because insertion complexiyt of map is logN
 S.C:-O(N)
 
 
