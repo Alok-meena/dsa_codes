@@ -111,13 +111,11 @@ class Solution{
 };
 
 T.c:-O(N*logN)  // because insertion complexiyt of map is logN
-S.C:-O(N)
+S.C:-O(N) // N of map + N of recursive calls
 
 
 
-@aayushiagarwal8797
-10 months ago
-Thank you sir :), for making tree simple and understandable .
+ for making tree simple and understandable .
 I would like to highlight one point : 
 Mapping solution will give wrong answer in case of duplicated nodes..... in such case , we can optimize findpos() function by checking from  inStart to inEND ..
  int findpos(int in[],int x,int n,int s,int e)
