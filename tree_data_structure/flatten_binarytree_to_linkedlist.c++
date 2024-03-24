@@ -53,7 +53,7 @@ class Solution
                 }
                 pred->right=curr->right;
                 curr->right=curr->left;
-                curr->left=NULL;
+                curr->left=NULL;// because in ques mentioned that curr ke left koo null krte rhna
             }
             curr=curr->right;
         }
