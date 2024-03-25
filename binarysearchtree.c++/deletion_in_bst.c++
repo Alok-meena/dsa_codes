@@ -131,6 +131,8 @@ node *deletefrombst(node *root,int val){
             // to ye vha jake easily delete kr dega
             return root;
 
+            // to max value from left subtree hogi rightmost node and right subtree ki min value hogi leftmost node okkk
+
 
             //code to take max value from left part 
             // int maxi=maxvalue(root->left)->data;
