@@ -100,17 +100,17 @@ node *deletefrombst(node *root,int val){
     if(root==NULL){
         return root;
     }
-    if(root->data==val){
+    if(root->data==val){ // to value mil gyi then 4 cases h
         //0 child
 
-        if(root->left==NULL && root->right==NULL){
+        if(root->left==NULL && root->right==NULL){// ager 0 child simply delete it
             delete root;
             return NULL;
         }  
 
         // 1 child
         //left child
-        if(root->left!=NULL && root->right==NULL){
+        if(root->left!=NULL && root->right==NULL){// if one child either left or right then store the child and delete the root and return the child
             node *temp=root->left;
             delete root; 
             return temp;
@@ -123,11 +123,20 @@ node *deletefrombst(node *root,int val){
         }
         //two child
 
-        if(root->left!=NULL && root->right!=NULL){
+        if(root->left!=NULL && root->right!=NULL){// and if two child so either take max value from left or min value from right and replace the root value
+            // with it in this case we have taken min value from right
             int mini=minvalue(root->right)->data;
-            root->data=mini;
-            root->right=deletefrombst(root->right,mini);
+            root->data=mini;//then root ke data ko replace kr diya min value se
+            root->right=deletefrombst(root->right,mini);// then we also have to delete that min value in right subtree to deletenode function ko call kr diya
+            // to ye vha jake easily delete kr dega
             return root;
+
+
+            //code to take max value from left part 
+            // int maxi=maxvalue(root->left)->data;
+            // root->data=maxi;
+            // root->left=deletefrombst(root->left,maxi);
+            // return root;
         }
     }
     else if(root->data>val){
