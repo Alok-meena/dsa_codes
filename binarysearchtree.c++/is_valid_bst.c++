@@ -20,6 +20,8 @@ se +infinite tk bs ow return false
 t.c:- O(N)
 s.c:-O(H) h is the height of the tree
 
+to bs vhi check kiya ki elements us rang me hai ki nhi
+
 
 
 
