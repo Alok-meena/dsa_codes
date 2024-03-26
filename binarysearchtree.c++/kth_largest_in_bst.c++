@@ -1,4 +1,4 @@
-
+morris traversal is not possible in this case
 
 
 void rec(TreeNode<int>*root,int& k,int &cnt,int &ans)
