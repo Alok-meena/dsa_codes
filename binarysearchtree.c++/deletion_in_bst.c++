@@ -123,6 +123,8 @@ node *deletefrombst(node *root,int val){
         }
         //two child
 
+        // to only two child ke case me node ko either inorder predecessor or inorder successor se replace krenge 
+
         if(root->left!=NULL && root->right!=NULL){// and if two child so either take max value from left or min value from right and replace the root value
             // with it in this case we have taken min value from right
             int mini=minvalue(root->right)->data;
