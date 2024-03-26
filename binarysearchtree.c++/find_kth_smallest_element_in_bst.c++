@@ -1,3 +1,42 @@
+approach 1:- using a vector 
+
+void inorder(BinaryTreeNode<int>* root, vector<int>& inTraversal)
+{
+	if (root == NULL)
+	{
+		return;
+	}
+
+	// Recurse over left subtree. 
+	inorder(root -> left, inTraversal);
+
+    inTraversal.push_back(root -> data);
+
+	// Recurse over right subtree.
+	inorder(root -> right, inTraversal);
+}
+int kthSmallest(BinaryTreeNode<int>* root, int k) {
+    // Write your code here.
+    // int i=1;
+    // return morristraversal(root,k,i);
+
+    vector <int> inTraversal;
+
+	inorder(root, inTraversal);
+
+	int n = inTraversal.size();
+
+	if (k > n)
+	{
+		return -1;
+	}
+	
+	return inTraversal[k-1];// k-1 if 0 based indexing is there
+   
+}
+
+
+
 int solve(BinaryTreeNode<int>*root,int &i,int k){
     if(root==NULL){
         return -1;
