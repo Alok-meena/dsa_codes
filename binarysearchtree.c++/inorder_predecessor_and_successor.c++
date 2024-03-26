@@ -30,6 +30,8 @@ pair<int, int> predecessorSuccessor(TreeNode *root, int key){
     pair<int,int>ans=make_pair(pre,succ);
     return ans;
 } 
+t.c:-O(N)
+s.c:-O(1)
 
 don't know why this code cause tle for some cases....
 
