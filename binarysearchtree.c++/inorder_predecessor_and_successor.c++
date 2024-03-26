@@ -1,187 +1,167 @@
-User
-TreeNode * minvalue(TreeNode * root){
-    TreeNode * temp=root;
-    while(temp->left!=NULL){
-        temp=temp->left;
-    }
-    return temp;
-}
-
-TreeNode * maxvalue(TreeNode * root){
-    TreeNode *temp=root;
-    while(temp->right!=NULL){
-        temp=temp->right;
-    }
-    return temp;
-}
-TreeNode * search(TreeNode * root, int val) {
-    if (root == NULL || root->data == val)
-        return root;
-    if (root->data < val)
-        return search(root->right, val);
-    return search(root->left, val);
-}
-TreeNode * inorderPredecessor(TreeNode * root, int val) {
-    TreeNode * target = search(root, val);
-    if (target == NULL)
-        return NULL;
-    if (target->left == NULL)
-        return NULL; // No predecessor exists if the target has a left subtree
-    return maxvalue(target->left);
-}
-TreeNode * inorderSuccessor(TreeNode * root, int val) {
-    TreeNode * target = search(root, val);
-    if (target == NULL)
-        return NULL;
-    if (target->right == NULL)
-        return NULL;
-    return minvalue(target->right); 
-}
 pair<int, int> predecessorSuccessor(TreeNode *root, int key){
-    TreeNode *successor = inorderSuccessor(root, key);
-    TreeNode *predecessor = inorderPredecessor(root, key);
+    TreeNode *temp=root;
 
-    int a = (successor != NULL) ? successor->data : -1; // Return -1 if no successor exists
-    int b = (predecessor != NULL) ? predecessor->data : -1; // Return -1 if no predecessor exists
+    int pre=-1;
+    int succ=-1;
 
-    return {b,a};
-}
+    while(temp->data!=key){
+        if(temp->data>key){
+            succ=temp->data;
+            temp=temp->left;
+        }
+        else{
+            pre=temp->data;
+            temp=temp->right;
+        }
+    }
+
+    TreeNode * leftsubtree=temp->left;
+    while(leftsubtree!=NULL){
+        pre=leftsubtree->data;
+        leftsubtree=leftsubtree->right;
+    }
+
+    TreeNode *rightsubtree=temp->right;
+    while(rightsubtree!=NULL){
+        succ=rightsubtree->data;
+        rightsubtree=rightsubtree->left;
+    }
+
+    pair<int,int>ans=make_pair(pre,succ);
+    return ans;
+} 
+
+don't know why this code cause tle for some cases....
+
+// to inorder pre hoga left subtree me se max value and inorder successor is min value from right subtree
 
 
 
+appraoch 2:----
 
-
-
-
-
-
-There is BST given with the root node with the key part as an integer only. You need to find the in-order successor and predecessor of a given key. If either predecessor or successor is not found, then set it to NULL.
-
-Note:- In an inorder traversal the number just smaller than the target is the predecessor and the number just greater than the target is the successor. 
-
-Example 1:
-
-Input:
-      8
-    /   \
-   1     9
-    \     \
-     4    10
-    /
-   3
-key = 8 Output: 
-4 9 Explanation: 
-In the given BST the inorder predecessor of 8 is 4 and inorder successor of 8 is 9.
-
-class Solution
+    
+pair<int, int> predecessorSuccessor(TreeNode *root, int key)
 {
-    private:
-    Node *minvalue(Node *root){
-    Node *temp=root;
-    while(temp->left != NULL){
-        temp=temp->left;
-    }
-    return temp;
-}
+    int predecessor = -1;
+    int successor = -1;
 
-Node *maxvalue(Node *root){
-    Node *temp=root;
-    while(temp->right != NULL){
-        temp=temp->right;
-    }
-    return temp;
-}
+    // Initializing temporary node with head.
+    TreeNode *temp = root;
 
-Node *search(Node *root, int key) {
-    if (root == NULL || root->key == key)
-        return root;
-    if (root->key < key)
-        return search(root->right, key);
-    return search(root->left, key);
-}
-
-Node *inorderPredecessor(Node *root, int key) {
-    Node *target = search(root, key);
-
-    if (target == NULL) {
-        // If target doesn't exist, traverse the tree to find the immediate larger element
-        Node *predecessor = NULL;
-        Node *current = root;
-
-        while (current != NULL) {
-            if (current->key > key) {
-                current = current->left;
-            } else {
-                predecessor = current;
-                current = current->right;
-            }
-        }
-        return predecessor;
-    }
-
-    if (target->left != NULL) {
-        return maxvalue(target->left);
-    }
-
-    Node *predecessor = NULL;
-    while (root != NULL) {
-        if (key > root->key) {
-            predecessor = root;
-            root = root->right;
-        } else if (key < root->key) {
-            root = root->left;
-        } else {
-            break;
-        }
-    }
-    return predecessor;
-}
-
-Node *inorderSuccessor(Node *root, int key) {
-    Node *target = search(root, key);
-
-    if (target == NULL) {
-        // If target doesn't exist, traverse the tree to find the immediate smaller element
-        Node *successor = NULL;
-        Node *current = root;
-
-        while (current != NULL) {
-            if (current->key < key) {
-                current = current->right;
-            } else {
-                successor = current;
-                current = current->left;
-            }
-        }
-        return successor;
-    }
-
-    if (target->right != NULL) {
-        return minvalue(target->right);
-    }
-
-    Node *successor = NULL;
-    while (root != NULL) {
-        if (key < root->key) {
-            successor = root;
-            root = root->left;
-        } else if (key > root->key) {
-            root = root->right;
-        } else {
-            break;
-        }
-    }
-    return successor;
-}
-
-    public:
-    void findPreSuc(Node* root, Node*& pre, Node*& suc, int key)
+    // Traversing in tree.
+    while (temp != NULL)
     {
-        // Your code goes here
-        pre=inorderPredecessor(root,key);
-        suc=inorderSuccessor(root,key);
+        if (key > temp->data)
+        {
+            // Updating predecessor.
+            predecessor = temp->data;
+            temp = temp->right;
+        }
+        else
+        {
+            temp = temp->left;
+        }
     }
-};
 
- Time Complexity: O(Height of the BST).
- Auxiliary Space: O(Height of the BST).
+    temp = root;
+
+    // Traversing in tree.
+    while (temp != NULL)
+    {
+        if (key >= temp->data)
+        {
+            temp = temp->right;
+        }
+        else
+        {
+            // Updating successor.
+            successor = temp->data;
+            temp = temp->left;
+        }
+    }
+
+    return make_pair(predecessor, successor);
+}
+
+Time Complexity
+O(N),  where ‘N’ is the number of nodes in the BST.
+
+In the worst case(skewed tree), we will have to traverse all the nodes in the BST. Hence the time complexity will be O(N).
+
+Space Complexity
+O(1), i.e. we are using constant space.
+
+We are not using any extra space. Hence, the space complexity is constant.
+
+
+approach 2:-
+
+
+    
+INORDER TRAVERSAL
+The fact that all the data values are unique makes the solution look very intuitive.
+We can simply store the inorder traversal of the given tree in the array, and find the element present before and after the given node in the array.
+For every node, its left subtree is visited recursively, and then the node itself is visited(the data is stored in the array), and then its right subtree.
+After the traversal, we can find the given node in the inorder array and return its predecessor and successor, if any.
+Time Complexity
+O(N),  where ‘N’ is the number of nodes in the BST.
+
+ 
+
+As we are traversing each node of the BST once, the time complexity will be linear.
+
+Space Complexity
+O(N), where ‘N’ is the number of nodes in the BST.
+
+ 
+
+In the worst case (skewed trees), we will have all the nodes of the BST in the recursion stack. 
+
+Also, the maximum possible size of the array used to store inorder traversal will be equal to N. Hence, the space complexity is linear.
+
+
+
+void inorder(TreeNode *root, vector<int> &inorderArray)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+
+    inorder(root->left, inorderArray);
+
+    inorderArray.push_back(root->data);
+
+    inorder(root->right, inorderArray);
+}
+
+pair<int, int> predecessorSuccessor(TreeNode *root, int key)
+{
+    // To store the inorder traversal of the BST.
+    vector<int> inorderArray;
+
+    inorder(root, inorderArray);
+
+    int predecessor = -1, successor = -1;
+
+    // Finding predecessor.
+    for (int i = 0; i < inorderArray.size(); i++)
+    {
+        if (inorderArray[i] < key)
+        {
+            predecessor = inorderArray[i];
+        }
+    }
+
+    // Finding successor.
+    for (int i = inorderArray.size() - 1; i >= 0; i--)
+    {
+        if (inorderArray[i] > key)
+        {
+            successor = inorderArray[i];
+        }
+    }
+
+    // We are returning here.
+    return {predecessor, successor};
+}
