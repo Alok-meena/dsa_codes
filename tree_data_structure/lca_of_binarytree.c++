@@ -31,7 +31,7 @@ class Solution
        }
        
        if(root->data==n1 || root->data==n2){
-           return root;
+           return root;// because vo khud hi ancestor hoga ager data equal ho gya root ke
        }
        
        Node *leftans=lca(root->left,n1,n2);
