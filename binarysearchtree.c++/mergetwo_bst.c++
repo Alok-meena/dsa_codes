@@ -107,6 +107,8 @@ s.c:-O(m+n) where m and n is the size of both bst vector storing inorder
 
 
 2nd approach using doubly linked list
+
+//bst to dll conversion using recursion
 void converIntoSortedDLL(TreeNode* root,TreeNode *&head){
     //base case
     if(root==NULL){
@@ -122,6 +124,8 @@ void converIntoSortedDLL(TreeNode* root,TreeNode *&head){
     converIntoSortedDLL(root->left,head);
 }
 
+
+// mergetwo linked list
 TreeNode* mergeLinkedList(TreeNode* head1,TreeNode* head2){
     TreeNode *head=NULL;
     TreeNode *tail=NULL;
