@@ -10,7 +10,7 @@ void inorder(TreeNode *root,vector<int>&in){
 
 }
 vector<int> mergettwosortedlist(vector<int>& a, vector<int>& b) {
-    vector<int> ans;
+    vector<int> ans(a.size()+b.size());
     int i = 0, j = 0;
 
     while (i < a.size() && j < b.size()) {
