@@ -63,11 +63,11 @@ class heap{
             int leftindex=2*i;
             int rightindex=2*i+1;
 
-            if(leftindex<size && arr[leftindex]>arr[i]){
+           if(leftindex<size && arr[leftindex]>arr[i] && arr[leftindex]>arr[rightindex]){
                 swap(arr[i],arr[leftindex]);
                 i=leftindex;
             }
-            else if(rightindex<size && arr[rightindex]>arr[i]){
+            else if(rightindex<size && arr[rightindex]>arr[i]&& arr[rightindex]>arr[leftindex]){
                 swap(arr[i],arr[rightindex]);
                 i=rightindex;
             }
@@ -92,7 +92,7 @@ void heapify(int arr[],int n,int i){
         largest=right;
     }
 
-    if(largest!=i){
+    if(largest!=i){// ager ye condition satisfy ho jayegi mtlb hme swap krna hai node apni shi position pe nhi hai 
         swap(arr[largest],arr[i]);
         heapify(arr,n,largest);
     }
@@ -119,7 +119,8 @@ int main(){
     h.print();
     h.deletefromheap();
 
-    int arr[6]={-1,54,53,55,52,50};
+    int arr[6]={-1,54,53,55,52,50};//to ye 1 based indexing me krte hai to simplify calculations jo parent node left
+    // right child etc ke liye tha 0 based me nhi karna hai ye
     int n=5;
     for(int i=n/2;i>0;i--){
         heapify(arr,n,i);
