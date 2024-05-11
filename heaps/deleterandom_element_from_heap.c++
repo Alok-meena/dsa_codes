@@ -29,6 +29,28 @@ void deleteRandom(int arr[], int index, int &n) {
     if (index * 2 <= n) {
         heapify(arr, index, n);
     }
+
+    //instead of this heapify u can use this the following code also
+    int i=1;
+    int size=n;
+        while(i<size){
+            int leftindex=2*i;
+            int rightindex=2*i+1;
+
+            if(leftindex<size && arr[leftindex]>arr[i]){
+                swap(arr[i],arr[leftindex]);
+                i=leftindex;
+            }
+            else if(rightindex<size && arr[rightindex]>arr[i]){
+                swap(arr[i],arr[rightindex]);
+                i=rightindex;
+            }
+            else{
+                return;
+            }
+
+
+        }
 }
 
 void print(int arr[], int n) {
