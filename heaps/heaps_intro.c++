@@ -85,7 +85,7 @@ void heapify(int arr[],int n,int i){
     int left=2*i;
     int right=2*i+1;
 
-    if(left<=n && arr[largest]<arr[left]){
+    if(left<=n && arr[largest]<arr[left]){// to yha pe aor niche left<=n hai equal to hai for 1 based indexing and < only for 0 based indexing
         largest=left;
     }
     if(right<=n && arr[largest]<arr[right]){
@@ -105,7 +105,7 @@ void heapsort(int arr[],int n){
         swap(arr[size],arr[1]);
         size--;
 
-        heapify(arr,size,1);
+        heapify(arr,size,1);//ham always 1st element ko hi heapify kr rhe hai
     }
 }
 int main(){
@@ -135,6 +135,46 @@ int main(){
     cout<<"printing sorted list..."<<endl;
     for(int i=1;i<=n;i++){
         cout<<arr[i]<<" ";
+    }
+
+
+
+     //priority queue works as max heap
+    priority_queue<int>pq;
+    pq.push(4);
+    pq.push(2);
+    pq.push(5);
+    pq.push(3);
+
+    cout<<"max element of heap:"<<pq.top()<<endl;
+    pq.pop();
+    cout<<"max element of heap:"<<pq.top()<<endl;
+
+    cout<<"size of the max heap:"<<pq.size()<<endl;
+    if(pq.empty()){
+        cout<<"heap is empty..."<<endl;
+    }
+    else{
+        cout<<"heap is not empty..."<<endl;
+    }
+
+    //min heap
+    cout<<"implementing minheap using priority queue..."<<endl;
+    priority_queue<int,vector<int>,greater<int>>minheap;
+    minheap.push(4);
+    minheap.push(2);
+    minheap.push(5);
+    minheap.push(3);
+    cout<<"min element of heap:"<<minheap.top()<<endl;
+    minheap.pop();
+    cout<<"min element of heap:"<<minheap.top()<<endl;
+
+    cout<<"size of the min heap:"<<minheap.size()<<endl;
+    if(minheap.empty()){
+        cout<<"heap is empty..."<<endl;
+    }
+    else{
+        cout<<"heap is not empty..."<<endl;
     }
 
 }
