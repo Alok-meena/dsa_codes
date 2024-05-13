@@ -80,10 +80,10 @@ class heap{
     }
 };
 
-void heapify(int arr[],int n,int i){
+void heapify(int arr[],int n,int i){ // this heapify function is for 1 based indexing..........
     int largest=i;
-    int left=2*i;
-    int right=2*i+1;
+    int left=2*i;// for 0 based it is 2*i+1
+    int right=2*i+1;// for 0 based it is 2*i+2
 
     if(left<=n && arr[largest]<arr[left]){// to yha pe aor niche left<=n hai equal to hai for 1 based indexing and < only for 0 based indexing
         largest=left;
@@ -122,7 +122,7 @@ int main(){
     int arr[6]={-1,54,53,55,52,50};//to ye 1 based indexing me krte hai to simplify calculations jo parent node left
     // right child etc ke liye tha 0 based me nhi karna hai ye
     int n=5;
-    for(int i=n/2;i>0;i--){
+    for(int i=n/2;i>0;i--){// this is for 1 based indexing and for 0 based indexing it is from n/2-1 equal to 0
         heapify(arr,n,i);
     }
     for(int i=1;i<=n;i++){
