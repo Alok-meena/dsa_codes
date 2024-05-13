@@ -34,9 +34,51 @@ So the overall time complexity will be O((N ^ 2) * log(N)).
 Space Complexity
 O(N ^ 2), where ‘N’ is the length of the given array/list.
 
+
+
+
+2nd approach:
+using min heap to find the largest sum of the subarray
+#include <algorithm>
+#include <queue>
+int getKthLargest(vector<int> &arr, int k)
+{
+	//	Write your code here.
+	int n=arr.size();
+    priority_queue<int,vector<int>, greater<int>>pq;
+	for(int i=0;i<n;i++){
+		int sum=0;
+		for(int j=i;j<n;j++){
+			sum+=arr[j];
+			if(pq.size()<k){// vhi hai ki largest ke liye min heap create kiya first k sum's ko dala min heap me and then baki ke sath condition 
+				pq.push(sum);
+			}
+			else{
+				if(sum>pq.top()){//check kr li as we have done previously
+					pq.pop();
+					pq.push(sum);
+				}
+			}
+		}
+	}
+
+	return pq.top();
+
+}
+ 
+Time Complexity
+O(N ^ 2 * log(K), where ‘N’ is the length of the given array/list and ‘K’ is the given number.
+
  
 
-Since we are using an array/list to store the sum of every subarray of the given array/list.
-And there will be (N * ( N + 1) ) / 2 such elements. So the overall space complexity will be O(N ^ 2).
+We are iterating through each subarray of the given array/list using a
+nested loop and then performing the push and pop operations on min-heap which takes O(log(K)) time. So the overall time complexity will be O( N ^ 2 * log(K).
+
+Space Complexity
+O(K), where ‘K’ is the given number.
+
+ 
+
+Since we are using a min-heap that stores ‘K’ elements (at max). So the overall space complexity will be O(K).
 
 
