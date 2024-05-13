@@ -81,9 +81,59 @@ class Solution {
     }
 };
 
-
-
-
-
 Expected Time Complexity: O(N) // because har case me complete tree ko traverse kiya hai
 Expected Space Complexity: O(N)
+
+
+
+if elements can be equal then 
+
+int countNode(BinaryTreeNode<int>* root){
+        if(root==NULL){ 
+            return 0;
+        }
+        
+        int ans=countNode(root->left)+countNode(root->right)+1;
+        return ans;
+    }
+    
+    bool cbt(BinaryTreeNode<int>* root,int index,int count){
+        if(root==NULL){
+            return true;
+        }
+        if(index>count){  //0- based indexing hai so equal to use karna hoga
+            return false;
+        }
+        else{
+            bool left=cbt(root->left,2*index+1,count);
+            bool right=cbt(root->right,2*index+2,count);
+            return (left && right);
+        }
+    }
+    
+    bool ismaxheap(BinaryTreeNode<int>* root){
+        if(root->left==NULL && root->right==NULL){
+            return true;
+        }
+        if(root->right==NULL){
+            return (root->data>=root->left->data);
+        }
+        else{
+            bool left=ismaxheap(root->left);
+            bool right=ismaxheap(root->right);
+            
+            return (left && right && (root->data>=root->left->data && root->data>=root->right->data));
+        }
+    }
+bool isBinaryHeapTree(BinaryTreeNode<int>* root) 
+{
+    // Write your code here.
+    int index=0;
+        int count=countNode(root);
+        if(cbt(root,index,count) && ismaxheap(root)){
+            return true;
+        }
+        else{
+            return false;
+        }
+}
