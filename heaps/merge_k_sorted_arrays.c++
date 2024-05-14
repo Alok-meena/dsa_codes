@@ -68,3 +68,65 @@ O(N * K), Where ‘K’ is the number of arrays and ‘N’ is the average numbe
 
 We are using an array/list of size O(N * K) to store all the elements of the ‘K’ arrays/lists.
 Then, we are sorting the output array in ascending order which takes at-least log(N * K) additional space. Thus, the total space complexity is O(K * N).
+
+
+
+another approach with better complexity 
+
+#include <bits/stdc++.h> 
+#include <queue>
+
+class node{
+    public:
+     int data;
+     int i;
+     int j;
+
+     node(int data,int row,int col){
+         this->data=data;
+         i=row;
+         j=col;
+     }
+};
+
+
+class compare{
+    public:
+      bool operator()(node* a,node* b){
+          return a->data>b->data;
+      }
+};
+
+vector<int> mergeKSortedArrays(vector<vector<int>>&kArrays, int k)
+{
+    // Write your code here. 
+    priority_queue<node*,vector<node*>,compare>minheap;
+    //sbhi array ke first element ko minheap me insert kr diya then bad me ager next element present hai to dal to minheap me
+    for(int i=0;i<k;i++){
+        node* temp=new node(kArrays[i][0],i,0);//O(klogk)
+        minheap.push(temp);
+    }
+
+    vector<int>ans;
+
+    while(minheap.size()>0){//O(n*k * log(k))
+        node* temp=minheap.top();
+        ans.push_back(temp->data);//yha ham data dalnege because minheap me to nodes pde hai
+        //to jo har array ke pahle element ko dala tha hamne min heap me ab min heap ke top ko ans array me dalo aor pop kr do
+
+        minheap.pop();
+
+        int i=temp->i;
+        int j=temp->j;
+        //fir next element of array ko min heap me dalenge if present
+        if(j+1<kArrays[i].size()){//mtlb ager range me hai to node bnake minheap me dal do
+            node *next=new node(kArrays[i][j+1],i,j+1);
+            minheap.push(next);
+        }
+    }
+    return ans;
+   
+}
+time complexity:-O(n*k * log(k))
+space complexity :-- O(k) by minheap + O(n*k) -> O(n*k)
+
