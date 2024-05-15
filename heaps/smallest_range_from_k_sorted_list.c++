@@ -75,3 +75,85 @@ int kSorted(vector<vector<int>> &a, int k, int n) {
 
 }
 
+
+
+
+
+
+leetocdoe solution
+
+
+    #include<bits/stdc++.h>
+#include <limits.h>
+#include <queue>
+
+class Solution {
+
+public:
+    class node{
+    public:
+      int data;
+      int row;
+      int col;
+
+      node(int d,int r,int c){
+          this->data=d;
+          this->row=r;
+          this->col=c;
+      }
+};
+
+class compare{
+    public:
+      bool operator()(node* a,node*b){
+          return a->data>b->data;
+      }
+};
+    vector<int> smallestRange(vector<vector<int>>& nums) {
+        int k=nums.size();
+        
+         int mini=INT_MAX;
+    int maxi=INT_MIN;
+
+    priority_queue<node*,vector<node*>,compare>minheap;
+
+        //maintain max while processing first element of each array
+   for(int i=0;i<k;i++){
+      int element=nums[i][0];
+      mini=min(mini,element);
+      maxi=max(maxi,element);
+      minheap.push(new node(element,i,0));
+   }
+
+
+   int start=mini,end=maxi;
+    //process all the remaining element by increasing mini
+
+   while(!minheap.empty()){
+       node *temp=minheap.top();
+       minheap.pop();
+         //assign mini
+
+
+       mini=temp->data;
+       //update range
+
+       if(maxi-mini<end-start){
+           start=mini;
+           end=maxi;
+       }
+        int row = temp->row, col = temp->col;
+            //add next element infront of mini if within array
+            if (col+1 < nums[row].size()){
+                minHeap.push(new node(nums[row][col+1],row, col+1));
+                maxi = max(maxi, nums[row][col+1]);
+            }
+       else{//one of the array is fully traveresed!!
+           break;
+       }
+   }
+
+   
+   return {start,end};
+    }
+};
