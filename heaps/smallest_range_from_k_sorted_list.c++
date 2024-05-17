@@ -92,6 +92,18 @@ int kSorted(vector<vector<int>> &a, int k, int n) {
 
 
 }
+O(N * K * log(K)), where ‘N’ is the number of elements present in each list and ‘K’ is the number of lists. 
+
+In worst case we may consider each and every element present in input which will take O(N * K)  time.
+And for each time we are finding the minimum and maximum element present in consideration which will take O(log(K))
+time as we will have K elements in Min heap( one from each list ) in our consideration. So total complexity will be O(N * K * log(K)).
+
+Space Complexity
+O(K), where ‘K’ is the number of lists. 
+
+We are using a Min heap of size ‘K’. So space complexity will be O(K).
+
+so here the time complexity is optimized
 
 approach 2: using the point that the individual lists are already sorted
 
