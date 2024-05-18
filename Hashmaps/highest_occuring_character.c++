@@ -38,7 +38,7 @@ char highestOccurringChar(char input[]) {
 
     for(int i=0;i<n;i++){
 
-        mpp[input[i]]++;
+        mpp[input[i]]++; // means mapp[intput[i]] se hmne mapp[a] character ko access kiya aor increment bhi
 
     }
 
@@ -52,7 +52,7 @@ char highestOccurringChar(char input[]) {
 
             maxi=it.second;
 
-            ans=it.first;
+            ans=it.first; //aor bs corresponding max count ke corresponding first me jo character hai use return krva diya hai
 
         }
 
