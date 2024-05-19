@@ -1,4 +1,4 @@
-
+ 
 #include <iostream>
 using namespace std;
 
@@ -9,7 +9,7 @@ class TrieNode{
       bool isterminal;
 
       TrieNode(char data){
-        data=data;
+        this->data=data;
         for(int i=0;i<26;i++){
             children[i]=NULL;
         }
@@ -22,7 +22,7 @@ class Trie{
       TrieNode* root;
 
       Trie(){
-        root=new TrieNode('\0');
+        root=new TrieNode('\0');//to hmne root node ko null character se start kr diya
       }
 
       void insertUtil(TrieNode* root,string word){
@@ -33,21 +33,22 @@ class Trie{
         }
 
         //assumption , that word will be in small letter
-        int index=word[0]-'a';
+        int index=word[0]-'a';//to reach to the index where we have to insert the character
         TrieNode* child;
 
         //present
-        if(root->children[index]!=NULL){
-            child=root->children[index];
+        if(root->children[index]!=NULL){//mtlb hmara pahla character present hai to exist kr rha hai
+            child=root->children[index];//to bs aage bdha diya
         }
         else{
             //absent
-            child=new TrieNode(word[0]);
+            child=new TrieNode(word[0]);//new node create kr li if present nhi hai to aor creation me sbse pahle to pahla character hi aayega to use kiya word[0]
             root->children[index]=child;
         }
 
         //RECURSION
-        insertUtil(child,word.substr(1));
+        insertUtil(child,word.substr(1));// word ka aage vala part pass kr diya pahle character ko chod kar  aor substr(1) mtlb ex abcd hai to bcd pass kiya then cd hoga agle recursive call me
+          // to 0th index ko chod ke baki ko pass kr rhe hai
       }
 
       void insertWord(string word){
@@ -57,14 +58,14 @@ class Trie{
       bool searchUtil(TrieNode* root,string word){
         //base case
         if(word.length()==0){
-            return root->isterminal;
+            return root->isterminal;//mtlb ager current string khtm hogyi hai aor hm abhi terminal node pe hai ya nhi hai to string present o/w not
         }
 
-        int index=word[0]-'A';
+        int index=word[0]-'a';
         TrieNode* child;
 
         if(root->children[index]!=NULL){
-            child=root->children[index];
+            child=root->children[index];//bas same hai insertion ki tarah ager mil gya to aage bdh jao nhi to return false and then call it again
         }
         else{
             //absent
@@ -126,16 +127,25 @@ class Trie{
         return root;
     }
     
-    TrieNode* deleteWord(string word)
-    {
-        return deleteUtil(root, word);
+     bool deleteWord(string word){
+    if (searchWord(word)) {  // Only attempt to delete if the word exists
+        root = deleteUtil(root, word);
+        return true;
     }
+    return false;
+     }
 };
 
 int main(){
-    Trie *t=new Trie();
+  Trie *t = new Trie();
     t->insertWord("abcd");
-    cout<<"Present or Not :"<<t->searchWord("abcd")<<endl;
-    cout<<"deleted or not:"<<t->deleteWord("abcd");
+    cout << "Present or Not: " << t->searchWord("abcd") << endl;
+    bool deleted = t->deleteWord("abcd");
+    cout << "Deleted or Not: " << deleted << endl;
+    cout << "Present or Not after deletion: " << t->searchWord("abcd") << endl;
+
+    delete t;
 
 }
+
+
