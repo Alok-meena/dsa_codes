@@ -113,7 +113,7 @@ class Trie{
 
             char ch=first[i];
 
-            if(root->childcount==1){
+            if(root->childcount==1){//iska mtlb hai ager kisi bhi node ka 1 child hai means common hai nhi hai aor 1 se jyada hai to to common nhi hai
                 ans.push_back(ch);
                 //then aage bdh jao
 
@@ -124,7 +124,7 @@ class Trie{
                 break;
             }
 
-            if(root->isterminal){
+            if(root->isterminal){//aor ager last tk pahuch gye to break kr do
                 break;
             }
         }
