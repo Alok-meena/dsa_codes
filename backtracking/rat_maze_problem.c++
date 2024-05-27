@@ -40,6 +40,9 @@ class Solution{
         //base case
         if(x==n-1 && y==n-1){
             ans.push_back(path);
+            //aor yha jab ham path pe complete kr liya to push kr diya usko fir return krenge aor sari sides jha ja ske check krenge aor isse 
+            //sare possible path aa jayenge
+            
             return;
         }
         
@@ -47,6 +50,8 @@ class Solution{
         visited[x][y]=1;
         
         //4 choises D L R U
+
+        //so according to this code ham pahle down ka check kr rhe hai and so on 
         
         //1 down
         int newx=x+1;
