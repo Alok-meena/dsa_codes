@@ -17,6 +17,8 @@ So, the adjacency list of the graph is stated below.
 
 vector < vector < int >> printAdjacency(int n, int m, vector < vector < int >> & edges) {
     // Write your code here.
+
+    //here insted of unordered_map<int,list<int>> we used vector<vector<int>>
     vector<vector<int>>ans(n);
     
 
@@ -32,6 +34,8 @@ vector < vector < int >> printAdjacency(int n, int m, vector < vector < int >> &
      // Idhr dekh isme hmlog do values aara input me usko dekhre u hogya pelha value v hogya dusra
      // value dono ka number me matric me hmlog connection banare hai u ka v ke saath v ka u ke saath
     for(int i=0;i<m;i++){
+
+        //because in vector<vector<int>> edges only two edges are present because it is in that format in the vector
         int u=edges[i][0];//because jo edges hai vector<vector<int>> me store hai aor pahle me u and doosre me v to pahli value ke liye (*** column 0 me u hai and i is used to access all the values
         int v=edges[i][1];//and here i is used and v value is present in 1st column
 
