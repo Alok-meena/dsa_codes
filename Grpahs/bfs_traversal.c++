@@ -60,7 +60,7 @@ do this if adjlist is not given and only edges are given
 
 void  preparedAdjList ( unordered_map<int,set<int>> &adjList, vector<pair<int, int>> &edges){
     for(int i=0; i<edges.size();i++){
-        int u= edges[i].first;
+        int u= edges[i].first;// like this because vector of pair is given and in pair to acces 1st value i.first and 2nd value i.second
         int v= edges[i].second;
         
         adjList[u].insert(v);
