@@ -55,6 +55,7 @@ vector<vector<int>> depthFirstSearch(int V, int E, vector<vector<int>> &edges)
 
     //call dfs if node is not visited 
     //this for loop is for disconnected components
+    
     for(int i=0;i<V;i++){
         if(!visited[i]){
             vector<int>component;//we have to return vector<vector<int> so we have created ans of this type and we store our ans in component of vector type 
