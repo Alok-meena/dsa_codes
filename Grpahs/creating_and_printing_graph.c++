@@ -39,6 +39,9 @@ vector < vector < int >> printAdjacency(int n, int m, vector < vector < int >> &
         int u=edges[i][0];//because jo edges hai vector<vector<int>> me store hai aor pahle me u and doosre me v to pahli value ke liye (*** column 0 me u hai and i is used to access all the values
         int v=edges[i][1];//and here i is used and v value is present in 1st column
 
+        //2 column hai u and v ke and multiple rows hai so for u to access all rows value use i then 0 for first column similarly for v [i][1] to access all the
+        //values of 2nd column ex:- v
+
         // Assuming the graph is undirected, add edges in both directions
 
         ans[u].push_back(v);
