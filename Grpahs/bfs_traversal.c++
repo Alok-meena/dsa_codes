@@ -20,7 +20,7 @@ using namespace std;
 void bfs(vector<int>& ans, unordered_map<int, bool>& visited, vector<vector<int>>& adj, int node) {
     queue<int> q;
     q.push(node);
-    visited[node] = true;
+    visited[node] = true;//to ye hamne pahle vale source node ke liye externally kr diya and then for loop me to individual kr liye alag se kr hi rhe hai
 
     while (!q.empty()) {
         int frontnode = q.front();
