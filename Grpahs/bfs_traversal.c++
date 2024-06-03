@@ -48,9 +48,13 @@ vector<int> bfsTraversal(int n, vector<vector<int>>& adj) {
    //include this for loop only if there are components of the graph also otherwise don't include 
     for(int i=0;i<n;i++){ //we have to run this loop for all the nodes so it is run till <n okkkk!
         if(!visited[i]){
-            bfs(ans,visited,adj,0);
+            bfs(ans,visited,adj,i);
         }
     }
+
+    //do this if disconnected component is not present 
+    bfs(ans,visited,adj,0);
+    
     return ans;
 }
 
