@@ -108,7 +108,7 @@ Hence, the space complexity is O(N).
 bool iscycleDfs(int node,int parent,unordered_map<int,bool>&visited,unordered_map<int,list<int>>&adj){
     visited[node]=true;
 
-    for(auto neighbour:adj[node]){
+    for(auto neighbour:adj[node]){//to ye vala loop adjlist ke node ke sare neighbours ko ek ek krke access krega
         if(!visited[neighbour]){
             bool ans=iscycleDfs(neighbour,node,visited,adj);//aor yha hmara  node hai neighbour aor iska parent current node hai
             //example 1->2 so 2 is the neighbour and 1 is the parent 
