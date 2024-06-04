@@ -77,3 +77,68 @@ int detectCycleInDirectedGraph(int n, vector < pair < int, int >> & edges) {
 }
 
 t.c :-O(n+m) s.c:-O(n)
+
+
+
+using bfs and kahn's algo
+
+
+#include <unordered_map>
+#include <list>
+#include <queue>
+
+
+
+int detectCycleInDirectedGraph(int n, vector < pair < int, int >> & edges) {
+  unordered_map<int,list<int>>adjlist;
+    for(int i=0;i<edges.size();i++){
+        int u=edges[i].first-1;
+        int v=edges[i].second-1;
+
+        adjlist[u].push_back(v);
+    }
+   
+    //find all indegrees
+    vector<int>indegree(n);
+    for(auto i:adjlist){
+        for(auto j:i.second){
+            indegree[j]++;
+        }
+    }
+
+    queue<int>q;
+    //0 indegree valo ko push krdo
+    for(int i=0;i<n;i++){
+        if(indegree[i]==0){
+            q.push(i);
+        }
+    }
+
+    //do bfs
+
+    int count=0;
+    while(!q.empty()){
+        int front=q.front();
+        q.pop();
+
+        count++;
+
+        //neighbours indgree update
+        for(auto neighbours:adjlist[front]){
+            indegree[neighbours]--;
+            if(indegree[neighbours]==0){
+                q.push(neighbours);
+            }
+        }
+    }
+    //if valid topological sort then no cycle present 
+    //if n no. of nodes are there in topological sort then it measn no cycle
+    if(count==n){
+      return false;
+    }
+    //otherwise cycle is present if wrong topological sort is there
+    else{
+      return true;
+    }
+
+}
