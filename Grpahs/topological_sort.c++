@@ -59,7 +59,7 @@ vector<int> topologicalSort(vector<vector<int>> &edges, int v, int e)  {
     
     //prepare adjacency list
     prepareadjlist(adjlist,edges,e);
-    vector<bool>visited(v);
+    vector<bool>visited(v);//yha visited ko map ki jagah vector liya to improve time complexity
     
 
     //call dfs if node is not visited 
