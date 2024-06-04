@@ -79,3 +79,65 @@ vector<int> topologicalSort(vector<vector<int>> &edges, int v, int e)  {
     return ans;
 }
 
+t.c and s.c:-linear
+
+
+
+Using kahn's algorithm
+
+
+#include <bits/stdc++.h> 
+#include <unordered_map>
+#include <list>
+#include <vector>
+#include <queue>
+
+vector<int> topologicalSort(vector<vector<int>> &edges, int v, int e)  {
+    // Write your code here
+
+    unordered_map<int,list<int>>adjlist;
+    for(int i=0;i<e;i++){
+        int u=edges[i][0];
+        int v=edges[i][1];
+
+        adjlist[u].push_back(v);
+    }
+   
+    //find all indegrees
+    vector<int>indegree(v);
+    for(auto i:adjlist){
+        for(auto j:i.second){
+            indegree[j]++;
+        }
+    }
+
+    queue<int>q;
+    //0 indegree valo ko push krdo
+    for(int i=0;i<v;i++){
+        if(indegree[i]==0){
+            q.push(i);
+        }
+    }
+
+    //do bfs
+
+    vector<int>ans;
+
+    while(!q.empty()){
+        int front=q.front();
+        q.pop();
+
+        //store ans
+        ans.push_back(front);
+
+        //neighbours indgree update
+        for(auto neighbours:adjlist[front]){
+            indegree[neighbours]--;
+            if(indegree[neighbours]==0){
+                q.push(neighbours);
+            }
+        }
+    }
+    return ans;
+}
+
