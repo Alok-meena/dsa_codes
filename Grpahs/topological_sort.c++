@@ -40,7 +40,7 @@ void prepareadjlist(unordered_map<int,list<int>>&adj,vector<vector<int>>&edges,i
     }
 }
 void dfs_topologicalsort(int node,vector<bool>&visited,unordered_map<int,list<int>>&adjlist,stack<int>&s){
-    visited[node]=true;
+    visited[node]=true;//are mtlb visited me node int ke index ko hamne true kr diya
     
     //recursive call for each connected component
     for(auto i:adjlist[node]){
