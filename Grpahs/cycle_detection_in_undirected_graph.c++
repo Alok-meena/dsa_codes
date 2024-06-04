@@ -33,7 +33,7 @@ So, there exists a cycle in the graph.
 bool iscycleBfs(int src_node,unordered_map<int,bool>&visited,unordered_map<int,list<int>>&adj){
     unordered_map<int,int>parent;
 
-    parent[src_node]=-1;
+    parent[src_node]=-1;//to pahla node tha uske liye -1 kr diya parent ko 
     visited[src_node]=true;
     queue<int>q;
 
@@ -43,9 +43,9 @@ bool iscycleBfs(int src_node,unordered_map<int,bool>&visited,unordered_map<int,l
         int front=q.front();
         q.pop();
 
-        for(auto neighbour:adj[front]){
+        for(auto neighbour:adj[front]){//ye kya krega adj[fornt] ke sare neighbours o access krke check krega code apna
             //this is the condition if cycle is present
-            if(visited[neighbour]==true && neighbour!=parent[front]){
+            if(visited[neighbour]==true && neighbour!=parent[front]){//yha parent[front] se compare kiya mtlb ki ager front ka parent khi neighbour to nnhi hai na
                 return true;
             }
             else if(!visited[neighbour]){
@@ -110,7 +110,8 @@ bool iscycleDfs(int node,int parent,unordered_map<int,bool>&visited,unordered_ma
 
     for(auto neighbour:adj[node]){
         if(!visited[neighbour]){
-            bool ans=iscycleDfs(neighbour,node,visited,adj);
+            bool ans=iscycleDfs(neighbour,node,visited,adj);//aor yha hmara  node hai neighbour aor iska parent current node hai
+            //example 1->2 so 2 is the neighbour and 1 is the parent 
             if(ans){
                 return true;
             }
@@ -140,7 +141,7 @@ string cycleDetection (vector<vector<int>>& edges, int n, int m)
     //for disconnected components
     for(int i=0;i<n;i++){
         if(!visited[i]){
-            bool ans=iscycleDfs(i,-1,visited,adj);
+            bool ans=iscycleDfs(i,-1,visited,adj);//pahle node ka parent to -1 hoga to pass kr diya
             if(ans==true){
                 return "Yes";
             }
