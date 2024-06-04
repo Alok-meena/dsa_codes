@@ -92,7 +92,7 @@ using bfs and kahn's algo
 int detectCycleInDirectedGraph(int n, vector < pair < int, int >> & edges) {
   unordered_map<int,list<int>>adjlist;
     for(int i=0;i<edges.size();i++){
-        int u=edges[i].first-1;
+        int u=edges[i].first-1;//because nodes 1 se start thi to hamne 0 se krva di ya do niche indegree ka loop 1 se <=n tk le jao
         int v=edges[i].second-1;
 
         adjlist[u].push_back(v);
@@ -137,7 +137,7 @@ int detectCycleInDirectedGraph(int n, vector < pair < int, int >> & edges) {
       return false;
     }
     //otherwise cycle is present if wrong topological sort is there
-    else{
+    else{//we assumed that if invalid topological sort then it's nodes will not be equal to n
       return true;
     }
 
