@@ -83,7 +83,7 @@ t.c and s.c:-linear
 
 
 
-Using kahn's algorithm
+// Using kahn's algorithm
 
 
 #include <bits/stdc++.h> 
