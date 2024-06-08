@@ -47,8 +47,10 @@ class Graph{
             s.pop();
 
             if(dist[top]!=INT_MAX){
-                for(auto i:adjlist[top]){
-                    if(dist[top]+i.second<dist[i.first]){
+                for(auto i:adjlist[top]){//to adjlist me top pe gye 
+                    if(dist[top]+i.second<dist[i.first]){//dist[top] means dist array me top index pe jo distance hai and i.second means pair me first to
+                        //node hai and second me distance < hai ager dist[i.firt] so i.first next node btata hai aor is index pe jo distance hai dist array
+                        //me ager usse kam hai to usko update kr do okkk
                         dist[i.first]=dist[top]+i.second;
                     }
                 }
