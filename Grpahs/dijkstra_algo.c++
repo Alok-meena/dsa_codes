@@ -104,3 +104,60 @@ vector<int> dijkstra(vector<vector<int>> &vec, int vertices, int edges, int sour
 
 t.c: O(E log (v) ) because we use set operations
 s.c: O(E+V)
+
+using priority queue instead of set
+
+#include <bits/stdc++.h>
+#include <vector>
+#include <limits.h>
+#include <unordered_map>
+#include <queue>
+
+using namespace std;
+
+vector<int> dijkstra(vector<vector<int>> &vec, int vertices, int edges, int source) {
+    // Create adjacency list
+    unordered_map<int, list<pair<int, int>>> adjlist;
+
+    for (int i = 0; i < edges; i++) {
+        int v = vec[i][0];
+        int u = vec[i][1];
+        int weight = vec[i][2];
+
+        adjlist[v].push_back(make_pair(u, weight));
+        adjlist[u].push_back(make_pair(v, weight));
+    }
+
+    // Creation of distance array with infinite value initially
+    vector<int> distance(vertices, INT_MAX);
+
+    // Min-heap priority queue (distance, node)
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+
+    // Initialize distance and priority queue with source node
+    distance[source] = 0;
+    pq.push(make_pair(0, source));
+
+    while (!pq.empty()) {
+        // Fetch top record
+        auto top = pq.top();
+        pq.pop();
+
+        int nodedistance = top.first;
+        int topnode = top.second;
+
+        // Traverse neighbours
+        for (auto neighbour : adjlist[topnode]) {
+            
+
+            if (nodedistance + neighbour.second < distance[neighbour.first]) {
+                // Distance update
+                distance[neighbour.first] = nodedistance + neighbour.second;
+                // Push updated distance to priority queue
+                pq.push(make_pair(distance[neighbour.first], neighbour.first));
+            }
+        }
+    }
+    return distance;
+}
+
