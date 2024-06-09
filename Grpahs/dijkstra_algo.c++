@@ -55,6 +55,8 @@ vector<int> dijkstra(vector<vector<int>> &vec, int vertices, int edges, int sour
         distance[i]=INT_MAX;
     }
 
+    // A set is a data structure that stores unique elements of the same type in a sorted order. 
+    //so set's first value will be the minimum value and min value will be present at the top
     //creation of set on basis (distance,node)
     set<pair<int,int>>st;
 
@@ -79,6 +81,9 @@ vector<int> dijkstra(vector<vector<int>> &vec, int vertices, int edges, int sour
                 //finding record
                 auto record=st.find(make_pair(distance[neighbour.first],neighbour.first));
                  // if record found than erase it
+                // If the element is found, st.find returns an iterator to the element.
+                //If the element is not found, st.find returns st.end(), which is an iterator to one past the last element of the set.
+                //This is a standard way in C++ to indicate that the element is not in the set. to bs ager st.end() ke equal nhi hai to erase it
                 if( record != st.end()){
                     st.erase(record);
                 }
@@ -97,5 +102,5 @@ vector<int> dijkstra(vector<vector<int>> &vec, int vertices, int edges, int sour
 
 }
 
-t.c: O(E log (v) )
+t.c: O(E log (v) ) because we use set operations
 s.c: O(E+V)
