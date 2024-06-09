@@ -40,6 +40,7 @@ vector<int> dijkstra(vector<vector<int>> &vec, int vertices, int edges, int sour
     unordered_map<int,list<pair<int,int>>>adjlist;
 
     for(int i=0;i<edges;i++){
+        //very very important yha indexing 0 se hi start thi ager 1 se ho to yha niche -1 krke  kr lena
         int v=vec[i][0];
         int u=vec[i][1];
         int weight=vec[i][2];
