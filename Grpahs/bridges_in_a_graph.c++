@@ -21,7 +21,7 @@ void dfs(int node,int parent,int &timer,vector<int>&disc,vector<int>&low,vector<
             //call se vapas aate time update the node low time with it's nbr low time
             low[node]=min(low[node],low[nbr]);
             //check edge is bridge
-            if(low[nbr]>disc[node]){
+            if(low[nbr]>disc[node]){//low[nbr]<disc[node] means ki nbr esi node se connected hai jo hmari node se pahle aati hai
                 result.push_back({node,nbr});
             }
         }
