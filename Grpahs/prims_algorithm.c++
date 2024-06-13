@@ -31,7 +31,7 @@ vector<pair<pair<int, int>, int>> calculatePrimsMST(int n, int m, vector<pair<pa
     }
 
     //algo started
-    //in this question our source node is 1
+    //in this question our source node is 1 that's why hamne adjlist me -1 nhi kiya ager source node 0 hoti to ham krte
     key[1]=0;
     parent[1]=-1;
 
