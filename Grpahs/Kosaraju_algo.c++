@@ -63,6 +63,7 @@ int stronglyConnectedComponents(int v, vector<vector<int>> &edges)
 	unordered_map<int,list<int>>transpose;
 	for(int i=0;i<v;i++){
 		visited[i]=0;
+		//to adj[i] se hm u pe pahuch gye aor nbr v hai to bs v me u ko push kiya just reverse
 		for(auto nbr:adj[i]){
 			transpose[nbr].push_back(i);
 		}
