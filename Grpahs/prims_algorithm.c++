@@ -11,7 +11,7 @@ vector<pair<pair<int, int>, int>> calculatePrimsMST(int n, int m, vector<pair<pa
     unordered_map<int,list<pair<int,int>>>adjlist;
 
     for(int i=0;i<m;i++){
-        int u=g[i].first.first;
+        int u=g[i].first.first; //yha -1 karna ager test cases me nodes 0 se start hai 
         int v=g[i].first.second;
         int w=g[i].second;
 
