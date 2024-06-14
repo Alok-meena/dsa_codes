@@ -96,7 +96,7 @@ int main()
 {
         int n;
         cin>>n;
-        vector<int>dp(n+1);
+        vector<int>dp(n+1);//size n+1 diya because 0 se leke n tk sare fibonacci no. chahihe the
 
         //step 1
         for(int i=0;i<=n;i++){
