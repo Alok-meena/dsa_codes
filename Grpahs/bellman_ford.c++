@@ -10,7 +10,7 @@ vector<int> bellmonFord(int n, int m, int src, vector<vector<int>> &edges) {
     
     //run n-1 times so n-1 tk hi chlaya hai 
     for(int i=0;i<n-1;i++){
-        //traverse on edge list
+        //traverse on edge list so ye loop hamne m edges ke liye chala diya
         for(int j=0;j<m;j++){
             int u=edges[j][0];
             int v=edges[j][1];
