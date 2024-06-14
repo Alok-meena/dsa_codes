@@ -22,7 +22,7 @@ int main()
 {
         int n;
         cin>>n;
-        vector<int>dp(n+1);
+        vector<int>dp(n+1);//n+1 size ka array bnaya because 0 based indexing hai 
 
         
         for(int i=0;i<=n;i++){
