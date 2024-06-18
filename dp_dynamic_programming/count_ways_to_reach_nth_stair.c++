@@ -11,35 +11,36 @@ Each time, you can climb either one step or two steps.
 You are supposed to return the number of distinct ways you can climb from the 0th step to the Nth step.
 brute force using recursion 
 
+#include <bits/stdc++.h> 
 
-int getCount(int currStep, int nStairs, const int& mod) {
+int mod=1e9;
 
-    // Base case.
-    if(currStep >= nStairs) {
-
-        return (currStep == nStairs);
+int solve(int n,int i,vector<int>&dp){
+    if(i==n || i==n-1){
+        return 1;
     }
-
-    //  Climb one stair.
-    int oneStepcount = getCount(currStep + 1, nStairs, mod);
-
-    //  Climb two stairs
-    int twoStepCount = getCount(currStep + 2, nStairs, mod);
-
-    return (oneStepcount + twoStepCount) % mod; 
-
+    if(i>n){
+        return 0;
+    }
+    
+    if(dp[i]!=-1){
+        return dp[i]%mod;
+    }
+    dp[i]=(solve(n,i+1,dp)+solve(n,i+2,dp))%mod;
+    return dp[i];
 }
 
 int countDistinctWays(int nStairs) {
-    
-    // Initialize the variable 'mod'.
-    const int mod = 1000000007;
 
-    // Initialize the variable 'ways'.
-    int ways = getCount(0, nStairs, mod);
+    //  Write your code here.''
 
-    return ways;
+    vector<int>dp(nStairs+1,-1);
+    int ans=solve(nStairs,0,dp);
+    return ans;
+
 }
+
+but it will cause tle okkkkk
 
     Time Complexity: O( 2 ^ N )
     Space complexity: O( N )
@@ -155,6 +156,8 @@ int countDistinctWays(int nStairs) {
     }  
     return prev1;
 }
+
+or can also use bottom up appraoch with only dp 
 
  Time Complexity: O( N )
     Space complexity: O( 1)
