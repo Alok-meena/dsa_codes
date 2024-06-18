@@ -15,6 +15,8 @@ Explanation: You will start at index 1.
 The total cost is 15.
 
 
+ 
+
 class Solution {
 public:
     int solve1(vector<int>&cost,int n){
@@ -28,6 +30,7 @@ public:
 
         int ans=min(solve1(cost,n-1),solve1(cost,n-2))+cost[n];
         return ans;
+        //it will cause tle
     }
     int solve2(vector<int>&cost,vector<int>&dp,int n){
         if(n==0){
@@ -85,7 +88,7 @@ public:
             dp[i]=cost[i]+min(dp[i-1],dp[i-2]);
         }
 
-        return min(dp[n-1],dp[n-2]);
+        return min(dp[n-1],dp[n-2]);//because ham n-2 aor n-1 se cost fill krte hi ja skte hai nth stair pe
     }
     int minCostClimbingStairs(vector<int>& cost) {
        
@@ -105,14 +108,16 @@ class Solution {
 public:
     int solve(vector<int>&cost,int n){
         //because    0    1     2 ....
-        //        prev2 prev1
-        int prev2=cost[0];
-        int prev1=cost[1];
+        //        prev1 prev2
+         int prev1=cost[0];
+        int prev2=cost[1];
+
+        int curr;
 
         for(int i=2;i<n;i++){
-            int curr=cost[i]+min(prev1,prev2);
-            prev2=prev1;
-            prev1=curr;
+            curr=min(prev1,prev2)+cost[i];
+            prev1=prev2;
+            prev2=curr;
         }
 
         return min(prev1,prev2);
