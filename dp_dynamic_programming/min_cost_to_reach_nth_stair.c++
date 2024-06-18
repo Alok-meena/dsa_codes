@@ -52,7 +52,7 @@ public:
     }
     int minCostClimbingStairs(vector<int>& cost) {
         //normal recursion code
-        t.c:-O(2^N) and s.c:-O(N)+O(N)
+        t.c:-O(2^N) and s.c:-O(N)
 
       
         int n=cost.size();
@@ -60,7 +60,7 @@ public:
         return ans;
     
         //top-down approach with memorization
-        t.c:-O(N) and s.c:-O(N)+O(N)
+        t.c:-O(N) and s.c:-O(N)+O(N)=O(N) (recusion (jo stack me calls store hoti hai) and memorization of dp array)
 
       
         // int n=cost.size();
