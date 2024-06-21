@@ -15,6 +15,8 @@ In the first test case, cut it into 2 parts of 5 and 2.
 
 In the second case, there is no way to cut into segments of 3 length only as the length of the rod is less than the given length. 
 
+	to ye ques me n length ki rod hai na use max kitne segment me cut kr skte hai given x , y , z length me se jaise 8 1 4 4 to 
+	8 ko 4 4 se but 2 segment and 1 se 8 bar to max 8 aagya okk
 
 1:recursion
 
