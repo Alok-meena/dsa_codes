@@ -30,7 +30,7 @@ int solve(int n,int x,int y,int z){
 		return INT_MIN;
 	}
 
-	int a=solve(n-x,x,y,z)+1;
+	int a=solve(n-x,x,y,z)+1;//+1 kiya because ager is segment ko include kr rhe hai to hi
 	int b=solve(n-y,x,y,z)+1;
 	int c=solve(n-z,x,y,z)+1;
 
