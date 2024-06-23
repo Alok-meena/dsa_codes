@@ -45,6 +45,15 @@ public:
         
         int m = grid.size();
         int n = grid[0].size();
+
+      //to dhyan se suno hme area nikalna hai of rectangle which is height*width okk to height aor width nikalni hogi to iske liye 
+     //to height means bottom - top and width = right - left okk 
+     //to ab sbko initializez kr do top jo hai bottom se kam hoga to iteration me min value lenge aor <m tk jayenge to top ko m rkh do 
+     //because iteration m tk nhi jayegi and bottom me hm max lenge to -ve vaue rkh do 
+     //same for left and right
+     //then iteration me top ke liye top and i me se min value lenge becaue top upe se niche no. of rows tk hoga jaise hi 1 mila
+     //and bottom me max of bottom and i 
+     //and same left right me j ko include karna because vo horizonattly jayega
         
         int top = m;   
         int bottom = -1; 
@@ -63,7 +72,7 @@ public:
             }
         }
         
-        int width = right - left + 1;
+        int width = right - left + 1;//dono me +1 kiya because indices 0 se start hoti hai but we want proper area o/w our area would be 0 in any case
         int height = bottom - top + 1;
         int area = width * height;
         
