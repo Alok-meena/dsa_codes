@@ -11,6 +11,10 @@ Here, you can see in Way 2 we have used 3 coins to reach the target sum of 7.
 Hence the output is 3.
 
 
+
+
+VERYA VERYA IMP KI AAP  1 HI ELEMENT KO KITNI BHI BAR USE KAR SKTE HAI OKKK
+
 1st : recursion approach : cause TLE
 #include <bits/stdc++.h> 
 
