@@ -81,7 +81,7 @@ class Solution {
 public:
     
     int solve(vector<int>&obstacles,int currlane,int currpos,vector<vector<int>>&dp){
-        int n=obstacles.size()-1;
+        int n=obstacles.size()-1;//size -1 krke hi dena hai okk
         if(currpos==n){
             return 0;
         }
@@ -119,3 +119,5 @@ public:
     }
 };
 
+
+3:bottom-up / tabulation method
