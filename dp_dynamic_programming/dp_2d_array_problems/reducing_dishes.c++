@@ -158,7 +158,7 @@ int maxSatisfaction(vector<int>& satisfaction) {
         for(int i=0;i<satisfaction.size();i++){
            int sum=0;
            int count=1;
-           for(int j=i;j<satisfaction.size();j++){
+           for(int j=i;j<satisfaction.size();j++){//ye isliye lgaya because ek bar sare elements ko leke ek ek ko chod chod ke sare case handel ho gye
               sum+=satisfaction[j]*count;
               count++;
            }
@@ -167,6 +167,9 @@ int maxSatisfaction(vector<int>& satisfaction) {
         return ans;
     }
 };
+
+t.c:-O(n^2)
+s.c:-O(1)
 
 
 
