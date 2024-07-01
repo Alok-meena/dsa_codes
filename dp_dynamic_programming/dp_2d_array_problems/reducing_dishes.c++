@@ -28,6 +28,11 @@ public:
             return 0;
         }
 
+        [-1,-8,0,5,-9]
+
+        ex:- is array me -1 ke liye inclusion and exclusion dono ki call ki hai hamne
+        jisse sare case cover ho jayenge
+
         int include=satisfaction[index]*(time+1)+solve(satisfaction,index+1,time+1);
         int exclude=0+solve(satisfaction,index+1,time);
 
