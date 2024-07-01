@@ -49,6 +49,8 @@ public:
               //loop me because 3 direcetions are possible but jump is possible only on two lanes 
                 if(currlane!=i && obstacles[currpos]!=i){ 
                   //MTLB HAM JHA JUMP KARNA CHAHTE HAI VO CURRENT LANE NHI HONI CHAHIHE
+                  //easy way me jha jump kiya vo currlane hai okk to vo i ke equal nhi hona chahihe and jha ham hai vha obstacle nhi hona chahie
+                  //means if ith lane me obstacle hai to jump krne pe khi bhi vo uske (i) equal na ho
 
                   //AOR 2ND CONDTION KI JHA JUMP KARNA CHAHTE HAI HAM VHA BHI OSTACLE NHI HONA CHAHIE
                   //TO CONDITION HUI KI EK TO CURRLANE JO HAI I KE EQUAL NA HO AOR JHA OBSTACLE HAI VO I KE EQUAL NA HO
@@ -121,3 +123,104 @@ public:
 
 
 3:bottom-up / tabulation method
+
+
+class Solution {
+public:
+    
+  
+    int solve(vector<int>&obstacles){
+        int n=obstacles.size()-1;
+        vector<vector<int>>dp(4,vector<int>(obstacles.size(),1e9));//size 4 liya because ham 1 index ko lane 1 man ke chal rhe hai
+
+        //uper ka base case hai ye if currpos n ho gyi to 0 and first me to now. of rows(lanes) dal di bs
+        dp[0][n]=0;
+        dp[1][n]=0;
+        dp[2][n]=0;
+        dp[3][n]=0;
+
+        for(int currpos=n-1;currpos>=0;currpos--){
+            for(int currlane=1;currlane<=3;currlane++){
+                        if(obstacles[currpos+1]!=currlane){
+                              dp[currlane][currpos]=dp[currlane][currpos+1];
+                        }
+                        else{//currlane me obstacle hai to kya kre
+                    
+                        //then sideways jump
+                        int ans=1e9;//JAB BHI OUT OF RANGE JAYE TO USSE CHOTA MAX ELEMENT LE LO
+                        //loop 1 se 3 because we just have 3 choices to jump
+                        for(int i=1;i<=3;i++){//loop me because 3 direcetions are possible but jump is possible only on two lanes 
+                           if(currlane!=i && obstacles[currpos]!=i){ 
+                            //means jis lane pe jump kre vo current lane na ho
+                            //and jha jump kr rhe hai vha pe obstacle nhi hona chahihe
+                            ans=min(ans,1+dp[i][currpos+1]);
+                            }
+                        }
+                        dp[currlane][currpos]=ans;
+            }
+            
+        }
+        }
+        return min(dp[2][0],min(1+dp[1][0],1+dp[3][0]));//1 add kiya to include jump from 1 or 3 to 2 lane
+    }
+    int minSideJumps(vector<int>& obstacles) {
+        return solve(obstacles);
+    }
+};
+
+s.c:-O(4*n)
+
+
+4:space optimization
+
+
+
+class Solution {
+public:
+    
+  
+    int solve(vector<int>&obstacles){
+        int n=obstacles.size()-1;
+        
+        vector<int>curr(4,INT_MAX);
+        vector<int>next(4,INT_MAX);
+        //to bs hmae 4 block ke 2 column chahie and just update after each iteration
+
+        //uper ka base case hai ye if currpos n ho gyi to 0 and first me to now. of rows(lanes) dal di bs
+        next[0]=0;
+        next[1]=0;
+        next[2]=0;
+        next[3]=0;
+
+        for(int currpos=n-1;currpos>=0;currpos--){
+            for(int currlane=1;currlane<=3;currlane++){
+                        if(obstacles[currpos+1]!=currlane){
+                              curr[currlane]=next[currlane];
+                        }
+                        else{//currlane me obstacle hai to kya kre
+                    
+                        //then sideways jump
+                        int ans=1e9;//JAB BHI OUT OF RANGE JAYE TO USSE CHOTA MAX ELEMENT LE LO
+                        //loop 1 se 3 because we just have 3 choices to jump
+                        for(int i=1;i<=3;i++){//loop me because 3 direcetions are possible but jump is possible only on two lanes 
+                           if(currlane!=i && obstacles[currpos]!=i){ 
+                            //means jis lane pe jump kre vo current lane na ho
+                            //and jha jump kr rhe hai vha pe obstacle nhi hona chahihe
+                            ans=min(ans,1+next[i]);
+                            }
+                        }
+                        curr[currlane]=ans;
+            }
+            
+        }
+        next=curr;
+        }
+        return min(next[2],min(1+next[1],1+next[3]));//1 add kiya to include jump from 1 or 3 to 2 lane
+    }
+    int minSideJumps(vector<int>& obstacles) {
+        return solve(obstacles);
+    }
+};
+
+
+s.c:-O(1)
