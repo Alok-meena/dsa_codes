@@ -1,4 +1,24 @@
+you have a convex n-sided polygon where each vertex has an integer value. You are given an integer array values where values[i] is the value of the ith vertex (i.e., clockwise order).
 
+You will triangulate the polygon into n - 2 triangles. For each triangle, the value of that triangle is the product of the values of its vertices, and the total score of the triangulation is the sum of these values over all n - 2 triangles in the triangulation.
+
+Return the smallest possible total score that you can achieve with some triangulation of the polygon.
+
+ 
+
+Example 1:
+
+
+Input: values = [1,2,3]
+Output: 6
+Explanation: The polygon is already triangulated, and the score of the only triangle is 6.
+Example 2:
+
+
+Input: values = [3,7,4,5]
+Output: 144
+Explanation: There are two triangulations, with possible scores: 3*7*5 + 4*5*7 = 245, or 3*4*5 + 3*4*7 = 144.
+The minimum score is 144.
 
 
 
@@ -77,7 +97,11 @@ public:
 
     int solve(vector<int>&v){
         int n=v.size();
-        vector<vector<int>>dp(n,vector<int>(n,0));//initialize 0 se hi karna no by one because this is bottom up approach
+        vector<vector<int>>dp(n,vector<int>(n,0));
+        //to yha 0 se initialize kiya because min ans 0 ho skta hai if there is no triangle foramtion
+        //and we are not computing the min value directly so we didn't initialize with INT_MAX to this
+        
+        //initialize 0 se hi karna no by one because this is bottom up approach
 
         //YHA HAME UPER KE CODE SE BASE CASE SMJ NHI AAYA TO NNHI DALA
 
