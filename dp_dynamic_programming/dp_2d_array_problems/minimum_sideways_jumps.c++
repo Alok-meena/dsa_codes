@@ -20,6 +20,7 @@ Output: 2
 Explanation: The optimal solution is shown by the arrows above. There are 2 side jumps (red arrows).
 Note that the frog can jump over obstacles only when making side jumps (as shown at point 2).
 
+SO OBSTACLES[I] ME I BTATA HAI KI OBSTACLE KONSI POSITION PE HAI AND OBS..[I] TELLS IN WHICH LANE THE OSBTACLE IS PRESENT
 
 
 
@@ -35,7 +36,7 @@ public:
             return 0;
         }
 
-        //to ager currlane me obstacle nhi hai to move kro aage jump bs side me hi kr skte hai
+        //to ager currlane me AGLI POSITION PE obstacle nhi hai to move kro aage jump bs side me hi kr skte hai
 
         if(obstacles[currpos+1]!=currlane){//currpos+1 kiya because next position pe check karna hai hame to
             return solve(obstacles,currlane,currpos+1);
@@ -48,7 +49,11 @@ public:
             for(int i=1;i<=3;i++){//AOR I YHA PE 3NO LANES HAI
               //loop me because 3 direcetions are possible but jump is possible only on two lanes 
                 if(currlane!=i && obstacles[currpos]!=i){ 
-                  //MTLB HAM JHA JUMP KARNA CHAHTE HAI VO CURRENT LANE NHI HONI CHAHIHE
+                 //MEANS I MTLB JHA HAM JUMP KARNA CAHHTE HAI SO CURRLANE JHA HM HAI VO JHA JUMP KARNA CAHTE HAI USKE EQUAL NA HO
+                 //AND OBSTACLES[CURRPOS] MEANS OBSTACLE HMARA JHA HAM JUMP KARNA CHAHTE HAI VHA NHI HONA CHAHIE
+                 
+                  //MTLB HAM JHA JUMP KARNA CHAHTE HAI VO CURRENT LANE NHI HONI CHAHIHE BECAUSE CURRLANE ME TO MOVE KRENGE AGER KOI OBSTACLE AAYA 
+                 //TBHI TO SIDE LANES ME JUMP KRENGE
                   //easy way me jha jump kiya vo currlane hai okk to vo i ke equal nhi hona chahihe and jha ham hai vha obstacle nhi hona chahie
                   //means if ith lane me obstacle hai to jump krne pe khi bhi vo uske (i) equal na ho
 
@@ -61,6 +66,8 @@ public:
 
                     //and ye condition bhi ho skti hai ki dono lane me jane ka chance ho to ham dono me se min vala ans lenge aor dono lane me jake
                     //apna recursion ans nikal ke leke aayega
+
+                   //TEHN BAS UPDATE ANS JUMP KIYA TO +1 AND MOVE ON BUT FIND MIN ANS
                     ans=min(ans,1+solve(obstacles,i,currpos));
                 }
             }
@@ -72,6 +79,9 @@ public:
         return solve(obstacles,2,0);//ques me given hai ki 2 lane me hai frog and at 0 position
     }
 };
+
+t.c:-O(2^n) because there is possiblly only 2 jumps frog can make
+s.c:-O(n)
 
 
 2:memorization using dp array 
@@ -116,11 +126,16 @@ public:
     }
     int minSideJumps(vector<int>& obstacles) {
         //2d array require as currlane and currpos both changes
-        vector<vector<int>>dp(4,vector<int>(obstacles.size(),-1));//size 4 liya for correct output as we have 3 lanes  and n columns
+        vector<vector<int>>dp(4,vector<int>(obstacles.size(),-1)); 
+ //HAMNE 4 ROW MAI BECAUse obss.. array me 0 bhi given hai mean obstacle nhi hai us poistion pe kisi bhi lane me and column hmara n 
+ 
+ //size 4 liya for correct output as we have 3 lanes  and n columns
         return solve(obstacles,2,0,dp);
     }
 };
 
+t.c:-O(n) 
+s.c:-O(4*n)
 
 3:bottom-up / tabulation method
 
@@ -134,14 +149,17 @@ public:
         vector<vector<int>>dp(4,vector<int>(obstacles.size(),1e9));//size 4 liya because ham 1 index ko lane 1 man ke chal rhe hai
 
         //uper ka base case hai ye if currpos n ho gyi to 0 and first me to now. of rows(lanes) dal di bs
+        //currpos ko n rkha in all lanes
         dp[0][n]=0;
         dp[1][n]=0;
         dp[2][n]=0;
         dp[3][n]=0;
 
+        //to n ka kam ho gya and n-1 se leke 0 tk jana hai with ans fill in each lane 1 se 3
         for(int currpos=n-1;currpos>=0;currpos--){
             for(int currlane=1;currlane<=3;currlane++){
                         if(obstacles[currpos+1]!=currlane){
+                             //to ager ye condn true hai means aage obstacle nhi hai to currpos se hi gye honge to usme bhi ans update kr do aage vala hi
                               dp[currlane][currpos]=dp[currlane][currpos+1];
                         }
                         else{//currlane me obstacle hai to kya kre
@@ -161,13 +179,15 @@ public:
             
         }
         }
-        return min(dp[2][0],min(1+dp[1][0],1+dp[3][0]));//1 add kiya to include jump from 1 or 3 to 2 lane
+        return min(dp[2][0],min(1+dp[1][0],1+dp[3][0]));//1 add kiya to include jump from 1 or 3 to 2nd lane
+        // because vo bhi possible hai because array finish ho gyi and atlast min of all ans
     }
     int minSideJumps(vector<int>& obstacles) {
         return solve(obstacles);
     }
 };
 
+t.c:-O(n)
 s.c:-O(4*n)
 
 
@@ -187,6 +207,8 @@ public:
         //to bs hmae 4 block ke 2 column chahie and just update after each iteration
 
         //uper ka base case hai ye if currpos n ho gyi to 0 and first me to now. of rows(lanes) dal di bs
+
+        //ye kiya because curr next pe depend karta hai so initally next fill hona jruri hai according to base case
         next[0]=0;
         next[1]=0;
         next[2]=0;
@@ -195,6 +217,10 @@ public:
         for(int currpos=n-1;currpos>=0;currpos--){
             for(int currlane=1;currlane<=3;currlane++){
                         if(obstacles[currpos+1]!=currlane){
+                              //dp[currlane][currpos]=dp[currlane][currpos+1];
+                          //to isme currlane and currpos to curr lane hi hui lane ki bat ho rhi to pos ko hta do
+                          //and currlane and currpos+1 means agli position to ye next me hogi
+
                               curr[currlane]=next[currlane];
                         }
                         else{//currlane me obstacle hai to kya kre
@@ -206,21 +232,22 @@ public:
                            if(currlane!=i && obstacles[currpos]!=i){ 
                             //means jis lane pe jump kre vo current lane na ho
                             //and jha jump kr rhe hai vha pe obstacle nhi hona chahihe
-                            ans=min(ans,1+next[i]);
+                            ans=min(ans,1+next[i]); //pos+1 hai to next ki bat hai
                             }
                         }
-                        curr[currlane]=ans;
+                        curr[currlane]=ans;//aor ye curr
             }
             
         }
-        next=curr;
+        next=curr;//and after each iteration ham piche aa rhe to next ab curr ke equal ho jayega
         }
-        return min(next[2],min(1+next[1],1+next[3]));//1 add kiya to include jump from 1 or 3 to 2 lane
+        return min(next[2],min(1+next[1],1+next[3]));
+        //aor ye min bhi next me se nikal rhe hai  &&&  1 add kiya to include jump from 1 or 3 to 2 lane
     }
     int minSideJumps(vector<int>& obstacles) {
         return solve(obstacles);
     }
 };
 
-
+t.c:-O(n)
 s.c:-O(1)
