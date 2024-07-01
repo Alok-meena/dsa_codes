@@ -146,6 +146,8 @@ public:
   
     int solve(vector<int>&obstacles){
         int n=obstacles.size()-1;
+
+        //max value se initialize kiya because we have to find min value and 0 indicates no jump
         vector<vector<int>>dp(4,vector<int>(obstacles.size(),1e9));//size 4 liya because ham 1 index ko lane 1 man ke chal rhe hai
 
         //uper ka base case hai ye if currpos n ho gyi to 0 and first me to now. of rows(lanes) dal di bs
