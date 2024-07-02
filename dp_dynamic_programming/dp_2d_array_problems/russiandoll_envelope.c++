@@ -82,3 +82,51 @@ public:
 
 t.c:-O(nlogn)===(O(nlogn)+O(nlogn)=O(nlogn)) of sort and binarysearch
 s.c:-O(n)
+
+
+
+IF HEIGHT AND WIDTH ARE GIVEN AS SEPARAT VECTORS THEN CODE FOR IT IS :---
+
+
+#include <vector>
+#include <algorithm>
+
+
+static bool comparator(vector<int>&a,vector<int>&b){
+        if(a[0]==b[0]){
+            return a[1]>b[1];//to isse jab dono width equal hui to height ko descending order me 
+            //sort kr diya jayega
+        }
+
+        return a[0]<b[0];//means by this we will sort according to width
+    }
+
+    int solve(int n,vector<vector<int>>&envelopes){
+        if(n==0){
+            return 0;
+        }
+        vector<int>ans;
+        ans.push_back(envelopes[0][1]);
+        for(int i=1;i<n;i++){
+            if(envelopes[i][1]>ans.back()){
+                ans.push_back(envelopes[i][1]);
+            }
+            else{
+                //just bda index find kro in ans 
+                int index=lower_bound(ans.begin(),ans.end(),envelopes[i][1])-ans.begin();
+                ans[index]=envelopes[i][1];
+            }
+        }
+        return ans.size();
+    }
+
+int findMaxEnvelopes(vector<int> &height, vector<int> &width, int n) {
+    // Write your code here.
+    vector<vector<int>>envelopes;
+    for(int i=0;i<n;i++){
+        envelopes.push_back({width[i],height[i]});
+    }
+
+    sort(envelopes.begin(),envelopes.end(),comparator);
+    return solve(n,envelopes);
+}
