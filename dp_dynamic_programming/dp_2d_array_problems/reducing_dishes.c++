@@ -192,6 +192,3 @@ int maxSatisfaction(vector<int>& satisfaction) {
 t.c:-O(n^2)
 s.c:-O(1)
 
-
-
-
