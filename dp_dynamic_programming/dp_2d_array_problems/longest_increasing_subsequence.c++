@@ -1,4 +1,20 @@
+Given an array a[ ] of n integers, find the Length of the Longest Strictly Increasing Subsequence.
 
+A sequence of numbers is called "strictly increasing" when each term in the sequence is smaller than the term that comes after it.
+
+Example 1:
+
+Input: n = 6, a[ ] = {5,8,3,7,9,1}
+Output: 3
+Explanation: There are more than one LIS in this array.  
+One such Longest increasing subsequence is {5,7,9}.
+
+
+
+    CAN TAKE ANY ELEMENT WITH OTHER ELEMENT BUT THERE ORDER IN THE ARRAY SHOULD BE MAINTAINED
+
+    Expected Time Complexity : O( n*log(n) )
+    Expected Auxiliary Space: O(n)
 
 
 
@@ -171,6 +187,69 @@ class Solution
        return solve(n,a);
     }
 }; 
+
+
+
+
+
+5: above all give tle as t.c should be nlogn so we will use binary search 
+
+class Solution
+{
+    public:
+    
+
+    int solveOptimal(int n,int a[]){
+        if(n==0){
+            return 0;
+        }
+        
+        vector<int>ans;
+        ans.push_back(a[0]);
+        
+        for(int i=0;i<n;i++){
+            if(a[i]>ans.back()){
+                ans.push_back(a[i]);
+            }
+            else{
+                //find index of element in ans which is just bigger than a[i]
+                int index=lower_bound(ans.begin(),ans.end(),a[i])-ans.begin();
+                ans[index]=a[i];
+            }
+        }
+        return ans.size();
+    }
+    int longestSubsequence(int n, int a[])
+    {
+       return solveOptimal(n,a);
+    }
+}; 
+
+syntax:lower_bound(InputIt first, InputIt last,value);
+
+
+t.c of finding lower_bound is 
+Time Complexity:  The number of comparisons performed is logarithmic. Therefore, the time complexity of the above approach is O(logN)
+
+AND THIS FUNCTION PERFORMS BINARY_SEARCH TO FIND THAT PARTICULAR INDEX
+
+Your teacher is correct in referring to std::lower_bound as performing a binary search.
+Internally, std::lower_bound uses a binary search algorithm, which efficiently finds the insertion point in logarithmic time, 
+O(logn).
+
+
+t.c:-O(nlogn)
+s.c:-O(n)
+
+
+
+
+ The lower_bound() method in C++ is used to return an iterator pointing to the first element in the range [first, last) which has a value not less than val. 
+This means that the function returns an iterator pointing to the next smallest number just greater than or equal to that number.
+If there are multiple values that are equal to val, lower_bound() returns the iterator of the first such value.
+The elements in the range shall already be sorted or at least partitioned with respect to val. 
+
+
 
 
 t.c:-O(n^2)
