@@ -137,6 +137,8 @@ class Solution
     }
 }; 
 
+t.c:-O(n^2)
+s.c:-O(n^2)
 
 but all these give tle
 
