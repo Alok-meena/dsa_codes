@@ -97,3 +97,6 @@ public:
         return solve(cuboids.size(),cuboids);
     }
 };
+
+t.c:-O(N^2)
+s.c:-O(N^2)
