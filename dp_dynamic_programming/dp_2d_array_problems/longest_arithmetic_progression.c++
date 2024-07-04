@@ -1,5 +1,15 @@
 
+Given an array A[] of sorted positive integers. An array having no duplicates elements, find the Length of the Longest Arithmetic Progression (LLAP) in given array A[].
 
+
+Example 1:
+
+Input:
+N = 6
+A[] = {1, 7, 10, 13, 14, 19}
+Output: 4
+Explanation: The longest arithmetic 
+progression is {1, 7, 13, 19}.
 
 VERY VERY IMP
 
