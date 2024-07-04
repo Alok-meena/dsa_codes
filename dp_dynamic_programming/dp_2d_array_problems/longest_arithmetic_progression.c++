@@ -49,7 +49,7 @@ public:
         int ans=0;
         
         for(int i=0;i<n;i++){
-            for(int j=i+1;j<n;j++){
+            for(int j=i+1;j<n;j++){//to i and j ko ap ke last element mana and then inke piche dekha using solve function
                 ans=max(ans,2+solve(i,A[j]-A[i],A));//index me i pass kiya taki isse pahle ke sare elements check kre diff ka
                 //+2 kiya to involve both A[j] and A[i]
             }
@@ -197,13 +197,14 @@ public:
         
         int ans=0;
         
-        for(int i=0;i<n;i++){
+        for(int i=0;i<n;i++){//to i and j ko ap ke last element mana and then inke piche dekha using solve function 
             for(int j=i+1;j<n;j++){
                 int count=2;
                 int n1=A[i];
                 int n2=A[j];
                 int diff=n2-n1;
-                
+
+               //now i and j mil gye hai to bs piche ke elements ko traverse kiya hai
                 for(int k=i-1;k>=0;k--){
                     if(n1-A[k]==diff){
                         count++;
