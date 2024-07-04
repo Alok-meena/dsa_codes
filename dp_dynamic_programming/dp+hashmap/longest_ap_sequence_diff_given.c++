@@ -32,14 +32,16 @@ public:
             int count=0;
 
            //check if ans already present or not
-            if(dp.count(temp)){
+            if(dp.count(temp)){//ye check krega ki i index tk koi element hai with diff d if yes to uske ans ko count me store kr liya
                 count=dp[temp];
             }
 
-            dp[arr[i]]=1+count;
+            dp[arr[i]]=1+count;//aor fir yha pe count yani pichla ans and +1 for including the current answer also
 
             ans=max(ans,dp[arr[i]]);
         }
         return ans;
     }
 };
+
+t.c:-O(n) and s.c:-O(n)
