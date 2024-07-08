@@ -47,10 +47,11 @@ public:
     int mctFromLeafValues(vector<int>& arr) {
         map<pair<int,int>,int>maxi;
 
+        //this loop is just used to save the combination of max value among the pairs
         for(int i=0;i<arr.size();i++){
             maxi[{i,i}]=arr[i];
             for(int j=i+1;j<arr.size();j++){
-                maxi[{i,j}]=max(arr[j],maxi[{i,j-1}]);
+                maxi[{i,j}]=max(arr[j],maxi[{i,j-1}]);//and bas piche vali value se compare krva rhe hai
             }
         }
         return solve(arr,maxi,0,arr.size()-1);
