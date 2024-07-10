@@ -45,7 +45,7 @@ public:
         }
         else{
             //add 1 to each as some operation is done to achieve our target
-            int insertAns=1+solve(s1,s2,i,j+1);
+            int insertAns=1+solve(s1,s2,i,j+1);//insert kr diya to ex horse and ros to insert kiya to h to vhi rhega na to i and r maatch ho gya to j+1
             int deleteAns=1+solve(s1,s2,i+1,j);
             int replaceAns=1+solve(s1,s2,i+1,j+1);
             ans=min(insertAns,min(deleteAns,replaceAns));
@@ -180,12 +180,14 @@ public:
     int minDistance(string word1, string word2) {
         //if word1 is empty the we have to insert all elements of word2 into a and
         //if b is empty then length of word1;
-        if(word1.length()==0){
-            return word2.length();
-        }
-        if(word2.length()==0){
-            return word1.length();
-        }
+        
+        //now need to include as we have the base case 2 just after first loop which will handle it
+       // // if(word1.length()==0){
+       //      return word2.length();
+       //  }
+       //  if(word2.length()==0){
+       //      return word1.length();
+       //  }
         return solve(word1,word2);
     }
 };
