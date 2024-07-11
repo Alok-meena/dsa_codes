@@ -64,3 +64,18 @@ class Solution
         return cost;
     }
 };
+
+
+it is like this for 1 2 3
+    long long first = pq.top(); // first = 1
+pq.pop(); // pq = [2, 3]
+
+long long second = pq.top(); // second = 2
+pq.pop(); // pq = [3]
+
+long long mergelength = first + second; // mergelength = 1 + 2 = 3
+cost += mergelength; // cost = 0 + 3 = 3
+
+pq.push(mergelength); // pq = [3, 3]
+
+that's why we did pq.size()>1 o/w we will get wrong ans as we want 2 elements in the pq to go on
