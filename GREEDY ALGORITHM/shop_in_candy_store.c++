@@ -13,6 +13,9 @@ K = 2
 candies[] = {3 2 1 4}
 
 
+TO PAHLE MIN AMOUNT HAI TO EK KAM KRO min amount ki candy buy kro by sorting it and k candy free max amount ki lo 
+and reverse to get the max amount
+
 class Solution
 {
 public:
