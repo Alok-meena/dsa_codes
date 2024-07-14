@@ -30,6 +30,7 @@ public:
         int n = nums.size();
         
         for (int i = 0; i < n; i++) {
+           //so we should have to check this condition first then update the maxreach
             if (i > maxReach) {
                 // If at any point the current index is greater than maxReach, we can't proceed further
                 return false;
