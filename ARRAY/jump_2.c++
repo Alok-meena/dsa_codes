@@ -84,6 +84,7 @@ public:
             for(int i=l;i<=r;i++){
                 farthest=max(i+nums[i],farthest);
             }
+           //to is loop se farthest ham l se calculate kr rhe hai
             l=r+1;
             r=farthest;
             jumps++;
