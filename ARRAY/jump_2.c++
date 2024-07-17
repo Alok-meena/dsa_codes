@@ -95,4 +95,41 @@ public:
 
 t.c:-O(n) and s.c:-O(1)
 
-3:
+ if this code does not handel some edge cases then  use 
+
+
+
+class Solution{
+  public:
+    
+    int minJumps(int arr[], int n){
+        // Your code here
+        int l=0;
+        int r=0;
+        
+        if(arr[0]==0 && n==1){
+            return 0;
+        }
+        if(arr[0]==0){
+            return -1;
+        }
+        int jumps=0;
+        while(r<n-1){
+            int farthest=0;
+            for(int i=l;i<=r;i++){
+                farthest=max(farthest,i+arr[i]);
+                if(farthest>=n-1){
+                    return jumps+1;
+                }
+            }
+            if(farthest<=r){
+                return -1;
+            }
+            l=r+1;
+            r=farthest;
+            jumps=jumps+1;
+        }
+        return jumps;
+        
+    }
+};
