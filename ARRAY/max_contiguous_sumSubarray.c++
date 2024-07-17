@@ -108,7 +108,7 @@ class Solution {
 
             // If max sum at current index is negative, we do not need to add
             // it to result so we update it to zero.
-            if (maxh < 0)
+            if (maxh < 0) //ye isliye kiya because if already our sum is going on negative then it will be going to reduce only so if it is negative then do it 0
                 maxh = 0;
         }
         // returning the result.
@@ -118,3 +118,37 @@ class Solution {
 Complexity:
 Time Complexity: O(n), where is the size of the array as we are looping once the whole array.
 Space Complexity: O(1), Here we are not using extra space.
+
+
+
+
+
+
+
+
+
+  NOW WHAT IF WE HAVE TO PRINT THIS to always if currentsum 0 hai soo mtlb yhi se start kiya hai and cu>maxsum ko updte kr do end me becaue
+jab bhi aage rukega to index store ho jayega then can print from start to end the respective array
+
+  class Solution {
+  public:
+    // Function to find the sum of contiguous subarray with maximum sum.
+   int maxSubarraySum(vector<int> &arr) {
+       int currentsum=0;
+       int maxsum=INT_MIN;
+       for(int i=0;i<n;i++){
+          if(currentsum=0){
+             start=i;
+          }
+          currentsum+=arr[i];
+          if(currentsum>maxsum){
+             maxsum=currentsum;
+             end=i;
+          }
+
+          if(currentsum<0){
+             currentsumm=0;
+          }
+       }
+    } 
+};
