@@ -9,6 +9,9 @@ class Solution {
     // Function to find the sum of contiguous subarray with maximum sum.
     long long maxSubarraySum(vector<int> &arr) {
         long long ans=arr[0];
+
+       //to yha kya ho rha hai ki ham starting se leke end tk ja rhe continuosly aor har ek element ko access krne ke bad ans update kr rhe
+      //to bs max ans usme store ho hi jayega
         for(int i=0;i<arr.size();i++) {
             long long temp=0;
             for(int j=i;j<arr.size();j++) {
