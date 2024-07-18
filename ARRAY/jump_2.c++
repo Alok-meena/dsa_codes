@@ -81,7 +81,7 @@ public:
  
         while(r<nums.size()-1){
             int farthest=0;
-            for(int i=l;i<=r;i++){
+            for(int i=l;i<=r;i++){//should be from l to r not till farthest as it is 0 at starting of every iteration
                 farthest=max(i+nums[i],farthest);
             }
            //to is loop se farthest ham l se calculate kr rhe hai
