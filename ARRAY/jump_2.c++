@@ -29,7 +29,7 @@ public:
 
         int ans=INT_MAX;
 
-        for(int i=1;i<=nums[index];i++){
+        for(int i=1;i<=nums[index];i++){//khuch bhi ho last tk jane ke liye 1 jump to krni hi hogi
             ans=min(ans,solve(index+i,jumps+1,nums));
         }
         
