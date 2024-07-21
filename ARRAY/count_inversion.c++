@@ -43,3 +43,60 @@ brute force class Solution {
 };
 
 t.c:-O(n^2) ans s.c:-O(1)
+
+
+
+using mergesort
+
+#include <bits/stdc++.h>
+using namespace std;
+
+long long merge(vector<long long>& nums, int low, int mid, int high) {
+    long long count = 0;
+    vector<long long> temp;
+    int left = low;
+    int right = mid + 1;
+    
+    while (left <= mid && right <= high) {
+        if (nums[left] <= nums[right]) {
+            temp.push_back(nums[left++]);
+        } else {
+            temp.push_back(nums[right++]);
+            count += (mid - left + 1);
+        }
+    }
+
+    while (left <= mid) {
+        temp.push_back(nums[left++]);
+    }
+
+    while (right <= high) {
+        temp.push_back(nums[right++]);
+    }
+
+    for (int i = low; i <= high; ++i) {
+        nums[i] = temp[i - low];
+    }
+
+    return count;
+}
+
+long long mergesort(vector<long long>& nums, int low, int high) {
+    long long count = 0;
+    if (low < high) {
+        int mid = low + (high - low) / 2;
+        count += mergesort(nums, low, mid);
+        count += mergesort(nums, mid + 1, high);
+        count += merge(nums, low, mid, high);
+    }
+    return count;
+}
+
+long long getInversions(long long *arr, int n) {
+    vector<long long> array(n);
+    for (int i = 0; i < n; ++i) {
+        array[i] = arr[i];
+    }
+    return mergesort(array, 0, n - 1);
+}
+
