@@ -33,7 +33,7 @@ brute force class Solution {
         // return solve(arr,n,count);
         for(int i=0;i<n-1;i++){
             for(int j=i+1;j<n;j++){
-                if(arr[i]>arr[j] && i<j){
+                if(arr[i]>arr[j]{
                     count++;
                 }
             }
@@ -41,3 +41,5 @@ brute force class Solution {
         return count;
     }
 };
+
+t.c:-O(n^2) ans s.c:-O(1)
