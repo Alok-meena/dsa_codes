@@ -47,56 +47,62 @@ t.c:-O(n^2) ans s.c:-O(1)
 
 
 using mergesort
-
-#include <bits/stdc++.h>
-using namespace std;
-
-long long merge(vector<long long>& nums, int low, int mid, int high) {
-    long long count = 0;
-    vector<long long> temp;
-    int left = low;
-    int right = mid + 1;
-    
-    while (left <= mid && right <= high) {
-        if (nums[left] <= nums[right]) {
-            temp.push_back(nums[left++]);
-        } else {
-            temp.push_back(nums[right++]);
-            count += (mid - left + 1);
+class Solution {
+  public:
+    // arr[]: Input Array
+    // N : Size of the Array arr[]
+    // Function to count inversions in the array.
+  
+    long long merge(long long nums[],int low,int high,int mid){
+        long long count=0;
+        long long temp[high-low+1];
+        int left=low;
+        int right=mid+1;
+        int k=0;
+        while(left<=mid && right<=high){
+            if(nums[left]<=nums[right]){//will have to include equal to as if elements can equal also
+                temp[k++]=nums[left++];
+            }
+            else{
+                temp[k++]=nums[right++];
+                count=count+(mid-left+1);
+            }
         }
+
+        while(left<=mid){
+                temp[k++]=nums[left++];
+        }
+
+        while(right<=high){
+                temp[k++]=nums[right++];
+        }
+        
+        for(long long i=low;i<=high;i++){
+            nums[i]=temp[i-low];
+        }
+
+        return count;
+        
     }
-
-    while (left <= mid) {
-        temp.push_back(nums[left++]);
+    long long mergesort(long long nums[],long long low,long long high){
+        long long count=0;
+        if(low>=high){
+            return count;//then return the count which we have calculated till now
+        }
+    
+        long long mid=low+(high-low)/2;
+        count+=mergesort(nums,low,mid);
+        count+=mergesort(nums,mid+1,high);
+        count+=merge(nums,low,high,mid);//have to pass mid here to merege both the left right subarray using the low high and mid
+        return count;
     }
-
-    while (right <= high) {
-        temp.push_back(nums[right++]);
+  
+    long long int inversionCount(long long arr[], int n) {
+        // Your Code Here
+        long long count;
+        count=mergesort(arr,0,n-1);
+        return count;
     }
+};
 
-    for (int i = low; i <= high; ++i) {
-        nums[i] = temp[i - low];
-    }
-
-    return count;
-}
-
-long long mergesort(vector<long long>& nums, int low, int high) {
-    long long count = 0;
-    if (low < high) {
-        int mid = low + (high - low) / 2;
-        count += mergesort(nums, low, mid);
-        count += mergesort(nums, mid + 1, high);
-        count += merge(nums, low, mid, high);
-    }
-    return count;
-}
-
-long long getInversions(long long *arr, int n) {
-    vector<long long> array(n);
-    for (int i = 0; i < n; ++i) {
-        array[i] = arr[i];
-    }
-    return mergesort(array, 0, n - 1);
-}
-
+t.c:-O(nlog2(n)) and s.c:-O(n)
