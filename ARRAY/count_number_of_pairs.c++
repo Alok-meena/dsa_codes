@@ -40,3 +40,26 @@ O(n^2)
 goes for tle
 
 
+using map
+
+
+
+
+class Solution {
+  public:
+    int getPairsCount(const vector<int>& arr, int k) {
+        map<int,int>m;//1st--->value 2nd--->count
+        
+        int ans=0;
+        
+        for(int i=0;i<arr.size();i++){
+            int value=k-arr[i];
+            if(m.find(value)!=m.end()){
+                ans+=m[value];
+            }
+            m[arr[i]]++;
+        }
+        return ans;
+    }
+};
+
