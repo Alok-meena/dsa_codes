@@ -40,7 +40,7 @@ class Solution{
 };
 
 
-2:use map
+2:use set
 
 class Solution {
 public:
@@ -61,7 +61,9 @@ public:
             cumSumSet.insert(cumSum);
         }
 
+
+
         return false;
     }
 };
-t.c:-O(nlogn) and s.c:-O(n)
+t.c:-O(n) and s.c:-O(n)
