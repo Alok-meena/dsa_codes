@@ -97,7 +97,6 @@ public:
                 current+=nums[j];
                 if(current==k){
                     count++;
-                    break;
                 }
             }
         }
