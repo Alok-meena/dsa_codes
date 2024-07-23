@@ -38,3 +38,30 @@ class Solution{
         return false;
     }
 };
+
+
+2:use map
+
+class Solution {
+public:
+    // Function to check whether there is a subarray present with 0-sum or not.
+    bool subArrayExists(int arr[], int n) {
+        unordered_set<long long> cumSumSet;
+        long long cumSum = 0;
+
+        for (int i = 0; i < n; ++i) {
+            cumSum += arr[i];
+
+            // Check if cumulative sum is zero or already exists in the set
+            if (cumSum == 0 || cumSumSet.find(cumSum) != cumSumSet.end()) {
+                return true;
+            }
+
+            // Add the current cumulative sum to the set
+            cumSumSet.insert(cumSum);
+        }
+
+        return false;
+    }
+};
+t.c:-O(nlogn) and s.c:-O(n)
