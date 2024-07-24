@@ -72,12 +72,16 @@ string isSubset(int a1[], int a2[], int n, int m) {
     for (auto it = um2.begin(); it != um2.end(); it++) {
         // If the frequency in a1 is greater than or equal to the frequency in a2,
         // increment the count
-        if (um[it->first] >= it->second) {
+
+        //means 1st map me it->first value ka jo freq hai ager voo >= it ki second hai to means continue;
+        
+        if (um[it->first] >= it->second) {//because the freq can be greater in a1 bs hme dekhna hai ki a2 ka har element a1 me hona chahihe
             count+=it->second;
         }
     }
     
     // If the count is equal to the size of a2, a2 is a subset of a1
+    //because arr2 me m elements hi honge aor count freq of all elements ko add hi to kr rha hai
     if (count == m)
         return "Yes";
     // Otherwise, a2 is not a subset of a1
