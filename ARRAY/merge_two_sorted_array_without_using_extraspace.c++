@@ -92,6 +92,7 @@ class Solution{
             int i=n-1;
             int j=0;
 
+    //if we are able to take extra space then it will be just like merge sort
             while(i>=0 && j<m){
                 if(arr1[i]>arr2[j]){
                     swap(arr1[i],arr2[j]);
