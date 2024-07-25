@@ -27,3 +27,19 @@ class Solution{
      return mini;
     }   
 };
+
+
+2:
+
+    class Solution{
+    public:
+    long long findMinDiff(vector<long long> a, long long n, long long m){
+        
+        sort(a.begin(),a.end());
+        long long mindiff=INT_MAX;
+        for(int i=m-1;i<n;i++){
+            mindiff=min(mindiff,a[i]-a[i-(m-1)]);
+        }
+        return mindiff;
+    }   
+};
