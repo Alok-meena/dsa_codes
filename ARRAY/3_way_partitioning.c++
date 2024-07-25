@@ -73,7 +73,7 @@ public:
         while(j<=end){
             
             if(array[j]<a){
-                swap(array[j++],array[start++]);
+                swap(array[j++],array[start++]);//yha start++ and j++ dono kiya because start and i dono ko 0 se kiya hai to left vala khudh hi se swap ho rha hai
             }
             else if(array[j]>b){
                 swap(array[j],array[end--]);
