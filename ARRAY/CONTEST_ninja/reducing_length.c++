@@ -57,7 +57,8 @@ Sample output 2:
 
 
 
-
+so what we are doing is first calculating sum and then calculating prefixsuma and suffixsum if it is <x then okk suffixsum is calculated by sum-prefixsum
+okk
 
 
 int canYouReduce(int n, int x, vector<int> &v) {
