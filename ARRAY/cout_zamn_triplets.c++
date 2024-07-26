@@ -67,7 +67,7 @@ int zamnTriplets (int n, vector <int> &a) {
 
    for(int i=1;i<a.size()-1;i++){
       if(a[i]%2==1){
-         int even_before=0,even_after=0;
+         int even_before=0,even_after=0;//aor ager current element ke left ya right me nhi hue opposite element to bas 0 rhega aor ans 0 ho jayega plus
          for(int j=i+1;j<a.size();j++){
             if(a[j]%2==0){
                even_after++;
