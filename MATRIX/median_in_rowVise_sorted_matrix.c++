@@ -81,7 +81,7 @@ public:
         int count=0;
         //it is doing binary search on every row
         for(int i=0;i<n;i++){
-            count+=upper_bound(matrix[i],value);
+            count+=upper_bound(matrix[i],value);//to yha ham R*C ki jagah har ek row ko pass krke nlogm me upper_bound nikal rhe hai
         }
         return count;
 
