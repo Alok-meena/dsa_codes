@@ -81,4 +81,6 @@ vector<int> nextSmallerElement(vector<int> &arr, int n)
     }
     return ans;
 }
-t.c:-O(n)
+t.c:-O(n) and O(n) space
+
+can find prevsmaller element by starting it with 0 to n-1
