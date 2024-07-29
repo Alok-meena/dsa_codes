@@ -73,7 +73,8 @@ int canYouReduce(int n, int x, vector<int> &v) {
     for(int i=0;i<v.size();i++){
         prefix+=v[i];
 
-        if(prefix<x && sum-prefix<x){
+        if(prefix<x && sum-prefix<x){//dekho iska mtlb to yhi hai ki prefix and sum ex 2 10 and 12 is the no. so dono ager less than 12 hai to 
+              //bs length 1 is possible o/w continue and return 0;
             return 1;
         }
     }
