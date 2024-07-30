@@ -36,12 +36,15 @@ vector<vector<int>> rotateMatrix(vector<vector<int>> &matrix)
     for(int i=0;i<n;i++){
         int row=0;
         for(int j=0;j<n;j++){
-            ans[j][n-i-1]=matrix[i][j];
+            ans[j][n-i-1]=matrix[i][j];//to bas khuch nhi karna before and after rotation ke index ko compare karna
+            //ans me bas matrix ka j jo hai ans ke i ke equal hai and ans ka j jo hai n-i-1 se decrease ho rha hai 
         }
     }
 
     return ans;
 }
+
+//for acw also just do ans[n-j-1][i]=matrix[i][j] bas compare hi karna hai hame
 
 t.c:-O(n^2) and s.c is also same
 
