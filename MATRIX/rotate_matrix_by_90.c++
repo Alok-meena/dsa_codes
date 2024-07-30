@@ -58,14 +58,13 @@ public:
          int n=matrix.size();
     //do transpose
 
-    for(int i=0;i<n-1;i++){
+    for(int i=0;i<n-1;i++){//n-1 tk hi jayenge as jo elements swap krne hai vo diagonal ke nhi hone chahihe as those will remain same
+        //and j jo hai next se start karna hai as we dont want i==j means to include the diagonal elements
         for(int j=i+1;j<n;j++){
-            if(i!=j){
-                swap(matrix[i][j],matrix[j][i]);
-            }
+            swap(matrix[i][j],matrix[j][i]);
         }
     }
-
+    //reversing each row
     for(int i=0;i<n;i++){
         reverse(matrix[i].begin(),matrix[i].end());
     }
@@ -93,9 +92,10 @@ vector<vector<int>> rotateMatrix(vector<vector<int>> &matrix) {
     }
 
     // Reverse each column
-    for (int j = 0; j < n; j++) {
-        for (int i = 0; i < n / 2; i++) {
-            swap(matrix[i][j], matrix[n - 1 - i][j]);
+    for (int j = 0; j < n; j++) {//outer loop is to access every column
+        for (int i = 0; i < n / 2; i++) {//this is to reverse every column
+            swap(matrix[i][j], matrix[n - 1 - i][j]);//now dhyan se suno matrix[i][j] means j constant so same column and i change means row change krni hai 
+            //and same for next col constant rkhne ke liye bad me j rakhna hai dry run karna smj jaoge
         }
     }
 
