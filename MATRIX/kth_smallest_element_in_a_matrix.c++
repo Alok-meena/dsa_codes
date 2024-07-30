@@ -100,3 +100,48 @@ public:
 
 //max and min are the values
 s.c:-O(1) and s.c:-O(nlogn-log(max-min) log(n) for upper bound
+
+
+WHAT IS ARRAY IS GIVEN INSTEAD OF VECTOR:-----------
+
+
+  #include <algorithm>
+int Upperbound(int matrix[],int n,int value){
+    int low=0;
+    int high=n;//here do this because yha ager sare array ke element <mid hue to that's why we want count of elements not their index so set it to n ans similar for ans
+    int ans=n;
+    while(low<high){
+        int mid=low+(high-low)/2;
+        if(value<matrix[mid]){
+            ans=mid;
+            high=mid;//taki har ek possibility check ho paye
+        }
+        else{
+            low=mid+1;
+        }
+    }
+    
+    return ans;
+}
+int kthSmallest(int mat[MAX][MAX], int n, int k) {
+    // Min-heap to store the smallest elements
+    int low=mat[0][0];
+    int high=mat[n-1][n-1];
+    
+    while(low<high){
+        int count=0;
+        int mid=low+(high-low)/2;
+        for(int i=0;i<n;i++){
+            count+=Upperbound(mat[i],n,mid);
+        }
+        
+        if(count<k){
+            low=mid+1;
+        }
+        else{
+            high=mid;
+        }
+    }
+    
+    return low;
+}
