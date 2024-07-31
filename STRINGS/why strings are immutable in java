@@ -1,0 +1,2 @@
+Strings in Java are specified as immutable, as seen above because strings with the same content share storage in 
+a single pool to minimize creating a copy of the same value. That is to say, once a String is generated, its content cannot be changed and hence changing content will lead to the creation of a new String.
