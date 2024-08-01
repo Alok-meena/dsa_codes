@@ -19,3 +19,120 @@ public:
         
     }
 };
+
+another way:-
+
+
+class Solution {
+public:
+    vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+        
+        sort(nums1.begin(),nums1.end());
+        sort(nums2.begin(),nums2.end());
+
+        int n1=nums1.size();
+        int n2=nums2.size();
+
+
+        vector<int>v;
+        vector<int> visited(n2, 0);  // Initialize visited array with 0
+        for(int i=0;i<n1;i++){
+            for(int j=0;j<n2;j++){
+                if(nums1[i]==nums2[j] && visited[j]==0){
+                    if(v.empty() || v.back()!=nums1[i]){
+                        v.push_back(nums1[i]);
+                    }
+                    visited[j]=1;
+                    break;
+                }
+                if(nums1[i]<nums2[j]){
+                    break;
+                }
+            }
+        }
+
+        return v;
+        
+    }
+};
+
+
+t.c:-O(n1*n2) and s.c:-O(n2)
+
+using while loop
+
+
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+class Solution {
+public:
+    vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+        sort(nums1.begin(), nums1.end());
+        sort(nums2.begin(), nums2.end());
+
+        vector<int> result;
+        int i = 0, j = 0;
+        int n1 = nums1.size();
+        int n2 = nums2.size();
+
+        while (i < n1 && j < n2) {
+            if (nums1[i] == nums2[j]) {
+                // To avoid duplicates, check if the result is empty or last element is different
+                if (result.empty() || result.back() != nums1[i]) {
+                    result.push_back(nums1[i]);
+                }
+                i++;
+                j++;
+            } else if (nums1[i] < nums2[j]) {
+                i++;
+            } else {
+                j++;
+            }
+        }
+
+        return result;
+    }
+};
+
+
+can do like this also
+
+class Solution {
+public:
+    vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+        
+        sort(nums1.begin(),nums1.end());
+        sort(nums2.begin(),nums2.end());
+
+        int n1=nums1.size();
+        int n2=nums2.size();
+
+
+        vector<int>v;
+        
+        int i=0;
+        int j=0;
+        while(i<n1 && j<n2){
+            if(nums1[i]<nums2[j]){
+                i++;
+            }
+            else if(nums2[j]>nums1[i]){
+                j++;
+            }
+            else{
+                if(v.empty() || v.back()!=nums1[i]){
+                    v.push_back(nums1[i]);
+                    i++;
+                    j++;
+                }
+            }
+        }
+        
+        return v;
+        
+    }
+};
+
+O(n1+n2) and O(1) are t.c and s.c
