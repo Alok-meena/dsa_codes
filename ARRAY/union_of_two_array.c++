@@ -72,3 +72,54 @@ class Solution {
         return unionset.size();
     }
 };
+
+3rd way without using set
+
+class Solution {
+  public:
+    // Function to return the count of number of elements in union of two arrays.
+    int doUnion(vector<int> arr1, vector<int> arr2) {
+        // code here
+        vector<int>ans;
+        
+        int i=0;
+        int j=0;
+        int n=arr1.size();
+        int m=arr2.size();
+        
+        while(i<n && j<m){
+            
+            if(arr1[i]<=arr2[j]){
+                if(ans.size()==0 || ans.back()!=arr1[i]){
+                    ans.push_back(arr1[i]);
+                }
+                i++;
+            }
+            else{
+                if(ans.size()==0 || ans.back()!=arr2[j]){
+                    ans.push_back(arr2[j]);
+                }
+                j++;
+            }
+        }
+        
+        while(i<n){
+            if(ans.size()==0 || ans.back()!=arr1[i]){
+              ans.push_back(arr1[i]);
+            }
+            i++;
+        }
+        
+        while(j<m){
+            if(ans.size()==0 || ans.back()!=arr2[j]){
+               ans.push_back(arr2[j]);
+            }
+            j++;
+        }
+        
+        return ans.size();
+        
+    }
+};
+
+t.c:-O(n+m) and s.c:-O(n+m)
