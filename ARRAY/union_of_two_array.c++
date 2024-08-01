@@ -73,13 +73,17 @@ class Solution {
     }
 };
 
-3rd way without using set
+3rd way without using set BUT FOR USING THIS METHOD WE HAVE TO SORT BOTH OF THE ARRAYS AS WE ARE USING TWO POINTER METHOD
 
 class Solution {
   public:
     // Function to return the count of number of elements in union of two arrays.
     int doUnion(vector<int> arr1, vector<int> arr2) {
         // code here
+
+        sort(arr1.begin(),arr1.end());
+        sort(arr2.begin(),arr2.end());
+        
         vector<int>ans;
         
         int i=0;
