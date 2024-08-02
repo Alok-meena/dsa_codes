@@ -64,7 +64,7 @@ public:
         sort(v.begin(),v.end(),cmp);
 
         for(auto i:v){
-            ans+=i.first;
+            ans+=i.first; //to jab i ne access kiya hoga to ek pair access kiya hoga 
         }
 
         return ans;
