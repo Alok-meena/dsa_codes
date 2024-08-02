@@ -19,7 +19,7 @@ All possible subsequences of abc are :
 “a” , “b” , “c” , “ab” , “bc” , “ac”, “abc”
 
 
-
+IT IS JUST SIMILAR TO HOW WE DONE TO GET ALL OF THE SUBARRAY MEANS TO FIND POWER SET OF A GIVEN SET 
 
 
 
