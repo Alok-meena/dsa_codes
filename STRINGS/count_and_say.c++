@@ -55,6 +55,8 @@ public:
                     count++;
                 }
             }
+
+            //this is necessary to include the last case when j>=s.length() can take the case when n=4
             temp += to_string(count);
             temp += s[s.length()-1]; //or can use s.back()
             s=temp;
