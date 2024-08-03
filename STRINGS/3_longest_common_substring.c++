@@ -38,7 +38,7 @@ class Solution {
     }
 };
 
-Time Complexity: O(2n+m) in the worst case, where n and m are the lengths of the two strings.
+Time Complexity: O(2^n+m) in the worst case, where n and m are the lengths of the two strings.
 Space Complexity: O(n+m) in the worst case for the recursive stack, where n and m are the lengths of the two strings.
 
 
@@ -123,30 +123,29 @@ public:
 
 
 
-3rd:bottom-up
+
+4). dp method bottom up approach
 
 class Solution {
-public:
+  public:
     int longestCommonSubstr(string s1, string s2) {
-        int n = s1.length();
-        int m = s2.length();
-        vector<vector<int>> dp(n + 1, vector<int>(m + 1, 0));
-        int maxLength = 0;
-
-        for (int i = 1; i <= n; i++) {
-            for (int j = 1; j <= m; j++) {
-                if (s1[i - 1] == s2[j - 1]) {
-                    dp[i][j] = dp[i - 1][j - 1] + 1;
-                    maxLength = max(maxLength, dp[i][j]);
-                }
+        // your code here
+        int n=s1.length();
+        int m=s2.length();
+        
+        vector<vector<int>>dp(n+1,vector<int>(m+1,0));
+        int ans=0;
+        
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=m;j++){
+                if(s1[i-1]==s2[j-1]){
+                    dp[i][j]=1+dp[i-1][j-1];
+                    ans=max(ans,dp[i][j]);
+                }//no require for else condition as all of the blocks are already 0
             }
         }
-
-        return maxLength;
+        return ans;
     }
 };
 
-
-
-Expected Time Complexity: O(n*m).
-Expected Auxiliary Space: O(n*m).
+O(n*m) t.c and s.c
