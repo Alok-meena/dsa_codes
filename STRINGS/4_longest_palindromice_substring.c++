@@ -89,4 +89,54 @@ private:
 };
 
 
+we can also omit that formula of start by doing so
+
+
+
+class Solution {
+public:
+    string longestPalin(string S) {
+        int n = S.length();
+        if (n == 0) return "";
+
+        int start = 0;
+        int maxLength = 1;
+
+        for (int i = 0; i < n; ++i) {
+            // Check for odd-length palindromes
+            pair<int,int>left= expandAroundCenter(S, i, i);
+            // Check for even-length palindromes
+            pair<int,int>right= expandAroundCenter(S, i, i + 1);
+            
+            int len1=left.first;
+            int len2=right.first;
+
+            int len = max(len1, len2);
+            if (len > maxLength) {
+                maxLength = len;
+                if(len==len1){
+                    start=left.second;
+                }
+                else{
+                    start=right.second;
+                }
+            }
+        }
+        
+        return S.substr(start, maxLength);
+    }
+
+private:
+    pair<int,int> expandAroundCenter(const string &s, int left, int right) {
+        while (left >= 0 && right < s.length() && s[left] == s[right]) {
+            --left;
+            ++right;
+        }
+        // Length of the current palindromic substring
+        int len=right - left - 1;
+        int start=left+1;
+        return {len,start};
+    }
+};
+
 Efficiency: This approach runs in O(n^2) time complexity and O(1) space complexity, making it efficient and straightforward for this problem.
