@@ -12,7 +12,45 @@ Output: a
 Explanation: "a", "b" and "c" are the longest palindromes with same length. The result is the one with the least starting index.
 
 
+1st : using longest common substring in this
 
+class Solution {
+  public:
+    string longestCommonSubstr(string s1, string s2) {
+        // your code here
+        int n=s1.length();
+        int m=s2.length();
+        
+        vector<vector<int>>dp(n+1,vector<int>(m+1,0));
+        int maxlength=0;
+        int endIndex=0;
+        
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=m;j++){
+                if(s1[i-1]==s2[j-1]){
+                    dp[i][j]=1+dp[i-1][j-1];
+                    if(dp[i][j]>maxlength){
+                        maxlength=dp[i][j];
+                        endIndex=i;
+                    }
+                }
+            }
+        }
+        
+        string s=s1.substr(endIndex - maxlength, maxlength);//we did this as we are starting from index 1
+        return s;
+    }
+    string longestPalin(string S) {
+        // code here
+        string s=S;
+        reverse(s.begin(),s.end());
+        
+        return longestCommonSubstr(S,s);
+        
+    }
+};
+
+but this is givig error
 
   class Solution {
 public:
