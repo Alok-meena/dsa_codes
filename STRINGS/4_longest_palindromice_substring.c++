@@ -123,7 +123,7 @@ public:
             }
         }
         
-        return S.substr(start, maxLength);
+        return S.substr(start, maxLength); //here start is the index and 2nd parameter is the length from that index to takeout
     }
 
 private:
