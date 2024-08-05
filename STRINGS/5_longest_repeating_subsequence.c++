@@ -98,5 +98,49 @@ class Solution {
             }
             return dp[n][n];
 		}
-
 };
+
+
+
+O(n^2) and 
+
+how to print the string
+
+
+
+// Online C++ compiler to run C++ program online
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+
+string solve(string str){
+    int n=str.length();
+     vector<vector<string>>dp(n+1,vector<string>(n+1,""));
+        
+            for(int i=1;i<=n;i++){
+                for(int j=1;j<=n;j++){
+                    if(str[i-1]==str[j-1] && i!=j){
+                        dp[i][j]=dp[i-1][j-1]+str[i-1];
+                    }
+                    else{
+                        dp[i][j]=(dp[i][j-1].length()>dp[i-1][j].length()?
+                        dp[i][j-1]:dp[i-1][j]);
+                    }
+                }
+            }
+            return dp[n][n];
+}
+int main() {
+    // Write C++ code here
+    string s="AXXX";
+    cout<<solve(s);
+    
+
+    return 0;
+}
+
+
+
+like this
