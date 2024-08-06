@@ -31,14 +31,14 @@ int maxSubStr(string str){
             if(i=='0') count0++;
             else count1++;
             
-            if(count0==count1){
+            if(count0==count1){//jaise hi equal mile to reset count of 0 and 1 to 0
                 count++;
                 count0=0;
                 count1=0;
             }
         }
         
-        if(count0!=0 && count1!=0){
+        if(count0!=0 && count1!=0){//if some 0 and 1 remain not equal it means that splitting is not possible then return -1
             return -1;
         }
         
