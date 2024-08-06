@@ -68,7 +68,11 @@ Only proceed with a swap if the character has not been used at the current index
 this is for the cases like string ex:--- ABB and more like this
 
 
+Time Complexity
+The time complexity of generating permutations is O(n * n!), where n is the length of the string. This is because there are n! permutations and each permutation takes O(n) time to construct and insert into the result vector.
 
+Space Complexity
+The space complexity is O(n * n!) to store all the permutations, plus O(n) for the recursion stack and O(n) for the seen set used in each recursive call. So, the overall space complexity is O(n * n!).
 
 
 
