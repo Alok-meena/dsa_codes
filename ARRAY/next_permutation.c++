@@ -101,7 +101,10 @@ vector<int> nextPermutation(vector<int> &permutation, int n)
                 break;
             }
         }
+ 
+        //aor ager index==-1 hai to means ki ham abhi last permutation pe hai ex 654321 and to get first one just reverse it 123456
 
+ 
         if(index==-1){
             reverse(permutation.begin(),permutation.end());
             return permutation;
