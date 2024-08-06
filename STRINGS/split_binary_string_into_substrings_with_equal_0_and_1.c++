@@ -43,6 +43,9 @@ int maxSubStr(string str){
         }
         
         return count;
+
+        //    return (count0!=0 || count1!=0)? -1:count;
+        //can also use ternary operator like this but take care that return cannot be used inside the ternary operator it should be used outside it
 }
 
 t.c:-O(N) and s.c:O(1)
