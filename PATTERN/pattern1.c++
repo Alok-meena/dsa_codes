@@ -45,6 +45,9 @@ void symmetry(int n) {
     
 }
 
+but in order to print it perfectly just remove the spaces given after star
+means like cout<<"*"; then dont give any space
+
 
 *         *
 * *     * *
