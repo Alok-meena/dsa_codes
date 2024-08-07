@@ -21,6 +21,7 @@ void getNumberPattern(int n) {
     // Write your code here.
     for(int i=0;i<(2*n)-1;i++){
         for(int j=0;j<(2*n)-1;j++){
+            //to bas hamne min distance nikala hai from all directions and subtract from n to get the pattern
             int top=i;
             int left=j;
             int right=(2*n-2)-j;
