@@ -47,7 +47,8 @@ class Solution {
 public:
     int solve(string s1,string s2,int i,int j,vector<vector<int>>&dp){
         if(i==s1.length()){
-            return s2.length()-j;
+            return s2.length()-j;//to ham j minus isliye kr rhe hai as s2.length()-j is the length of the string which is still not converted 
+            // so ye hame return krke ans me add karna hai that's why we did this
         }
         if(j==s2.length()){
             return s1.length()-i;
