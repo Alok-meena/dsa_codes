@@ -30,8 +30,13 @@ public:
         int ans=INT_MAX;
 
         for(int i=1;i<=nums[index];i++){//khuch bhi ho last tk jane ke liye 1 jump to krni hi hogi
-            ans=min(ans,solve(index+i,jumps+1,nums));
+            ans=min(ans,solve(index+i,jumps+1,nums));//and we are updating the jumps to jumps+1 as we are making a jump for each 
+            //and we are doing jump+1 not jump++ as jump++ will change the value of jumps and we have to use it
         }
+
+       // When you perform jump++, the value of jump is incremented by 1, and the change persists after the operation. This is known as a post-increment operation, meaning the current value is used in the expression first, and then the value is incremented.
+
+       // On the other hand, when you pass jump + 1 as an argument or in an expression, the value of jump remains unchanged. The expression jump + 1 simply adds 1 to the current value of jump and uses that result in the function or expression, but the original jump variable is not modified.
         
         return ans;
     }
@@ -42,6 +47,31 @@ public:
 };
 
 t.c:-O(N^N) and s.c:-O(N)
+
+another recursive solution
+
+class Solution {
+public:
+    int solve(int i,vector<int>&nums,vector<int>&dp){
+        if(i==nums.size()-1) return 0;
+
+        if(dp[i]!=-1) return dp[i];
+
+        int ans=INT_MAX;
+        for(int j=1;j<=nums[i];j++){
+            if(i+j<nums.size()){
+                int v=solve(i+j,nums,dp);
+                if(v!=INT_MAX) ans=min(ans,v+1);
+            }
+        }
+
+        return dp[i]=ans;
+    }
+    int jump(vector<int>& nums) {
+        vector<int>dp(nums.size(),-1);
+        return solve(0,nums,dp);
+    }
+};
 
 
 2:
