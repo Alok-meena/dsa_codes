@@ -27,7 +27,7 @@ public:
         if(i==s.length()){
             return 1;
         }
-
+  //Both string temp = ""; and string temp; will give you an empty string to start with. The difference is mainly in clarity and style, not in behavior.
         string temp;
         for(int j=i;j<s.length();j++){
             temp+=s[j];
