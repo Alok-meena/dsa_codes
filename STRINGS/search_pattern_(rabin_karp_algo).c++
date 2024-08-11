@@ -20,34 +20,38 @@ Explanation:
 The string "geek" occurs twice in text, one starts are index 1 and the other at index 9.
 
 
-class Solution
-{
-    public:
-        vector <int> search(string pattern, string text)
-        {
-            //code here.
-            vector<int>ans;
-            
-            // for(int i=1;i<=text.length();i++){
-            //     for(int j=1;j<=pattern.length();j++){
-            //         if(pattern[j]==text[i])
-            //     }
-            // }
-            
-            int i=1;
-            int j=1;
-            while(i<=text.length()){
-                if(pattern[j]==text[i]){
-                    i++;j++;
-                    continue;
-                }
-                else{
-                    if(j==pattern.length()) ans.push_back(i-j+1);
-                    j=1;
-                    i++;
+1: brute force
+
+
+    #include <vector>
+#include <string>
+using namespace std;
+
+class Solution {
+public:
+    vector<int> search(string pattern, string text) {
+        vector<int> ans;
+        int n = text.length();
+        int m = pattern.length();
+
+        //and we are checking for every i as there can be overlappping patterns in text ex:- text=aaa patt=aa and ans=1 2 
+        for (int i = 0; i <= n - m; ++i) {
+            bool match = true;
+            for (int j = 0; j < m; ++j) {
+                if (text[i + j] != pattern[j]) {
+                    match = false;
+                    break;
                 }
             }
-            return ans;
+            if (match) {
+                ans.push_back(i + 1); // Store 1-based index
+            }
         }
-     
+        
+        return ans;
+    }
 };
+
+t.c:-O(n*m) and s.c:-O(n)
+
+2:- (Rabin-Karp Algorithm) using this algo this question can also be solved
