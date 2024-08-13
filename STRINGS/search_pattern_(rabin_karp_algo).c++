@@ -27,6 +27,7 @@ The string "geek" occurs twice in text, one starts are index 1 and the other at 
 #include <string>
 using namespace std;
 
+//TO BAS IS CODE KE ANDER HAMNE KIYA KYA HAI HAR EK INDEX PE JAKE CHECK KR RHE HAI IF THE PATTERN IS PRESENT NHI HAI TO EK INDEX SE SHIFT KR RHE HAI (i++)
 class Solution {
 public:
     vector<int> search(string pattern, string text) {
