@@ -38,7 +38,8 @@ public:
         int m = pattern.length();
 
         //and we are checking for every i as there can be overlappping patterns in text ex:- text=aaa patt=aa and ans=1 2 
-        for (int i = 0; i <= n - m; ++i) {
+        for (int i = 0; i <= n - m; ++i) {//yha pe <=n-m tk chlana pdega because last vale pattern ko bhi to consider karna hai okkk 
+            //ex:- abcabc okk to ager n-m means 3 <3 means 2nd index which is till c to last pattern abc check nhi ho payega
             bool match = true;
             for (int j = 0; j < m; ++j) {
                 if (text[i + j] != pattern[j]) {
@@ -55,6 +56,92 @@ public:
     }
 };
 
+
+
 t.c:-O(n*m) and s.c:-O(n)
 
-2:- (Rabin-Karp Algorithm) using this algo this question can also be solved
+
+2) using kmp algo
+
+
+class Solution
+{
+    public:
+        void createLps(string s,vector<int>&lps){
+            int n=s.length();
+
+            int prefix=0;
+            int suffix=1;
+    
+            while(suffix<n){
+                if(s[prefix]==s[suffix]){
+                    lps[suffix]=prefix+1;
+                    suffix++;
+                    prefix++;
+                }
+                else{
+                    if(prefix==0){
+                        lps[suffix]=0;
+                        suffix++;
+                    }
+                    else{
+                        prefix=lps[prefix-1];
+                    }
+                }
+            }
+        }
+        vector <int> search(string pattern, string text)
+        {
+            //code here.
+            
+            //first of all we have find out the LPS OF pattern
+            
+            int n=text.length();
+            int m=pattern.length();
+            
+            vector<int>ans;
+            
+            vector<int>lps(m,0);
+            
+            createLps(pattern,lps);  O(m) for this lps code 
+            
+            int first=0;
+            int second=0;
+
+            //and if we just have to calculate the first occurrence index then just add condition second<m && first<n then jaise hi pura pattern match hoga to 
+            //uski length of second== m ho jayegi and loop break ho jayega
+
+
+            O(n) for this traveral of the text string and the prev jumps in pattern are considered to be negligible
+            
+            while(first<n){
+                if(text[first]==pattern[second]){
+                    first++;
+                    second++;
+                }
+                else{
+                    //not matched 
+                    //then first ko aage bda do ager second already 0 pe hai to
+                    if(second==0){
+                        first++;
+                    }
+                    else{
+                        second=lps[second-1];
+                    }
+                }
+                if(second==m) ans.push_back(first-second+1);
+            }
+            
+            return ans;
+            
+        }
+     
+};
+
+t.c:-O(n+m) and s.c:-O(m)
+
+3:- (Rabin-Karp Algorithm) using this algo this question can also be solved
+
+
+
+
