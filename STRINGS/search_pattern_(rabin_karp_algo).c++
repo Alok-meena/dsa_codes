@@ -22,6 +22,8 @@ The string "geek" occurs twice in text, one starts are index 1 and the other at 
 
 1: brute force
 
+    //to yha problem hai ki hamne jist part of text string ko traverse kr liya hai us part ko hi fir se traverse kr rhe hai that's why t.c is not good
+    HERE THE CHARACTERS ARE COMPARED REPEATEDLY
 
     #include <vector>
 #include <string>
