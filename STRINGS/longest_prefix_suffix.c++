@@ -106,3 +106,9 @@ class Solution{
 };
 
 t.c:-O(n) and s.c:-O(n) and the jumps taken by prefix pointer will remain negligible
+
+
+//just add this if we have to return the string as prefix always start from 0th index and suffix always end at n-1 index
+        int len=lps[n-1];
+        if(len==0) return "";
+        return s.substr(0,len);
