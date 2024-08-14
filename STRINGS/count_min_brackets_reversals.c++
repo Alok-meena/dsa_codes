@@ -37,10 +37,11 @@ int countRev (string s)
 {
     // your code here
     int n=s.length();
-    if(n%2!=0) return -1;
+    if(n%2!=0) return -1; //if odd brackets then pair cant be formed
     
     int open=0,close=0,reversal;
-    
+
+    //yha se for loop me hamne jo valid pair the unhe hta diya hai and atlast invalid pair ke count hi bchenge open and close me
     for(auto i:s){
         if(i=='{') open++;
         else{
@@ -48,8 +49,9 @@ int countRev (string s)
             else open--;
         }
     }
-    
-    reversal=(int)(ceil(open/2.0)+ceil(close/2.0));
+
+    //and hame ceil value hi chahihe o/w incorrect answer aayega you can check by dry run
+    reversal=(int)(ceil(open/2.0)+ceil(close/2.0)); //half open and close brackets ko reverse kiya hai bas
     
     return reversal;
     
