@@ -56,6 +56,7 @@ public:
     }
 };
 
+this is also known as naive algo 
 
 
 t.c:-O(n*m) and s.c:-O(n)
@@ -142,6 +143,9 @@ t.c:-O(n+m) and s.c:-O(m)
 
 3:- (Rabin-Karp Algorithm) using this algo this question can also be solved
 
+Like the Naive Algorithm, the Rabin-Karp algorithm also check every substring. But unlike the Naive algorithm, the Rabin Karp algorithm matches the hash value of the pattern with the hash value of the current substring of text, and if the hash values match then only it starts matching individual characters. So Rabin Karp algorithm needs to calculate hash values for the following strings.
 
+Pattern itself
+All the substrings of the text of length m which is the size of pattern.
 
 
