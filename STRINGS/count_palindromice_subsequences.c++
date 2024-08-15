@@ -98,6 +98,8 @@ class Solution{
         if(s[i]==s[j]){
             //ans+= mat karna as here we are also adding mod so due to this 
           //ans might be wrong so just put the value in ans okk
+
+		//here +1 is for the starting and end charactes mixture palindrome formed
             ans=(solve(i+1,j,s,dp)+solve(i,j-1,s,dp)+1)%mod;
         }
         else{
