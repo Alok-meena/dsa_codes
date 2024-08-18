@@ -124,7 +124,7 @@ class Solution
                     //not matched 
                     //then first ko aage bda do ager second already 0 pe hai to
                     if(second==0){
-                        first++;
+                        first++;//vha code me prefix=0 then suffix ++  same yha hai second=0 to first++ jo ki aage bdta jayega 
                     }
                     else{
                         second=lps[second-1];
