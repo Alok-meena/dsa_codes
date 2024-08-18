@@ -79,7 +79,9 @@ class Solution{
         int size=target.length();
         
         int ans=0;
-        
+
+       //to suno ham ye 2 for loop se har ek position bhej rhe hai 2d mat ki aor hmara fun har ek direction me jake check kr rha current position se 
+           //ager target achieve hota hai to
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
                 ans+=solve(i,j,0,size,target,mat);
@@ -90,6 +92,10 @@ class Solution{
     }
 };
 
+VERY VERY IMP 
+
+Exactly! The function explores all possible paths from each cell in the matrix to find occurrences of the target string, 
+and the nested loops ensure that every cell is considered as a starting point. If you have any more questions or need further clarification, feel free to ask!
 
 Time Complexity : O(R*C*22*len), where len is length of target string.
 Space Complexity : O(1), since no extra space is used here.
