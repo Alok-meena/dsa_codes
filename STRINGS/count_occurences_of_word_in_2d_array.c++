@@ -55,6 +55,11 @@ class Solution{
             char temp=target[index];
             mat[i][j]='0';
             index++;
+
+            //to yha ham index==size se compare kr rhe hai dekho kyo ?
+            //ham 0 as a index pass kr rhe hai aor if char matches then index++ means if last char match hua then index++ which equals to the size okk
+            //that's what we have did 
+               
             if(index==size){
                 found=1;
             }
