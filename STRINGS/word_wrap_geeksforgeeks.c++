@@ -55,7 +55,8 @@ public:
         // if(dp[i][rem]!=-1){
         //     return dp[i][rem];
         // }
-        
+
+         TO NICHE IF ME AND CHOICE 1 ME HAM HAR BAR NEW LINE ME LIKH RHE THE THAT'S WHY WE ARE DOING K-ARR[I]-1 NO UPDATING REM AS WE ARE NOT WRITING IN THE SAME LINE
         int ans;
         if(nums[i]>rem){//rem ke corresponding hi check karna hai
             ans=(rem+1)*(rem+1)+solve(i+1,k-nums[i]-1,nums,k);
