@@ -121,9 +121,12 @@ class Solution
                     second++;
                 }
                 else{
+                    //to ager match nhi hua to same kmp jaise piche vo part dhundho jo ki match ho rha tha pattern se bs pattern ke pointer ko vhi pe le jao and 
+                    //continue
                     //not matched 
                     //then first ko aage bda do ager second already 0 pe hai to
                     if(second==0){
+                        
                         first++;//vha code me prefix=0 then suffix ++  same yha hai second=0 to first++ jo ki aage bdta jayega 
                     }
                     else{
