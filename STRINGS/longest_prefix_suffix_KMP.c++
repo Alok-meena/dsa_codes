@@ -35,7 +35,8 @@ class Solution{
 	    int n=s.length();
 	    
 	    int flag=1;
-	    
+
+	   //this is for the case where all the char are same so return s.length()-1
 	    for(int i=0;i<s.length()-1;i++){
 	        if(s[i]!=s[i+1]){
 	            flag=0;
@@ -88,6 +89,8 @@ class Solution{
 	            prefix++;
 	        }
 	        else{
+		  //to ager equal nhi aate to dekho ki prefix 0 pe hoga to pahle ke part se match nhi krva skte hai and nhi hoga
+			//to krva skte hai to aap prefix ko lps[prefix-1] pe le jao and match ho gya to theek nhi to aor picche jao until prefix=0 ho jaye okk
 	            if(prefix==0){//means ageer prefix=0 hai to ham 0th index ke pahle ja hi nhi skte hai
 	                LPS[suffix]=0;
 	                suffix++;
