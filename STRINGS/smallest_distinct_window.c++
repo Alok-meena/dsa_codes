@@ -59,4 +59,6 @@ class Solution{
     }
 };
 
+t.c:-O(n^3) and s.c:-O(n)
+
 2:optimal
