@@ -59,3 +59,20 @@ int main() {
         cout<<ans[i]<<endl;
     }
 }
+
+
+
+// Online C++ compiler to run C++ program online
+#include <iostream>
+#include <string>
+using namespace std;
+int main() {
+    // Write C++ code here
+    string s="abcd";
+    for(int i=0;i<s.length();i++){
+        for(int len=1;len<=s.length()-i;len++){
+            cout<<s.substr(i,len)<<" ";
+        }
+    }
+    return 0;
+}
