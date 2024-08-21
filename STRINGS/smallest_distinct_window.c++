@@ -89,6 +89,7 @@ t.c:-O(n^3) and s.c:-O(n)
         int ans=n;
         
         m.clear();
+        //map ko clear kr diya hai as we will use this map only to again traverse and count the char
         
         while(tail<n){
             //pahle ham head ko aage bdhayenge jab tak hame sare distinct char na mil jaye for this head+1<n here we are not modifying the head value and c<disti
