@@ -21,7 +21,11 @@ Given string ABSG has 24 permutations.
 
 
 
+unique means 
+Key Points:
+Unique Permutations: When a string contains duplicate characters, some permutations will be identical. For example, for the string "AAB", the permutations "AAB" and "ABA" may appear multiple times if duplicates are not handled. The term "unique permutations" means you should only consider distinct permutations and avoid duplicates in the final output.
 
+Lexicographical Order: This means the permutations should be printed in dictionary order (e.g., "ABC" comes before "ACB").
 
 
 
