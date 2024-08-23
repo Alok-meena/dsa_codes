@@ -35,6 +35,9 @@ anagrams "is" makes group 1.
  a word or phrase that is made by arranging the letters of another word or phrase in a different order
 
 
+
+
+
 1st approach:
 
 
@@ -52,6 +55,8 @@ class Solution{
         }
         
         vector<vector<string>>ans;
+
+      //YHA PE SIZE MAT DE DENA ANS KO VO TAB DETE HAI JAB HAME PARTICULAR INDEX PE KOI VALUE DALNI HOTI HAI AGER DIRECT VECTOR ME DALNA HO TO PUSH_BACK USE KARNA
         
         for(auto i:m){
             ans.push_back(i.second);
