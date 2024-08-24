@@ -47,7 +47,11 @@ class Solution{
         //code here
         map<string,vector<string>>m;
         int n=string_list.size();
-        
+
+
+   //{act,god,cat,dog,tac} ye vector hai apne pas and we are just sorting it and as key we store v[i] as a value 
+     // ex act sort act then act->act,cat(after sort act to m[act]=cat store hoga) , tac 
+                           //dgo->god,dog and then just store them into the ans vector
         for(int i=0;i<n;i++){
             string s=string_list[i];
             sort(s.begin(),s.end());
@@ -59,6 +63,7 @@ class Solution{
       //YHA PE SIZE MAT DE DENA ANS KO VO TAB DETE HAI JAB HAME PARTICULAR INDEX PE KOI VALUE DALNI HOTI HAI AGER DIRECT VECTOR ME DALNA HO TO PUSH_BACK USE KARNA
         
         for(auto i:m){
+         //as hamne i.first me string aor i.second me vector<string> store ki hai to direct vector store ho jayega
             ans.push_back(i.second);
         }
         
