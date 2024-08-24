@@ -38,6 +38,8 @@ Exact Frequencies: The smallest window in s must contain all the characters in x
 
 
 #include <bits/stdc++.h> 
+
+//HAMARA YHA VALA APPROACH DISTINCT CALCULATE NHI KR RHA HAI blki puri x string ko kr rha hai order khuch bhi ho no matter and freq should be same
 string smallestWindow(string s, string x)
 {
     // Write your code here.
@@ -58,10 +60,10 @@ string smallestWindow(string s, string x)
 
     int l=0,r=0;
     while(r<n){
-        if(mp[s[r]]>0){
+        if(mp[s[r]]>0){//>0 unhi ka hoga jo x me present hai
             count++;
         }
-        mp[s[r]]--;
+        mp[s[r]]--;//aor ager present nhi hoga to uska count negative ho jayega map me add hoke
 
         while(count==m){
             if(r-l+1<minlength){
@@ -69,6 +71,10 @@ string smallestWindow(string s, string x)
                 sIndex=l;
             }
             mp[s[l]]++;
+            //>0 means ki vo ab apni window me mojud nhi hai to count-- kr do to exit the loop
+
+            //baki >0 to unhi ki jayegi jo x me present hai as jo nhi hai to unka to count 0 tha bs jaise hi hamne r aage badhaya to m[s[r]]++ and
+          //left me ham bas m[s[l]]-- kr denge
             if(mp[s[l]]>0) count--;
             l++;
         }
@@ -76,6 +82,8 @@ string smallestWindow(string s, string x)
     }
     return sIndex==-1?"":s.substr(sIndex,minlength);
 }
+
+t.c:-O(n+d) and s.c:-O(d)
 
 this is the code
 
