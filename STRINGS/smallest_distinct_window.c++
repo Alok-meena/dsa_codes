@@ -83,7 +83,13 @@ t.c:-O(n^3) and s.c:-O(n)
         }
         
         int distinct=m.size();
-        int tail=0,head=-1;
+        int tail=0,head=-1;//very imp ki yha pe head ko -1 pe point kiya hai as we dont want out pointer to go further as we reac count=distinct
+
+
+
+       //example aabbbcbbac to ager ham head ko 0 krenge 
+     //to according to our code at last if we do ++head then it will be one index further at last which we dont want that's why we did point it to the -1
+     //so that after ++head it points to 0 and so on and when our condition fullfills then it remains on the same index i hope you got it
         
         int count=0;//to count distinct elements live during traversal
         int ans=n;
@@ -122,7 +128,21 @@ t.c:-O(n^3) and s.c:-O(n)
 
 t.c:-O(n) and s.c:-O(n)
 
-it will not work with ordered_map as it have logn t.c for insertion,deletion,updation okk then t.c:-O(nlogn) that's why
+
+
+
+
+ Exactly! The idea behind initializing second to -1 (or handling second differently) is to ensure proper control over when the pointer
+ actually starts pointing to the first character of the substring. If you start with second = -1, the increment operation ++second moves 
+ it to 0 before accessing str[second], effectively starting the substring search correctly at the first character.
+
+ When second is initialized to 0, and you increment second++ inside the loop, it might move one step ahead of the actual end of the current valid window. 
+ This is why calculating the window size using second - first + 1 can lead to an off-by-one error.
+ 
+ In contrast, if you manage second carefully—either by using ++second after initialization to -1 or by adjusting the window size calculation
+ correctly—you avoid such errors. This small detail is important for correctly implementing sliding window techniques.
+ 
+ it will not work with ordered_map as it have logn t.c for insertion,deletion,updation okk then t.c:-O(nlogn) that's why
 
 
 
