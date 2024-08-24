@@ -55,3 +55,27 @@ public:
         return ans;
     }
 };
+
+
+
+
+Root (idx = 0, current = "")
+|
+|-- "you" (idx = 1, current = "you")
+|       |
+|       |-- "have" (idx = 2, current = "you have")
+|       |                |-- [Reached base case, add "you have" to result]
+|       |
+|       |-- "are" (idx = 2, current = "you are")
+|                        |-- [Reached base case, add "you are" to result]
+
+     to ab bat ye hai ki ye function call complete ho gya to automatically ab ham previouse call jha se hua tha vh chle jayenge
+|
+|-- "we" (idx = 1, current = "we")
+        |
+        |-- "have" (idx = 2, current = "we have")
+        |                |-- [Reached base case, add "we have" to result]
+        |
+        |-- "are" (idx = 2, current = "we are")
+                         |-- [Reached base case, add "we are" to result]
+
