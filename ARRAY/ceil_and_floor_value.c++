@@ -9,7 +9,7 @@ int solve(vector<int>&v,int value,int n){
         int mid=low+(high-low)/2;
         if(v[mid]<=value){
             ans=v[mid];//as lower_bound always return the index
-            low=mid+1;
+            low=mid+1;//and right me bhejte rhihe as we want largest value
         }
         else{
             high=mid-1;
@@ -27,7 +27,7 @@ int lower_bound(vector<int>&v,int value,int n){
         int mid=low+(high-low)/2;
         if(v[mid]>=value){
             ans=v[mid];
-            high=mid-1;
+            high=mid-1;//smaller value ke liye left jate jao
         }
         else{
             low=mid+1;
