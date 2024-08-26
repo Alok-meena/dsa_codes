@@ -31,8 +31,8 @@ int lower_bound(vector<int>&v,int value){
     while(low<=high){
         int mid=low+(high-low)/2;
         if(v[mid]>=value){
-            ans=v;//as lower_bound always return the index
-            high=mid-1;
+            ans=mid;//as lower_bound always return the index
+            high=mid-1;//this is done as ex 1 2 3 8 8 8 8 9 9 so in this mid is 4 but it is not the first occurence to get it we have to move towards left 
         }
         else{
             low=mid+1;
