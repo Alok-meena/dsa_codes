@@ -98,3 +98,36 @@ public:
         return s.size();
     }
 };
+
+
+to get all of the pairs use this
+
+
+#include <algorithm>
+#include <set>
+#include <vector>
+#include <unordered_map>
+
+int getPairsWithDifferenceK(int *arr, int n, int k) {
+    // Write your code here
+    int ans = 0;
+    unordered_map<int,int> mp;
+    for(int i=0; i<n; i++){
+        int temp = arr[i] + k;
+ 
+        ans = ans + mp[temp];
+ 
+        if(k!=0){
+            temp = arr[i]-k;
+            ans = ans + mp[temp];
+        }
+        mp[arr[i]]++;
+    }
+    return ans;
+}
+
+t.c:-O(n) and s.c:-O(n)
+
+here what we are doing is adding k to the current element and also subtracting it if the temp is present in map then do update the ans o/w i++ okk
+as this approach works because arr[i]+/-k then if the value is there then this will be a valid pair and count it as we have to count all of the pairs so we are doing
+so okk
