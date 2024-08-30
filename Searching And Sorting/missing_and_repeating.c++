@@ -47,3 +47,5 @@ public:
         
     }
 };
+
+t.c:-O(nlogn) and s.c:-O(n)
