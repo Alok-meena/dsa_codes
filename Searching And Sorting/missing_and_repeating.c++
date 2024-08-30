@@ -12,7 +12,93 @@ Explanation: Repeating number is 3 and smallest positive missing number is 2.
 
 
 
+1) brute force approach O(n^2) t.c and O(1) s.c
 
+class Solution{
+public:
+    vector<int> findTwoElement(vector<int> arr, int n) {
+        // code here
+        int repeating=-1;
+        int missing=-1;
+        
+        for(int i=1;i<=n;i++){
+            int count=0;
+            for(int j=0;j<n;j++){
+                if(i==arr[j]){
+                    count++;
+                    if(count==2){
+                        repeating=i;
+                    }
+                }
+                
+            }
+            if(count==0) missing=i;
+        }
+        
+        return {repeating,missing};
+        
+    }
+};
+
+
+2) optimized O(n) t.c and s.c
+
+class Solution{
+public:
+    vector<int> findTwoElement(vector<int> arr, int n) {
+        // code here
+        int repeating=-1;
+        int missing=-1;
+        
+        vector<int>v(n+1,0);
+        for(int i=0;i<n;i++){
+            v[arr[i]]++;
+        }
+        
+        for(int i=1;i<=n;i++){
+            if(v[i]==0) missing=i;
+            else if(v[i]==2) repeating=i;
+        }
+        
+        return {repeating,missing};
+        
+    }
+};
+
+
+3) using set O(n) t.c and s.c
+
+class Solution{
+public:
+    vector<int> findTwoElement(vector<int> arr, int n) {
+        // code here
+        int repeating=-1;
+        int missing=-1;
+        
+        unordered_set<int>s;
+        
+        for(auto i:arr){
+            if(s.find(i)!=s.end()){
+                repeating=i;
+            }
+            s.insert(i);
+        }
+        
+        for(int i=1;i<=n;i++){
+            if(s.find(i)==s.end()){
+                missing=i;
+            }
+        }
+        
+        return {repeating,missing};
+        
+    }
+};
+
+nothing just check if the number is already present in the set if it is then it is the repeating number as set only contains unique numbers so there will be no duplicate numbers in the set
+okk and
+
+for finding the missing number check fom
 
 class Solution{
 public:
