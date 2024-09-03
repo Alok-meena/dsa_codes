@@ -150,17 +150,21 @@ public:
         int missing=-1;
         
         for(int i=0;i<n;i++){
+            //arr[i]-1 pe gye hai ham because hmari 0 based indexing hai ok 
             int index=abs(arr[i])-1;//it should be abs(arr[i]) because if the element is modified to negative element then this index would be wrong okk
             
             if(arr[index]<0){
+                //means that if the same index comes again then it means that this is the repeating number as the number is already negative so it measn that 
+                //it has occurred before
                 repeating=abs(arr[i]);
             }
             else{
-                arr[index]=-arr[index];
+                arr[index]=-arr[index];//else app sbhi elements ko negative krte jao
             }
         }
         
         for(int i=0;i<n;i++){
+            //jo bhi element aapka positive bacha hoga vo element hmara array me missing hoga simple okk !!!!!!!!
             if(arr[i]>0){
                 missing=i+1;
                 break;
