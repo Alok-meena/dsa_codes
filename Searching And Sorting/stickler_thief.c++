@@ -44,6 +44,8 @@ class Solution
         vector<int>dp(n,0);
 
         //then store arr[0] in dp[0] and then max of arr[0] and [1] in dp[1] then start the loop
+
+        //hamne pahle to 0 and 1 index pe value store krva di and then arr[i] ko i-2 me add krke max count krte gye bs and at last ans return kr do
         dp[0]=arr[0];
         dp[1]=max(arr[0],arr[1]);
         
