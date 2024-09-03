@@ -135,3 +135,40 @@ public:
 };
 
 t.c:-O(nlogn) and s.c:-O(n)
+
+
+
+space optimized O(n) and O(1)
+
+
+
+class Solution{
+public:
+    vector<int> findTwoElement(vector<int> arr, int n) {
+        // code here
+        int repeating=-1;
+        int missing=-1;
+        
+        for(int i=0;i<n;i++){
+            int index=abs(arr[i])-1;//it should be abs(arr[i]) because if the element is modified to negative element then this index would be wrong okk
+            
+            if(arr[index]<0){
+                repeating=abs(arr[i]);
+            }
+            else{
+                arr[index]=-arr[index];
+            }
+        }
+        
+        for(int i=0;i<n;i++){
+            if(arr[i]>0){
+                missing=i+1;
+                break;
+            }
+        }
+        
+        return {repeating,missing};
+    }
+};
+
+in this we use the concept that goind to the arr[i-1] index and chec
