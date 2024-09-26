@@ -132,6 +132,9 @@ public:
 
 t.c:-O(n*log(n)) + O(n^2) (for n and inside loops which is approximately n)
 
+to isme khuch nhi hai i fix rkha aor baki 2 pair ko dhundha and to avoid duplicate values and use of set do increment i/j/k if nums[i]==nums[i-1] okk
+
+
 
 
 
