@@ -92,7 +92,7 @@ public:
 };
 
 
-2) handling duplicate consonants also
+2) handling duplicate consonants also dont do count consonants using set as we also have to count the duplicate ones but not the vowels okk
 
 #include <unordered_map>
 #include <set>
