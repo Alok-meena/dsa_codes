@@ -142,3 +142,10 @@ public:
         return count;
     }
 };
+
+
+Time Complexity:
+The time complexity is still O(n^2), where n is the length of the string. Each starting index i results in an inner loop that checks for valid substrings up to the end of the string.
+Space Complexity:
+O(1) for the vowelSet since the maximum size is always 5.
+O(26) for the unordered_map (or consonant count array) since there are a fixed number of possible characters.
