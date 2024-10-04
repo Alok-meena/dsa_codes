@@ -44,3 +44,31 @@ public:
 O(n^3) t.c and s.c:-O(1)
 
 
+optimized using prefix sum 
+
+
+class Solution{
+public:
+    //Function to count subarrays with sum equal to 0.
+    long long int findSubarray(vector<long long int> &arr, int n ) {
+        //code here
+
+  //to ham yha pe apna longest subarray with sum k jaise hi kr rhe hai 
+//but bat ye hai ki apne subarray me pahle jitne bhi sum-k hai utne hi hmare k sum ke subarray honge bs yhi apply kiya hai 
+        unordered_map<int,int>mp;
+        mp[0]++;
+        long long count=0;
+        int prefixsum=0;
+        for(int i=0;i<arr.size();i++){
+            prefixsum+=arr[i];
+            int remove=prefixsum;
+            count+=mp[remove];
+            mp[prefixsum]++;
+        }
+
+        return count;
+        
+    }
+};
+
+O(n*logn) and s.c:-O(n)
