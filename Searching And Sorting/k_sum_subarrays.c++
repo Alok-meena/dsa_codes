@@ -30,7 +30,7 @@ public:
              for (int k=i; k<=j; k++){
                  sum+=arr[k];
              }
-             if(sum==0){
+             if(sum==0){//fo rk sum==k
                  ans++;
              }
            }
@@ -61,7 +61,7 @@ public:
         int prefixsum=0;
         for(int i=0;i<arr.size();i++){
             prefixsum+=arr[i];
-            int remove=prefixsum;
+            int remove=prefixsum;//k ke liye prefixsum-k kr dena bs
             count+=mp[remove];
             mp[prefixsum]++;
         }
