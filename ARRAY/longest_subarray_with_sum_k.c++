@@ -67,6 +67,9 @@ int longestSubarrayWithSumK(vector<int> a, long long k) {
 
         //so if sum if already present then it does not update
        // this is done as give problem in case of zeroes
+
+
+       //the case is ager rem nhi hai map me to if sum pahle nhi aaya to hi map me dalna okk
         if(prefixSum.find(sum)==prefixSum.end()){
             prefixSum[sum]=i;
         }
