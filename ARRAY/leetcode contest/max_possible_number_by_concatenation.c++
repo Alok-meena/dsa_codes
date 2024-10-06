@@ -72,6 +72,9 @@ int main() {
 }
 
 
+WE CAN USE bitset<bit>(number) to convert to the binary form 
+
+use #include <bitset> but it does give leading  zeroes also example (000111) where zero precede the first non zero term trailing zeroes means (10000)
 
 code:
 
