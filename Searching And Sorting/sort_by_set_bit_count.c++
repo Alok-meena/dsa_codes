@@ -41,7 +41,7 @@ This is a built-in function in GCC and Clang that counts the number of set bits 
 For example, __builtin_popcount(5) returns 2 because 5 is 101 in binary, which has two set bits.
 
 
-  
+  1)
 
   class Solution{
     public:
@@ -61,7 +61,9 @@ BUT in interview etc we cant use the inbuilt functions so we have to write the c
 
 
 
+2)
 
+ 
 class Solution{
     public:
     
