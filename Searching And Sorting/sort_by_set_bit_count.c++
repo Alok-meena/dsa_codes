@@ -57,6 +57,21 @@ For example, __builtin_popcount(5) returns 2 because 5 is 101 in binary, which h
 };
 
 
+#include <bits/stdc++.h> 
+  
+     bool cmp(int a,int b){
+        return __builtin_popcount(a)>__builtin_popcount(b);
+    }
+void sortSetBitsCount(vector<int>& arr, int size)
+{
+	// Write your code here
+
+	stable_sort(arr.begin(),arr.end(),cmp);
+    return ;
+}
+
+use this as stable_sort will keep the relative ordering of same elements
+
 BUT in interview etc we cant use the inbuilt functions so we have to write the code ourself
 
 
