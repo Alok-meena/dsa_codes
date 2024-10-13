@@ -80,3 +80,5 @@ public:
         return ans;
     }
 };
+
+t.c:-O(n^2*klogk) s.c :- O(n+K)
