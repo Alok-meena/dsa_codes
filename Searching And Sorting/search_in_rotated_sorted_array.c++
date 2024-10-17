@@ -46,7 +46,7 @@ class Solution {
             if(arr[left]<=arr[mid]){
                 
                 //checking if exits in left part
-                if(arr[left]<=key && key<arr[mid]){
+                if(arr[left]<=key && key<=arr[mid]){
                     right=mid-1;//check in left part
                 }
                 else{
@@ -57,7 +57,8 @@ class Solution {
             //but if right part is sorted then
             else{
                 //checking in right part
-                if(arr[mid]<key && key<=arr[right]){
+                if(arr[mid]<key && key<=arr[right]){ //to yha pe arr[mid] ke equal to nhi ho skta hai because vo hamne uper hi include kr liya hai okk so not
+//possible here right yes sir absolutely kese ho yar aap log
                     left=mid+1;
                 }
                 else{
