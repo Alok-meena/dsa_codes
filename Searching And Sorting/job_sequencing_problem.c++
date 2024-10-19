@@ -89,3 +89,49 @@ class Solution
 
 
 t.c:-O(nlogn+n*m) s.c:-O(m)
+
+
+if 2d array is given 
+
+#include <algorithm>
+
+static bool cmp(vector<int>&a,vector<int>&b){
+        return a[2]>b[2];
+    }
+
+vector<int> jobScheduling(vector<vector<int>> &jobs)
+{
+    // Write your code here
+    int n=jobs.size();
+    sort(jobs.begin(),jobs.end(),cmp);
+        
+        int maxidead=-1;
+        for(int i=0;i<n;i++){
+            maxidead=max(maxidead,jobs[i][1]);
+        }
+        
+        vector<int>schedule(maxidead+1,-1);
+        
+        int count=0;
+        int maxprofit=0;
+        for(int i=0;i<n;i++){
+            int currentdead=jobs[i][1];
+            int currentprofit=jobs[i][2];
+            int currentid=jobs[i][0];
+            
+            for(int k=currentdead;k>0;k--){
+                if(schedule[k]==-1){
+                    count++;
+                    maxprofit+=currentprofit;
+                    schedule[k]=currentid;
+                    break;
+                }
+            }
+        }
+        
+        vector<int>ans;
+        ans.push_back(count);
+        ans.push_back(maxprofit);
+        
+        return ans;
+}
