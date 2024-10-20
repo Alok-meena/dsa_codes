@@ -72,3 +72,6 @@ public:
         return count;
     }
 };
+
+
+t.c:-O(n^2) and s.c:-O(m) where m is no. of unique characters
