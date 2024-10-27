@@ -61,16 +61,11 @@ void insertAtTail(node* &head,int data){
     temp->next=NULL;
 }
 
-or can also do this 
-
-void insertAtTail(node* &head,int data){
-    node *temp=new node(data);
-    node *var=head;
-    while(var->next!=NULL){
-        var=var->next;
-    }
-    var->next=temp;
-    temp->next=NULL;
+//use this if we are using the tail pointer directly
+void insertAttail(node* &tail,int data){
+    node *nodeToInsert=new node(data);
+    tail->next=nodeToInsert;
+    tail=nodeToInsert;
 }
 
 
