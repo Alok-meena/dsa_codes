@@ -46,9 +46,17 @@ So, the **`if` condition** ensures that recursion only happens when it's needed,
 };
 
 void insertAthead(node* &head,int data){
-    node *temp=new node(data);
-    temp->next=head;
-    head=temp;
+   //if nodes are not initialized initially then do this
+   if(head==NULL){
+       node *temp=new node(data);
+       head=temp;
+       tail=temp;
+   }
+   else{
+        node *temp=new node(data);
+        temp->next=head;
+        head=temp;
+   }
 }
 
 void insertAtTail(node* &head,int data){
@@ -62,10 +70,17 @@ void insertAtTail(node* &head,int data){
 }
 
 //use this if we are using the tail pointer directly
-void insertAttail(node* &tail,int data){
-    node *nodeToInsert=new node(data);
-    tail->next=nodeToInsert;
-    tail=nodeToInsert;
+void insertAttail(node* &tail,node* &head,int data){
+    if(tail==NULL){
+        node *temp=new node(data);
+        head=temp;
+        tail=temp;
+    }
+    else{
+        node *nodeToInsert=new node(data);
+        tail->next=nodeToInsert;
+        tail=nodeToInsert;
+    }
 }
 
 
@@ -109,7 +124,7 @@ or can also do this
 void insertAtpos(node* &head,int pos,int data){
     // it is required because we are starting from the head so it can't insert at start
     if(pos==1){
-        insertAthead(head,data);
+        insertAthead(head,tail,data);
         return ;//it is necessary because o/w the remaining part will be performed
     }
     node *temp=new node(data);
@@ -123,7 +138,7 @@ void insertAtpos(node* &head,int pos,int data){
     }
    //iske bina bhi ho jata but hmara tail update nhi hota okk
      if(current->next==NULL){
-        insertAtTail(tail,data);
+        insertAtTail(tail,head,data);
         return;
     }
     current->next=temp;
@@ -161,14 +176,17 @@ void deleteAtPos(node* &tail,node* &head,int pos){
 }
 
 int main(){
+    if nodes are not created initially and 
+    node *head=NULL;
+    node *tail=NULL;
     // node *head=node1;
-    node* node1=new node(40);
+    // node* node1=new node(40);
     cout<<node1->data<<endl;
     cout<<node1->next<<endl;
      
-    node *head=node1;//so dekho yha pe hamne node1 ki memory pe hi head ko point krvaya hai okkk this is very imp
-    node *tail=node1;//as initially to dono ek node jo create kiya uspe point krenge
-    insertAthead(head,3);
+    // node *head=node1;//so dekho yha pe hamne node1 ki memory pe hi head ko point krvaya hai okkk this is very imp
+    // node *tail=node1;//as initially to dono ek node jo create kiya uspe point krenge
+    insertAthead(head,tail,3);
     printList(head);
 
      cout<<"head:"<<head->data<<endl;
