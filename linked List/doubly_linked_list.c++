@@ -80,6 +80,40 @@ void insertAtPos(node* &head,node* &tail,int data,int pos){
     }
 }
 
+void deleteAtPos(node* &head,node* &tail,int pos){
+    if(pos==1){
+        node *temp=head;
+        //ye imp hai okk prev bhi to start node ka null hota hai na
+        head=head->next;
+        temp->next->prev=NULL;
+        temp->next=NULL;
+        delete temp;
+    }
+    else{
+        
+        node *forward=head->next;
+        node *curr=head;
+        int count=1;
+        while(count<pos-1){
+            curr=curr->next;
+            forward=forward->next;
+            count++;
+        }
+        if(forward->next==NULL){
+            curr->next=forward->next;
+            tail=curr;
+        }
+        else{
+            curr->next=forward->next;
+            forward->next->prev=curr;
+        }
+        forward->next=NULL;
+        forward->prev=NULL;
+        delete forward;
+    }
+}
+
+
 int getlength(node* &head){
     int len=0;
     node *temp=head;
