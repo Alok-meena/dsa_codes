@@ -37,7 +37,7 @@ int main(){
     cin>>n;
 
     int rows=1;
-    int z=(2*n)-3;
+    int z=(2*n)-3;//main mudda isi formula ka tha aor ye sabhi me correctly work kr rha hai okk
     while(rows<=n){
         int no=1;
         while(no<=rows){
