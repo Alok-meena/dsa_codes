@@ -41,6 +41,8 @@ public:
             window.insert(arr[i]);
 
             // If the size of the set exceeds k, remove the element that's k distance behind
+
+            //jaise hi apna set ki size 3 hui to ham last element ko htate jao bs
             if (i >= k) {
                 window.erase(arr[i - k]);
             }
@@ -49,3 +51,21 @@ public:
         return false;
     }
 };
+
+
+
+this is also correct
+
+        int n = arr.size();
+
+        for (int i = 0; i < n; i++) {
+            // Check up to k elements ahead for duplicates
+            for (int j = i + 1; j <= i + k && j < n; j++) {
+                if (arr[i] == arr[j]) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+
