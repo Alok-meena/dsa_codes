@@ -70,3 +70,24 @@ Node *reverseLinkedList(Node *head) {
     return head;
     
 }
+
+
+2nd approach in recursive approach
+
+LinkedListNode<int>* reverse(LinkedListNode<int>* &head){
+  //for empty and single node linked list
+    if(head==NULL || head->next==NULL){
+        return head;
+    }
+
+  //so it will return the new head of the reversed linked list 
+    LinkedListNode<int> *newhead=reverse(head->next);
+
+    head->next->next=head;//to point 1->2-> this pointer which is head->next->next to the head itself we did so
+    head->next=NULL;
+    return newhead;
+}
+LinkedListNode<int> *reverseLinkedList(LinkedListNode<int> *head) {
+   return reverse(head);
+    
+}
