@@ -24,6 +24,9 @@ class Solution {
   public:
     // Function to reverse a linked list.
     struct Node* reverseList(struct Node* head) {
+      if(head==NULL || head->next==NULL){
+        return head;
+      }
         // code here
         // return head of reversed list
 
