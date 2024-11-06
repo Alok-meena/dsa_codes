@@ -26,6 +26,9 @@ class Solution {
     struct Node* reverseList(struct Node* head) {
         // code here
         // return head of reversed list
+
+       //so basically start kro head se right and curr ke next linked list pe pointer rkh lo and then curr ko reverse me prev pe point krva do 
+      //then prev ko curr pe lao and curr ko forward pe and do until curr reaches NULL right
         struct Node *prev=NULL;
         struct Node *current=head;
         struct Node *forward;
