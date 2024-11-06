@@ -45,3 +45,28 @@ class Solution {
         return prev;
     }
 };
+
+
+recursive
+
+//to make changed in the original linked list pass values by reference
+
+void reverse(Node* &head,Node* &curr,Node* &prev){
+    if(curr==NULL){
+        head=prev;
+        return;
+    }
+
+    Node*forward=curr->next;
+    //to same to same pahle jaisa haijust current->next=prev hamne last me karna start kiya hai ye list ke end tk jayega fir jaise jaise vapas aayega vha se 
+  //reverse dirn me curr->next=prev krta jayega okkk
+    reverse(head,forward,curr);
+    curr->next=prev;
+}
+Node *reverseLinkedList(Node *head) {
+    Node *curr=head;
+    Node *prev=NULL;
+    reverse(head,curr,prev);
+    return head;
+    
+}
