@@ -1,7 +1,9 @@
 #include <iostream>
 using namespace std;
 
-// Function to calculate factorial
+#include <iostream>
+using namespace std;
+
 int factorial(int num) {
     int fact = 1;
     for (int i = 1; i <= num; i++) {
@@ -10,21 +12,18 @@ int factorial(int num) {
     return fact;
 }
 
-// Function to calculate nCr
 int nCr(int n, int r) {
     return factorial(n) / (factorial(r) * factorial(n - r));
 }
 
-// Function to print Pascal's Triangle
 void printPascalsTriangle(int n) {
-    for (int line = 0; line < n; line++) {
-        // Print leading spaces for alignment
+//listen r<=n and both r and n starts from 0 so appply this formula for each row till 0 to n-1 and r fromm 0 to n
+    for (int row = 0; row <n; row++) {
         
-        // Print the values in the current line
-        for (int i = 0; i <= line; i++) {
-            cout << nCr(line, i) << " "; // Calculate and print nCr
+        for (int col = 0; col <=row; col++) {
+            cout << nCr(row, col) <<"\t";
         }
-        cout << endl; // Move to the next line
+        cout << endl;
     }
 }
 
