@@ -54,6 +54,8 @@ recursive
 void reverse(Node* &head,Node* &curr,Node* &prev){
     if(curr==NULL){
         head=prev;
+        // 1-2-3-4-5-6-null to is point pe to curr null pe hai but jab hmne return kiya then vo 6 pe hoga and bs vhi se fun call ki next line hi print hogi
+        // right to bs curr->next=prev krte jao
         return;
     }
 
