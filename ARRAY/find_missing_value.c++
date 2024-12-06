@@ -62,3 +62,27 @@ public:
         return (n*(n+1)/2)-sum;
     }
 };
+
+
+2nd approach O(n) and O(1) s.c
+
+#include <bits/stdc++.h>
+#include <map>
+using namespace std;
+
+int main(){
+    int arr[6]={1,2,3,4,6};
+
+    int xr=0;
+    for(int i=1;i<=6;i++){
+        xr=xr^i;
+    }^
+
+   firstly doing 1^2^3^4^5^6^1^2^3^4^6 then 4 will be remaining as all other will be cancel out  
+    for(int i=0;i<6;i++){
+        xr=xr^arr[i];
+    }
+    cout<<xr;
+    
+} 
+
