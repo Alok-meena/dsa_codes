@@ -137,3 +137,36 @@ int main(){
         cout<<i<<" ";
     }
 } 
+
+
+#include <bits/stdc++.h>
+#include <map>
+using namespace std;
+
+void reverse(int arr[],int low,int high){
+        // code here
+        while(low<=high){
+            swap(arr[low],arr[high]);
+            low++;high--;
+        }
+    }
+
+int main(){
+    int n=5;
+    int arr[5]={1,2,3,4,5};
+    
+    int d;
+    cout<<"enter no. of places to rotate:";
+    cin>>d;
+
+    reverse(arr,n-d,n-1);
+    reverse(arr,0,n-d-1);
+    reverse(arr,0,n-1);
+    cout<<endl;
+    for(auto i:arr){
+        cout<<i<<" ";
+    }
+}  
+for right rotate
+
+for left rotate just do reversing for 0-d-1 , d,n-1, 0,n-1 bas
