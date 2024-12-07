@@ -49,3 +49,24 @@ class Solution {
         return ans;
     }
 };
+
+
+optimized
+
+O(n) t.c and s.c:-O(1)
+
+    #include <bits/stdc++.h> 
+vector<int> findLeaders(vector<int> &elements, int n) {
+    // Write your code here.
+    vector<int>ans;
+    
+    int maxi=INT_MIN;
+        for(int i=n-1;i>=0;i--){
+            if(elements[i]>maxi){
+                maxi=elements[i];
+                ans.push_back(elements[i]);
+            }
+        }
+    reverse(ans.begin(),ans.end());
+    return ans;
+}
