@@ -86,6 +86,7 @@ vector<vector<int>> rotateMatrix(vector<vector<int>> &matrix) {
 
     // Transpose the matrix
     for (int i = 0; i < n; i++) {
+        //can also do it like j=0;j<i;j++
         for (int j = i + 1; j < n; j++) {
             swap(matrix[i][j], matrix[j][i]);
         }
