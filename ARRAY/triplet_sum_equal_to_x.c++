@@ -45,6 +45,8 @@ class Solution {
 
 2nd:t.c:-O(n^2) and s.c:-O(1)
 
+  worst case inner loop t.c:-O(n) that's why t.c:-O(n^2)
+
   class Solution {
   public:
 
@@ -75,3 +77,33 @@ class Solution {
         return false;
     }
 };
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+
+    int sum=30;
+    vector<int>arr={1,3,14,14,2,5,6,2,5,7};
+    
+    for(int k=0;k<arr.size();k++){
+        int sum2=sum-arr[k];
+
+        map<int,int>mp;
+        for(int i=0;i<arr.size();i++){
+            int val=sum2-arr[i];
+            if(mp.find(val)!=mp.end()){
+                cout<<"true";
+                return 0;
+            }
+            mp[arr[i]]++;
+        }
+    }
+
+    cout<<"sum does not exist";
+    
+} 
+
+first O(n) and then using two sum O(n^2) total t.c
+
