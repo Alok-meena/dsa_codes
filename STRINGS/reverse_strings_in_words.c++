@@ -55,3 +55,34 @@ string reverseString(string &str){
 	}
 	return s;
 }
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    // Define the grammar as a map of non-terminal to its productions
+    string s="the sky is blue";
+    string word;
+    
+    vector<string>ans;
+
+    for(int i=0;i<s.length();i++){
+        if(s[i]>='a' && s[i]<='z'){
+            word.push_back(s[i]);
+        }
+        else{
+            ans.push_back(word);
+            word="";
+        }
+    }
+
+    ans.push_back(word);
+
+    reverse(ans.begin(),ans.end());
+    for(auto i:ans){
+        cout<<i<<" ";
+    }
+
+}
+
