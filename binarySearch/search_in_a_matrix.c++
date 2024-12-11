@@ -5,7 +5,8 @@ bool searchMatrix(vector<vector<int>>& mat, int target) {
         int n=mat.size();
     int m=mat[0].size();
     
-
+    //so here we are starting from the last col of first row or we can also start from the last row of first col
+    
     int r=0,c=m-1;
 
     while(r<n && c>=0){
@@ -85,8 +86,11 @@ public:
 O(row*col ) t.c ans constant space complexity
 
 
+
 optimal soln
 
+//in this sol we we have just traversed all of the rows in O(n) and then applying binarysearch on every row 
+//means t.c:-O(nlogm)
 
 class Solution {
 public:
@@ -149,6 +153,7 @@ public:
         
         while(start<=end){
             int mid=(end+start)/2;
+            /////we should have to do it with col only because logically it should be col not row
             int element=matrix[mid/col][mid%col];
             if(element==target){
                 return true;
@@ -164,6 +169,6 @@ public:
     }
 };
 
-t.c:-O(log(n+m))
+t.c:-O(log(n*m))
 
 most optimal
