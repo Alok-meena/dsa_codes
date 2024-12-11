@@ -70,12 +70,15 @@ bool canplace(vector<int>&stalls,int k,int n,int minDistance){
     int placed_cows=1;
     int last_cow_location=stalls[0];
     
-    for(int i=0;i<n;i++){
+    for(int i=1;i<n;i++){
         if(stalls[i]-last_cow_location>=minDistance){
             placed_cows++;
             last_cow_location=stalls[i];
         }
     }
+
+    //here we should have to include the condtion >=k o/w if only ==k then if more than k cows can be placed than false will be return but 
+  //we want to maximize the min distance that's why we did so
 
     if(placed_cows>=k){
         return true;
@@ -93,6 +96,13 @@ int aggressiveCows(vector<int> &stalls, int k)
     int h=stalls[n-1];
 
     int ans=-1;
+
+    //can also do like this brute force checking for all of the distances O(n*maxDist)
+    // for(int i=l;i<=h;i++){
+    //     if(canplace(stalls,k,n,i)){
+    //         ans=max(ans,i);
+    //     }
+    // }
 
     //O(log(maxdistance) where maxdist=stalls[n-1]
     while(l<=h){
