@@ -1,3 +1,39 @@
+
+below how to flatten the 2d array into a 1d array method is used but we can also use the following method for the below ques also in O(n+m) t.c O(1) s.c
+
+bool searchMatrix(vector<vector<int>>& mat, int target) {
+        int n=mat.size();
+    int m=mat[0].size();
+    
+
+    int r=0,c=m-1;
+
+    while(r<n && c>=0){
+        if(mat[r][c]==target){
+            return true;
+        }
+        else if(mat[r][c]>=target){
+            c--;
+        }
+        else{
+            r++;
+        }
+    }
+    return false;
+}
+
+t.c:-O(n+m) and s.c:-O(1)
+
+
+
+
+
+
+
+
+
+
+
 74. Search a 2D Matrix
 Solved
 Medium
