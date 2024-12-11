@@ -64,6 +64,11 @@ because we have to maximize the answer okk o/w we should move towards left becaa
 
 
 
+
+
+
+FOR THIS PROBLEM SORTING IS MUST 
+
 O(n)
 
 bool canplace(vector<int>&stalls,int k,int n,int minDistance){
