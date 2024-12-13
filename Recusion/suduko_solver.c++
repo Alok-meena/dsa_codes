@@ -96,7 +96,7 @@ bool solve(vector<vector<char>>&v){
 };
 
 
-t.c:-O(9^n) s.c:-O(1)
+t.c:-O(9^n) or O(9^9) s.c:-O(1)
 
 
 
