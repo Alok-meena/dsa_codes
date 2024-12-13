@@ -137,7 +137,7 @@ public:
             count++;
         }
 
-
+        //here it should be forward ! = NULL not head->next because it will be NULL only becaue till now you didnt connecte it with the next part
         if(forward!=NULL){
             head->next=reverseKGroup(forward,k);
         }
