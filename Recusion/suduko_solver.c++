@@ -96,7 +96,9 @@ bool solve(vector<vector<char>>&v){
 };
 
 
-t.c:-O(9^n) or O(9^9) s.c:-O(1)
+t.c:-O(9^n) or O(9^81)*27==O(9^84) s.c:-O(1)
+
+ because like 2^n we have 9^n and n is here i=0; i<9 and j=0;j<9 therefore 9X9
 
 
 
@@ -149,9 +151,10 @@ bool solve(vector<vector<int>>&v){
                     v[i][j]=0;
                 }
             }
+            return false;// If no number fits, return false (backtrack)
         }
     }
-    return false;
+    return true;// If the entire board is filled correctly, return true
 }
 
 int main() {
