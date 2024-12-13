@@ -117,3 +117,5 @@ public:
         return result;
     }
 };
+
+t.c:-O(2^n)
