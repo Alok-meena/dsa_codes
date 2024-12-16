@@ -42,8 +42,10 @@ class Solution {
     }
     Node* findIntersection(Node* head1, Node* head2) {
         // code goes here.
-        set<int>ans;
-        set<int>ans1;
+
+        //use unordered_set for O(1) t.c okk and if used set then t.c=O(logn)
+        unordered_set<int>ans;
+        unordered_set<int>ans1;
         
         Node *temp1=head1;
         
@@ -77,3 +79,5 @@ class Solution {
         
     }
 };
+
+t.c:-O(n1+n2+k) and s.c:-O(n1+k)
