@@ -75,8 +75,8 @@ class Solution{
 
 if n is the total number of elements in all of the linked lists
 
-Time Complexity : O(n * log n) , sort takes O(n * log n) time complexity.
-Space Complexity : O(n) , due to space consumed by ans vector.
+Time Complexity :O(n*k) + O(m * log m)  where m=n+k , sort takes O(n * log n) time complexity.
+Space Complexity : 2 * O(n*k) , due to space consumed by ans vector.
 
 
 
