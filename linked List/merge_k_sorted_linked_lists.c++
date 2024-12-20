@@ -143,3 +143,101 @@ class Solution {
 };
 
 t.c:-O(n*k) and s.c:-O(n*k) where n is size of arr and k is length of each list
+
+
+in place solution
+
+class Solution {
+  public:
+    // Function to merge K sorted linked list.
+    Node* solve(Node* &first,Node* &second){
+        if(first->next==NULL){
+            first->next=second;
+            return first;
+        }
+        
+        Node *curr1=first;
+        Node *next1=curr1->next;
+        Node *curr2=second;
+        Node *next2=second->next;//to have pointer to the remaining list
+        
+        while(next1!=NULL && curr2!=NULL){
+            
+            if(curr2->data>=curr1->data && curr2->data<=next1->data){
+                curr1->next=curr2;
+                next2=curr2->next;
+                curr2->next=next1;
+                curr1=curr2;
+                curr2=next2;
+            }
+            else{
+                curr1=next1;
+                next1=next1->next;
+
+                //if first list is fully traversed then connect remaining seconnd list okk
+                
+                if(next1==NULL){
+                    curr1->next=curr2;
+                    return first;
+                }
+            }
+        }
+        return first;
+    }
+    Node* mergeKLists(vector<Node*>& arr) {
+        // Your code here
+        Node *temp=arr[0];
+        for(int i=1;i<arr.size();i++){
+            //smaller node is sent first
+            if(temp->data<arr[i]->data){
+                temp=solve(temp,arr[i]);
+            }
+            else{
+                temp=solve(arr[i],temp);
+            }
+        }
+        return temp;
+    }
+};
+
+t.c:-O(n*k) and s.c:-O(1)
+
+
+using priority queue
+
+#include <queue>
+class compare{
+    public:
+ //lamda function
+      bool operator()(Node* a,Node *b){
+         //means greater value will go donwn in the heap and min value at the top
+          return a->data>b->data;
+      }
+};
+Node* mergeKLists(vector<Node*> &listArray){
+    // Write your code here.
+    //here we cant use greater<Node*> here for minheap because it works only for standard values like int float etc not for Node okk so make a class of it 
+  //and then use
+    priority_queue<Node*,vector<Node*>,compare>pq;
+        for(auto i:listArray){
+            if(i) pq.push(i);
+        }
+        
+        Node *dummy=new Node(-1);
+        Node *temp=dummy;
+        
+        while(!pq.empty()){
+            Node *newhead=pq.top();
+            pq.pop();
+            temp->next=newhead;
+            temp=temp->next;
+            if(newhead->next){
+                pq.push(newhead->next);
+            }
+        }
+        
+        return dummy->next;
+}
+
+t.c:-O((n+k)logk) and s.c:-O(n+k)
+
