@@ -205,6 +205,36 @@ t.c:-O(n*k) and s.c:-O(1)
 
 using priority queue
 
+How to Decide Which Side of the Symbol?
+The > or < in the comparator reflects how you want to prioritize the elements:
+
+>: Smaller values have higher priority (min-heap).
+<: Larger values have higher priority (max-heap).
+Tip:
+Read the > or < as a question:
+"Should a have lower priority than b?"
+If the answer is true, b gets higher priority. okkk
+
+
+and this operator() is also fixed we cannot change it it is done to call it by creating a object instance in the class itself
+
+Why Use operator() Instead of Other Methods?
+Callable Objects:
+
+operator() makes an object callable just like a function. This is particularly useful for custom comparators, functors, or callbacks.
+Seamless Integration:
+
+STL algorithms and containers like std::sort, std::priority_queue, and std::transform often require callable objects. Using operator() integrates seamlessly with these.
+Readability:
+
+Using operator() makes your code look cleaner and more intuitive because you can treat objects like functions.
+
+
+Purpose of operator()
+The primary purpose of operator() is to make objects of a class behave like functions. 
+It does not eliminate the need to create an object of the class.
+Instead, it allows you to call the object itself as if it were a function.
+
 #include <queue>
 class compare{
     public:
@@ -232,6 +262,8 @@ Node* mergeKLists(vector<Node*> &listArray){
             temp->next=newhead;
             temp=temp->next;
             if(newhead->next){
+                //ham esa nhi kr rhe ki only head ko bhej rhe list me and next list  se attach kr rhe hai ham bs har ek element ko dal rhe so min head ka
+                //ager next element exist krta hai to use push kr do queue me okk and continue this
                 pq.push(newhead->next);
             }
         }
