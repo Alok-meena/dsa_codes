@@ -75,12 +75,11 @@ vector<int> nextGreaterElement(vector<int>& arr, int n)
 
 		if(s.size()==0){
 			ans[i]=-1;
-			s.push(arr[i]);
 		}
 		else{
 			ans[i]=s.top();
-			s.push(arr[i]);
 		}
+		s.push(arr[i]);
 	}
 
 	return ans;
