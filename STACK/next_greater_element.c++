@@ -84,3 +84,5 @@ vector<int> nextGreaterElement(vector<int>& arr, int n)
 
 	return ans;
 }
+
+t.c:-O(2*N) AND S.C:-o(N)
