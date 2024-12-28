@@ -91,6 +91,8 @@ vector<int> nextGreaterElementII(vector<int>& a) {
     // Write your code here.
     int n=a.size();
 
+    //to solve this ques we just copied the array again okk
+
     for(int i=0;i<n;i++){
         a.push_back(a[i]);
     }
