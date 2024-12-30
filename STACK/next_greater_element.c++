@@ -1,64 +1,58 @@
-Problem statement
-Implement a Queue Data Structure specifically to store integer data using a Singly Linked List or an array.
+Next Greater Element
+Difficulty: MediumAccuracy: 32.95%Submissions: 415K+Points: 4
+Given an array arr[ ] of integers, the task is to find the next greater element for each element of the array in order of their appearance in the array. Next greater element of an element in the array is the nearest element on the right which is greater than the current element.
+If there does not exist next greater of current element, then next greater element for current element is -1. For example, next greater of the last element is always -1.
 
-You need to implement the following public functions :
+Examples
 
-1. Constructor: It initializes the data members as required.
-
-2. enqueue(data): This function should take one argument of type integer. It enqueues the element into the queue.
-
-3. dequeue(): It dequeues/removes the element from the front of the queue and in turn, returns the element being dequeued or removed. In case the queue is empty, it returns -1.
-
-4. front(): It returns the element being kept at the front of the queue. In case the queue is empty, it returns -1.
-
-5. isEmpty(): It returns a boolean value indicating whether the queue is empty or not.
-Operations Performed on the Queue :
-Query-1(Denoted by an integer 1): Enqueues integer data to the queue.
-
-Query-2(Denoted by an integer 2): Dequeues the data kept at the front of the queue and returns it to the caller, return -1 if no element is present in the queue.
-
-Query-3(Denoted by an integer 3): Fetches and returns the data being kept at the front of the queue but doesn't remove it, unlike the dequeue function, return -1 if no element is present in the queue.
-
-Query-4(Denoted by an integer 4): Returns a boolean value denoting whether the queue is empty or not.
-Detailed explanation ( Input/output format, Notes, Images )
-Constraints :
-1 <= t <= 5
-1 <= q <= 5000
-1 <= x <= 4
-1 <= data <= 2^31 - 1
-
-Time Limit: 1 sec
-Sample Input 1 :
-1
-7
-1 17
-1 23
-1 11
-2
-2
-2
-2
-Sample Output 1 :
-17
-23
-11
--1
-Explanation for Sample Output 1 :
-The first three queries are of enQueue, so we will push 17, 23, and 11 into the queue.
-
-The next four queries are of deQueue, so we will starting removing elements from the queue, so the first element will be 17, then 23, and then 11. And after the third dequeue query, the queue is now empty so for the fourth query, we will return -1.
-Sample Input 2 :
-1
-3
-2
-1 10
-3
-Sample Output 2 :
--1 
-10
+Input: arr[] = [1, 3, 2, 4]
+Output: [3, 4, 4, -1]
+Explanation: The next larger element to 1 is 3, 3 is 4, 2 is 4 and for 4, since it doesn't exist, it is -1.
+Input: arr[] = [6, 8, 0, 1, 3]
+Output: [8, -1, 1, 3, -1]
+Explanation: The next larger element to 6 is 8, for 8 there is no larger elements hence it is -1, for 0 it is 1 , for 1 it is 3 and then for 3 there is no larger element on right and hence -1.
+Input: arr[] = [10, 20, 30, 50]
+Output: [20, 30, 50, -1]
+Explanation: For a sorted array, the next element is next greater element also exxept for the last element.
+Input: arr[] = [50, 40, 30, 10]
+Output: [-1, -1, -1, -1]
+Explanation: There is no greater element for any of the elements in the array, so all are -1.
+Constraints:
+1 ≤ arr.size() ≤ 106
+0 ≤ arr[i] ≤ 109
 
 
 
+class Solution {
+  public:
+    // Function to find the next greater element for each element of the array.
+    vector<int> nextLargerElement(vector<int>& arr) {
+        // code here
+        vector<int>ans;
+        
+        int n=arr.size();
+        
+        for(int i=n-1;i>=0;i--){
+            int next_greater=-1;
+            int j=i+1;
+            while(j<n){
+                if(arr[j]>arr[i]){
+                    next_greater=arr[j];
+                    break;
+                }
+                j++;
+            }
+            
+            ans.push_back(next_greater);
+        }
+        
+        reverse(ans.begin(),ans.end());
+        
+        return ans;
+    }
+};
+
+t.c:-O(n^2) and s.c:-O(n)
 
 
 #include <stack>
