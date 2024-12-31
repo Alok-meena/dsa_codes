@@ -64,3 +64,41 @@ void sortStack(stack<int> &stack)
 		stack.push(i);
 	}
 }
+
+t.c:-O(nlogn) and s.c:-O(N)
+
+
+using recursion
+
+#include <bits/stdc++.h> 
+
+void sortInsert(stack<int>&s,int num){
+	if(s.empty() || s.top()<num){
+		s.push(num);
+		return;
+	}
+
+	int val=s.top();
+	s.pop();
+	sortInsert(s,num);
+	s.push(val);
+}
+void sortStack(stack<int> &stack)
+{
+	// Write your code here
+	//jab tk stack empty nhi hoga jao 
+	//then return me values ko sorted way me inesrt kro means
+
+	//bs insert the value in stack if it's top values is less than current to be inserted value o/w go down until stack is empty
+	if(stack.empty()){
+		return;
+	}
+
+	int val=stack.top();
+	stack.pop();
+	sortStack(stack);
+
+	sortInsert(stack,val);
+}
+
+t.c:-O(N^2) and s.c:-O(n)
