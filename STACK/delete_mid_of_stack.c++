@@ -55,4 +55,29 @@ class Solution {
 
 t.c:-O(n) and s.c:-O(n)
 
+
+we can also use recursion for it
+
+#include <bits/stdc++.h>
+
+void solve(stack<int>&s,int n,int count){
+   if(count==n/2){
+      s.pop();
+      return;
+   }
+
+   int val=s.top();
+   s.pop();
+   solve(s,n,count+1);
+   s.push(val);
+}
+void deleteMiddle(stack<int>&inputStack, int N){
+	
+   // Write your code here
+   int count=0;
+   solve(inputStack,N,count);
+}
+
+t.c:-O(n) and s.c:-O(n) okkkkkk
+
   
