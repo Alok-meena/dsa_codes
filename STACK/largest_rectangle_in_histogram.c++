@@ -65,7 +65,68 @@ t.c:-O(N^2) and s.c:-O(1)
 
 2) optimized
 
+class Solution {
+public:
+    void solve2(vector<int>&prevsmaller,vector<int>&heights,int n){
+        stack<int>s;
 
+        for(int i=0;i<n;i++){
+            while(!s.empty() and heights[s.top()]>=heights[i]){
+                s.pop();
+            }
+
+            if(s.empty()){
+                prevsmaller[i]=-1;
+            }
+            else prevsmaller[i]=s.top();
+
+            s.push(i);
+        }
+    }
+    void solve1(vector<int>&nextsmaller,vector<int>&heights,int n){
+        stack<int>s;
+
+        for(int i=n-1;i>=0;i--){
+            while(!s.empty() and heights[s.top()]>=heights[i]){
+                s.pop();
+            }
+
+            if(s.empty()){
+                nextsmaller[i]=-1;
+            }
+            else nextsmaller[i]=s.top();
+
+            s.push(i);
+        }
+    }
+    int largestRectangleArea(vector<int>& heights) {
+        int ans=INT_MIN;
+        int n=heights.size();
+
+        //because we have to go to the left only till the prevssmaller element and same for the right direction
+        vector<int>nextsmaller(n);
+        vector<int>prevsmaller(n);
+
+        solve1(nextsmaller,heights,n);
+        solve2(prevsmaller,heights,n);
+
+        
+        
+        for(int i=0;i<n;i++){
+
+            //if it is then no next value will be smaller so take till the end okk
+            if(nextsmaller[i]==-1){
+                nextsmaller[i]=n;
+            }
+            int length=heights[i];
+            int breadth=nextsmaller[i]-prevsmaller[i]-1;
+
+            int area=breadth*length;
+            ans=max(ans,area);
+        }
+        return ans;
+    }
+};
 
 
 
