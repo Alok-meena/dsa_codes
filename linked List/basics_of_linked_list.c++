@@ -15,6 +15,7 @@ class node{
     }
 
     //destructor
+    //it is not required mostly if want to perform something then use it
     ~node(){
         int val=this->data;
         //memory free
