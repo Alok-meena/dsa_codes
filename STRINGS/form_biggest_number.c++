@@ -68,6 +68,8 @@ int main() {
 		}
 
 		sort(v.begin(),v.end(),cmp);
+
+		//if all numbers are zero then  and print only 0 because concatenating multiple zeroes will create undersidred outputs okk
 		if(v[0]=="0"){
 			cout<<"0"<<endl;
 		}
