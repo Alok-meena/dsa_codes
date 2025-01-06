@@ -62,6 +62,11 @@ public:
     solve(v,ans,i+1,n,sum-v[i],d);
     ans.pop_back();
 
+     //this is required because duplicate combinations are not accepted that's why this is used
+
+     //The duplicates are avoided only within a single combination, not across all combinations. Let me clarify this further
+
+     //means ye only single combination me duplicates avoid kr rha hai baki hm duplicates ko alag alag combinations me use kr skte hai okkkk
     while(i+1<n && v[i]==v[i+1]){
         i++;
     }
