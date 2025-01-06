@@ -56,7 +56,6 @@ Time Limit: 1 sec.
 
 
 #include <bits/stdc++.h>
-
 bool canpaint(vector<int>&boards,int k,int n,int Time){
     int painters=1;
     int workdone=0;
@@ -86,7 +85,8 @@ int findLargestMinDistance(vector<int> &boards, int k)
         sum+=i;
     }
 
-    int low=1;
+    int low=*max_element(boards.begin(),boards.end()); /// because min time to paint any board is the max length of board then only all of the boards
+    //can be colored okk not minimum
     int high=sum;
     int ans=INT_MAX;
 
@@ -96,9 +96,9 @@ int findLargestMinDistance(vector<int> &boards, int k)
         if(canpaint(boards,k,n,mid)){
             ans=min(ans,mid);
             high=mid-1;//moving left because we want to minimize our answer okk
-        }
-        else{
-            low=mid+1;//move right because if this time in not sufficient than less than it will also be not sufficient
+        } else {
+            low = mid + 1; // move right because if this time in not sufficient
+                           // than less than it will also be not sufficient
         }
     }
     return ans;
