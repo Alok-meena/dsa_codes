@@ -124,8 +124,8 @@ bool isvalid(vector<vector<int>>&v,int row,int col,int val){
 
     //validate 3X3 matrix
 
-    int new_row=(3*(row/3));
-    int new_col=(3*(col)/3);
+    int new_row=3*(row/3);
+    int new_col=3*(col/3);
 
     for(int i=0;i<3;i++){
         for(int j=0;j<3;j++){
