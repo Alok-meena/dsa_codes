@@ -46,3 +46,57 @@ public:
 };
 
 t.c:-O(nlog2(n)) and s.c:-O(n)
+
+
+
+
+void merge(vector<int>&v,int low,int high,int mid){
+    int left=low;
+    int right=mid+1;
+
+    vector<int>temp(high-low+1); //this is because if we have low to 4 and high to 5 then also it will create 5 size temp which we dont want just 
+    //create size of high-low+1 +1 due to 0 based indexing okk
+    int i=0;
+
+    while(left<=mid and right<=high){
+        if(v[left]<=v[right]){
+            // temp.push_back(v[left++]);
+            temp[i++]=v[left++];
+        }
+        else{
+            temp[i++]=v[right++];
+            // temp.push_back(v[right++]);
+        }
+    }
+
+    while(left<=mid){
+        temp[i++]=v[left++];
+        // temp.push_back(v[left++]);
+    }
+
+    while(right<=high){
+        temp[i++]=v[right++];
+        // temp.push_back(v[right++]);
+    }
+
+    for(int i=low;i<=high;i++){
+        v[i]=temp[i-low];
+    }
+
+
+}
+void mergesort(vector<int>&v,int low,int high){
+    if(low>=high){
+        return;
+    }
+
+    int mid=(low+high)/2;
+
+    mergesort(v,low,mid);
+    mergesort(v,mid+1,high);
+    merge(v,low,high,mid);
+}
+void mergeSort(vector < int > & arr, int n) {
+    // Write your code here.
+    mergesort(arr,0,n-1);
+}
