@@ -79,6 +79,7 @@ bool canplace(vector<int>&stalls,int k,int n,int minDistance){
         if(stalls[i]-last_cow_location>=minDistance){
             placed_cows++;
             last_cow_location=stalls[i];
+            if(placed_cows>=k) return true;
         }
     }
 
@@ -97,7 +98,7 @@ int aggressiveCows(vector<int> &stalls, int k)
     sort(stalls.begin(),stalls.end());
 
     int n=stalls.size();
-    int l=1;
+    int l=0; //min dist b/w 2 cows possible is 0
     int h=stalls[n-1];
 
     int ans=-1;
