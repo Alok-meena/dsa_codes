@@ -114,7 +114,8 @@ void solve(vector<int>&a,vector<vector<int>>&ans,vector<int>&output,int target,i
         solve(a,ans,output,target-a[i],i);
         output.pop_back();
 
-        // while(i+1<a.size() and a[i]==a[i+1]) i++;
+        while(i+1<a.size() and a[i]==a[i+1]) i++;
+       //to handle duplicates;
 
         //exclude
         solve(a,ans,output,target,i+1);
