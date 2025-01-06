@@ -26,7 +26,7 @@ public:
             }
 
             // Move to the part of the array that is more likely to have a peak
-            if (nums[mid] > nums[mid - 1]) {
+            if (mid==0 or nums[mid] > nums[mid - 1]) {
                 low = mid + 1;
             } else {
                 high = mid - 1;
