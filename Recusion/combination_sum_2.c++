@@ -89,3 +89,58 @@ public:
 };
 
 t.c:-O(2^k) where k>>>n
+
+
+ or can also do 
+
+
+ #include <bits/stdc++.h>
+using namespace std;
+
+void solve(vector<int>&a,vector<vector<int>>&ans,vector<int>&output,int target,int i){
+        if(target==0){
+            ans.push_back(output);
+            return;
+        }
+        if(target<0) return;
+
+        if(i>=a.size()){
+            return;
+        }
+        
+        //include
+        output.push_back(a[i]);
+        //we are not increasing the index then it will take the current value again and again
+        solve(a,ans,output,target-a[i],i);
+        output.pop_back();
+
+        // while(i+1<a.size() and a[i]==a[i+1]) i++;
+
+        //exclude
+        solve(a,ans,output,target,i+1);
+        
+    }
+    vector<vector<int> > combinationSum(vector<int> &A, int B) {
+        // Your code here
+        vector<vector<int>>ans;
+        
+        vector<int>output;
+        solve(A,ans,output,B,0);
+        
+        return ans;
+    }
+
+int main() {
+    vector<int>v={1,1,2};
+    sort(v.begin(),v.end());
+    vector<vector<int>>ans=combinationSum(v,10);
+    for(auto i:ans){
+        for(auto j:i){
+            cout<<j<<" ";
+        }
+        cout<<endl;
+    }
+}
+
+
+same 
