@@ -129,6 +129,7 @@ bool isvalid(vector<vector<int>>&v,int row,int col,int val){
 
     for(int i=0;i<3;i++){
         for(int j=0;j<3;j++){
+         //here we must have to do so and we cannot start from new_row and col as incrementing them may result in wrong answers and index
             if(v[i+new_row][j+new_col]==val){
                 return false;
             }
@@ -154,6 +155,7 @@ bool solve(vector<vector<int>>&v){
             return false;// If no number fits, return false (backtrack)
         }
     }
+  //it may work without this true but required for some cases
     return true;// If the entire board is filled correctly, return true
 }
 
