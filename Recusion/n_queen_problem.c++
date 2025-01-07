@@ -120,7 +120,8 @@ void solve(vector<vector<int>>&v,int n,vector<vector<vector<int>>>&solutions,int
         if(isvalid(v,n,row,col)){
             //place
             v[row][col]=1;
-            
+
+	    //here we should not have to stop and have to store all possible solutions okk 
             solve(v,n,solutions,row+1);
 
             //bactrack
