@@ -67,6 +67,13 @@ void insertAtPos(node* &head,node* &tail,int data,int pos){
 
         //inserting at the end with data d and using pointer tail
 
+        if(curr==NULL){
+            cout<<"invalid position"<<endl;
+            return;
+        }
+
+        //and check this curr==NULL before that curr->next below o/w it will give unexpected results okkk
+
         if(current->next==NULL){
             insertAtTail(tail,head,data);
             return;
