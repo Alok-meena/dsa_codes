@@ -53,6 +53,11 @@ void insertAtTail(node* &tail,node* &head,int data){
 }
 
 void insertAtPos(node* &head,node* &tail,int data,int pos){
+    if(pos<1){
+        cout<<"invalid position"<<endl;
+        return;
+    }
+    
     if(pos==1){
         insertAtHead(head,tail,data);
         return;
