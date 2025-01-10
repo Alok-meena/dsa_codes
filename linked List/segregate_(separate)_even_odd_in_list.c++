@@ -97,4 +97,13 @@ class Solution {
     }
 };
 
+
+at the last we can also use these 3 conditions instead of all those 3
+  //this is necessary as if even does not exist return odd
+   if(evenhead==NULL) return oddhead;
+
+//make eventail->next=odd and no need to check null as it will never occur okk
+        eventail->next=oddhead;
+        oddtail->next=NULL;
+
 t.c:-O(n) and s.c:-O(1)
