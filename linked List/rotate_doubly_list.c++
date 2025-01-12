@@ -107,17 +107,18 @@ class Solution {
         }
         
         Node *newhead=temp->next;
-        Node *newtail=temp;
-        
-        Node *oldtail=newhead;
-        while(oldtail->next!=NULL){
-            oldtail=oldtail->next;
+        if(newhead==NULL) return head; // case of p==len
+        temp->next=NULL;
+
+        Node *t=newhead;
+        while(t->next!=NULL){
+            t=t->next;
         }
         
-        oldtail->next=head;
-        head->prev=oldtail;
+        t->next=head;
+        head->prev=t;
         
-        newtail->next=NULL;
+        temp->next=NULL;
         
         return newhead;
         
