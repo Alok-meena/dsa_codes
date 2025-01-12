@@ -73,6 +73,7 @@ using recursion
 #include <bits/stdc++.h> 
 
 void sortInsert(stack<int>&s,int num){
+	//aor ager stack empty hi ho gya hai to bs dal do value stack me okk
 	if(s.empty() || s.top()<num){
 		s.push(num);
 		return;
