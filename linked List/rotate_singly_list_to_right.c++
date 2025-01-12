@@ -79,3 +79,13 @@ public:
 };
 
 t.c:-O(n) and s.c:-O(1)
+
+ int getlength(Node *head){
+        Node *temp=head;
+        int length=0;
+        while(temp!=NULL){
+            length++;
+            temp=temp->next;
+        }
+        return length;
+    }
