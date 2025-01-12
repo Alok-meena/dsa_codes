@@ -64,6 +64,8 @@ bool findRedundantBrackets(string &s)
             char ch=st.top();
             bool isredundant=true;
             while(st.top()!='('){
+               //to dekho (a) to ye redundant backet hai because brackets ki need hi nhi hai yha pe to okk 
+             // but if open bracket se pahle ager koi bhi operator hua to ye redundant nhi hoga okk 
                 if(ch=='+' || ch=='-' || ch=='*' || ch=='/'){
                     isredundant=false;
                 }
