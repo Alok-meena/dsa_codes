@@ -112,6 +112,7 @@ class Solution {
         bool rowcheck=true;
         bool colcheck=true;
         for(int i=0;i<n;i++){
+            //here i!=candidate condition is necessary because vo khud ko janta hoga na celebrity jo hai that's why it's i,i can be 1 which can give wrong answer
             if(i!=candidate and mat[candidate][i]==1){
                 rowcheck=false;
                 break;
