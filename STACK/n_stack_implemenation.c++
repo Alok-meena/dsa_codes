@@ -60,8 +60,13 @@ True
 True
 
 
+but i dont understand that how multiple stacks can be implemented is it like isnertin g value of multiple stacks just like normal array insertion and dont worry due to next top array and freespot is it
+ChatGPT said:
+ChatGPT
+Yes, you are correct! Implementing multiple stacks in a single array is like using an array to store values for all stacks while keeping track of each stack's elements using auxiliary data structures like top, next, and freespot.
 
 
+bus usi array me ham values ko insert kr rhe hai multiple stack ki values okk 
 
 
 
