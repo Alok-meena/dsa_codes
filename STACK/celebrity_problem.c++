@@ -90,8 +90,10 @@ class Solution {
         for(int i=0;i<n;i++){
             s.push(i);
         }
-        
-        while(s.size()!=1){
+
+        //s.size()!=1 this is wrong condition conditon should be >1 because for 4x4 matrix with all 1's 
+        // stack will contain  3 2 1 0 in the 2 loops it will become empty and size is 0 not 1 so it will result into tle okk
+        while(s.size()>1){
             int a=s.top();
             s.pop();
             
