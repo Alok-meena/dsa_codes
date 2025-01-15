@@ -116,3 +116,62 @@ public:
         return a.empty();
     }
 };
+
+t.c:-O(1) and s.c:-O(n)
+
+
+
+queue using single stack using recursion
+
+
+class MyQueue {
+public:
+    stack<int> s;
+    MyQueue() {}
+
+    void push(int x) {
+        s.push(x);
+    }
+
+    int pop() {
+        if (s.empty()) return -1; // Queue is empty
+
+        int top = s.top();
+        s.pop();
+
+        if (s.empty()) return top; // Found the front element
+
+        int result = pop(); // Recursive call to find the front
+        s.push(top); // Rebuild stack as you backtrack
+        return result;
+    }
+
+    int peek() {
+        if (s.empty()) return -1;
+
+        int top = s.top();
+        s.pop();
+
+        if (s.empty()) {
+            s.push(top);
+            return top;
+        }
+
+        int result = peek();
+        s.push(top);
+        return result;
+    }
+
+    bool empty() {
+        return s.empty();
+    }
+};
+
+
+Disadvantages of Single-Stack Approach:
+
+High overhead due to recursion.
+Not as clean or efficient as the two-stack implementation.
+Limited by stack depth, making it unsuitable for large queues.
+
+O(n) s.c and t.c according to the operations
