@@ -99,11 +99,11 @@ while maintaining the circular nature okk
 #include <bits/stdc++.h> 
 class Deque
 {
-public:
     int *arr;
+    int size;
     int front;
     int rear;
-    int size;
+public:
     // Initialize your data structure.
     Deque(int n)
     {
@@ -117,19 +117,18 @@ public:
     bool pushFront(int x)
     {
         // Write your code here.
-        if((front==0 and rear==size-1) or (rear==(front-1)%size)){
+        if(isFull()){
             return false;
         }
-        else if (front==-1){
+        else if(isEmpty()){
             front=rear=0;
         }
-        else if (front==0 and rear!=size-1){
+        else if(front==0 && rear!=size-1){
             front=size-1;
         }
         else{
             front--;
         }
-
         arr[front]=x;
         return true;
     }
@@ -138,23 +137,19 @@ public:
     bool pushRear(int x)
     {
         // Write your code here.
-        if((front==0 and rear==size-1) or (rear==(front-1)%size)){
+        if(isFull()){
             return false;
         }
-        //if queue is empty
-        else if(front==-1){
+        else if(isEmpty()){
             front=rear=0;
         }
-        //to maintain circular nature 
-        else if(rear==size-1 and front!=0){
+        else if(rear==size-1 && front!=0){
             rear=0;
         }
         else{
             rear++;
         }
-
         arr[rear]=x;
-
         return true;
     }
 
@@ -162,10 +157,10 @@ public:
     int popFront()
     {
         // Write your code here.
-        if(front==-1){
+        if(isEmpty()){
+            
             return -1;
         }
-
         int ans=arr[front];
         arr[front]=-1;
         if(front==rear){
@@ -184,11 +179,12 @@ public:
     int popRear()
     {
         // Write your code here.
-        if(front==-1){
+        if(isEmpty()){
+            
             return -1;
         }
-
         int ans=arr[rear];
+        arr[rear]=-1;
         if(front==rear){
             front=rear=-1;
         }
@@ -205,7 +201,9 @@ public:
     int getFront()
     {
         // Write your code here.
-        if(front==-1) return -1;
+        if(isEmpty()){
+            return -1;
+        }
         return arr[front];
     }
 
@@ -213,7 +211,9 @@ public:
     int getRear()
     {
         // Write your code here.
-        if(front==-1) return -1;
+        if(isEmpty()){
+            return -1;
+        }
         return arr[rear];
     }
 
@@ -221,15 +221,23 @@ public:
     bool isEmpty()
     {
         // Write your code here.
-        return front==-1;
+        if(front==-1){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     // Returns true if the deque is full. Otherwise returns false.
     bool isFull()
     {
         // Write your code here.
-        if(front==0 and rear==size-1) return true;
-        else if(rear==(front-1)%size) return true;
-        return false;
+        if((front==0 && rear==size-1) || (front!=0 &&(rear==(front-1)%(size-1)))){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 };
