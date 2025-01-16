@@ -71,7 +71,7 @@ class Solution {
 s.c:-O(n) and t.c:-O(n*k)
 
 
-optimized is using deque ( because during moving to the next window front element is popping and back is pushing so only possible in deque okk)
+optimized is using deque ( can use normal queue also )
 
 
 #include <bits/stdc++.h>
