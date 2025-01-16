@@ -67,3 +67,64 @@ long long sumOfMaxAndMin(vector<int> &nums, int n, int k) {
 
 
 t.c:-O(n*k) and s.c:-O(1)
+
+optimized
+
+using deque
+
+t.c:-O(n) and s.c:-O(k)
+
+#include <bits/stdc++.h> 
+long long sumOfMaxAndMin(vector<int> &nums, int n, int k) {
+	// Write your code here.
+    long long ans=0;
+
+    deque<long long>maxi(k);
+    deque<long long>mini(k);
+
+    for(int i=0;i<k;i++){
+
+        while(!maxi.empty() and nums[maxi.back()]<=nums[i]){
+            maxi.pop_back();
+        }
+
+        while(!mini.empty() and nums[mini.back()]>nums[i]){
+            mini.pop_back();
+        }
+
+        maxi.push_back(i);
+        mini.push_back(i);
+    }
+
+    ans+=nums[maxi.front()]+nums[mini.front()];
+
+    for(int i=k;i<n;i++){
+        //removal
+        while(!maxi.empty() and i-maxi.front()>=k){
+            maxi.pop_front();
+        }
+
+        while(!mini.empty() and i-mini.front()>=k){
+            mini.pop_front();
+        }
+
+        //addition of new element
+
+        while(!maxi.empty() and nums[maxi.back()]<=nums[i]){
+            maxi.pop_back();
+        }
+
+        while(!mini.empty() and nums[mini.back()]>nums[i]){
+            mini.pop_back();
+        }
+
+        maxi.push_back(i);
+        mini.push_back(i);
+
+        ans+=nums[maxi.front()]+nums[mini.front()];
+
+    }
+
+    return ans;
+}
+it is a very deep ques check using dryrun
