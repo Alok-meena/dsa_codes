@@ -37,7 +37,7 @@ node* treebuild(node *root){
     cout<<"Enter the data for inserting right of:"<<data<<endl;
     root->right=treebuild(root->right);
 
-    return root;
+    return root; //to bhai return bhi to kroge to the main function 
 
 
 }
@@ -61,6 +61,7 @@ void levelorderTraversal(node *root){
         }
 
         else{
+            //yhi pe print karna o/w there will be error due to NULL exception okk
             cout<<temp->data<<" ";
             if(temp->left){
                q.push(temp->left);
