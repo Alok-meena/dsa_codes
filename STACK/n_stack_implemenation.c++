@@ -150,6 +150,7 @@ Yes, you are correct! Implementing multiple stacks in a single array is like usi
 bus usi array me ham values ko insert kr rhe hai multiple stack ki values okk 
 
 
+just do DRY RUN AND U WILL UNDERSTAND
 
 
 #include <bits/stdc++.h> 
