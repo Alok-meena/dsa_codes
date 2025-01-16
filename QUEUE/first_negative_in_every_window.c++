@@ -98,7 +98,8 @@ class Solution {
             ans.push_back(0);
         }
         
-        for(int i=k;i<n;i++){
+        for(int i=k;i<n;i++){ //ab ye i vale ko window ka last index mano okk jo add ho rha hai to n tk hi chlana pdega right as first k size window is processed
+          //already
             if(!dq.empty() and i-dq.front()>=k){
                 dq.pop_front();
             }
