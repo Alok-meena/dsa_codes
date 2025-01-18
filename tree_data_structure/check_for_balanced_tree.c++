@@ -71,3 +71,33 @@ bool isBalancedBT(TreeNode<int>* root){
     // Write your code here.
     return balance(root).first;  //O(N)
 }
+
+same code but 
+class Solution {
+  public:
+    pair<bool,int> Balance(Node *root){
+        if(root==NULL){
+            pair<bool,int>p=make_pair(true,0);
+            return p;
+        }
+        
+        pair<bool,int> l=Balance(root->left);
+        pair<bool,int> r=Balance(root->right);
+        
+        bool leftpart=l.first;
+        bool rightpart=r.first;
+        int diff=abs(l.second-r.second);
+        
+        pair<bool,int>ans;
+        ans.first=leftpart and rightpart and diff<2;
+        ans.second=max(l.second,r.second)+1;
+        
+        return ans;
+    }
+    
+    // Function to check whether a binary tree is balanced or not.
+    bool isBalanced(Node* root) {
+        // Code here
+        return Balance(root).first;
+    }
+};
