@@ -104,6 +104,45 @@ void reverse_levelorderTraversal(node *root){
     }
 }
 
+more simple 
+class Solution {
+  public:
+    vector<int> reverseLevelOrder(Node *root) {
+        if (!root) return {};
+
+        vector<int> result;
+        queue<Node*> q;
+        stack<int> s;
+
+        q.push(root);
+
+        while (!q.empty()) {
+            Node* node = q.front();
+            q.pop();
+
+            // Push the node data into the stack
+            s.push(node->data);
+
+            // Enqueue left and right children
+            if (node->right) q.push(node->right);
+            if (node->left) q.push(node->left);
+        }
+
+        // Pop all elements from the stack and store them in the result vector
+        while (!s.empty()) {
+            result.push_back(s.top());
+            s.pop();
+        }
+
+        return result;
+    }
+};
+
+this is the best approach dry run and u will understand
+so if we first go to the right and push it's data then we will get the data in correct reverse level order okkk
+
+  
+
 void inorder(node *root){
     if(root==NULL){
         return;
