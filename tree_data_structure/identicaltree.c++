@@ -1,4 +1,5 @@
 
+THIS BELOW SOLN IS CORRECT FOR ONLY VALUES BUT DOESNT STAND FOR STRUCTURES OKK structure can be diff
 class Solution {
   public:
     void preorder(Node *root,vector<int>&a){
