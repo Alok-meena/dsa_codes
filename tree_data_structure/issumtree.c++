@@ -2,6 +2,8 @@ Given a Binary Tree. Return true if, for every node X in the tree other than the
 
 An empty tree is also a Sum Tree as the sum of an empty tree can be considered to be 0. A leaf node is also considered a Sum Tree.
 
+TO SUNO VERY IMP KI HAM IS TREE ME ROOT KE LIYE PURE LEFT KA SUM AND PURE RIGHT KA SUM NIKAL RHE H NA KI ONLY UNKE LEFT AOR RIGHT KA SUM DHYAN RKHNA YE CHEEZ
+
 class Solution
 {
     private:
@@ -30,7 +32,7 @@ class Solution
          pair<bool,int>ans;
          if(isLeftsumtree && isRightsumtree && condition){
              ans.first=true;// to first ko to ture krna hi h;
-             ans.second=root->data+leftsum+rightsum;//aor fir second me root+left+right taki uper vale root ko left ye right ki values ka sum kr ske
+             ans.second=2*root->data;// are bhai hme uper niche ka total sum bhejna hai yad rkha kro ye cheez
          }
          else{
              ans.first=false;// ager answer false h to us case me second yani sum calculate krne ki jrurat hi nhi h
