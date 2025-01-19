@@ -56,7 +56,9 @@ pair<bool,int> balance(TreeNode<int>* root){
 
      bool diff=abs(left.second-right.second)<=1;
      pair<bool,int>ans;
-     ans.second=max(left.second,right.second)+1;
+     ans.second=max(left.second,right.second)+1; //ye hmara normal height ke liye hai remember it more clearly okk
+
+     KYOKI HAME HEIGHT TO NORMALLY CALCULATE KRNI HI HAI TO YE TO KRNA OBVIOUS HAI 
 
         
         if(leftans && rightans && diff){
@@ -86,11 +88,11 @@ class Solution {
         
         bool leftpart=l.first;
         bool rightpart=r.first;
-        int diff=abs(l.second-r.second);
+        int diff=abs(l.second-r.second); //bhai ye to karna hi hai right
         
         pair<bool,int>ans;
         ans.first=leftpart and rightpart and diff<2;
-        ans.second=max(l.second,r.second)+1;
+        ans.second=max(l.second,r.second)+1; 
         
         return ans;
     }
