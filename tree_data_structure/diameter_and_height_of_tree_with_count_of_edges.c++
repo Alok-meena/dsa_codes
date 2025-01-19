@@ -57,11 +57,11 @@ class Solution {
       
       int o1=left.first;
       int o2=right.first;
-      int o3=left.second+right.second;
+      int o3=left.second+right.second;//this for diameter okk
       
       pair<int,int>ans;
       ans.first=max(o1,max(o2,o3));
-      ans.second=max(left.second,right.second)+1;
+      ans.second=max(left.second,right.second)+1; //ye hamne kiya to store the normal height of the tree 
       return ans;
   }
     // Function to return the diameter of a Binary Tree.
