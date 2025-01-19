@@ -1,5 +1,55 @@
 Given a binary tree with n nodes. Find the zig-zag level order traversal of the binary tree.
 
+
+t.c:-O(3N) == O(n) and s.c:(2n)==O(n)
+
+class Solution{
+    public:
+    //Function to store the zig zag order traversal of tree in a list.
+    vector <int> zigZagTraversal(Node* root)
+    {
+    	// Code here
+    	vector<vector<int>>ans;
+        vector<int>v;
+        queue<Node*>q;
+        q.push(root);
+        q.push(NULL);
+        int i=0;
+        
+        while(!q.empty()){
+            Node *temp=q.front();
+            q.pop();
+            
+            if(temp==NULL){
+                if(i%2!=0) reverse(v.begin(),v.end());
+                ans.push_back(v);
+                v.clear();
+                if(!q.empty()){
+                    q.push(NULL);
+                }
+                i++;
+            }
+            else{
+                v.push_back(temp->data);
+                
+                if(temp->left) q.push(temp->left);
+                if(temp->right) q.push(temp->right);
+            }
+        }
+        
+        v.clear();
+        for(auto i:ans){
+            for(auto j:i){
+                v.push_back(j);
+            }
+        }
+        
+        return v;
+    }
+};
+
+in the below solution we just removed this overhead
+
 Example 1:
 
 Input:
