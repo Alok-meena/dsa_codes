@@ -102,6 +102,9 @@ class Solution {
     }
 };
 
+Expected Time Complexity: O(NlogN)
+Expected Auxiliary Space: O(N).
+
 
 we cannot do this using dfs without more updates we can do use dfs if we manage a level and update the curr node if it's level is less than the level with same hd
 
@@ -146,3 +149,6 @@ class Solution {
     }
 };
 
+
+Expected Time Complexity: O(NlogN)
+Expected Auxiliary Space: O(N). logn for inserting into map
