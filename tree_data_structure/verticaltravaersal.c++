@@ -64,3 +64,41 @@ class solution {
 
 Expected Time Complexity: O(N*log(N)) // but yha O(N) hi hai
 Expected Auxiliary Space: O(N)
+
+
+t.c:-O(n*logm) and s.c:-O(n) due to the map and queue also
+m is the unique horizonatal distance okk
+class Solution
+{
+    public:
+    //Function to find the vertical order traversal of Binary Tree.
+    vector<int> verticalOrder(Node *root)
+    {
+        //Your code here
+        vector<int>ans;
+        if(root==NULL) return ans;
+        map<int,vector<int>>m;
+        queue<pair<Node*,int>>q;
+        
+        q.push({root,0});
+        
+        while(!q.empty()){
+            pair<Node*,int>p = q.front();
+            q.pop();
+            
+            m[p.second].push_back(p.first->data);
+            
+            if(p.first->left) q.push({p.first->left,p.second-1});
+            if(p.first->right) q.push({p.first->right,p.second+1});
+        }
+        
+        for(auto i:m){
+            for(auto j:i.second){
+                ans.push_back(j);
+            }
+        }
+        
+        return ans;
+    }
+    
+};
