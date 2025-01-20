@@ -68,6 +68,8 @@ Expected Auxiliary Space: O(N)
 
 t.c:-O(n*logm) and s.c:-O(n) due to the map and queue also
 m is the unique horizonatal distance okk
+
+we have to use bfs (level order) o/w the order of elements from top to bottom will on be maintained
 class Solution
 {
     public:
