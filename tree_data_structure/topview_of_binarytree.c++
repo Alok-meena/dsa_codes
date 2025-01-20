@@ -76,7 +76,7 @@ class Solution {
         // code here
         vector<int>ans;
         if(root==NULL) return ans;
-        map<int,vector<int>>m;
+        map<int,int>m;
         queue<pair<Node*,int>>q;
         
         q.push({root,0});
@@ -86,7 +86,7 @@ class Solution {
             q.pop();
 
             //if the distance is already present then dont add any other value corresponding to it okk
-            if(m.find(p.second)==m.end()) m[p.second].push_back(p.first->data);
+            if(m.find(p.second)==m.end()) m[p.second]=p.first->data;
             
             if(p.first->left) q.push({p.first->left,p.second-1});
             if(p.first->right) q.push({p.first->right,p.second+1});
