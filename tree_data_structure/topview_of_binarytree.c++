@@ -101,3 +101,48 @@ class Solution {
         return ans;
     }
 };
+
+
+we cannot do this using dfs without more updates we can do use dfs if we manage a level and update the curr node if it's level is less than the level with same hd
+
+like this 
+
+class Solution {
+  public:
+    // Function to return a list of nodes visible from the top view
+    // from left to right in Binary Tree.
+    
+    // Helper function to perform DFS traversal and update the top view
+    void dfs(Node* root, map<int, pair<int, int>>& m, int hd, int level) {
+        // Base case: If the node is NULL, return
+        if (root == NULL) {
+            return;
+        }
+        
+        // If the horizontal distance (hd) is not in the map, or if the level of the current node
+        // is less than the level already recorded at that horizontal distance, update the map.
+        if (m.find(hd) == m.end() || m[hd].second > level) {
+            m[hd] = {root->data, level};
+        }
+        
+        // Recur for the left and right child nodes
+        dfs(root->left, m, hd - 1, level + 1);  // Move to left child, hd decreases by 1
+        dfs(root->right, m, hd + 1, level + 1); // Move to right child, hd increases by 1
+    }
+
+    vector<int> topView(Node *root) {
+        vector<int> ans;
+        if (root == NULL) return ans;
+        
+        map<int, pair<int, int>> m; // Map to store node data and level for each horizontal distance
+        dfs(root, m, 0, 0); // Start DFS from root with hd=0 and level=0
+        
+        // Extract the top view from the map (nodes are sorted by horizontal distance)
+        for (auto i : m) {
+            ans.push_back(i.second.first); // i.second.first contains the node's data
+        }
+        
+        return ans;
+    }
+};
+
