@@ -63,3 +63,41 @@ Expected Auxiliary Space: O(N).
 but in reality of our code
 Time Complexity: O(n)
 Space Complexity: O(n)
+
+
+
+just one change and u are done with it 
+
+class Solution {
+  public:
+    // Function to return a list of nodes visible from the top view
+    // from left to right in Binary Tree.
+    vector<int> topView(Node *root) {
+        // code here
+        vector<int>ans;
+        if(root==NULL) return ans;
+        map<int,vector<int>>m;
+        queue<pair<Node*,int>>q;
+        
+        q.push({root,0});
+        
+        while(!q.empty()){
+            pair<Node*,int>p = q.front();
+            q.pop();
+
+            //if the distance is already present then dont add any other value corresponding to it okk
+            if(m.find(p.second)==m.end()) m[p.second].push_back(p.first->data);
+            
+            if(p.first->left) q.push({p.first->left,p.second-1});
+            if(p.first->right) q.push({p.first->right,p.second+1});
+        }
+        
+        for(auto i:m){
+            for(auto j:i.second){
+                ans.push_back(j);
+            }
+        }
+        
+        return ans;
+    }
+};
