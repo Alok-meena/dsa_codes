@@ -116,3 +116,46 @@ class Solution{
 
 Expected Time Complexity: O(n).
 Expected Auxiliary Space: O(n).
+
+similar code diff datastructure
+
+class Solution{
+    public:
+    //Function to store the zig zag order traversal of tree in a list.
+    vector <int> zigZagTraversal(Node* root)
+    {
+    	// Code here
+    	vector<int>ans;
+    	queue<Node*>q;
+    	q.push(root);
+    	int level=0;
+    	
+
+    	while(!q.empty()){
+    	    vector<int>ele;
+    	    queue<Node*>nq;
+    	    
+    	    while(q.size()){
+    	        Node *temp=q.front();
+    	        q.pop();
+    	        
+    	        ele.push_back(temp->data);
+    	        
+    	        if(temp->left) nq.push(temp->left);
+    	        if(temp->right) nq.push(temp->right);
+    	    }
+    	    
+    	    q=nq;
+    	    
+    	    if(level%2!=0) reverse(ele.begin(),ele.end());
+    	    
+    	    for(auto i:ele){
+    	        ans.push_back(i);
+    	    }
+    	    
+    	    level++;
+    	}
+    	
+    	return ans;
+    }
+};
