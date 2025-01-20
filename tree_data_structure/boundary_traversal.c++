@@ -26,7 +26,7 @@ class Solution {
           if((root==NULL) || (root->left==NULL && root->right==NULL)){
               return ;
           }
-          ans.push_back(root->data);
+          ans.push_back(root->data);//ye pe ans uper se niche k order me chahihe that's why we did used it here
           if(root->left){
               lefttraversal(root->left,ans);
           }
@@ -52,6 +52,8 @@ class Solution {
           if((root==NULL) || (root->left==NULL && root->right==NULL)){
               return ;
           }
+
+          //pahle right because we want right part but if does not exist then go to the left part as we want all boundary values 
           if(root->right){
               righttraversal(root->right,ans);
           }
@@ -60,7 +62,7 @@ class Solution {
           }
           //aor ager vapas aa gye to ans ko store kr lo
           
-          ans.push_back(root->data);
+          ans.push_back(root->data); //ye ans hme reverse order me chahihe that's why return kr rhe hai jab ans dal rhe hai 
       }
 public:
     vector <int> boundary(Node *root)
