@@ -33,9 +33,9 @@ public:
         }
         ListNode *fast=head;
         ListNode *slow=head;
-        while(fast!=NULL && slow!=NULL){
+        while(fast->next!=NULL && slow!=NULL){ ///to ye update jruri hai ki next ko pahle check kro then aage badhao varna mt badhao
             fast=fast->next;
-            if(fast!=NULL){
+            if(fast->next!=NULL){
                 fast=fast->next;
             }
             slow=slow->next;
@@ -139,6 +139,15 @@ Node *removeLoop(Node *head)
     }
     temp->next=NULL;
     return head;
+
+    or we can also do like without finding the start of loop we can solve like this 
+        slow=head;
+        while(slow->next!=fast->next){
+            slow=slow->next;
+            fast=fast->next;
+        }
+
+        fast->next=NULL;
 }
 
 O(n) and s.c:-O(1)
