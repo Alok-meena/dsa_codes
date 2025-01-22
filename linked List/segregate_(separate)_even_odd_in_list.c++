@@ -107,3 +107,106 @@ at the last we can also use these 3 conditions instead of all those 3
         oddtail->next=NULL;
 
 t.c:-O(n) and s.c:-O(1)
+
+
+
+
+normal vs code code
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class node{
+	public:
+	  int data;
+	  node *next;
+
+	  node(int data){
+		  this->data=data;
+		  this->next=NULL;
+	  }
+};
+
+void insertattail(node* &head,node* &tail,int data){
+	node *temp=new node(data);
+	if(tail==NULL){
+		head=temp;
+		tail=temp;
+	}
+	else{
+		tail->next=temp;
+		tail=temp;
+	}
+}
+
+void print(node *head){
+	node *temp=head;
+	while(temp!=NULL){
+		cout<<temp->data<<" ";
+		temp=temp->next;
+	}
+	cout<<endl;
+}
+
+void solve(node *head){
+	node *oddhead=NULL;
+	node *oddtail=NULL;
+	node *evenhead=NULL;
+	node *eventail=NULL;
+
+	node *temp=head;
+	while(temp!=NULL){
+		int val=temp->data;
+
+		if(val%2!=0){
+			if(val%2!=0 and oddhead==NULL){
+				oddhead=temp;
+				oddtail=temp;
+			}
+			else{
+				oddtail->next=temp;
+				oddtail=temp;
+			}
+		}
+		else{
+			if(evenhead==NULL){
+				evenhead=temp;
+				eventail=temp;
+			}
+			else{
+				eventail->next=temp;
+				eventail=temp;
+			}
+		}
+		
+
+		temp=temp->next;
+	}
+
+	if(oddhead==NULL){
+		print(evenhead);
+		return;
+	}
+
+	oddtail->next=evenhead;
+	if(evenhead!=NULL) eventail->next=NULL;
+	print(oddhead);
+	return;
+
+
+}
+int main() {
+	int n;
+	cin>>n;
+
+	node *head=NULL;
+	node *tail=NULL;
+
+	for(int i=0;i<n;i++){
+		int val;
+		cin>>val;
+		insertattail(head,tail,val);
+	}
+	
+	solve(head);
+}
