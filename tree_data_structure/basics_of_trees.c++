@@ -20,6 +20,9 @@ class node{
     }
 };
 
+
+//THIS IS TREE BUILD BY PREORDER TRAVERSAL OKK
+
 node* treebuild(node *root){
 
     cout<<"Enter the data:"<<endl;
