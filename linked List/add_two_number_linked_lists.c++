@@ -215,3 +215,103 @@ class Solution {
 };
 
 same t.c and s.c
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class node{
+	public:
+	  int data;
+	  node *next;
+
+	  node(int data){
+		  this->data=data;
+		  this->next=NULL;
+	  }
+};
+
+void insertathead(node* &head,int data){
+	node *temp=new node(data);
+	if(head==NULL){
+		head=temp;
+	}
+	else{
+		temp->next=head;
+		head=temp;
+	}
+}
+
+void print(node *head){
+	node *temp=head;
+	while(temp!=NULL){
+		cout<<temp->data<<" ";
+		temp=temp->next;
+	}
+	cout<<endl;
+}
+
+node* add(node *h1,node *h2){
+	node *head=NULL;
+	node *a=h1;
+	node *b=h2;
+	int carry=0;
+
+	while(a!=NULL and b!=NULL){
+		int sum=a->data+b->data+carry;
+		carry=sum/10;
+		insertathead(head,sum%10);
+		a=a->next;
+		b=b->next;
+	}
+
+	while(a!=NULL){
+		int sum=a->data+carry;
+		carry=sum/10;
+		insertathead(head,sum%10);
+		a=a->next;
+	}
+
+	while(b!=NULL){
+		int sum=b->data+carry;
+		carry=sum/10;
+		insertathead(head,sum%10);
+		b=b->next;
+	}
+
+	while(carry){
+		insertathead(head,carry);
+		carry=carry/10;
+	}
+
+	return head;
+
+	
+	
+}
+int main() {
+	int n,m;
+	cin>>n>>m;
+	node *h1=NULL,*h2=NULL;
+	// node *t1=NULL,*t2=NULL;
+
+	for(int i=0;i<n;i++){
+		int val;
+		cin>>val;
+		insertathead(h1,val);
+	}
+
+	for(int i=0;i<m;i++){
+		int val;
+		cin>>val;
+		insertathead(h2,val);
+	}
+	
+	node *temp=NULL;
+
+	temp=add(h1,h2);
+	print(temp);
+	
+}
+
+t.c:-O(N+m) and s.c:-O(max(n,m))
