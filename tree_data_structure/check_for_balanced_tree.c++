@@ -65,7 +65,7 @@ pair<bool,int> balance(TreeNode<int>* root){
             ans.first=true;
         }
         else{
-            ans.second=false;
+            ans.first=false;
         }
         return ans;
 }
