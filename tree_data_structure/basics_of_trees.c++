@@ -23,6 +23,30 @@ class node{
 
 //THIS IS TREE BUILD BY PREORDER TRAVERSAL OKK
 
+we can also do this in this way
+
+node* buildTree(){
+	int data;
+	cin>>data;
+
+	node *root=new node(data);
+
+	string l,r;
+	cin>>l;
+
+	if(l=="true"){
+		root->left=buildTree();
+	}
+
+	cin>>r;
+	if(r=="true"){
+		root->right=buildTree();
+	}
+
+	return root;
+
+}
+
 node* treebuild(node *root){
 
     cout<<"Enter the data:"<<endl;
@@ -41,8 +65,6 @@ node* treebuild(node *root){
     root->right=treebuild(root->right);
 
     return root; //to bhai return bhi to kroge to the main function 
-
-
 }
 
 void levelorderTraversal(node *root){
