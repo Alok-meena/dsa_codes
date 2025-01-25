@@ -85,5 +85,5 @@ public:
 };
 
 
-Expected Time Complexity: O(N). 
+Expected Time Complexity: O(N). ( O(n)+O(n)+O(n) )
 Expected Auxiliary Space: O(Height of the Tree).
