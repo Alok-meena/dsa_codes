@@ -70,3 +70,33 @@ class Solution {
         return Diameter(root).first;
     }
 };
+
+
+and the smallest code 
+
+class Solution {
+public:
+    int solve(TreeNode *root,int &ans){
+        if(root==NULL){
+            return 0;
+        }
+
+        int lh=solve(root->left,ans);
+        int rh=solve(root->right,ans);
+
+        int currd=lh+rh;
+        ans=max(ans,currd);
+
+        return max(lh,rh)+1;
+    }
+    int diameterOfBinaryTree(TreeNode* root) {
+        int ans=0;
+        int a=solve(root,ans);
+        return ans;
+    }
+};
+
+just do +1 in the currdiameter if nodes are considered instead of these edges okk
+
+(bs khuch nhi curr node pe khde hai aor left ki height aor right ki height ko add kr rhe hai aor +1 nhi kiya for edges and ager ye cheez uper 
+bhej rhe hai to curr node ka bhi count krna hai that's why +1 )
