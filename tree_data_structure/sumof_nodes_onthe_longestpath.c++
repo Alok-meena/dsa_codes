@@ -36,6 +36,8 @@ class Solution
         
         solve(root->left,len+1,maxlen,sum,maxsum);//then we are first traversing the left subtree then the right subtree
         solve(root->right,len+1,maxlen,sum,maxsum);
+
+        //and now iske bad hame sum ko change nhi krna aor na hi length ko krna hai as these are passed as copy not value
     }
 public:
     
