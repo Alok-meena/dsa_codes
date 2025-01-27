@@ -70,7 +70,7 @@ class Solution
     {
        //Your code here 
        if(root==NULL){
-           return root;
+           return NULL;
        }
        
        if(root->data==n1 || root->data==n2){
