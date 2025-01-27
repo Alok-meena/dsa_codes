@@ -32,7 +32,9 @@ class Solution{
         solve(root->right, k, count, path);
         
         //check for K Sum
-        
+
+        //we are doing it in reverse way because we are popping also during backtracking so it will consider all possible paths and it is not possible
+        //we we check the sum fromm the starting okk
         int size = path.size();
         int sum = 0;// khuch nhi bs revere me sum kr ke dekh liya ager equal to k aa rhe hai to and then 
         for(int i = size-1; i>=0; i--)  {
