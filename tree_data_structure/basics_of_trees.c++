@@ -213,6 +213,42 @@ void iterativeInorder(node *root) {
     }
 }
 
+iterative inorder traversal we can also write like 
+
+simple what we want left root right to pahle left jate jaao until null then store ans and go right
+
+class Solution {
+  public:
+    // Function to return a list containing the inorder traversal of the tree.
+    vector<int> inOrder(Node* root) {
+        // Your code here
+        vector<int>ans;
+        
+        stack<Node*>s;
+        
+        Node *temp=root;
+        
+        while(true){
+            if(temp!=NULL){
+                s.push(temp);
+                temp=temp->left;
+            }
+            else{
+                if(s.empty()) break;
+                temp=s.top();
+                ans.push_back(temp->data);
+                s.pop();
+                temp=temp->right;
+            }
+        }
+        
+        return ans;
+    }
+};
+
+
+//as preorder is root left right so first push root into stack and then push right and then left as we want left right and stack will reverse that order into this 
+//okk
 void iterativePreorder(node *root) {
     stack<node*> s;
     if (root != nullptr)
@@ -230,6 +266,9 @@ void iterativePreorder(node *root) {
     }
 }
 
+
+and in this we must have to use two stacks as what we want left right root so if we do push root then left then right so stack will reverse this order to correct
+it do use another stack to reverse the order again okk
 
 void iterativePostorder(node *root) {
     if (root == nullptr)
