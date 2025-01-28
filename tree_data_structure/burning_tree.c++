@@ -114,4 +114,94 @@ class Solution {
 };
 
  Time Complexity: O(N) // O(N) for levelorder traversal + O(N) for burn tree + ) =O(N) if insertion in map is O(1) and if logn then is is O(NlogN)
- Auxiliary Space: O(height of tree)
+ Auxiliary Space: O(n) for map
+
+
+
+code that i coded is ::::
+
+
+class Solution {
+  public:
+  
+    Node* findnode(Node *root,int target,map<Node*,Node*>&nodetoParent){
+        queue<Node*>q;
+        
+        Node *res;
+        
+        q.push(root);
+        nodetoParent[root]=NULL;
+        
+        while(!q.empty()){
+            
+            Node *front=q.front();
+            q.pop();
+            
+            if(front->data==target) res=front;
+            
+            if(front->left){
+                nodetoParent[front->left]=front;
+                q.push(front->left);
+            }
+            
+            if(front->right){
+                nodetoParent[front->right]=front;
+                q.push(front->right);
+            }
+        }
+        
+        return res;
+    }
+    
+    int burnTree(Node *root,Node *target,map<Node*,Node*>&nodetoParent){
+        queue<Node*>q;
+        q.push(target);
+        
+        map<Node*,bool>visited;
+        visited[target]=true;
+        
+        int time=0;
+        
+        while(!q.empty()){
+            int size=q.size();
+            bool addition=false;
+            
+            for(int i=0;i<size;i++){
+                Node *temp=q.front();
+                q.pop();
+                
+                if(temp->left and !visited[temp->left]){
+                    visited[temp->left]=true;
+                    q.push(temp->left);
+                    addition=true;
+                }
+                
+                if(temp->right and !visited[temp->right]){
+                    visited[temp->right]=true;
+                    q.push(temp->right);
+                    addition=true;
+                }
+                
+                if(nodetoParent[temp] and !visited[nodetoParent[temp]]){
+                    visited[nodetoParent[temp]]=true;
+                    q.push(nodetoParent[temp]);
+                    addition=true;
+                }
+            }
+            
+            if(addition) time++;
+        }
+        
+        return time;
+    }
+    int minTime(Node* root, int target) {
+        // code here
+        map<Node*,Node*>nodetoParent;
+        
+        Node *tar=findnode(root,target,nodetoParent);
+        
+        int ans=burnTree(root,tar,nodetoParent);
+        
+        return ans;
+    }
+};
