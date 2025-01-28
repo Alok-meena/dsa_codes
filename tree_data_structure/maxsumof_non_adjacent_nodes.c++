@@ -43,7 +43,7 @@ class Solution{
     
     int getMaxSum(Node *root) 
     {
-        pair<int,int>ans=solve(root);//to hmne ans me int,int bnaya jisme pahla vala store krega by including current and excluding other to uper dekho
+        pair<int,int>ans=solve(root);//to hmne ans me int,int bnaya jisme pahla vala store krega by including current and excluding curr level to uper dekho
         return max(ans.first,ans.second);
     }
 };
