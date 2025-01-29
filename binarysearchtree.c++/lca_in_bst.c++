@@ -1,4 +1,45 @@
+brute force
+
+bool solve(TreeNode *root,TreeNode *a,vector<TreeNode*>&v){
+    if(root==NULL){
+        return false;
+    }
+
+    v.push_back(root);
+
+    if(root->data==a->data) return true;
+
+    if(solve(root->left,a,v) or solve(root->right,a,v)) return true;
+
+    v.pop_back();
+    return false;
+
+}
+TreeNode *LCAinaBST(TreeNode *root, TreeNode *P, TreeNode *Q)
+{
+    // Write your code here.
+    vector<TreeNode*>a;
+    vector<TreeNode*>b;
+
+    if(!solve(root,P,a) or !solve(root,Q,b)){
+        return NULL;
+    }
+
+    int i=0;
+    while(i<a.size()){
+        if(a[i]!=b[i]) break;
+        i++;
+    }
+
+    return a[i-1];
+}
+
+t.c:-O(h) and s.c:-O(h) and for skew tree O(n) t.c and s.c okk
+
+
 recursive approach:-
+
+    
 
 t.c:-O(N) s.c:-O(H)
 TreeNode *LCAinaBST(TreeNode *root, TreeNode *P, TreeNode *Q)
@@ -39,3 +80,7 @@ TreeNode *LCAinaBST(TreeNode *root, TreeNode *P, TreeNode *Q)
 
   
 }
+
+
+
+
