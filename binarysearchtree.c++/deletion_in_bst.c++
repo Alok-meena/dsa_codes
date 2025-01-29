@@ -129,6 +129,10 @@ node *deletefrombst(node *root,int val){
             // with it in this case we have taken min value from right
             int mini=minvalue(root->right)->data;
             root->data=mini;//then root ke data ko replace kr diya min value se
+            //and hamne value right se mangwayi hai to right se jo return hoga use bhi correctly place krna hoga 
+            //for ex right me only 1 node hota to return NULL hota to use root ke right me place krna hota that's why 
+
+            
             root->right=deletefrombst(root->right,mini);// then we also have to delete that min value in right subtree to deletenode function ko call kr diya
             // to ye vha jake easily delete kr dega
             return root;
