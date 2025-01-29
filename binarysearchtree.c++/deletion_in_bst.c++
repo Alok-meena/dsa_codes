@@ -81,7 +81,7 @@ void inorder(node *root){
 }
 
 node *minvalue(node *root){
-    node *temp=root;
+    node *temp=root; //dont do mistake by root->left as it is already passed 
     while(temp->left!=NULL){
         temp=temp->left;
     }
