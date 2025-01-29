@@ -62,6 +62,46 @@ void morristraversal(node *root){
 
 
 
+written by this below one
+
+class Solution {
+  public:
+  
+    void solve(Node *root,vector<int>&inorder){
+        Node *curr=root;
+        
+        while(curr!=NULL){
+            if(curr->left==NULL){
+                inorder.push_back(curr->data);
+                curr=curr->right;
+            }
+            else{
+                Node *prev=curr->left;
+                while(prev->right!=NULL and prev->right!=curr){
+                    prev=prev->right;
+                }
+                
+                if(prev->right==curr){
+                    prev->right=NULL;
+                    inorder.push_back(curr->data);
+                    curr=curr->right;
+                }
+                else{
+                    prev->right=curr;
+                    curr=curr->left;
+                }
+            }
+        }
+    }
+    // Function to return a list containing the inorder traversal of the tree.
+    vector<int> inOrder(Node* root) {
+        // Your code here
+        vector<int>inorder;
+        solve(root,inorder);
+        return inorder;
+    }
+};
+
 
 
 
@@ -135,6 +175,44 @@ void morrisTraversalPreorder(node* root)
         }  
     }  
 }  
+
+
+just one change push data when prev->next==NULL only not wait to reach end of left subtree
+
+class Solution {
+public:
+    void solve(TreeNode *root,vector<int>&inorder){
+        TreeNode *curr=root;
+        
+        while(curr!=NULL){
+            if(curr->left==NULL){
+                inorder.push_back(curr->val);
+                curr=curr->right;
+            }
+            else{
+                TreeNode *prev=curr->left;
+                while(prev->right!=NULL and prev->right!=curr){
+                    prev=prev->right;
+                }
+                
+                if(prev->right==curr){
+                    prev->right=NULL;
+                    curr=curr->right;
+                }
+                else{
+                    prev->right=curr;
+                    inorder.push_back(curr->val);
+                    curr=curr->left;
+                }
+            }
+        }
+    }
+    vector<int> preorderTraversal(TreeNode* root) {
+        vector<int>ans;
+        solve(root,ans);
+        return ans;
+    }
+};
 
 
 c). for post order:-
