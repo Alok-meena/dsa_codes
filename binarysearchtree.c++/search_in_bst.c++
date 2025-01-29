@@ -9,11 +9,13 @@ bool searchInBST(BinaryTreeNode<int> *root, int x) {
         return true;
     }
     if(x<root->data){
-        searchInBST(root->left,x);
+        return searchInBST(root->left,x);
     }
     else{
-        searchInBST(root->right,x);
+        return searchInBST(root->right,x);
     }
+
+    return false;
 }
 
 iterative approach:-
