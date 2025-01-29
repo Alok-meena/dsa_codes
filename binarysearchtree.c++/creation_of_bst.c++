@@ -54,6 +54,8 @@ void levelorderTraversal(node *root){
 }
 
 node *inserttobst(node *root,int data){
+    //iska mtlb hai ki hame binary treee ki tarah normally khi bhi insertion nhi krna ese krna hai ki bst apni properties ko retain kre
+    //to kisi node ki pos find krte krte NULL tk pahuch gya root then create a new node there and return it okkk that's why ==null ke sath compare kiya hai okk
     if(root==NULL){
         root=new node(data);
         return root;
