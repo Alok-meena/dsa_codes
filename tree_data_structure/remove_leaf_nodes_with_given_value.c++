@@ -52,6 +52,12 @@ public:
         //yha mene kya glti ki ki last tk traversse kre bina hi me check krna start kr diya tha which is wrong when returning from there then we can also check
       // if root is null or not okk then check the condition
 
+
+
+       //mereko bad me smj aaya ki is tree me hme given value vali sari nodes ko delete krna hai jo ki leaf node hai that's why hmne ye condn bad
+     //me dali hai okkk then iske delete hote hi ko aor node with same value leaf bn jayegi to vo bhi delete ho ske isliye hmne ye bad me likha hai 
+     //ager unique values hoti to pahle likhne pe bhi kam ho jata
+
         if(root->left==NULL and root->right==NULL and root->val==target){
             return NULL;
         }
