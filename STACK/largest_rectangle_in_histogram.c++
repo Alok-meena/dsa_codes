@@ -119,7 +119,8 @@ public:
                 nextsmaller[i]=n;
             }
             int length=heights[i];
-            int breadth=nextsmaller[i]-prevsmaller[i]-1;
+            int breadth=nextsmaller[i]-prevsmaller[i]-1; //to suno hame only next smaller ke pahle index tk ki length chahihe okk that's why -1 kiya u can
+            //check by doing dry run okk
 
             int area=breadth*length;
             ans=max(ans,area);
