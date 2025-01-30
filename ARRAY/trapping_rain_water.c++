@@ -62,6 +62,8 @@ class Solution{
     }
 };
 
+t.c:-O(n) and s.c:-O(n)
+
 2nd:
 class Solution{
 
