@@ -50,3 +50,56 @@ vector < vector < int >> printAdjacency(int n, int m, vector < vector < int >> &
     return ans;
 }
 
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class graph{
+    public:
+       
+       unordered_map<int,vector<int>>adj;
+
+       void addEdge(int u,int v,bool direction){
+         adj[u].push_back(v);
+
+         if(direction==0){
+            adj[v].push_back(u);
+         }
+       }
+
+       void printAdjList(){
+          for(auto i:adj){
+            cout<<i.first<<"=>";
+            for(auto j:i.second){
+                cout<<j<<",";
+            }
+            cout<<endl;
+          }
+       }
+};
+
+int main(){
+    int n;
+    cout<<"enter the number of nodes:";
+    cin>>n;
+
+    int e;
+    cout<<"enter the number of edges:";
+    cin>>e;
+
+    graph g;
+
+    for(int i=0;i<e;i++){
+        int u,v;
+        cin>>u>>v;
+
+        g.addEdge(u,v,0);
+    }
+
+    g.printAdjList();
+}
+
+
+t.c:-  for adding edges (e) and printing adj list O(n+e) and s.c:-O(n+e)
+
