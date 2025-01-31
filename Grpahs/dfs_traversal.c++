@@ -69,3 +69,39 @@ vector<vector<int>> depthFirstSearch(int V, int E, vector<vector<int>> &edges)
 
 
 t.c and s.c ---> linear
+
+
+written by me 
+
+
+class Solution {
+public:
+    void dfs(int n,vector<vector<int>>&graph,vector<bool>&visited,int curr){
+        if(visited[curr]==true) return;
+
+        visited[curr]=true;
+
+        for(int i=0;i<graph.size();i++){
+           //here first we have to check that if there is a edge b/w curr and it's neighbour then only go to check the dfs function okk
+            if(graph[curr][i]==1){
+                if(visited[i]==false) dfs(n,graph,visited,i);
+            }
+        }
+    }
+
+    int findCircleNum(vector<vector<int>>& isConnected) {
+        int n=isConnected.size();
+
+        vector<bool>visited(n+1,false);
+        int connected=0;
+
+        for(int i=0;i<n;i++){
+            if(visited[i]==false){
+                connected++;
+                dfs(n,isConnected,visited,i);
+            }
+        }
+
+        return connected;
+    }
+};
