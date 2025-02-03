@@ -18,8 +18,12 @@ bool searchInBST(BinaryTreeNode<int> *root, int x) {
     return false;
 }
 
+t.c:-O(logn) and s.c:-O(logn) which is height and u know in case of skeew tree okk but
+
 iterative approach:-
 
+
+t.c:-O(logn) and s.c:-O(1)
 
 bool searchInBST(BinaryTreeNode<int> *root, int x) {
     BinaryTreeNode<int> *temp=root;
