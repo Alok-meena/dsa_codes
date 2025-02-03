@@ -65,3 +65,5 @@ bool validateBST(BinaryTreeNode<int> *root) {
     return true;
 
 }
+
+t.c:-O(n) and s.c:-O(n)
