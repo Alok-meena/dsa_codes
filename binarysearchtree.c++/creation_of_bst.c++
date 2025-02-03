@@ -66,6 +66,8 @@ node *inserttobst(node *root,int data){
     else{
         root->left=inserttobst(root->left,data);
     }
+
+    return root;
 }
 void takeinput(node* &root){
     int data;
