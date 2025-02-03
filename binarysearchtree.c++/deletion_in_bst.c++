@@ -192,3 +192,23 @@ int main(){
 
 t.c:- same O(H) and in worse case it is O(N) where H is height
 s.c:-O(H) and O(N) worst case due to recursive calls 
+
+
+
+mene isme single child vale ka galat code kiya tha once a time here it is
+
+if(root->left and root->right==NULL){
+            root->data=root->left->data;
+            root->left=NULL;
+            return root;
+        }
+
+        //RIGHT
+        if(root->right and root->left==NULL){
+            root->data=root->right->data;
+            root->right=NULL;
+            return root;
+        }
+
+what i did i just replace the value and return but it is not the case means ex if the below left or right has more children then they will be lost that's why
+we cant do like this
