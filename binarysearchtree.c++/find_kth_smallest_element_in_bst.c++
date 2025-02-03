@@ -35,6 +35,10 @@ int kthSmallest(BinaryTreeNode<int>* root, int k) {
    
 }
 
+t.c:-O(n) and s.c:-O(n)
+
+or can do it directly without storing in vector
+
 
 
 int solve(BinaryTreeNode<int>*root,int &i,int k){
@@ -42,6 +46,8 @@ int solve(BinaryTreeNode<int>*root,int &i,int k){
         return -1;
     }
     int left=solve(root->left,i,k);
+
+    //are bhai ye bs isliye kiya taki function khuch to return kre apna
     if(left!=-1){// ager left -1 nhi h to hi return kro nhi to rhne do and i ka track rkha so bi reference pass kiya ise to reach to k
         return left;
     }
@@ -67,42 +73,36 @@ s.c:-O(H)
 
 approach 2 : using morris traversal then s.c:- O(1) 
 
-int morristraversal(BinaryTreeNode<int>* root, int k,int &i){
-    if(root==NULL){
-        return -1;
-    }
-     BinaryTreeNode<int>*current=root;
-    BinaryTreeNode<int>*predecessor=NULL;
-    while(current!=NULL){
-        if(current->left==NULL){
-            if(i++==k){
-                return current->data;
-            }
-            current=current->right;
-        }
-        else{
-            predecessor=current->left;
-            while(predecessor->right!=NULL && predecessor->right!=current){
-                predecessor=predecessor->right;
-            }
-            if(predecessor->right==NULL){
-                predecessor->right=current;
-                current=current->left;
-            }
-            else{
-                predecessor->right=NULL;
-                if(i++==k){
-                    return current->data;
-                }
-                current=current->right;
-            }
-        }
-    }
-    return -1;
-}
 int kthSmallest(BinaryTreeNode<int>* root, int k) {
     // Write your code here.
-    int i=1;// if u will take i=0 then compare it with k-1 not with k
-    return morristraversal(root,k,i);
-   
+    int i=0;
+    BinaryTreeNode<int>* curr=root;    
+
+    while(curr!=NULL){
+            if(curr->left!=NULL){
+                BinaryTreeNode<int> *temp=curr->left;
+                while(temp->right!=NULL and temp->right!=curr){
+                    temp=temp->right;
+                }
+                if(temp->right==NULL){
+                    temp->right=curr;
+                    curr=curr->left;
+                }
+                else{
+                    temp->right=NULL;
+                    i++;
+                     if(i==k) return curr->data;
+                    curr=curr->right;
+                }
+            }
+            else{
+                i++;
+                if(i==k) return curr->data;
+                curr=curr->right;
+            }
+        }
+        
+        return -1;
 }
+
+and for kth largest element just one change n-k+1 th smallest element okk
