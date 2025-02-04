@@ -33,9 +33,11 @@ pair<int, int> predecessorSuccessor(TreeNode *root, int key){
 t.c:-O(N)
 s.c:-O(1)
 
-don't know why this code cause tle for some cases....
+don't know why this code cause tle for some cases....  
 
 // to inorder pre hoga left subtree me se max value and inorder successor is min value from right subtree
+
+this above code will not work in all cases as the curr can be null also okk so in that case and if the value is not found then also take care
 
 
 
@@ -167,3 +169,94 @@ pair<int, int> predecessorSuccessor(TreeNode *root, int key)
     // We are returning here.
     return {predecessor, successor};
 }
+
+
+best approach :------------
+
+
+
+
+
+pair<int, int> predecessorSuccessor(TreeNode *root, int key)
+{
+    // Write your code here.
+    int pred=-1;
+    int succ=-1;
+
+    TreeNode *curr=root;
+    while(curr and curr->data!=key){
+         
+        if(curr->data>key){
+            succ=curr->data;
+            curr=curr->left;
+        }
+        else{
+            pred=curr->data;
+            curr=curr->right;
+        }
+    }
+
+    if(curr){
+        //find pred (max from left subtree)
+        TreeNode *p=curr->left;
+        while(p!=NULL){ //here we cant have p->right!=NULL condition as what if curr->left is null then it will give segmentation fault okk alright
+            pred=p->data;
+            p=p->right;
+        }
+
+        //find succ (min from right)
+        TreeNode *s=curr->right;
+        while(s!=NULL){
+            succ=s->data;
+            s=s->left;
+        }
+    }
+
+    return {pred,succ};
+}
+
+this is the correct code of taking care of null exceptions and all okk
+
+t.c:-O(n) and s.c:-O(1)
+
+
+and using vector below is the code
+
+
+void inorder(TreeNode* root,vector<int>&ans){
+    if(root==NULL) return;
+
+    inorder(root->left,ans);
+    ans.push_back(root->data);
+    inorder(root->right,ans);
+}
+pair<int, int> predecessorSuccessor(TreeNode *root, int key)
+{
+    // Write your code here.
+    vector<int>ans;
+    inorder(root,ans);
+    int n=ans.size();
+
+    int pre=-1;
+    int succ=-1;
+
+    for(int i=0;i<n;i++){
+        if(ans[i]<key){
+            pre=ans[i];
+        }
+        else break;
+    }
+
+    for(int i=n-1;i>=0;i--){
+        if(ans[i]>key){
+            succ=ans[i];
+        }
+        else break;
+    }
+
+    return {pre,succ};
+}
+
+t.c:-O(n) and s.c:-O(n)
+
+i did mistake as if the element is not present then also we have to return the ans so what is pred just smaller and succ just greater so update continuosly the ans
