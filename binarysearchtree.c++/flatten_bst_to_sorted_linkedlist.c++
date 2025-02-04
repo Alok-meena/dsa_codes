@@ -53,3 +53,43 @@ TreeNode<int>* flatten(TreeNode<int>* root)
 }
 t.c:-O(N)
 s.c:-O(N)
+
+
+ instead of creating more nodes we can link the given nodes only by tis
+
+
+
+void inorder(TreeNode<int>* root,vector<TreeNode<int>*>&ans){
+    if(root==NULL) return;
+
+    inorder(root->left,ans);
+    ans.push_back(root);
+    inorder(root->right,ans);
+}
+TreeNode<int>* flatten(TreeNode<int>* root)
+{
+    // Write your code here
+    if(root==NULL) return root;
+    vector<TreeNode<int>*>in;
+
+    inorder(root,in);
+
+    if(in.size()==1){
+        return root;
+    }
+
+
+    for(int i=0;i<in.size()-1;i++){
+       in[i]->left=NULL;
+       in[i]->right=in[i+1];
+    }
+
+    in.back()->left=NULL;
+    in.back()->right=NULL;
+
+    return in[0];
+}
+
+
+same t.c and s.c
+  but dont know why partially accepted
