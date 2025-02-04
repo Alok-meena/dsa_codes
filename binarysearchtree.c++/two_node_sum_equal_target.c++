@@ -52,5 +52,5 @@ bool twoSumInBST(BinaryTreeNode<int>* root, int target) {
 }
 
 t.c:-O(N) // O(N) for the traversal of each node and O(N) for the traversal of the vector --O(N)
-s.c:-O(H) and O(N) in skewed tree it is due to recursive calls and space used
+s.c:-O(N) as for vector in s.c is O(n) and for recursive is O(h) and for skew tree it is O(n) okk
 by the vector to store the inorder traversal     ..............        can use morris inorder traversal for O(1) time complexity
