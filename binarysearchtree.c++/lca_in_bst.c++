@@ -74,7 +74,7 @@ TreeNode *LCAinaBST(TreeNode *root, TreeNode *P, TreeNode *Q)
               root=root->left;
             else  if(root->data<P->data && root->data<Q->data)
                  root=root->right;
-            else 
+            else //ab ager ek chota hai aor ek bda root se to bs ek left me hoga aor ek right me to yhi answer hoga that's it
                 return root;
     }
 
@@ -82,5 +82,31 @@ TreeNode *LCAinaBST(TreeNode *root, TreeNode *P, TreeNode *Q)
 }
 
 
+the below one is the same code that we will visite every node and ask if answer exists in that case or not okkk
+
+TreeNode *LCAinaBST(TreeNode *root, TreeNode *p, TreeNode *q)
+{
+    Write your code here.
+    if(root==NULL){
+            return NULL;
+        }
+
+        if(root->data==p->data or root->data==q->data){
+            return root;
+        }
+
+        TreeNode *left=LCAinaBST(root->left,p,q);
+        TreeNode *right=LCAinaBST(root->right,p,q);
+
+        if(left!=NULL and right!=NULL){
+            return root;
+        }
+        
+        if(left!=NULL and right==NULL) return left;
+        else if(left==NULL and right!=NULL) return right;
+        else return NULL;
+
+}
 
 
+t.c:-O(n) and s.c:-O(h)
