@@ -1,3 +1,33 @@
+brute force t.c:-O(n1+n2 log (n1+n2)) and s.c:-O(n1+n2)
+
+
+void inorder(TreeNode *root,vector<int>&ans){
+    if(root==NULL) return ;
+
+    inorder(root->left,ans);
+    ans.push_back(root->data);
+    inorder(root->right,ans);
+}
+vector<int> mergeBST(TreeNode *root1, TreeNode *root2)
+{
+    // Write your code here.
+    vector<int>ans;
+
+    inorder(root1,ans);
+    inorder(root2,ans);
+
+    sort(ans.begin(),ans.end());
+    return ans;
+}
+
+okkk
+
+
+and now other solutions
+
+
+
+
 so if we have to return the elements of both the bst in sorted order then code :-
 
 void inorder(TreeNode *root,vector<int>&in){
@@ -40,6 +70,9 @@ vector<int> mergeBST(TreeNode *root1, TreeNode *root2)
     return ans;
 }
 
+
+
+t.c:-O(n1+n2) and s.c:-O(n1+n2)
 
 2)..but if we have to return the root of the merged bst then code is:--
 
@@ -100,13 +133,13 @@ TreeNode* mergeBST(TreeNode *root1, TreeNode *root2)
     return inordertobst(s,end,ans);
 }
 
-t.c:-O(m+n) 
+t.c:-O(m+n) as it is not mergetsort okkk the vertors are already sorted and we just have to merge them okk
 s.c:-O(m+n) where m and n is the size of both bst vector storing inorder
 
 
 
 
-2nd approach using doubly linked list
+3rd approach using doubly linked list
 
 //bst to dll conversion using recursion
 void converIntoSortedDLL(TreeNode* root,TreeNode *&head){
@@ -215,4 +248,4 @@ TreeNode* mergeBST(TreeNode *root1, TreeNode *root2)
     
 }
 t.c:-O(m+n)
-s.c:-O(h) where h is the height of the tree
+s.c:-O(h) where h is the height of the tree because sbhi recursions ka space complexity to height ke equal hi hoga right so we choosed it 
