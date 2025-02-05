@@ -26,6 +26,29 @@ approach 2:---
 similarly as we have done in trees that creation of tree from inorder and preorder and inorder and postorder so we can create inorder from both by sorting the
 elements okkk... so t.c:-O(NlogN) s.c:-O(N)
 
+what i did i just sort the preorder to get inorder and used binarysearch to create the tree same t.c and s.c
+
+
+BinaryTreeNode<int>* bst(vector<int>&in,int low,int high){
+    if(low>high){
+        return NULL;
+    }
+    int mid=(low+high)/2;
+
+    BinaryTreeNode<int>* root=new BinaryTreeNode<int>(in[mid]);
+    root->left=bst(in,low,mid-1);
+    root->right=bst(in,mid+1,high);
+
+    return root;
+}
+
+BinaryTreeNode<int>* preorderToBST(vector<int> &preorder) {
+    // Write your code here.
+    sort(preorder.begin(),preorder.end());
+    BinaryTreeNode<int>* newroot=bst(preorder,0,preorder.size()-1);
+    return newroot;
+}
+
 
 
 approach 3:--
