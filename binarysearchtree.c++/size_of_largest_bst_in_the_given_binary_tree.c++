@@ -16,6 +16,41 @@ leaf Nodes are the BSTs with size equal
 to 1.
 
 
+brute force t.c:-O(n^2) and s.c:-O(h)
+
+
+
+bool isbst(TreeNode *root,int mini,int maxi){
+    if(root==NULL) return true;
+
+    if(root->data>=mini and root->data<=maxi){
+        bool left=isbst(root->left,mini,root->data);
+        bool right=isbst(root->right,root->data,maxi);
+
+        return left and right;
+    }
+
+    return false;
+}
+
+int countNodes(TreeNode *root){
+    if(root==NULL) return 0;
+
+    return 1+countNodes(root->left)+countNodes(root->right);
+}
+int largestBST(TreeNode * root){
+    // Write your code here.
+    if(root==NULL) return 0;
+
+    if(isbst(root,INT_MIN,INT_MAX)){
+        return countNodes(root);
+    }
+
+    return max(largestBST(root->left),largestBST(root->right));
+}
+
+
+
 approach 1:--
 
 checking for isbst for left and right subtree and for each node but it is of O(N2) t.c so not optimised
