@@ -21,6 +21,8 @@ BinaryTreeNode<int>* preorderToBST(vector<int> &preorder) {
     return root;
 }
 
+t.c:-O(n^2) and s.c:-O(n)
+
 
 approach 2:---
 similarly as we have done in trees that creation of tree from inorder and preorder and inorder and postorder so we can create inorder from both by sorting the
@@ -56,6 +58,7 @@ approach 3:--
 
 using concept of is bst of rangebased answer 
 //smja do jldi se
+//pass i as by reference as we want it's value to get updated okk
 BinaryTreeNode<int>* solve(vector<int>&preorder,int &i,int mini,int maxi){
     if(i>=preorder.size()){// base condition is when u will move out of the array
         return NULL;
@@ -79,7 +82,7 @@ BinaryTreeNode<int>* preorderToBST(vector<int> &preorder) {
     return solve(preorder,i,mini,maxi);
 }
 
-t.c:-O(N)
+t.c:-O(3N) as we are traversing each node 3 times okk so simply t.c is O(n) and s.c:-O(1)
 
 
 
