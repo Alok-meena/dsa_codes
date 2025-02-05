@@ -56,6 +56,10 @@ approach 1:--
 checking for isbst for left and right subtree and for each node but it is of O(N2) t.c so not optimised
 
 approach 2:---
+
+are bhai suno ye khuch nya nhi hai ye vhi hai jo hamne binary tree tree ka kiya tha balance hai ya nhi binary tree to vha hamne pair return kiya tha aor yha
+info type ki class return kr rhe hai as here we require 4 variables okk
+
 //to ek class bna li variables ki jinki hme requirement hai
 class info{
     public:
