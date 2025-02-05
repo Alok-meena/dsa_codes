@@ -93,3 +93,122 @@ TreeNode<int>* flatten(TreeNode<int>* root)
 
 same t.c and s.c
   but dont know why partially accepted
+
+
+ek bnde ne kiya tha ye code O(n) and s.c:-O(1)
+
+ void makelist(TreeNode<int>* root, TreeNode<int>* &head)
+
+{
+
+    if(!root) return;
+
+ 
+
+    makelist(root->right,head);
+
+ 
+
+    root->right=head;
+
+    head=root;
+
+ 
+
+    makelist(root->left,head);
+
+     root->left=NULL;
+
+     return;
+
+ 
+
+}
+
+ 
+
+TreeNode<int>* flatten(TreeNode<int>* root)
+
+{
+
+    // Write your code here
+
+    TreeNode<int>* head=NULL;
+
+ 
+
+    makelist(root,head);
+
+    return head;
+
+    
+
+}
+
+
+now i tried using morris traversal but didnt work
+
+TreeNode<int>* flatten(TreeNode<int>* root)
+{
+    // Write your code here
+    TreeNode<int>* curr1=root->left;
+    root->left=NULL;
+
+    TreeNode<int>* root1=NULL;
+    TreeNode<int>* root2=NULL;
+
+    while(curr1!=NULL){
+        if(curr1->left){
+            TreeNode<int>* temp=curr1->left;
+            while(temp->right!=NULL and temp->right!=curr1){
+                temp=temp->right;
+            }
+
+            if(temp->right==NULL){
+                temp->right=curr1;
+                curr1=curr1->left;
+            }
+            else{
+                if(!root1) root1=temp;
+                curr1->left=NULL;
+                curr1=curr1->right;
+            }
+        }
+        else{
+            if(curr1->right==NULL) break;
+            curr1=curr1->right;
+        }
+    }
+
+    curr1->right=root;
+
+    TreeNode<int>* curr2=root->right;
+
+    while(curr2!=NULL){
+        if(curr2->left){
+            TreeNode<int>* temp=curr2->left;
+            while(temp->right!=NULL and temp->right!=curr2){
+                temp=temp->right;
+            }
+
+            if(temp->right==NULL){
+                temp->right=curr2;
+                curr2=curr2->left;
+            }
+            else{
+                if(!root2) root2=temp;
+                curr2->left=NULL;
+                curr2=curr2->right;
+            }
+        }
+        else{
+            curr2=curr2->right;
+        }
+    }
+
+    root->right=root2;
+
+
+    return root1;
+}
+
