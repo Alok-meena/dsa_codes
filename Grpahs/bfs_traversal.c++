@@ -81,6 +81,8 @@ vector<int> BFS(int vertex, vector<pair<int, int>> edges)
     
     preparedAdjList(adjList,edges);
     // traverse all components
+
+
     for(int i =0;i<vertex;i++){
         if(!visited[i]){
             bfs(adjList,visited,ans,i); 
@@ -94,3 +96,111 @@ O(n + m), where ‘n’ is the number of vertices and ‘m’ is the number of e
 
 Space Complexity
 O(n), where ‘n’ is the number of vertices.
+
+
+we can also store the levels into the queue alright like below
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class graph{
+    public:
+       map<int,vector<int>>adj;
+
+       void addEdge(int u,int v,int dir){
+          adj[u].push_back(v);
+
+          if(dir==0){
+             adj[v].push_back(u);
+          }
+       }
+
+       void printAdjList(){
+          for(auto i:adj){
+            cout<<i.first<<"=>";
+            for(auto j:i.second){
+                cout<<j<<" ";
+            }
+            cout<<endl;
+          }
+       }
+};
+
+void dfs(vector<int>adj[],vector<bool>&visited,int curr){
+    if(visited[curr]){
+        return;
+    }
+
+    visited[curr]=true;
+    cout<<curr<<" ";
+
+    for(auto neigh:adj[curr]){
+        if(!visited[neigh]){
+            dfs(adj,visited,neigh);
+        }
+    }
+}
+
+void bfs(vector<int>adj[],vector<bool>&visited,int curr){
+    queue<pair<int,int>>q; //{level,node}
+
+    q.push({0,curr});
+    visited[curr]=true;
+
+
+    while(!q.empty()){
+        int front=q.front().second;
+        int level=q.front().first;
+        q.pop();
+
+        cout<<level<<":"<<front<<" ";
+
+        for(auto i:adj[front]){
+            if(!visited[i]){
+                q.push({level+1,i});
+                visited[i]=true;
+            }
+        }
+    }
+}
+
+int main(){
+    int n;
+    cout<<"enter the number of nodes:";
+    cin>>n;
+
+    int e;
+    cout<<"enter the number of edges:";
+    cin>>e;
+
+    cout<<"now enter the edges"<<endl;
+
+    vector<int> adj[n+1];
+
+    for(int i=0;i<e;i++){
+        int u,v;
+        cin>>u>>v;
+
+        adj[u].push_back(v);
+        adj[v].push_back(u);
+    }
+
+    vector<bool>visited(n+1,false);
+
+    bfs(adj,visited,1);
+
+    // for(int i=1;i<n+1;i++){
+    //     if(visited[i]==false){
+    //         bfs(adj,visited,i);
+    //     }
+    // }
+}
+
+// 1 2
+// 1 3
+// 3 2
+// 2 4
+// 3 4
+
+t.c:-O(n+v) 
