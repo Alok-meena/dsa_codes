@@ -15,6 +15,9 @@ So, the adjacency list of the graph is stated below.
 1 → 2
 2 → 0 → 1
 
+
+    ///are khuch nhi hai bs isme hme output return adjlist ke format vala krna hai that's why we used adjlist and then push that ans into vector alright
+
 vector < vector < int >> printAdjacency(int n, int m, vector < vector < int >> & edges) {
     // Write your code here.
 
@@ -50,6 +53,34 @@ vector < vector < int >> printAdjacency(int n, int m, vector < vector < int >> &
     return ans;
 }
 
+
+so is uper vale me direct answer dal diya or we can store the ans into adjlist and then push into 2d vector
+
+vector < vector < int >> printAdjacency(int n, int m, vector < vector < int >> & edges) {
+    // Write your code here.
+    vector<int> adj[n];
+
+    for(int i=0;i<m;i++){
+        int u=edges[i][0];
+        int v=edges[i][1];
+
+        adj[u].push_back(v);
+        adj[v].push_back(u);
+    }
+
+    vector<vector<int>>ans(n);
+
+    for(int i=0;i<n;i++){
+        ans[i].push_back(i);
+
+        for(int j=0;j<adj[i].size();j++){ //bs har ek list ki size tk chalo aor kya
+            ans[i].push_back(adj[i][j]);
+        }
+    }
+
+
+   return ans;
+}
 
 
 #include <bits/stdc++.h>
@@ -118,7 +149,7 @@ int adjecency_matrix()
     int edges;
     cin >> edges;
 
-    vector<vector<int>> adjmatrix(n + 1, vector<int>(n + 1, -1));
+    vector<vector<int>> adjmatrix(n + 1, vector<int>(n + 1, -1)); //n+1 if we have nodes from 1
     // undirected
     for (int i = 0; i < edges; i++)
     {
