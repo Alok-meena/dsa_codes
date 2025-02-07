@@ -178,7 +178,7 @@ void dfs(vector<int> adj[], int n, vector<bool> &vis, int curr)
 
     cout << curr << " ";
     vis[curr] = true;
-    // travel across neigh
+    // travel across all neightbours of the curr node okk
     for (auto neig : adj[curr])
     {
         if (vis[neig] == false)
