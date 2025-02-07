@@ -68,7 +68,49 @@ vector<vector<int>> depthFirstSearch(int V, int E, vector<vector<int>> &edges)
 }
 
 
-t.c and s.c ---> linear
+t.c and s.c ---> linear O(v+e) t.c and s.c
+
+
+if we have undirected disconnected graph the we have to return all traversal possible 
+
+void dfs(vector<int> adj[], vector<bool>& visited, vector<int>& component, int curr) {
+    if (visited[curr]) return;
+
+    component.push_back(curr);
+    visited[curr] = true;
+
+    for (auto i : adj[curr]) {
+        if (!visited[i]) {
+            dfs(adj, visited, component, i);
+        }
+    }
+}
+
+vector<vector<int>> depthFirstSearch(int V, int E, vector<vector<int>> &edges) {
+    vector<vector<int>> ans;
+    
+    vector<int> adj[V+1];  // ? Correct for 1-based indexing
+    vector<bool> visited(V+1, false);  // ? Must also be of size V+1
+
+    for (int i = 0; i < E; i++) {
+        int u = edges[i][0];
+        int v = edges[i][1];
+
+        adj[u].push_back(v);
+        adj[v].push_back(u);
+    }
+
+    for (int i = 1; i <= V; i++) {  // ? Start from 1 (not 0)
+        if (!visited[i]) {
+            vector<int> component;
+            dfs(adj, visited, component, i);
+            ans.push_back(component);
+        }
+    }
+
+    return ans;
+}
+
 
 
 written by me 
