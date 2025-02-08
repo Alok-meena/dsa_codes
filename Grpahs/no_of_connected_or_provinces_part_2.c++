@@ -79,3 +79,45 @@ class Solution {
 };
 
 as in ques it is 0 - based indexing so we are taking it okk
+
+
+
+and through bfs it is like this 
+
+class Solution {
+  public:
+    void bfs(vector<vector<int>>&adj,vector<bool>&visited,int curr){
+        queue<int>q;
+        visited[curr]=true;
+        q.push(curr);
+        
+        while(!q.empty()){
+            int front=q.front();
+            q.pop();
+            
+            
+            for(int i=0;i<adj.size();i++){
+                if(adj[front][i]==1){
+                    if(!visited[i]){
+                        q.push(i);
+                        visited[i]=true;
+                    }
+                }
+            }
+        }
+    }
+    int numProvinces(vector<vector<int>> adj, int V) {
+        // code here
+        int provinces=0;
+        vector<bool>visited(V);
+        
+        for(int i=0;i<V;i++){
+            if(!visited[i]){
+                bfs(adj,visited,i);
+                provinces++;
+            }
+        }
+        
+        return provinces;
+    }
+};
