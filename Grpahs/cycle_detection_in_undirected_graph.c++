@@ -151,3 +151,82 @@ string cycleDetection (vector<vector<int>>& edges, int n, int m)
 }
 
 
+below one is written by me second time 
+
+
+#include <bits/stdc++.h>
+
+bool dfs(vector<int> adj[],vector<bool>&visited,unordered_map<int,int>&node_to_parent,int currnode){
+    visited[currnode]=true;
+
+
+    for(auto neigh:adj[currnode]){
+        if(!visited[neigh]){
+            node_to_parent[neigh]=currnode;
+            if(dfs(adj,visited,node_to_parent,neigh)) return true;
+        }
+        else if(visited[neigh] and neigh!=node_to_parent[currnode]) return true;
+    }
+    
+    return false;
+}
+
+bool bfs(vector<int> adj[],vector<bool>&visited,int currnode){
+    queue<int>q;
+    unordered_map<int,int>node_to_parent;
+
+    q.push(currnode);
+    visited[currnode]=true;
+
+    node_to_parent[currnode]=-1;
+
+    while(!q.empty()){
+        int front=q.front();
+        q.pop();
+
+        for(auto neigh:adj[front]){
+            if(!visited[neigh]){
+                visited[neigh]=true;
+                q.push(neigh);
+                node_to_parent[neigh]=front;
+            }
+            else if(visited[neigh] and neigh!=node_to_parent[front]) return true;
+        }
+    }
+    
+    return false;
+}
+
+string cycleDetection (vector<vector<int>>& edges, int n, int m)
+{
+    // Write your code here.
+    vector<int> adj[n+1];
+    for(int i=0;i<m;i++){
+        int u=edges[i][0];
+        int v=edges[i][1];
+
+        adj[u].push_back(v);
+        adj[v].push_back(u);
+    }
+
+    vector<bool>visited(n+1,false);
+        unordered_map<int,int>node_to_parent;
+        node_to_parent[1]=-1;
+
+
+    for(int i=1;i<n+1;i++){
+        if(!visited[i]){
+            bool cycle=dfs(adj,visited,node_to_parent,i);
+            if(cycle) return "Yes";
+        }
+    }
+
+    return "No";
+}
+
+same t.c and s.c
+
+
+and here we have to take n+1 size as the nodes are from 1 not zero
+
+
