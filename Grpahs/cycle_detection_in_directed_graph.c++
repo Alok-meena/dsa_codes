@@ -142,3 +142,59 @@ int detectCycleInDirectedGraph(int n, vector < pair < int, int >> & edges) {
     }
 
 }
+
+
+
+
+done second time by me
+
+#include <bits/stdc++.h>
+
+bool dfs(vector<int> adj[],vector<bool>&visited,unordered_map<int,int>&node_to_parent,int currnode,vector<bool>&dfsCall){
+    visited[currnode]=true;
+    dfsCall[currnode]=true; //we have to mark it true as soon as we start the dfs call for the currnode right and after loop when we return we have
+    //have to mark it false also remember 
+
+    //and here we cant use the approach of undirected graph u all know why okk u can check it by dry run 
+
+
+    for(auto neigh:adj[currnode]){
+        if(!visited[neigh]){
+            node_to_parent[neigh]=currnode;
+            if(dfs(adj,visited,node_to_parent,neigh,dfsCall)) return true;
+        }
+        else if(visited[neigh] and dfsCall[neigh]) return true;
+    }
+
+    dfsCall[currnode]=false;
+    
+    return false;
+}
+
+int detectCycleInDirectedGraph(int n, vector < pair < int, int >> & edges) {
+  // Write your code here.
+   vector<int> adj[n+1];
+    for(int i=0;i<edges.size();i++){
+        int u=edges[i].first;
+        int v=edges[i].second;
+
+        adj[u].push_back(v);
+        // adj[v].push_back(u);
+    }
+
+    vector<bool>visited(n+1,false);
+    unordered_map<int,int>node_to_parent;
+    node_to_parent[1]=-1;
+
+    vector<bool>dfsCall(n+1,false);
+
+
+    for(int i=1;i<n+1;i++){
+        if(!visited[i]){
+            bool cycle=dfs(adj,visited,node_to_parent,i,dfsCall);
+            if(cycle) return 1;
+        }
+    }
+
+    return 0;
+}
