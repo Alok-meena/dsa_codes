@@ -163,6 +163,7 @@ bool dfs(vector<int> adj[],vector<bool>&visited,unordered_map<int,int>&node_to_p
     for(auto neigh:adj[currnode]){
         if(!visited[neigh]){
             node_to_parent[neigh]=currnode;
+             ///to yha pe check also o/w if u directly return it then it will not check the adjacent nodes okk
             if(dfs(adj,visited,node_to_parent,neigh)) return true;
         }
         else if(visited[neigh] and neigh!=node_to_parent[currnode]) return true;
@@ -190,7 +191,7 @@ bool bfs(vector<int> adj[],vector<bool>&visited,int currnode){
                 q.push(neigh);
                 node_to_parent[neigh]=front;
             }
-            else if(visited[neigh] and neigh!=node_to_parent[front]) return true;
+            else if(visited[neigh] and neigh!=node_to_parent[front]) return true; //here we can directly return our ans in bfs alright
         }
     }
     
