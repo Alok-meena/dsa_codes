@@ -100,3 +100,108 @@ where N is the number of nodes and M is the number of edges.
  
 
 Adjacency List required to maintain the graph requires O(N+M) space. Hence, the overall Space Complexity is O( N + M ).
+
+
+second time
+
+#include <bits/stdc++.h>
+
+
+this dfs function cannot be used to solve this problem as it will find the longest path and it will not find correct parent of each node okk 
+so we must have to use bfs as it go level by level with 1 distance okk
+
+If you just want to build a parent map (i.e., store the parent of each node for traversal purposes), DFS can do this. However, if you want to find the parent such that it leads to the shortest path, DFS will not work reliably.
+
+
+3. How BFS Ensures Correct Parent Assignment
+BFS works level by level, meaning:
+
+The first time a node is visited, it's via the shortest path.
+It assigns the correct parent immediately.
+Each node is processed in order of increasing distance from the source.
+
+	
+
+void dfs(vector<int> adj[],vector<int>&nodetoParent,vector<bool>&visited,int currnode){
+	if(visited[currnode]) return ;
+	
+	visited[currnode]=true;
+
+	for(auto neigh:adj[currnode]){
+		if(!visited[neigh]){
+			nodetoParent[neigh]=currnode;
+			visited[neigh]=true;
+			dfs(adj,nodetoParent,visited,neigh);
+		}
+	}
+
+}
+
+
+void bfs(vector<int> adj[],vector<int>&nodetoParent,vector<bool>&visited,int currnode){
+	queue<int>q;
+	q.push(currnode);
+	visited[currnode]=true;
+
+	while(!q.empty()){
+		int front=q.front();
+		q.pop();
+
+		for(auto neigh:adj[front]){
+			if(!visited[neigh]){
+				visited[neigh]=true;
+				nodetoParent[neigh]=front;
+				q.push(neigh);
+			}
+		}
+	}
+	
+}
+
+vector<int> shortestPath( vector<pair<int,int>> edges , int n , int m, int s , int t){
+	
+	// Write your code here
+	vector<int> adj[n+1];
+
+	for(int i=0;i<m;i++){
+		int u=edges[i].first;
+		int v=edges[i].second;
+
+		adj[u].push_back(v);
+		adj[v].push_back(u);
+	}
+
+	vector<int>nodetoParent(n+1,-1);
+	vector<bool>visited(n+1,false);
+
+
+
+	bfs(adj,nodetoParent,visited,s);
+
+	vector<int>ans;
+	
+
+	int parent=t;
+	int count=0;
+	ans.push_back(parent);
+
+	while(parent!=s){
+		ans.push_back(nodetoParent[parent]);
+		parent=nodetoParent[parent];
+		count++;
+	}
+
+	cout<<count<<endl; //this is if we have weights then we can add them here in count and return them as our answer okk alright
+	
+	reverse(ans.begin(),ans.end());
+
+	
+	return ans;
+
+
+
+
+	
+}
+
+t.c and s.c same bs khuch nhi we just have to create the parent array of each node and then just have to backtrack from the target node that's all alright
