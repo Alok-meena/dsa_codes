@@ -80,7 +80,8 @@ t.c :-O(n+m) s.c:-O(n)
 
 
 
-using bfs and kahn's algo
+using bfs and kahn's algo nothing changed just hme pta hai ki kahn's algo se ham topological sort nikalte hai using bfs but only possiblei n dag so
+if we got wrong sorting then offcourse there will be a cycle okk
 
 
 #include <unordered_map>
