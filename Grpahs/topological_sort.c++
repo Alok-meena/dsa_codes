@@ -126,7 +126,8 @@ vector<int> topologicalSort(vector<vector<int>> &edges, int v, int e)  {
 }
 
 
-// Using kahn's algorithm
+// Using kahn's algorithm in this we just have to find indegree of each node okk  and push all nodes with 0 indegree in queue and remove these nodes and add
+//nodes with 0 indegree okk
 
 
 #include <bits/stdc++.h> 
@@ -183,4 +184,6 @@ vector<int> topologicalSort(vector<vector<int>> &edges, int v, int e)  {
     }
     return ans;
 }
+
+t.c:-O(n+m)
 
