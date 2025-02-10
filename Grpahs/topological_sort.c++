@@ -81,6 +81,49 @@ vector<int> topologicalSort(vector<vector<int>> &edges, int v, int e)  {
 
 t.c and s.c:-linear
 
+dfs one written second time 
+
+#include <bits/stdc++.h> 
+
+void dfs(vector<int> adj[],vector<bool>&visited,stack<int>&s,int currnode){
+    visited[currnode]=true;
+
+    for(auto neigh:adj[currnode]){
+        if(!visited[neigh]){
+            dfs(adj,visited,s,neigh);
+        }
+    }
+
+    s.push(currnode);
+}
+vector<int> topologicalSort(vector<vector<int>> &edges, int v, int e)  {
+    // Write your code here
+    vector<int>ans;
+    vector<int> adj[v];
+
+    for(int i=0;i<e;i++){
+        int u=edges[i][0];
+        int v=edges[i][1];
+
+        adj[u].push_back(v);
+    }
+
+    stack<int>s;
+    vector<bool>visited(v,false);
+
+    for(int i=0;i<v;i++){
+        if(!visited[i]){
+            dfs(adj,visited,s,i);
+        }
+    }
+
+    while(!s.empty()){
+        ans.push_back(s.top());
+        s.pop();
+    }
+
+    return ans;
+}
 
 
 // Using kahn's algorithm
