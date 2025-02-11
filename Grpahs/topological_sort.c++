@@ -65,6 +65,8 @@ vector<int> topologicalSort(vector<vector<int>> &edges, int v, int e)  {
     //call dfs if node is not visited 
     //this for loop is for disconnected components
     stack<int>s;
+
+    //we have to call this dfs for every component okk not just for only one component
     for(int i=0;i<v;i++){
         if(!visited[i]){
             dfs_topologicalsort(i,visited,adjlist,s);
