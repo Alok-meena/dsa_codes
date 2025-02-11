@@ -105,3 +105,67 @@ int main(){
 }
 
 t.c & s.c:-O(N+E)
+
+
+second time written by me
+
+#include <bits/stdc++.h>
+
+void dfs(vector<pair<int,int>> adj[],vector<bool>&visited,stack<int>&s,int currnode){
+    visited[currnode]=true;
+
+    for(auto neigh:adj[currnode]){
+        if(!visited[neigh.first]){
+            visited[neigh.first]=true;
+            dfs(adj,visited,s,neigh.first);
+        }
+    }
+
+    s.push(currnode);
+}
+
+vector<int> shortestPathInDAG(int n, int m, vector<vector<int>> &edges)
+{
+    // Write your code here
+    vector<pair<int,int>> adj[n];
+
+    for(int i=0;i<m;i++){
+        int u=edges[i][0];
+        int v=edges[i][1];
+        int w=edges[i][2];
+
+        adj[u].push_back({v,w});
+    }
+
+    vector<bool>visited(n,false);
+    stack<int>s;
+
+    for(int i=0;i<n;i++){
+        if(!visited[i]){
+            dfs(adj,visited,s,i);
+        }
+    }
+
+    vector<int>distance(n,INT_MAX);
+    distance[0]=0;
+
+    while(!s.empty()){
+        int top=s.top();
+        s.pop();
+
+        if(distance[top]!=INT_MAX){
+            for(auto neigh:adj[top]){
+                if(distance[top]+neigh.second<distance[neigh.first]){
+                    distance[neigh.first]=distance[top]+neigh.second;
+                }
+            }
+        }
+    }
+
+    for(int i=0;i<n;i++){
+        if(distance[i]==INT_MAX) distance[i]=-1;
+    }
+
+    return distance;
+}
+same t.c and s.c
