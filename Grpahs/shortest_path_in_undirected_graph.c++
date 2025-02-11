@@ -120,6 +120,18 @@ The first time a node is visited, it's via the shortest path.
 It assigns the correct parent immediately.
 Each node is processed in order of increasing distance from the source.
 
+
+
+
+DFS explores one complete path before backtracking.
+It does not necessarily explore the shortest path first.
+Since DFS can go deep into the graph before checking other possible paths, it may miss a shorter route.
+
+
+BFS explores the graph level by level.
+Since all direct neighbors of a node are checked before moving deeper, BFS ensures that the first time we reach a node,
+it's via the shortest path.
+
 	
 
 void dfs(vector<int> adj[],vector<int>&nodetoParent,vector<bool>&visited,int currnode){
