@@ -205,3 +205,92 @@ class Solution {
         return ans;
     }
 };
+
+using dfs we can do like this : ---
+          
+
+class Solution {
+  public:
+    // Function to set parent pointers using DFS
+void setParent(Node* root, unordered_map<Node*, Node*>& nodeToParent) {
+    if (!root) return;
+    
+    if (root->left) {
+        nodeToParent[root->left] = root;
+        setParent(root->left, nodeToParent);
+    }
+    
+    if (root->right) {
+        nodeToParent[root->right] = root;
+        setParent(root->right, nodeToParent);
+    }
+}
+
+// Function to find the target node using DFS
+Node* findTarget(Node* root, int target) {
+    if (!root) return NULL;
+    
+    if (root->data == target) return root;
+    
+    Node* leftSearch = findTarget(root->left, target);
+    if (leftSearch) return leftSearch;
+    
+    return findTarget(root->right, target);
+}
+
+    int burnTree(Node *root,unordered_map<Node*,Node*>nodetoParent,Node *target){
+        queue<Node*>q;
+        q.push(target);
+        
+        unordered_map<Node*,bool>visited;
+        visited[target]=true;
+        
+        bool addition;
+        int time=0;
+        
+        while(!q.empty()){
+            addition=false;
+            int size=q.size();
+
+            for(int i=0;i<size;i++){
+                Node *front=q.front();
+                q.pop();
+                
+                
+                if(front->left and !visited[front->left]){
+                    q.push(front->left);
+                    visited[front->left]=true;
+                    addition=true;
+                }
+                
+                if(front->right and !visited[front->right]){
+                    q.push(front->right);
+                    visited[front->right]=true;
+                    addition=true;
+                }
+                
+                if(nodetoParent[front] and !visited[nodetoParent[front]]){
+                    q.push(nodetoParent[front]);
+                    visited[nodetoParent[front]]=true;
+                    addition=true;
+                }
+                
+            }
+            
+            if(addition) time++;
+        }
+        
+        return time;
+    }
+    int minTime(Node* root, int target) {
+        // code here
+        unordered_map<Node*,Node*>nodetoParent;
+        setParent(root,nodetoParent);
+        
+        Node *tar=findTarget(root,target);
+        
+        return burnTree(root,nodetoParent,tar);
+    }
+};
+
+
