@@ -150,8 +150,9 @@ vector<int> topologicalSort(vector<vector<int>> &edges, int v, int e)  {
     }
    
     //find all indegrees
-    vector<int>indegree(v);
+    vector<int>indegree(v,0);
     for(auto i:adjlist){
+         //means v->u then indegree[u]++  as many times there is a edges from a node->u okk
         for(auto j:i.second){
             indegree[j]++;
         }
