@@ -79,3 +79,46 @@ public:
         return true;
     }
 };
+
+
+by bfs
+
+
+class Solution {
+public:
+    bool bfs(vector<vector<int>>&graph,vector<int>&color,int currnode,int col){
+        queue<int>q;
+        color[currnode]=col;
+        q.push(currnode);
+
+        while(!q.empty()){
+            int front=q.front();
+            q.pop();
+
+            for(auto neigh:graph[front]){
+                if(color[neigh]==-1){
+                    color[neigh]=!color[front];
+                    q.push(neigh);
+                }
+                else if(color[neigh]==color[front]) return false;
+            }
+        }
+
+        return true;
+    }
+    bool isBipartite(vector<vector<int>>& graph) {
+        int n=graph.size();
+        vector<int>color(n,-1);
+        for(int i=0;i<n;i++){
+            if(color[i]==-1){
+                bool check=bfs(graph,color,i,0);
+                if(!check) return false;
+            }
+        }
+
+        return true;
+    }
+};
+
+
+same t.c and s.c
