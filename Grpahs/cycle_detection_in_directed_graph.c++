@@ -33,6 +33,8 @@ So, there exists a cycle in the graph.
 bool isdfs_cycle(int node,unordered_map<int,bool>&visited,  unordered_map<int,bool>&dfs_visited
 ,unordered_map<int,list<int>>&adjlist){
   visited[node]=true;
+
+  //ye kiya because iska mtlb ki apne current path me ye node included hai aor agr ghumke ham isi node pe vapas aa jate hai then apni cycle present hai okk
   dfs_visited[node]=true;//to bs jaise hi kisi node ke liye ye function call hua to hmne isko true kr diya hai
 
   for(auto neighbour:adjlist[node]){
