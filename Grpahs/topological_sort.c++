@@ -179,7 +179,7 @@ vector<int> topologicalSort(vector<vector<int>> &edges, int v, int e)  {
 
         //neighbours indgree update
         for(auto neighbours:adjlist[front]){
-            indegree[neighbours]--;
+            indegree[neighbours]--; //ager hamne currnode ko htaya hai then iske sare neightbours ki indegree ko 1 se decrease kr do that's it
             if(indegree[neighbours]==0){
                 q.push(neighbours);
             }
