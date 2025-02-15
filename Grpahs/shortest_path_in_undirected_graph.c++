@@ -217,3 +217,47 @@ vector<int> shortestPath( vector<pair<int,int>> edges , int n , int m, int s , i
 }
 
 t.c and s.c same bs khuch nhi we just have to create the parent array of each node and then just have to backtrack from the target node that's all alright
+
+
+
+this is for shortest path in undirected and unweighted graph so here we are just returning the path okk not the sum of weights
+
+
+
+
+and if we have to return distance array right in undirected graph with weights 1 so below code
+
+class Solution {
+  public:
+    // Function to find the shortest path from source to all other nodes
+    vector<int> shortestPath(vector<vector<int>>& adj, int src) {
+        // code here
+        int n=adj.size();
+        vector<int>distance(n,INT_MAX);
+        
+        queue<int>q;
+        q.push(src);
+        distance[src]=0;
+        
+        while(!q.empty()){
+            int front=q.front();
+            q.pop();
+            
+            for(auto neigh:adj[front]){
+                if(distance[front]+1<distance[neigh]){
+                    distance[neigh]=distance[front]+1;
+                    q.push(neigh);
+                }
+            }
+        }
+        
+        for(auto &i:distance){
+            if(i==INT_MAX) i=-1;
+        }
+        
+        return distance;
+    }
+};
+
+
+okk
