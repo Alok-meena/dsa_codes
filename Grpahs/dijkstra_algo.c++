@@ -208,6 +208,7 @@ vector<int> dijkstra(vector<vector<int>> &vec, int vertices, int edges, int sour
                 }
 
                 distance[neigh.first]=dist+neigh.second;
+                //and ager distance update ho rha hai only tabhi set me dalo o/w mat dalo okk
                 st.insert({distance[neigh.first],neigh.first}); //yha pe jo distance update kiya hai
                 //hamne vo update karna hai okk not the neigh.second it will be wrong
             }
@@ -216,3 +217,17 @@ vector<int> dijkstra(vector<vector<int>> &vec, int vertices, int edges, int sour
 
     return distance;
 }
+
+
+In DAG-based shortest path using Topological Sort
+Since we process nodes based on order, some might never be reached from the source, so checking prevents incorrect calculations.
+
+In Bellman-Ford Algorithm
+This algorithm iterates V-1 times to relax edges. If a node is still at INT_MAX, it means it's unreachable. Avoiding unnecessary updates ensures correctness.
+
+In algorithms where nodes may be processed before being reached
+If an algorithm doesn't inherently guarantee that nodes are processed only when they have a valid shortest distance, this check is necessary.
+
+    so we do not need to check int max condition as we are getting nodes based on min dist  
+
+instead of this we can also use priority_queue
