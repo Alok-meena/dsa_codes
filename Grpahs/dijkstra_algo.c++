@@ -162,3 +162,57 @@ vector<int> dijkstra(vector<vector<int>> &vec, int vertices, int edges, int sour
     return distance;
 }
 
+
+
+2nd time :
+
+#include <bits/stdc++.h> 
+vector<int> dijkstra(vector<vector<int>> &vec, int vertices, int edges, int source) {
+    // Write your code here.
+    vector<pair<int,int>> adj[vertices];
+
+    for(int i=0;i<edges;i++){
+        int u=vec[i][0];
+        int v=vec[i][1];
+        int w=vec[i][2];
+
+        adj[u].push_back({v,w});
+        adj[v].push_back({u,w});
+    }
+
+    vector<int>distance(vertices,INT_MAX);
+    distance[source]=0;
+
+    set<pair<int,int>>st; //node,dist because sorts based on first value okk and we need weight's here
+    st.insert({0,source});
+
+    while(st.size()){
+        auto top=*st.begin();
+        st.erase(st.begin());
+
+        int currnode=top.second;
+        int dist=top.first;
+
+        for(auto neigh:adj[currnode]){
+            //and isme hame dist[currnode]!=INT_MAX condition ki bhi requirement nhi hai okk as we are using set to process nodes with smalles distance 
+            //it is genearally used when there are nodes which are not eachable okk
+            if(dist+neigh.second<distance[neigh.first]){
+                //we have to remove the distance correspoinding to this neigh.first node 
+                //as if we enter this condition means that is more distance and we want latest distances
+                //in our code can do dry run and u will got it 
+                auto record=st.find({distance[neigh.first],neigh.first});
+                //if record found remove it
+
+                if(record!=st.end()){
+                    st.erase(record);
+                }
+
+                distance[neigh.first]=dist+neigh.second;
+                st.insert({distance[neigh.first],neigh.first}); //yha pe jo distance update kiya hai
+                //hamne vo update karna hai okk not the neigh.second it will be wrong
+            }
+        }
+    }
+
+    return distance;
+}
