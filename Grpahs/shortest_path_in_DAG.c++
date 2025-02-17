@@ -46,6 +46,8 @@ class Graph{
             int top=s.top();
             s.pop();
 
+            //here it is necessary to check if the dist is max or not because here we are processing nodes based on the order 
+            //but in dijkstra we dont need this as we are getting nodes based on min distance okk
             if(dist[top]!=INT_MAX){
                 for(auto i:adjlist[top]){//to adjlist me top pe gye 
                     if(dist[top]+i.second<dist[i.first]){//dist[top] means dist array me top index pe jo distance hai and i.second means pair me first to
