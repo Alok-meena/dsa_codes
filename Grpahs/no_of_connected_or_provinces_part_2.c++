@@ -55,6 +55,7 @@ class Solution {
         visited[curr]=true;
         
         for(int i=0;i<adj.size();i++){
+            //yha bs ye farak hai ki ager curr ka neigh hai i to vo 1 hona chahihe aor ager vo 1 hai to  tbhi aap check kro o/w mat kro                                                                            
             if(adj[curr][i]==1){
                 if(!visited[i]){
                     dfs(adj,visited,i);
@@ -66,6 +67,8 @@ class Solution {
         // code here
         int provinces=0;
         vector<bool>visited(V);
+
+       //to bat same hai just hame matrix pe lagana hai okk so listen niche to same rhega
         
         for(int i=0;i<V;i++){
             if(!visited[i]){
