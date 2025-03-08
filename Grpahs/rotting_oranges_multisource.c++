@@ -150,6 +150,7 @@ public:
             int size=q.size();
             level++;
           //to dekho yha pe ham ek level pe multiple rotten oranges se kam krva rhe hai that's why it is multisource bfs alright
+         //to ek bar me sare rotten orange jo queue me hai unhe use kro means use q.size of current ookk
 
             for(int k=0;k<size;k++){
                 int i=q.front().first;
@@ -197,3 +198,64 @@ public:
 
 
 t.c:-O(n*m) and s.c:-O(N*m) 
+
+
+
+ little short code
+
+class Solution {
+public:
+    int orangesRotting(vector<vector<int>>& grid) {
+        int m=grid.size();
+        int n=grid[0].size();
+
+
+        queue<pair<int,int>>q;
+
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(grid[i][j]==2){
+                    q.push({i,j});
+                }
+            }
+        }
+
+        int mintime=0;
+
+
+        while(!q.empty()){
+            int size=q.size();
+            mintime++;
+
+            for(int k=0;k<size;k++){
+                pair<int,int> p=q.front();
+                int i=p.first;
+                int j=p.second;
+
+                q.pop();
+
+
+                int dirx[]={-1,0,0,1};
+                int diry[]={0,-1,1,0};
+                
+                for(int d=0;d<4;d++){
+                    int newi=i+dirx[d];
+                    int newj=j+diry[d];
+
+                    if(newi>=0 and newi<m and newj>=0 and newj<n and grid[newi][newj]==1){
+                        grid[newi][newj]=2;
+                        q.push({newi,newj});
+                    }
+                }
+            }
+        }
+
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(grid[i][j]==1) return -1;
+            }
+        }
+
+        return mintime==0?0:mintime-1;
+    }
+};
