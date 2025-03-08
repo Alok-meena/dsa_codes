@@ -174,3 +174,59 @@ public:
 };
 
 same t.c and s.c s.c is due to recursive depth alright
+
+class Solution {
+public:
+    void bfs(vector<vector<int>>&grid,int i,int j){
+        int m=grid.size();
+        int n=grid[0].size();
+
+        queue<pair<int,int>>q;
+        q.push({i,j});
+        grid[i][j]=0;
+
+        while(!q.empty()){
+            pair<int,int>p=q.front();
+            q.pop();
+
+            int x=p.first;
+            int y=p.second;
+
+            int dirx[]={-1,0,0,1};
+            int diry[]={0,-1,1,0};
+
+            for(int i=0;i<4;i++){
+                int newx=x+dirx[i];
+                int newy=y+diry[i];
+
+                if(newx>=0 and newx<m and newy>=0 and newy<n and grid[newx][newy]==1){
+                     grid[newx][newy]=0;
+                    q.push({newx,newy});
+                    // grid[newx][newy]=0;
+                }
+            }
+        }
+    }
+    int numEnclaves(vector<vector<int>>& grid) {
+        int m=grid.size();
+        int n=grid[0].size();
+
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if((i==0 or j==0 or i==m-1 or j==n-1) and grid[i][j]==1){
+                    bfs(grid,i,j);
+                }
+            }
+        }
+
+        int count=0;
+
+         for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(grid[i][j]==1) count++;
+            }
+        }
+
+        return count;
+    }
+};
