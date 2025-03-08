@@ -256,6 +256,7 @@ public:
             }
         }
 
-        return mintime==0?0:mintime-1;
+        return mintime==0?0:mintime-1;  //to ans ko mintime-1 hi bhejna pdega u can dryrun on [2 1 1][1 1 0][0 1 1] alright ans 5 aayega but should be 5
+     //as hamne 0th level ko pahle hi 1 kr diya i mean rotten orange k count nhi krna hme okk
     }
 };
