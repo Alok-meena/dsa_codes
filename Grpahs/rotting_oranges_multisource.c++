@@ -103,6 +103,7 @@ public:
             for(int j=0;j<grid[i].size();j++){
                 if(grid[i][j]==2){
                     int time=bfs(grid,i,j);
+                    //ek component ka to min time chahihe but sbhi k milake max chahihe hoga jisme sabhi orange rotten ho jaye
                     maxtime=max(maxtime,time);
                 }
             }
