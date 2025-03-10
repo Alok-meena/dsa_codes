@@ -97,9 +97,11 @@ public:
 
             for(auto neigh:graph[front]){
                 if(color[neigh]==-1){
-                    color[neigh]=!color[front];
+                    color[neigh]=!color[front]; //ager curronde colored nhi hai to bs front ka neigh hai to diff color from front hona chahihe that's why this condition
+                 //of =!color[front] okk
                     q.push(neigh);
                 }
+                //aor yha pe ager neigh ka color front ke color ke equal hai means same hai to return false alright
                 else if(color[neigh]==color[front]) return false;
             }
         }
@@ -110,8 +112,11 @@ public:
         int n=graph.size();
         vector<int>color(n,-1);
         for(int i=0;i<n;i++){
+            //ye color yha pe visited k kam kr rha hai okk 
             if(color[i]==-1){
+                
                 bool check=bfs(graph,color,i,0);
+                //aor ager bipartite nhi hai to return kro false
                 if(!check) return false;
             }
         }
@@ -122,3 +127,36 @@ public:
 
 
 same t.c and s.c
+
+
+
+ 2nd time
+
+class Solution {
+public:
+    bool dfs(vector<vector<int>>&graph,vector<int>&color,int node,int curr_color){
+        color[node]=curr_color;
+
+        for(auto neigh:graph[node]){
+            if(color[neigh]==-1){
+                if(!dfs(graph,color,neigh,!curr_color)) return false;
+            }
+            else if(color[neigh]==curr_color) return false;
+        }
+
+        return true;
+    }
+    bool isBipartite(vector<vector<int>>& graph) {
+        int n=graph.size();
+        vector<int>color(n,-1);
+
+        for(int i=0;i<n;i++){
+            if(color[i]==-1){
+                bool isBipartite=dfs(graph,color,i,0);
+                if(!isBipartite) return false;
+            }
+        }
+
+        return true;
+    }
+};
