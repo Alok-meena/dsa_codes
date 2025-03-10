@@ -55,6 +55,7 @@ public:
         vector<int> adj[n];
 
         for(int i=0;i<p.size();i++){
+           //and given [1,0] so to take course 1 course 0 must be completed so for this p[i][1] is dependent on p[i][0] alright so build accordingly
             adj[p[i][1]].push_back(p[i][0]);
         }
 
@@ -84,6 +85,7 @@ public:
             }
         }
 
+       //mtlb ager cycle hai to return kro empty topo sort o/w return the ans of toposort
         if(ans.size()!=n) return {};
 
 
