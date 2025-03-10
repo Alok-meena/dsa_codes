@@ -47,7 +47,7 @@ public:
         vector<int> adj[n]; //ye to no. of courses ke equal size ka hi hoga
 
         for(int i=0;i<p.size();i++){
-            adj[p[i][0]].push_back(p[i][1]);
+            adj[p[i][1]].push_back(p[i][0]);
         }
 
         vector<int>indegree(n,0);
