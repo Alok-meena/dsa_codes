@@ -155,6 +155,12 @@ vector<int> shortestPathInDAG(int n, int m, vector<vector<int>> &edges)
         int top=s.top();
         s.pop();
 
+
+        Summary of Differences
+Approach	Checks distance[node] != INT_MAX?	Why?
+Topo Sort (DAG)	✅ Yes	Some nodes might be unreachable, and processing them would cause incorrect updates.
+Dijkstra (General Graphs)	❌ No	It always picks the correct minimum distance, so unreachable nodes are never processed.
+
         if(distance[top]!=INT_MAX){
             for(auto neigh:adj[top]){
                 if(distance[top]+neigh.second<distance[neigh.first]){
