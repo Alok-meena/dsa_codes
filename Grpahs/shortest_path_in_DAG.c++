@@ -177,3 +177,52 @@ Dijkstra (General Graphs)	❌ No	It always picks the correct minimum distance, s
     return distance;
 }
 same t.c and s.c
+
+
+
+and we can aslo use dijkstra but it's t.c is O(v+e log(v+e)) okk but in case of dag use topo sort only as it will  have t.c O(v+e) alright
+
+
+#include <bits/stdc++.h>
+
+
+
+vector<int> shortestPathInDAG(int n, int m, vector<vector<int>> &edges)
+{
+    // Write your code here
+     vector<pair<int,int>> adj[n]; //edge->edge,distance
+
+    for(int i=0;i<m;i++){
+        int u=edges[i][0];
+        int v=edges[i][1];
+        int w=edges[i][2];
+
+        adj[u].push_back({v,w});
+    }
+
+    vector<int>distance(n,INT_MAX);
+    priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;
+    pq.push({0,0}); //dist,source
+    distance[0]=0;
+
+    while(!pq.empty()){
+        pair<int,int>p=pq.top();
+        pq.pop();
+
+        int dist=p.first;
+        int currnode=p.second;
+
+        for(auto neigh:adj[currnode]){
+            if(dist+neigh.second<distance[neigh.first]){
+                distance[neigh.first]=dist+neigh.second;
+                pq.push({distance[neigh.first],neigh.first});
+            }
+        }
+    }
+
+    for(auto &i:distance){
+        if(i==INT_MAX) i=-1;
+    }
+
+    return distance;
+}
