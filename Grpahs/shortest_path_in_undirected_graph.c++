@@ -245,6 +245,7 @@ class Solution {
             
             for(auto neigh:adj[front]){
                 if(distance[front]+1<distance[neigh]){
+		   //and jo distance update kr rhe ho us neigh ko queue me push bhi karna hai as we are looking for min distance everytime alright 
                     distance[neigh]=distance[front]+1;
                     q.push(neigh);
                 }
