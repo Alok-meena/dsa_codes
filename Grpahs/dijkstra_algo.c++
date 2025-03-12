@@ -187,7 +187,7 @@ vector<int> dijkstra(vector<vector<int>> &vec, int vertices, int edges, int sour
     st.insert({0,source});
 
     while(st.size()){
-        auto top=*st.begin();
+        auto top=*st.begin(); //it will return a pointer type but we are dereferencing it
         st.erase(st.begin());
 
         int currnode=top.second;
@@ -196,11 +196,14 @@ vector<int> dijkstra(vector<vector<int>> &vec, int vertices, int edges, int sour
         for(auto neigh:adj[currnode]){
             //and isme hame dist[currnode]!=INT_MAX condition ki bhi requirement nhi hai okk as we are using set to process nodes with smalles distance 
             //it is genearally used when there are nodes which are not eachable okk
-            if(dist+neigh.second<distance[neigh.first]){
+            if(dist+neigh.second<distance[neigh.first]){ 
+                very very imp ager aap ye record ko delete nhi bhi kroge then also ans correct aayega as everytime we are getting min distance okk 
+                
+                //to ager dist update kr rhe ho so first check if is node ke corresponding koi record pahle se to nhi hai na
                 //we have to remove the distance correspoinding to this neigh.first node 
                 //as if we enter this condition means that is more distance and we want latest distances
                 //in our code can do dry run and u will got it 
-                auto record=st.find({distance[neigh.first],neigh.first});
+                auto record=st.find({distance[neigh.first],neigh.first}); //node to vhi hai aor uske record me distance bhi vhi hoga dist array me jo store hoga okk
                 //if record found remove it
 
                 if(record!=st.end()){
