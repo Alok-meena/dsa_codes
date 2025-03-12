@@ -34,6 +34,8 @@ There is at least one 0 in mat.
 
 
 
+ to suno ager isme ek 0 se sbka distance nikalna hota to ye single source hota right but hme multiple 0's se nikalna hai to ye multisource bfs hai right to
+sabhi ko dal do 0's ko ek sath jinse distance nikalna hai ok
 
 
 
@@ -138,3 +140,5 @@ public:
         return dist;
     }
 };
+
+
