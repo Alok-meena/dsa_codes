@@ -87,3 +87,54 @@ public:
 };
 
 t.c is n*m and s.c is also n*m
+
+will work normally if the dist is updated inside the loop also 
+
+class Solution {
+public:
+    vector<vector<int>> updateMatrix(vector<vector<int>>& mat) {
+        int n=mat.size();
+        int m=mat[0].size();
+
+        vector<vector<int>>dist(n,vector<int>(m,1e9));
+        vector<vector<bool>>vis(n,vector<bool>(m,false));
+
+        queue<vector<int>>q;
+
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(mat[i][j]==0){
+                    dist[i][j]=0;
+                    vis[i][j]=true;
+                    q.push({i,j,0});
+                }
+            }
+        }
+
+        while(!q.empty()){
+            vector<int>v=q.front();
+            q.pop();
+
+            int i=v[0];
+            int j=v[1];
+            int step=v[2];
+
+
+            int dirx[]={-1,0,0,1};
+            int diry[]={0,-1,1,0};
+
+            for(int k=0;k<4;k++){
+                int newi=i+dirx[k];
+                int newj=j+diry[k];
+
+                if(newi>=0 and newi<n and newj>=0 and newj<m and vis[newi][newj]==false){
+                    vis[newi][newj]=true;
+                    dist[newi][newj]=step+1;
+                    q.push({newi,newj,step+1});
+                }
+            }
+        }
+
+        return dist;
+    }
+};
