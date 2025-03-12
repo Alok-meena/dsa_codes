@@ -138,4 +138,65 @@ vector<pair<pair<int, int>, int>> calculatePrimsMST(int n, int m, vector<pair<pa
     return ans;
 }
 
+
+
+2nd time 
+
+#include <bits/stdc++.h> 
+vector<pair<pair<int, int>, int>> calculatePrimsMST(int n, int m, vector<pair<pair<int, int>, int>> &g)
+{
+    // Write your code here.
+    vector<pair<int,int>>adj[n+1];
+
+    for(int i=0;i<m;i++){
+        int u=g[i].first.first;
+        int v=g[i].first.second;
+        int w=g[i].second;
+
+        adj[u].push_back({v,w});
+        adj[v].push_back({u,w});
+    }
+
+    vector<int>dist(n+1,1e9);
+    vector<bool>mst(n+1,false);
+    vector<int>parent(n+1,-1);
+
+    dist[1]=0;
+
+    for(int i=1;i<=n;i++){
+        int mini=INT_MAX;
+        int node;
+
+        for(int i=1;i<=n;i++){
+            if(mst[i]==false and dist[i]<mini){
+                node=i;
+                mini=dist[i];
+            }
+        }
+
+        mst[node]=true;
+
+        //check all adjacent nodes
+        for(auto neigh:adj[node]){
+            int v=neigh.first;
+            int wt=neigh.second;
+
+            if(mst[v]==false and wt<dist[v]){
+                parent[v]=node;
+                dist[v]=wt;
+            }
+        }
+    }
+
+    vector<pair<pair<int,int>,int>>ans;
+    for(int i=2;i<=n;i++){
+        ans.push_back({{parent[i],i},dist[i]});
+    }
+
+    return ans;
+
+
+}
+
+t.c O(n^2) and s.c:-O(n+m) and can be optimized using priority queue
   
