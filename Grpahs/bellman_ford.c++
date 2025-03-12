@@ -24,8 +24,7 @@ vector<int> bellmonFord(int n, int m, int src, vector<vector<int>> &edges) {
 
     //checking for negative cycle
     int flag=0;
-     for(int i=0;i<n-1;i++){
-        //traverse on edge list
+      //traverse on edge list
         for(int j=0;j<m;j++){
             int u=edges[j][0];
             int v=edges[j][1];
@@ -35,12 +34,38 @@ vector<int> bellmonFord(int n, int m, int src, vector<vector<int>> &edges) {
                 flag=1;
             }
         }
-    }
     if(flag==0){
-        return distance;
+        return 0;
     }
+    return -1;//means negative cycle is present 
 }
 
 
 t.c:-O(n*m) because n-1 times traversal of all edges
 s.c:-O(n)
+
+o/w if we only have to return the distance without checking for negative cycle then just return the distance array directly okk
+
+vector<int> bellmonFord(int n, int m, int src, vector<vector<int>> &edges) {
+    // Write your code here.
+    vector<int>distance(n+1,1e8);
+    distance[src]=0;
+
+    for(int i=0;i<n-1;i++){
+        
+        //traverse on edges
+        for(int j=0;j<m;j++){
+            int u=edges[j][0];
+            int v=edges[j][1];
+            int w=edges[j][2];
+
+            if(distance[u]+w<distance[v]){
+                distance[v]=distance[u]+w;
+            }
+        }
+    }
+
+
+    return distance;
+
+}
