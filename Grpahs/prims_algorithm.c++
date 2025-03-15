@@ -1,4 +1,78 @@
+ Prim's MST
+Moderate
+80/80
+Average time to solve is 15m
+91 upvotes
+Asked in companies
+Problem statement
+You are given an undirected connected weighted graph having ‘N’ nodes numbered from 1 to 'N'. A matrix ‘E’ of size M x 2 is given which represents the ‘M’ edges such that there is an edge directed from node E[i][0] to node E[i][1]. You are supposed to return the minimum spanning tree where you need to return weight for each edge in the MST.
 
+For example :
+
+The MST (Minimum Spanning Tree) for the above graph is:
+
+Detailed explanation ( Input/output format, Notes, Images )
+Constraints :
+1 ≤ T ≤ 5
+2 <= N <= 100
+1 <= M <= min(1000, N(N - 1) / 2)
+1 <= E[i][0], E[i][1] <= N
+
+
+Time Limit: 1 sec
+Sample Input 1 :
+1
+5 14
+1 2 2
+1 4 6
+2 1 2
+2 3 3
+2 4 8
+2 5 5
+3 2 3
+3 5 7
+4 1 6
+4 2 8
+4 5 9
+5 2 5
+5 3 7
+5 4 9
+Sample Output 1 :
+1 2 2
+1 4 6
+2 3 3
+2 5 5
+Explanation of Input 1 :
+The Minimum spanning tree for the given graph will contain the edges: (1,2) with weight 2, (1,4) with weight 6, (2,3) with weight 3 and (2,5) with weight 5.
+Sample Input 2 :
+1
+5 15
+1 2 21
+1 4 16
+2 1 12
+2 3 13
+2 4 18
+2 5 15
+3 2 13
+3 5 17
+4 1 16
+4 2 18
+4 5 19
+5 1 18
+5 2 15
+5 3 17
+5 4 19
+Sample Output 2 :
+1 2 12
+1 4 16
+2 3 13
+2 5 15
+Explanation of Input 2 :
+The Minimum spanning tree for the given graph will contain the edges: (1,2) with weight 12, (1,4) with weight 16, (2,3) with weight 13 and (2,5) with weight 15.
+
+
+
+    
 
 #include <bits/stdc++.h> 
 #include <unordered_map>
@@ -163,7 +237,7 @@ vector<pair<pair<int, int>, int>> calculatePrimsMST(int n, int m, vector<pair<pa
 
     dist[1]=0;
 
-    for(int i=1;i<=n;i++){
+    for(int i=1;i<=n;i++){ 
         int mini=INT_MAX;
         int node;
 
@@ -189,7 +263,7 @@ vector<pair<pair<int, int>, int>> calculatePrimsMST(int n, int m, vector<pair<pa
     }
 
     vector<pair<pair<int,int>,int>>ans;
-    for(int i=2;i<=n;i++){
+    for(int i=2;i<=n;i++){ //sari nodes 1 se start hoti hai to 0 se nhi and 1 ka parent -1 so start from 2 okk
         ans.push_back({{parent[i],i},dist[i]});
     }
 
@@ -199,4 +273,59 @@ vector<pair<pair<int, int>, int>> calculatePrimsMST(int n, int m, vector<pair<pa
 }
 
 t.c O(n^2) and s.c:-O(n+m) and can be optimized using priority queue
+
+optimized using priority queue then t.c :-O(mlogn) alright because n nodes are pushed into the queue not m edges okk so nlogn+mlogn = mlogn
+
+#include <bits/stdc++.h> 
+vector<pair<pair<int, int>, int>> calculatePrimsMST(int n, int m, vector<pair<pair<int, int>, int>> &g)
+{
+    // Write your code here.
+    vector<pair<int,int>> adj[n+1];
+
+    for(int i=0;i<m;i++){
+        int u=g[i].first.first;
+        int v=g[i].first.second;
+        int wt=g[i].second;
+
+        adj[u].push_back({v,wt});
+        adj[v].push_back({u,wt});
+    }
+
+    //prepare key , mst , parent vectors
+
+    priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;
+
+    vector<int>key(n+1,INT_MAX);
+    vector<bool>mst(n+1,false);
+    vector<int>parent(n+1,-1);
+
+    key[1]=0;
+    pq.push({0,1});
+
+    while(!pq.empty()){
+        int node=pq.top().second;
+        pq.pop();
+        
+
+        mst[node]=true;
+
+        for(auto neigh:adj[node]){
+            int u=neigh.first;
+            int wt=neigh.second;
+            if(mst[u]==false and wt<key[u]){
+                key[u]=wt;
+                parent[u]=node;
+                pq.push({key[u],u});
+            }
+        }
+    }
+
+    vector<pair<pair<int,int>,int>>ans;
+    for(int i=2;i<=n;i++){
+        ans.push_back({{parent[i],i},key[i]});
+    }
+
+    return ans;
+}
+
   
