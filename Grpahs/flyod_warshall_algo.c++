@@ -31,6 +31,8 @@ class Solution {
     void shortestDistance(vector<vector<int>>& mat) {
         // Code here
         int n=mat.size();
+
+	//TO AGER path nhi hai kinhi 2 nodes ke beech me to -1 hai to ise infinite bna do as ham har ek node se as intermediate hoke jayenge okk that's why 
         
         for(int i=0;i<n;i++){
             for(int j=0;j<n;j++){
@@ -45,7 +47,8 @@ class Solution {
                 }
             }
         }
-        
+
+	//and again normal bna do okk -1 kr do 
         for(int i=0;i<n;i++){
             for(int j=0;j<n;j++){
                 if(mat[i][j]==1e8) mat[i][j]=-1;
@@ -70,8 +73,7 @@ class Solution {
 public:
 	int isNegativeWeightCycle(int n, vector<vector<int>>edges){
 	    // Code here
-	    int INF = 1e8; 
-        vector<vector<int>> mat(n, vector<int>(n, INF));
+        vector<vector<int>> mat(n, vector<int>(n, 1e8));
 
         // Fill the diagonal with 0
         for(int i = 0; i < n; i++) mat[i][i] = 0;
