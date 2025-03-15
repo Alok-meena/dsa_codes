@@ -61,3 +61,46 @@ t.c:-O(n^3)
 for(int i=0;i<n;i++){
    if(mat[i][i]<0) cout<<"negative cycle is present in this graph";
 }
+
+
+
+like this 
+
+class Solution {
+public:
+	int isNegativeWeightCycle(int n, vector<vector<int>>edges){
+	    // Code here
+	    int INF = 1e8; 
+        vector<vector<int>> mat(n, vector<int>(n, INF));
+
+        // Fill the diagonal with 0
+        for(int i = 0; i < n; i++) mat[i][i] = 0;
+
+        // Populate initial distances from edges
+        for(auto &edge : edges) {
+            int u = edge[0], v = edge[1], w = edge[2];
+            mat[u][v] = w;
+        }
+
+        
+        
+        for(int k=0;k<n;k++){
+            for(int i=0;i<n;i++){
+                for(int j=0;j<n;j++){
+                    mat[i][j]=min(mat[i][k]+mat[k][j],mat[i][j]);
+                }
+            }
+        }
+        
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                if(mat[i][j]==1e8) mat[i][j]=-1;
+            }
+        }
+        for(int i=0;i<n;i++){
+   if(mat[i][i]<0) return 1;
+}
+return 0;
+	}
+};
+
