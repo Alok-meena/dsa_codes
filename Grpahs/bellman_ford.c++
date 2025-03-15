@@ -16,7 +16,7 @@ vector<int> bellmonFord(int n, int m, int src, vector<vector<int>> &edges) {
             int v=edges[j][1];
             int wt=edges[j][2];
 
-            if(distance[u]+wt<distance[v]){
+            if(distance[u]!=INT_MAX and distance[u]+wt<distance[v]){
                 distance[v]=distance[u]+wt;
             }
         }
@@ -30,7 +30,7 @@ vector<int> bellmonFord(int n, int m, int src, vector<vector<int>> &edges) {
             int v=edges[j][1];
             int wt=edges[j][2];
 
-            if(wt!=INT_MAX && distance[u]+wt<distance[v]){
+            if(dist[u]!=INT_MAX && distance[u]+wt<distance[v]){
                 flag=1;
             }
         }
