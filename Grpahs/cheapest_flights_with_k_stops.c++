@@ -111,7 +111,7 @@ public:
         }
 
         priority_queue<vector<int>,vector<vector<int>>,greater<vector<int>>>pq;
-        pq.push({-1,0,src});//cost,k,source
+        pq.push({-1,0,src});//k,cost,source
         vector<int>mincost(n,1e9);
 
         while(!pq.empty()){
