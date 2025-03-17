@@ -71,6 +71,11 @@ so this ques is same to same as fibonacci series just a little modification and 
 You are supposed to return the number of distinct ways you can climb from the 0th step to the Nth step.
 brute force using recursion 
 
+
+
+
+and in the below one we are starting from 0 and going till n alright
+
 #include <bits/stdc++.h> 
 
 int mod=1e9;
@@ -144,7 +149,7 @@ int mod=1e9+7;
 
 
 int solve(int n,vector<int>&dp){
-    if(n<=1) return 1;
+    if(n<=1) return 1; //because 0 se aane ka bhi 1 man liya and 1 tk aane ka to 1 hi hai that's why
 
     if(dp[n]!=-1) return dp[n];
 
@@ -164,29 +169,23 @@ int countDistinctWays(int nStairs) {
 //space optimized
 #include <bits/stdc++.h> 
 
-int m = 1e9 + 7;
+int mod=1e9+7;
 
 int countDistinctWays(int nStairs) {
+    //  Write your code here.
+    vector<int>dp(nStairs+1,-1);
     
-    if(nStairs == 0){
-        return 1;
+    int a=1;
+    int b=1;
+
+    for(int i=2;i<=nStairs;i++){
+        int c=(a+b)%mod;
+        a=b;
+        b=c;
     }
-
-    if(nStairs == 1){
-        return 1;
-    }
-
-    int prev1 = 1;
-    int prev2 = 1;
-
-    for(int i = 2; i <= nStairs; i++){
-
-        int curr = (prev1 + prev2) % m;
-        prev2 = prev1;
-        prev1 = curr;    
-    }  
-    return prev1;
+    return b;
 }
+
 
 or can also use bottom up appraoch with only dp 
 
