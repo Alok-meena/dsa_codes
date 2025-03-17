@@ -28,8 +28,45 @@ this is same as max no. of non-adjacent elements just difference is elements are
 just make two array and in one take 1st and dont include last and reverse in second array send both to fun and then return max ans
 
 
+#include <bits/stdc++.h> 
+
+long long int solve(int idx,vector<int>&house){
+    if(idx<0) return 0;
+
+    if(idx==0) return house[idx];
 
 
+    int exc=solve(idx-1,house)+0;
+
+    int inc=solve(idx-2,house)+house[idx];
+
+    return max(exc,inc);
+}
+
+long long int houseRobber(vector<int>& valueInHouse)
+{
+    // Write your code here.
+    int n=valueInHouse.size();
+
+    if(n==1) return valueInHouse[0];
+    
+    vector<int>first,second;
+    for(int i=0;i<n;i++){
+        if(i!=n-1){
+            first.push_back(valueInHouse[i]);
+        }
+        if(i!=0){
+            second.push_back(valueInHouse[i]);
+        }
+    }
+
+    return max(solve(n-2,first),solve(n-2,second));
+}
+
+exponential
+
+
+here directly most optimized approach is used alright
 
 #include <bits/stdc++.h> 
 
