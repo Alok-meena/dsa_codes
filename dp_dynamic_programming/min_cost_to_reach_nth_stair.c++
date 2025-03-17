@@ -15,6 +15,7 @@ Explanation: You will start at index 1.
 The total cost is 15.
 
 
+ and array size is n so only n-1 tk ki cost given hai and we only have to add cost if we jump from that index to next so no need to add destination cost alright
  
 
 class Solution {
