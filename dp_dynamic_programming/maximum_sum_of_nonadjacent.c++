@@ -55,6 +55,7 @@ int maximumNonAdjacentSum(vector<int> &nums){
 can start from starting also
 #include <bits/stdc++.h> 
 int solve(vector<int>&nums,int n,int i){
+    //to ye vala base case +2 index ke liye necessary hai alright
     if(i>n){
         return 0;
     }
