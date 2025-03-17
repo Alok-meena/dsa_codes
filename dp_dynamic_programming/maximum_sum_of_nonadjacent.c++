@@ -37,7 +37,7 @@ int solve(vector<int>&nums,int n){
     }
     if(n==0){
       
-        return nums[0];
+        return nums[0]; //not required mostly
     }
 
     int incl=solve(nums,n-2)+nums[n];
