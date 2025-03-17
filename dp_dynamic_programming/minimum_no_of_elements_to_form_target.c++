@@ -11,6 +11,33 @@ Here, you can see in Way 2 we have used 3 coins to reach the target sum of 7.
 Hence the output is 3.
 
 
+i tried greedy approach but didnt work 
+
+#include <bits/stdc++.h> 
+int minimumElements(vector<int> &num, int x)
+{
+    // Write your code here.
+    int count=0;
+    int n=num.size();
+
+    sort(num.begin(),num.end());
+
+    int i=n-1;
+
+    while(x>0 and i>=0){
+        if(x>=num[i]){
+            count+=x/num[i]; //so we are utilizing the max value as many times as we can then moving to the next one alright
+            x=x%num[i];
+        }
+        i--;
+
+    }
+
+    return x==0?count:-1;
+}
+
+
+but it will not work for evry case so we need to use dp alright
 
 
 VERYA VERYA IMP KI AAP  1 HI ELEMENT KO KITNI BHI BAR USE KAR SKTE HAI OKKK
@@ -22,6 +49,8 @@ int solve(vector<int>&num,int x){
     if(x==0){//means target achieved
         return 0;
     }
+
+    //this is used because if we cant form the ans then we can return -1 so we used this as we are calculating min so we are not passing -1 directly alright
     if(x<0){
         return INT_MAX;
     }
@@ -106,6 +135,8 @@ int minimumElements(vector<int> &num, int x)
     vector<int>dp(x+1,-1);
     //The size of the dp array should be x + 1 rather than num.size() + 1 because the dp array is used to store the minimum number of 
     //elements needed to form each value from 0 to x. Here’s a detailed explanation:
+
+    //are bhai yha pe apna target (x) change ho rha hai to use hi store karna hai hame kk
 
     int ans=solve(num,x,dp);
     if(ans!=INT_MAX){
