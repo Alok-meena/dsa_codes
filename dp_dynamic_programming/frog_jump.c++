@@ -50,6 +50,29 @@ class Solution {
     }
 };
 
+
+but the base case is handling the bound check so no need to explicitely checking bounds so can do like this 
+
+
+  public:
+    int solve(int idx,vector<int>&height){
+        if(idx<=0) return 0;
+        
+        int cost1=1e9,cost2=1e9;
+        
+        
+        
+        return min(solve(idx-1,height)+abs(height[idx-1]-height[idx]),solve(idx-2,height)+abs(height[idx-2]-height[idx]));
+        
+    }
+    int minCost(vector<int>& height) {
+        // Code here
+        
+        return solve(height.size()-1,height);
+    }
+};
+
+
 t.c:- exponential
 
 top down approach with memorization t.c :-O(n) and s.c:-O(n) 
@@ -83,6 +106,31 @@ class Solution {
         return solve(height.size()-1,height,dp);
     }
 };
+
+class Solution {
+  public:
+    int solve(int idx,vector<int>&height,vector<int>&dp){
+        if(idx<=0) return 0;
+        if(idx==1) return abs(height[1]-height[0]);
+        
+        int cost1=1e9,cost2=1e9;
+        
+        if(dp[idx]!=-1) return dp[idx];
+        
+        
+        
+        dp[idx]=min(solve(idx-1,height,dp)+abs(height[idx-1]-height[idx]),solve(idx-2,height,dp)+abs(height[idx-2]-height[idx]));
+        return dp[idx];
+    }
+    int minCost(vector<int>& height) {
+        // Code here
+        vector<int>dp(height.size()+1,-1);
+        
+        return solve(height.size()-1,height,dp);
+    }
+};
+
+in this case we have to add that idx==1 case also 
 
 
 bottom up approach (tabulation)
