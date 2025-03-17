@@ -48,7 +48,7 @@ long long int houseRobber(vector<int>& valueInHouse)
     // Write your code here.
     int n=valueInHouse.size();
 
-    if(n==1) return valueInHouse[0];
+    if(n==1) return valueInHouse[0]; //ye case jruri hai because ager hamen first ko choda aor last ko to dono cases me hi ye single vala cover nhi hoga that's why
     
     vector<int>first,second;
     for(int i=0;i<n;i++){
