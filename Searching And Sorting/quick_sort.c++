@@ -39,3 +39,10 @@ class Solution {
         return j;
     }
 };
+
+
+this low+1 bound check is necessary in this case arr = {5, 10, 15, 20, 25}
+low = 0, high = 4
+pivot = arr[low] = 5
+
+here j can go negative which will be wrong alright
