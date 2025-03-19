@@ -167,7 +167,7 @@ long long int solve(int n){
         long long int second=prev2%mod;
         long long int sum=(first+second)%mod;
 
-        long long int curr=((i-1)*sum)%mod;
+        long long int curr=((i-1)*sum)%mod; 
         prev1=prev2;
         prev2=curr;
     }
@@ -182,3 +182,21 @@ long long int countDerangements(int n) {
 
 
 t.c:-O(N) and s.c:-O(1)
+
+
+same code
+
+long long int countDerangements(int n) {
+    // Write your code here
+
+    int a=0;
+    int b=1;
+
+    for(int i=3;i<=n;i++){
+        int c=(((i-1)%mod)*((b%mod)+(a)%mod))%mod;  //bhai yha glti se i-1 ki jagah b use mt krna as we did a and b for dp[0] and dp[1] so replace with them only
+        a=b;
+        b=c;
+    }
+    return b;
+}
+
