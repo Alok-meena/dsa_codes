@@ -144,6 +144,26 @@ int cutSegments(int n, int x, int y, int z) {
 	}
 }
 
+or 
+
+int cutSegments(int n, int x, int y, int z) {
+	// Write your code here.
+	vector<int>dp(n+1,INT_MIN); //n<0 ke liye int_min set kr rhe the to sbko hi kr do set alright
+	dp[0]=0;
+
+	for(int i=1;i<=n;i++){
+		int a=INT_MIN,b=INT_MIN,c=INT_MIN;
+		if(i-x>=0) a=dp[i-x]+1;
+		if(i-y>=0) b=dp[i-y]+1;
+		if(i-z>=0) c=dp[i-z]+1;
+
+		dp[i]=max(a,max(b,c));
+	}
+
+	if(dp[n]<0) return 0;  //and here we cant check like dp[n]==INT_MIN becaue after max value is computer it will be no longer INT_MIN okk
+	return dp[n];
+}
+
 
 Time Complexity
 O(N), Where ‘N’ is the length of the rod.
@@ -158,3 +178,5 @@ O(N), Where ‘N’ is the length of the rod.
  
 
 As we created a ‘DP’ array for storing the values.
+
+and no space optimmiztion is possible okk
