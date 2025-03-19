@@ -30,6 +30,8 @@ int solve(int n,int x,int y,int z){
 		return INT_MIN;
 	}
 
+	//bs ques me bola hai ki max segments kis case me use hogi alright that's why we returned max segments by adding the current segment 
+
 	int a=solve(n-x,x,y,z)+1;//+1 kiya because ager is segment ko include kr rhe hai to hi
 	int b=solve(n-y,x,y,z)+1;
 	int c=solve(n-z,x,y,z)+1;
