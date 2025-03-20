@@ -51,6 +51,37 @@ class Solution {
 };
 
 
+class Solution {
+  public:
+    int solve(vector<int>&height,int idx,vector<int>&dp){
+        if(idx==height.size()-1) return 0;
+
+
+      //here we are required to initilize them to intmax okk because here we can only go upto n-1 so there can be any invalid path so we have to take min in that case o/w
+
+      //0 will come which will given incorrect ans alright
+        
+        int op1=INT_MAX,op2=INT_MAX;
+        
+        if(idx+1<height.size()){
+            op1=solve(height,idx+1,dp)+abs(height[idx]-height[idx+1]);
+        }
+        
+        if(idx+2<height.size()){
+            op2=solve(height,idx+2,dp)+abs(height[idx]-height[idx+2]);
+        }
+        
+        return min(op1,op2);
+    }
+    int minCost(vector<int>& height) {
+        // Code here
+        int n=height.size();
+        vector<int>dp(n+1,-1);
+        return solve(height,0,dp);
+    }
+};
+
+
 but the base case is handling the bound check so no need to explicitely checking bounds so can do like this 
 
 
