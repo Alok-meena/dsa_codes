@@ -24,6 +24,33 @@ Sample Output:
 
 1:recursion---
 
+mostly start with 0 only it will be easy to understand alright
+
+ #include <bits/stdc++.h> 
+
+int solve(vector<int>&weight,vector<int>&value,int n,int capacity,int idx){
+  if(idx==n-1){
+    if(weight[idx]<=capacity){
+      return value[idx];
+    }
+    else return 0;
+  }
+
+  int include=0; //very imp to initialize the include o/w get garbage value which will be wrong alright
+  if(weight[idx]<=capacity){
+    include=value[idx]+solve(weight,value,n,capacity-weight[idx],idx+1);
+  }
+
+  int exclude=0+solve(weight,value,n,capacity,idx+1); // 0 add hamne understanding ke liye kiya hai just o/w no need of it
+
+  return max(include,exclude);
+}
+int knapsack(vector<int> weight, vector<int> value, int n, int maxWeight) 
+{
+	// Write your code here
+  return solve(weight,value,n,maxWeight,0);
+}
+
   
 #include <bits/stdc++.h> 
 
@@ -57,6 +84,35 @@ int knapsack(vector<int> weight, vector<int> value, int n, int maxWeight)
 }
 
 2:memorization
+
+ #include <bits/stdc++.h> 
+
+int solve(vector<int>&weight,vector<int>&value,int n,int capacity,int idx,vector<vector<int>>&dp){
+  if(idx==n-1){
+    if(weight[idx]<=capacity){
+      return value[idx];
+    }
+    else return 0;
+  }
+
+  if(dp[idx][capacity]!=-1) return dp[idx][capacity];
+
+  int include=0;
+  if(weight[idx]<=capacity){
+    include=value[idx]+solve(weight,value,n,capacity-weight[idx],idx+1,dp);
+  }
+
+  int exclude=0+solve(weight,value,n,capacity,idx+1,dp);
+
+  dp[idx][capacity]=max(include,exclude);
+  return dp[idx][capacity];
+}
+int knapsack(vector<int> weight, vector<int> value, int n, int maxWeight) 
+{
+	// Write your code here
+  vector<vector<int>>dp(n+1,vector<int>(maxWeight+1,-1));
+  return solve(weight,value,n,maxWeight,0,dp);
+}
 
 #include <bits/stdc++.h> 
 #include <vector>
@@ -95,7 +151,36 @@ int knapsack(vector<int> weight, vector<int> value, int n, int maxWeight)
 
 
 
-3rd:memorization
+3rd:bottom up 
+
+
+int knapsack(vector<int> weight, vector<int> value, int n, int maxWeight) 
+{
+	// Write your code here
+  vector<vector<int>>dp(n+1,vector<int>(maxWeight+1,0));
+  for(int wt=0;wt<=maxWeight;wt++){
+    if(weight[n-1]<=wt){
+      dp[n-1][wt]=value[n-1];
+    }
+  }
+
+  for(int i=n-2;i>=0;i--){
+    for(int w=0;w<=maxWeight;w++){
+      int include=0;
+      if(weight[i]<=w){
+        include=value[i]+dp[i+1][w-weight[i]];
+      }
+
+      int exclude=0+dp[i+1][w];
+
+      dp[i][w]=max(include,exclude);
+    }
+  }
+
+  return dp[0][maxWeight];
+}
+
+very imp
 
 
 #include <bits/stdc++.h>
