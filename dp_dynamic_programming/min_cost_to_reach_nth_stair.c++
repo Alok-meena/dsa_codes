@@ -77,6 +77,9 @@ public:
 class Solution {
 public:
     int solve(vector<int>&cost,int idx,vector<int>&dp){
+       //Return the minimum cost to reach the top of the floor.
+
+        //yha given hai ki top of the floor reach karna hai so we can exceed n alright which is diff from frog jump ques in that we have to reach only n-1
         if(idx>=cost.size()) return 0; //top floor ki cost given nhi hai so 0 liya
 
         if(dp[idx]!=-1) return dp[idx];
