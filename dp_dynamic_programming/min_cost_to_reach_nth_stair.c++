@@ -57,7 +57,8 @@ public:
 
       
         int n=cost.size();
-        int ans=min(solve1(cost,n-1),solve1(cost,n-2));
+        int ans=min(solve1(cost,n-1),solve1(cost,n-2)); //mereko isme confusion thi but the thing is in this ques we can either start from 0 or 1
+        //so we have to return the min of both that's why this is done the below code in which we started from 0 is more related to this and easily understandable
         return ans;
     
         //top-down approach with memorization
@@ -71,6 +72,28 @@ public:
         // return ans;
     }
 };
+
+
+class Solution {
+public:
+    int solve(vector<int>&cost,int idx,vector<int>&dp){
+        if(idx>=cost.size()) return 0; //top floor ki cost given nhi hai so 0 liya
+
+        if(dp[idx]!=-1) return dp[idx];
+
+        int op1=cost[idx]+solve(cost,idx+1,dp);
+        int op2=cost[idx]+solve(cost,idx+2,dp);
+        
+        return dp[idx]=min(op1,op2);
+    }
+    int minCostClimbingStairs(vector<int>& cost) {
+        int n=cost.size();
+        vector<int>dp(n+1,-1);
+        int ans=min(solve(cost,0,dp),solve(cost,1,dp));
+        return ans;
+    }
+};
+
 
 
 2nd approach : - bottom-up approach
