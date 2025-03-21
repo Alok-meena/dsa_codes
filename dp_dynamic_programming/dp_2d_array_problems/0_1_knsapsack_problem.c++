@@ -232,6 +232,36 @@ O(n*maxweight), where maxweight is the weight of bag.
 
 4:space optimized
 
+int knapsack(vector<int> weight, vector<int> value, int n, int maxWeight) 
+{
+	// Write your code here
+ //as our curr values are dependent on next idx+1 so we made an array for that okk and similarly one for current right
+  vector<int>next(maxWeight+1,0);
+  vector<int>curr(maxWeight+1,0);
+  for(int wt=0;wt<=maxWeight;wt++){
+    if(weight[n-1]<=wt){
+      next[wt]=value[n-1];
+    }
+  }
+
+  for(int idx=n-2;idx>=0;idx--){
+    for(int wt=0;wt<=maxWeight;wt++){
+      int include=0; //very imp to initialize the include o/w get garbage value which will be wrong alright
+      if(weight[idx]<=wt){
+        include=value[idx]+next[wt-weight[idx]];
+      }
+
+      int exclude=0+next[wt]; // 0 add hamne understanding ke liye kiya hai just o/w no need of it
+
+      curr[wt]=max(include,exclude);
+    }
+    next=curr;
+  }
+  return next[maxWeight];
+}
+
+below is the case in recursion from n-1 to 0  okk
+
 
 
 
@@ -243,7 +273,7 @@ int solve(vector<int> &weight, vector<int> &value, int n, int capacity) {
   //to har row apni pichli vali pe hi depend kr rhi hai so we can also do space optimization
   //we require only two rows then we will update each 
 
-  vector<int>prev(capacity+1,0);
+  vector<int>prev(capacity+1,0); //ab suno dhyan se okk ab rows to chahihe nhi bs 2 row se kam chl rha hai to unki size to col ke acco hi hogi that's why alright
   vector<int>curr(capacity+1,0);
 
   for (int w = weight[0]; w <=capacity; w++) {
