@@ -174,3 +174,38 @@ bool isSubsetSum(vector<int>& arr, int sum) {
     }
 
 so isme uper k same to same nhi karna i-1 hi check karna hoga and if uper n se 0 gye to i+1 think logically then u will understand
+
+
+space optimized
+
+bool isSubsetSum(vector<int>& arr, int sum) {
+        // code here
+        int n=arr.size();
+        
+        vector<vector<int>>dp(arr.size()+1,vector<int>(sum+1,0));
+        vector<int>next(sum+1,0);
+        vector<int>curr(sum+1,0);
+        //iska mtlb hai ki sbhi ke pahle column ko 1 kr do that's it
+        
+        next[0]=1;
+        curr[0]=1;
+  //and yha nich loop me ham bs har pahle colmun ko 1 kr rhe vhi kr do in dono row me bhi that's it
+        // for(int i=0;i<=n;i++){
+        //     curr[0]=1;
+        // }
+        
+        //  if (arr[0] <= sum) {
+        //         dp[0][arr[0]] = 1;
+        //     }        
+        for(int idx=n-1;idx>=0;idx--){
+            for(int target=1;target<=sum;target++){
+                bool inc=false,exc=false;
+                if(target-arr[idx]>=0 and arr[idx]<=target) inc=next[target-arr[idx]];
+                exc=next[target];
+                
+                curr[target]=inc or exc;
+            }
+            next=curr;
+        }
+
+to bs khuch nhi idx+1 so next pe depend kr rha hai to bs rows ke equla means sum+1 sizse k bna liya 
