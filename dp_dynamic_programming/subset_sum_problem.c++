@@ -125,6 +125,33 @@ bottom up
 bool isSubsetSum(vector<int>& arr, int sum) {
         // code here
         int n=arr.size();
+        
+        vector<vector<int>>dp(arr.size()+1,vector<int>(sum+1,0));
+        for(int i=0;i<=n;i++){
+            dp[i][0]=1;
+        }
+        
+          
+        for(int idx=n-1;idx>=0;idx--){
+            for(int target=1;target<=sum;target++){
+                bool inc=false,exc=false;
+                if(target-arr[idx]>=0 and arr[idx]<=target) inc=dp[idx+1][target-arr[idx]];
+                exc=dp[idx+1][target];
+                
+                dp[idx][target]=inc or exc;
+            }
+        }
+        
+        return dp[0][sum];
+    }
+
+bs vhi hai direct conversion top down o-n and sum-0 so just reverse n-0 0-sum alright 
+
+and ye niche vala bhi tik hai 
+
+bool isSubsetSum(vector<int>& arr, int sum) {
+        // code here
+        int n=arr.size();
         vector<vector<int>>dp(arr.size()+1,vector<int>(sum+1,0));
         for(int i=0;i<n;i++){
             dp[i][0]=1;
