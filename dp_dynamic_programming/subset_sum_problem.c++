@@ -1,4 +1,22 @@
+Subset Sum Problem
+Difficulty: MediumAccuracy: 32.0%Submissions: 336K+Points: 4
+Given an array of positive integers arr[] and a value sum, determine if there is a subset of arr[] with sum equal to given sum. 
 
+Examples:
+
+Input: arr[] = [3, 34, 4, 12, 5, 2], sum = 9
+Output: true 
+Explanation: Here there exists a subset with target sum = 9, 4+3+2 = 9.
+Input: arr[] = [3, 34, 4, 12, 5, 2], sum = 30
+Output: false
+Explanation: There is no subset with target sum 30.
+Input: arr[] = [1, 2, 3], sum = 6
+Output: true
+Explanation: The entire array can be taken as a subset, giving 1 + 2 + 3 = 6.
+Constraints:
+1 <= arr.size() <= 200
+1<= arr[i] <= 200
+1<= sum <= 104
 
 
 
@@ -100,3 +118,30 @@ class Solution {
 };
 
 bottom up
+
+
+bool isSubsetSum(vector<int>& arr, int sum) {
+        // code here
+        int n=arr.size();
+        vector<vector<int>>dp(arr.size()+1,vector<int>(sum+1,0));
+        for(int i=0;i<n;i++){
+            dp[i][0]=1;
+        }
+
+     //so ager first element within the bound hai to vo bn skta hai target me help so mark it first 
+         if (arr[0] <= sum) {
+                dp[0][arr[0]] = 1;
+            }        
+        for(int idx=1;idx<n;idx++){
+            for(int target=1;target<=sum;target++){
+                bool inc=false,exc=false;
+                if(arr[idx]<=target) inc=dp[idx-1][target-arr[idx]];
+                exc=dp[idx-1][target];
+                
+                dp[idx][target]=inc or exc;
+            }
+        }
+        return dp[n-1][sum];
+    }
+
+so isme uper k same to same nhi karna i-1 hi check karna hoga and if uper n se 0 gye to i+1 think logically then u will understand
