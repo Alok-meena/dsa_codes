@@ -18,14 +18,53 @@ Explanation: This array can never be
 partitioned into two such parts.
 
 
+ye ques similar to subset sum problem hai jisme hame target given tha and we have to check if there is any subset with sum equals target alright so is ques me
+equal sum dono subset me means totalsum/2 right so just run this code for target=totalsum/2 that's it and if totalsum is odd then not possible 
+
+class Solution {
+public:
+     bool solve(vector<int>&arr,int target,int idx,vector<vector<int>>&dp){
+        if(idx==arr.size()){
+            if(target==0){
+                return true;
+            }
+            else return false;
+        }
+        if(target==0) return true;
+        
+        if(dp[idx][target]!=-1) return dp[idx][target];
+        
+        //include
+        bool inc=false,exc=false;
+        if(arr[idx]<=target) inc=solve(arr,target-arr[idx],idx+1,dp);
+        exc=solve(arr,target,idx+1,dp);
+        
+        dp[idx][target]=inc or exc;
+        return dp[idx][target];
+    }
+    bool canPartition(vector<int>& nums) {
+        int n=nums.size();
+        int sum=0;
+        for(auto i:nums) sum+=i;
+        if(sum%2!=0) return false;
+        sum=sum/2;
+        vector<vector<int>>dp(nums.size()+1,vector<int>(sum+1,-1));
+        return solve(nums,sum,0,dp);
+    }
+};
+
+and below one is by love sir concept
+
 
 
 1:recursion
 
+or we can also start from sum=0 and making it equal to target alright but this one is preferrable
+
 class Solution{
 public:
     int solve(int index,int arr[],int target,int n){
-        if(index>=n){
+        if(index>=n){ 
             return 0;
         }
         if(target<0){
