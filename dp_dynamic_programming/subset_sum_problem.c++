@@ -94,7 +94,7 @@ class Solution {
     }
     bool isSubsetSum(vector<int>& arr, int sum) {
         // code here
-        vector<vector<int>>dp(arr.size()+1,vector<int>(sum+1,-1));
+        vector<vector<int>>dp(arr.size()+1,vector<int>(sum+1,-1)); //we should have to store int in this dp as bool value can create error alright
         return solve(arr,sum,0,dp);
     }
 };
