@@ -91,10 +91,12 @@ top down
 class Solution {
   public:
     bool solve(vector<int>&arr,int target,int idx,vector<vector<int>>&dp){
-        if(idx>=arr.size()){
+        if(idx==arr.size()){
             if(target==0) return true;
             else return false;
         }
+
+        if(target==0) return true;
         
         if(dp[idx][target]!=-1) return dp[idx][target];
         
