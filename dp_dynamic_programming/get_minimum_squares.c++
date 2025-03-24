@@ -31,6 +31,7 @@ class Solution{
 	    
 	    for(int i=1;i*i<=n;i++){
 	        int t=i*i
+	       //to ques me hi given hai ki min value chahihe to min ke according hi solve kro curr value and jo return hoke aayi fun laya usme se min value alright
 	        ans=min(ans,1+solve(n-t));//because i*i on this stop only not initializing
 	    }
 	    
@@ -92,7 +93,7 @@ class Solution{
 	public:
 	
 	int solve(int n){
-	    vector<int>dp(n+1,INT_MAX);
+	    vector<int>dp(n+1,INT_MAX); //here we are finding min so we have to use INT_MAX
 	    dp[0]=0;
 	    
 	    for(int i=1;i<=n;i++){
