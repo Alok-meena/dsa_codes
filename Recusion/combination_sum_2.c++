@@ -102,9 +102,8 @@ void solve(vector<int>&a,vector<vector<int>>&ans,vector<int>&output,int target,i
             ans.push_back(output);
             return;
         }
-        if(target<0) return;
 
-        if(i>=a.size()){
+        if(i>=a.size() or target<0){
             return;
         }
         
