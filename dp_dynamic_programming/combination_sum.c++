@@ -25,6 +25,9 @@ Hence the output will be 9.
 1:recusion 
 
 //bs khuch nhi sbhi no. ke liye call krke dekha hai
+
+//accha suno jo ek ques tha combination sum in which each no. can be taken any no. of times that is diff from this as here we have to find total ways in which
+//target can achieved but can go in any order but in that other ques we are going orderly that's why that is diff from this alright
 #include <bits/stdc++.h> 
 
 
