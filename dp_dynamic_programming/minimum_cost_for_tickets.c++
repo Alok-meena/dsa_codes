@@ -46,6 +46,9 @@ int solve(int n, vector<int>&days, vector<int>&cost,int index){
 
     //7day pass
     int i;
+    //to i=index kiya to i me initally 0 ayega and just checking jis index pe ja rhe uska day currday+7 less ho that's it and then in the function call 
+    //we will pass i not index because i shi position pe pahuch hai no index and similarly for 30 days also
+    
     for(i=index;i<n && days[i]<days[index]+7;i++);//isme i<n hai so that it is in range and days[i]<days[index]+7 kiya mtlb days[i] to agle days access
     //hote rhenge aor days[index]+7 mtlb current day ex 1 3 4 5 7 8 10  cost :- 2 7 20 to isme 1 day k2 2 coin then index=1 and i=1 and then 
     //days[index]+7=3+7=10 mtlb <10 mtlb =9 tk hi jaye to 7 kdm aage bda diya same for 30  days
@@ -126,8 +129,8 @@ AND THIS IS BOTTOM-UP APPRAOCH SO WE DO IT FROM N-1 TO 0
 int solve(int n, vector<int> &days, vector<int> &cost) {
   
 
-  vector<int> dp(n + 1, INT_MAX);
-  dp[n] = 0;
+  vector<int> dp(n + 1, INT_MAX); //and hamesha yad rkho ki jab bhi min nikalna ho to bottom up me sabko intmax hi assign kr dena alright
+  dp[n] = 0; //base case
   for (int k = n - 1; k >=0; k--) {
     int option1 = cost[0] + dp[k + 1];
 
