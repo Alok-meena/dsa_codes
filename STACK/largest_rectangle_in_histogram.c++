@@ -59,6 +59,39 @@ public:
     }
 };
 
+the above code is checking l-1 index first and below one more variables are used so not more difference alright
+
+
+class Solution {
+public:
+    int largestRectangleArea(vector<int>& heights) {
+        int area=0;
+        int n=heights.size();
+
+        for(int i=0;i<n;i++){
+            int l=i;
+            int r=i;
+
+            int left=i-1;
+            int right=i+1;
+
+            while(left>=0 and heights[left]>=heights[i]){
+                l=left;
+                left--;
+            }
+            while(right<n and heights[right]>=heights[i]){
+                r=right;
+                right++;
+            }
+
+            int len=r-l+1;
+            int height=heights[i];
+            int ans=len*height;
+            area=max(area,ans);
+        }
+        return area;
+    }
+};
 
 t.c:-O(N^2) and s.c:-O(1)
 
