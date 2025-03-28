@@ -79,3 +79,69 @@ public:
 
 
 this approach is giving tle using dfs approach t.c:-O(m*n*k)
+
+
+
+bfs 
+
+khuch nhi kiya hamne kya kiya ki query ko sort kr liya alright and smaller qury ka count aa gya jo ki uske aage ki query me bhi involve hoga that's why hamne ek
+hi count bnaya hai alright
+
+class Solution {
+public:
+    vector<int> maxPoints(vector<vector<int>>& grid, vector<int>& queries) {
+        int m=grid.size();
+        int n=grid[0].size();
+        int k=queries.size();
+
+        vector<pair<int,int>>query(k);
+        for(int i=0;i<k;i++) query[i]={queries[i],i};
+
+        sort(query.begin(),query.end());
+
+       //pq me grid value and indices store kr liye alright
+
+        priority_queue<pair<int,pair<int,int>>,vector<pair<int,pair<int,int>>>,greater<pair<int,pair<int,int>>>>pq;
+        vector<vector<bool>>vis(m,vector<bool>(n,false));
+        pq.push({grid[0][0],{0,0}});
+        vis[0][0]=true;
+
+        int count=0;
+        vector<int>ans(k,0);
+        int dirx[]={-1,0,0,1};
+        int diry[]={0,-1,1,0};
+
+        for(auto q:query){
+            int query_val=q.first;
+            int query_index=q.second;
+         
+            //ye index ko hamne ans me store krne ke liye liya hai alright dekho hamne sort kr liya taki ek hi count variable ko use karna pde tik hai
+            //but correct index pe store ho that's why index be 2nd place pe store kiya hai tik hai 
+
+         
+            while(!pq.empty() and pq.top().first<query_val){
+                int gridval=pq.top().first;
+                int i=pq.top().second.first;
+                int j=pq.top().second.second;
+                pq.pop();
+
+                count++;
+                for(int d=0;d<4;d++){
+                    int newi=i+dirx[d];
+                    int newj=j+diry[d];
+                    if(newi>=0 and newi<m and newj>=0 and newj<n and !vis[newi][newj]){
+                        vis[newi][newj]=true;
+                        pq.push({grid[newi][newj],{newi,newj}});
+                    }
+                }
+            }
+            ans[query_index]=count;
+        }
+        return ans;
+    }
+};
+
+O(K∗Log(K)+M∗N∗Log(K))
+
+
+
