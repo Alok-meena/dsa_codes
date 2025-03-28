@@ -27,6 +27,34 @@ SO OBSTACLES[I] ME I BTATA HAI KI OBSTACLE KONSI POSITION PE HAI AND OBS..[I] TE
 1:recursion
 
 
+ class Solution {
+public:
+    int solve(vector<int>&v,int n,int pos,int curr_lane){
+        if(pos==n-1){
+            return 0;
+        }
+
+        if(pos+1<n and v[pos+1]!=curr_lane){
+            return solve(v,n,pos+1,curr_lane);
+        }
+        else{
+            int ans=INT_MAX;
+            for(int lane=1;lane<=3;lane++){
+                if(lane!=curr_lane and v[pos]!=lane){
+                    ans=min(ans,1+solve(v,n,pos,lane));
+                }
+            }
+            return ans;
+        }
+    }
+    int minSideJumps(vector<int>& obstacles) {
+        int n=obstacles.size();
+        return solve(obstacles,n,0,2);
+    }
+};
+
+ 
+
 class Solution {
 public:
     
@@ -88,7 +116,36 @@ s.c:-O(n)
 
 AND HERE ALSO WE WILL USE A 2D ARRAY BECAUSE CURRLANE AND CURRPOS BOTH ARE CHANGING OKK!!!!!!!
 
+class Solution {
+public:
+    int solve(vector<int>&v,int n,int pos,int curr_lane,vector<vector<int>>&dp){
+        if(pos==n-1){
+            return 0;
+        }
 
+        if(dp[pos][curr_lane]!=-1) return dp[pos][curr_lane];
+
+        if(pos+1<n and v[pos+1]!=curr_lane){
+            return dp[pos][curr_lane]=solve(v,n,pos+1,curr_lane,dp);
+        }
+        else{
+            int ans=INT_MAX;
+            for(int lane=1;lane<=3;lane++){
+                if(lane!=curr_lane and v[pos]!=lane){
+                    ans=min(ans,1+solve(v,n,pos,lane,dp));
+                }
+            }
+            return dp[pos][curr_lane]=ans;
+        }
+    }
+    int minSideJumps(vector<int>& obstacles) {
+        int n=obstacles.size();
+        vector<vector<int>>dp(obstacles.size()+1,vector<int>(4,-1)); //ye bhale chal gya but we have to take 4 rows and n+1 columns alright
+        return solve(obstacles,n,0,2,dp);
+    }
+};
+
+ 
 class Solution {
 public:
     
