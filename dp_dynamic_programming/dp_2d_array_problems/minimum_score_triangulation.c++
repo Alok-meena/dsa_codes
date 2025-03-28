@@ -107,7 +107,7 @@ public:
 
         //but reverse i=n-1 se start kiya and j ko i+2 se table i . . . j 3 point se traingle formation ho payegi
         for(int i=n-1;i>=0;i--){
-            for(int j=i+2;j<n;j++){
+            for(int j=i+2;j<n;j++){ //j ko i se start nhi kiya o/w 1 point no triangle and same with i+1 so did with i+2
                 int ans=INT_MAX;
                 for(int k=i+1;k<j;k++){
                     ans=min(ans,v[i]*v[j]*v[k]+dp[i][k]+dp[k][j]);
@@ -116,6 +116,8 @@ public:
             }
         }
         return dp[0][n-1];
+
+      and didnt initialize dp with INT_MAX because we didnt understand upper base case so we are using 0 and taking intmax condition separately
     }
     int minScoreTriangulation(vector<int>& values) {
         int n=values.size();
