@@ -256,3 +256,42 @@ The elements in the range shall already be sorted or at least partitioned with r
 
 t.c:-O(n^2)
 s.c:-O(n) (from O(2*n+1))
+
+
+
+and if we have to return the elements also then use this way
+
+class Solution {
+public:
+    int solve(vector<int>& arr, vector<int>& ans, int n, int currindex, int previndex, vector<vector<int>>& dp) {
+        if (currindex == n) {
+            return 0;
+        }
+
+        if (dp[currindex][previndex + 1] != -1) {
+            return dp[currindex][previndex + 1];
+        }
+
+        int inc = 0;
+        
+        // Include case
+        if (previndex == -1 || arr[currindex] > arr[previndex]) {
+            ans.push_back(arr[currindex]);  // Add to LIS candidate
+            inc = 1 + solve(arr, ans, n, currindex + 1, currindex, dp);
+            ans.pop_back();  // Backtrack (undo modification)
+        }
+
+        // Exclude case
+        int exc = solve(arr, ans, n, currindex + 1, previndex, dp);
+
+        return dp[currindex][previndex + 1] = max(inc, exc);
+    }
+
+    vector<int> lis(vector<int>& arr) {
+        vector<vector<int>> dp(arr.size() + 1, vector<int>(arr.size() + 1, -1));
+        vector<int> ans;
+        solve(arr, ans, arr.size(), 0, -1, dp);
+        return ans;
+    }
+};
+
