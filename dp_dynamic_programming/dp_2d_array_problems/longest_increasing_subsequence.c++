@@ -78,7 +78,7 @@ class Solution
         int exclude=0+solve(n,a,currindex+1,previndex,dp);//curr to aage bd gya but not prev vo vhi rhega
         
         dp[currindex][previndex+1]=max(include,exclude);
-        return dp[currindex][previndex+1];
+        return dp[currindex][previndex+1]; //very imp previndex can be negative so doing +1 to make it correct within the bound alright
     }
     
     int longestSubsequence(int n, int a[])
@@ -91,7 +91,7 @@ class Solution
     }
 };
 
-t.c:-O(n^2)
+t.c:-O(n^2) to ye complexity we can determine from how many states are there or changing alright
 s.c:-O(n^2)
 
 
@@ -108,7 +108,7 @@ class Solution
         vector<vector<int>>dp(n+1,vector<int>(n+1,0));//to code me hamne curr+1 kiya hai jbki start
         //n-1 se kiya to size n+1 krn hogi curr ki bhi
         
-        for(int currindex=n-1;currindex>=0;currindex--){
+        for(int currindex=n-1;currindex>=0;currindex--){ //aor previnddex currindex se ek piche and jayega till -1
             for(int previndex=currindex-1;previndex>=-1;previndex--){
                 int include=0;
                 //include case
