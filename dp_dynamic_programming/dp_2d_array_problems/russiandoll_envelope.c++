@@ -48,6 +48,7 @@ public:
 
     static bool comparator(vector<int>&a,vector<int>&b){
         if(a[0]==b[0]){
+         //bs khuch nhi yha pe hamne only order specify kiya hai alright
             return a[1]>b[1];//to isse jab dono width equal hui to height ko descending order me 
             //sort kr diya jayega
         }
@@ -79,6 +80,36 @@ public:
         return solve(n,envelopes);
     }
 };
+
+
+class Solution {
+public:
+    static bool cmp(vector<int>a,vector<int>b){
+        if(a[0]==b[0]) return a[1]>b[1];
+        return a[0]<b[0];
+    }
+    int maxEnvelopes(vector<vector<int>>& envelopes) {
+        sort(envelopes.begin(),envelopes.end(),cmp);
+        vector<int>ans;
+        for(auto i:envelopes){
+            ans.push_back(i[1]);
+        }
+
+        vector<int>v;
+        v.push_back(ans[0]);
+        for(int i=1;i<ans.size();i++){
+            if(ans[i]>v.back()){
+                v.push_back(ans[i]);
+            }
+            else{
+                int index=lower_bound(v.begin(),v.end(),ans[i])-v.begin();
+                v[index]=ans[i];
+            }
+        }
+        return v.size();
+    }
+};
+
 
 t.c:-O(nlogn)===(O(nlogn)+O(nlogn)=O(nlogn)) of sort and binarysearch
 s.c:-O(n)
@@ -130,3 +161,5 @@ int findMaxEnvelopes(vector<int> &height, vector<int> &width, int n) {
     sort(envelopes.begin(),envelopes.end(),comparator);
     return solve(n,envelopes);
 }
+
+
