@@ -102,6 +102,24 @@ s.c:-O(n^2)
 3:tabulation/ bottom-up appraoch
 
 
+if in top down we start time=0 then below code will be used
+
+int maxSatisfaction(vector<int>& satisfaction) {
+        sort(satisfaction.begin(),satisfaction.end());
+        int n=satisfaction.size();
+        vector<vector<int>>dp(n+1,vector<int>(n+2,0));  //here we need to do size+2 because time=i+1 means start from n and accessing n+1 would be possible 
+        //only if size will be n+2 alright
+
+        for(int i=n-1;i>=0;i--){
+            for(int time=i+1;time>=1;time--){
+                int inc=satisfaction[i]*(time)+dp[i+1][time+1];
+                int exc=0+dp[i+1][time];
+                dp[i][time]=max(inc,exc);
+            }
+        }
+        return dp[0][1];
+    }
+
 
 
 class Solution {
@@ -133,6 +151,28 @@ t.c:-O(n^2)
 s.c:-O(n^2)
 
 4:space optimization s.c:-O(n) t.c:-O(n^2)
+
+ if time=0 in top down
+
+ int maxSatisfaction(vector<int>& satisfaction) {
+        sort(satisfaction.begin(),satisfaction.end());
+        int n=satisfaction.size();
+        vector<vector<int>>dp(n+1,vector<int>(n+2,0));
+        vector<int>next(n+2,0);
+        vector<int>curr(n+2,0);
+
+        for(int i=n-1;i>=0;i--){
+            for(int time=i+1;time>=1;time--){
+                int inc=satisfaction[i]*(time)+next[time+1];
+                int exc=0+next[time];
+                curr[time]=max(inc,exc);
+            }
+            next=curr;
+        }
+        return next[1];
+    }
+
+this code will be used
 
 
   class Solution {
