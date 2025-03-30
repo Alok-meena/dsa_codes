@@ -30,6 +30,53 @@ Explanation: Inserting 5 characters the string becomes "leetcodocteel".
 
 
 
+brute force
+
+class Solution {
+public:
+    int solve(string s,int i,int j){
+        if(i>=j) return 0;
+
+        int mini1=INT_MAX,mini2=INT_MAX;
+        if(s[i]==s[j]){
+            mini1=solve(s,i+1,j-1);
+        }
+        else{
+            mini2=1+min(solve(s,i+1,j),solve(s,i,j-1));
+        }
+        return min(mini1,mini2);
+    }
+    int minInsertions(string s) {
+        return solve(s,0,s.length()-1);
+    }
+};
+
+top down with memorization
+
+class Solution {
+public:
+    int solve(string s,int i,int j,vector<vector<int>>&dp){
+        if(i>=j) return 0;
+
+        if(dp[i][j]!=-1) return dp[i][j];
+
+        if(s[i]==s[j]){
+            return dp[i][j]=solve(s,i+1,j-1,dp);
+        }
+        else{
+            return dp[i][j]=1+min(solve(s,i+1,j,dp),solve(s,i,j-1,dp));
+        }
+    }
+    int minInsertions(string s) {
+        int n=s.length();
+        vector<vector<int>>dp(n+1,vector<int>(n+1,-1));
+        return solve(s,0,s.length()-1,dp);
+    }
+};
+
+t.c and s.c is O(n^2)
+
+
 
 class Solution {
 public:
