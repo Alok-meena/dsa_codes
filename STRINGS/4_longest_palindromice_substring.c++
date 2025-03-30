@@ -123,6 +123,41 @@ class Solution {
 
 but this is givig error
 
+class Solution {
+public:
+    string longestCommonSubstr(string& s1, string& s2) {
+        int n = s1.length();
+        vector<vector<int>> dp(n + 1, vector<int>(n + 1, 0));
+        int maxLen = 0, endIdx = 0;
+
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (s1[i - 1] == s2[j - 1]) {
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
+
+                    // Ensure the found substring is a valid palindrome
+                    int revIdx = n - j; // Reverse index mapping
+                    if (revIdx + dp[i][j] - 1 == i - 1) { 
+                        if (dp[i][j] > maxLen) {
+                            maxLen = dp[i][j];
+                            endIdx = i - 1;
+                        }
+                    }
+                }
+            }
+        }
+
+        return s1.substr(endIdx - maxLen + 1, maxLen);
+    }
+
+    string longestPalindrome(string s) {
+        string revS = s;
+        reverse(revS.begin(), revS.end());
+        return longestCommonSubstr(s, revS);
+    }
+};
+ this is correct
+
   class Solution {
 public:
     string longestPalin(string S) {
