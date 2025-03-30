@@ -11,6 +11,77 @@ Input: str = "abc"
 Output: a
 Explanation: "a", "b" and "c" are the longest palindromes with same length. The result is the one with the least starting index.
 
+brute force 
+
+  // Online C++ compiler to run C++ program online
+#include <bits/stdc++.h>
+using namespace std;
+
+
+    bool check(string s){
+        int i=0;
+        int j=s.length()-1;
+        while(i<j){
+            if(s[i]!=s[j]) return false;
+            i++;j--;
+        }
+        return true;
+    }
+    int longestPalindrome(string s) {
+        int n=s.length();
+        int maxlen=0;
+        for(int i=0;i<n;i++){
+            for(int j=i;j<n;j++){
+                string a=s.substr(i,j-i+1);
+                if(check(a)){
+                    maxlen=max(maxlen,j-i+1);
+                }
+            }
+        }
+        return maxlen;
+    }
+
+
+int main() {
+    // Write C++ code here
+    string a="abcddc";
+    cout<<longestPalindrome(a);
+}
+
+t.c:- O(n^3)
+
+and in this only to return the string use this code
+
+class Solution {
+public:
+    bool check(string s){
+        int i=0;
+        int j=s.length()-1;
+        while(i<j){
+            if(s[i]!=s[j]) return false;
+            i++;j--;
+        }
+        return true;
+    }
+    string longestPalindrome(string s) {
+        int n=s.length();
+        string ans;
+        int maxlen=0;
+        for(int i=0;i<n;i++){
+            for(int j=i;j<n;j++){
+                string a=s.substr(i,j-i+1);
+                if(check(a)){
+                    if(maxlen<j-i+1){
+                        ans=a;
+                        maxlen=j-i+1;
+                    }
+                }
+            }
+        }
+        return ans;
+    }
+};
+
 
 1st : using longest common substring in this
 
