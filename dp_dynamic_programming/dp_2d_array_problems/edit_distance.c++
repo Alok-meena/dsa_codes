@@ -32,9 +32,12 @@ class Solution {
 public:
     int solve(string s1,string s2,int i,int j){
         //means length(s1)<s2 so remaining characters of s2 ko s1 me lga diya with ==operations
+        //to ager koi bhi string khtm ho gyi and we need to convert s1 to s2 and s1 is over then we have to add rem char of s2 to s1 alright so return rem lenght of s2 
+       
         if(i==s1.length()){
             return s2.length()-j;
         }
+        //and if s2 khtm ho gyi then rem chars of s1 needed to be deleted so that it can be converted to s2 alright so return remaining length of s1 alright
         if(j==s2.length()){
             return s1.length()-i;
         }
@@ -46,8 +49,8 @@ public:
         else{
             //add 1 to each as some operation is done to achieve our target
             int insertAns=1+solve(s1,s2,i,j+1);//insert kr diya to ex horse and ros to insert kiya to h to vhi rhega na to i and r maatch ho gya to j+1
-            int deleteAns=1+solve(s1,s2,i+1,j);
-            int replaceAns=1+solve(s1,s2,i+1,j+1);
+            int deleteAns=1+solve(s1,s2,i+1,j);//and ager equal nhi hai ex geek gesk alright so e and s are not equal e delete so i+1 j remain same
+            int replaceAns=1+solve(s1,s2,i+1,j+1);//replace me match ho jayega to dono ko age bda do alright and return min of all that's all
             ans=min(insertAns,min(deleteAns,replaceAns));
         }
         return ans;
