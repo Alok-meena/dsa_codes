@@ -69,10 +69,10 @@ public:
         long maxTriplet = 0, maxElement = 0, maxDiff = 0;
         for (long num : nums) {
            //this order should not be changed
-            
+            maxTriplet = max(maxTriplet, maxDiff * num);
             maxDiff = max(maxDiff, maxElement - num);
             maxElement = max(maxElement, num);
-            maxTriplet = max(maxTriplet, maxDiff * num);
+            
         }
         return maxTriplet;
     }
