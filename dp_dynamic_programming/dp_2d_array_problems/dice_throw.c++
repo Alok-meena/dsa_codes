@@ -19,6 +19,33 @@ faces from 1 to 6.
 
 THIS QUESTION IS ALSO KNOWN AS DISTINC WAYS TO ACHIEVE THE TARGET
 
+
+ below is also correct but can do like this also
+
+int mod=1000000007;
+
+class Solution {
+public:
+    int solve(int dice,int faces,int target,int index,vector<vector<int>>&dp){
+        if(index>=dice) return target==0?1:0;
+
+        if(dp[index][target]!=-1) return dp[index][target];
+        
+        int ans=0;
+        
+        for(int i=1;i<=faces;i++){
+            if(target>=i) ans=(ans+solve(dice,faces,target-i,index+1,dp))%mod;
+        }
+
+        return dp[index][target]=ans;
+    }
+    int numRollsToTarget(int n, int k, int target) {
+        vector<vector<int>>dp(n+1,vector<int>(target+1,-1));
+        return solve(n,k,target,0,dp);
+    }
+};
+
+
 1:recusion
 
 class Solution {
@@ -100,6 +127,32 @@ class Solution {
 3:bottom-up approach
 
 
+int numRollsToTarget(int n, int k, int target) {
+        vector<vector<int>>dp(n+2,vector<int>(target+1,0));
+
+
+    //ye niche vala for loop nhi lagana because what we want ki sari dices use ho and then target 0 ho from base case alright
+        // for(int index=0;index<=n;index++){
+        //     dp[index][0]=1;
+        // }
+        dp[n][0]=1;
+
+    //n is done so start with n-1 alright
+
+        for(int index=n-1;index>=0;index--){
+            for(int tar=0;tar<=target;tar++){
+                int ans=0;
+        
+                for(int i=1;i<=k;i++){
+                    if(tar>=i) ans=(ans+dp[index+1][tar-i])%mod;
+                }
+
+                dp[index][tar]=ans;
+            }
+        }
+        return dp[0][target];
+d    }
+
 class Solution {
   public:
    
@@ -133,7 +186,27 @@ class Solution {
 
 4:space optimization
 
+int numRollsToTarget(int n, int k, int target) {
+     
+        vector<int>next(target+1,0);
+        vector<int>curr(target+1,0);
+        next[0]=1; //yha pe tha dp[n][0]=1 alright so niche loop me hamne n-1 se start kiya to n to next row hi hogi alright
 
+
+        for(int index=n-1;index>=0;index--){
+            for(int tar=0;tar<=target;tar++){
+                int ans=0;
+        
+                for(int i=1;i<=k;i++){
+                    if(tar>=i) ans=(ans+next[tar-i])%mod;
+                }
+
+                curr[tar]=ans;
+            }
+            next=curr;
+        }
+        return next[target];
+    }
 
 class Solution {
   public:
