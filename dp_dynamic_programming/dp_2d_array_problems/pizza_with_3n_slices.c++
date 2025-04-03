@@ -21,6 +21,33 @@ Explanation: Pick pizza slice of size 4, Alice and Bob will pick slices with siz
 THIS IS SAME AS ROBBERY QUES WHERE HOUSES ARE ALSO IN CIRUCLAR LOOP
 
 
+
+ 
+ can do like this also
+
+
+to bhai log same to same house robbery vala ques just we have to stop if we eat n/3 slices alright as each will get n/3 only 
+
+class Solution {
+public:
+    int solve(int i,int k,int count,vector<int>&slices,int endindex){
+        if(i>=endindex or count==k) return 0;
+
+        int take=slices[i]+solve(i+2,k,count+1,slices,endindex);
+        int nottake=0+solve(i+1,k,count,slices,endindex);
+        return max(take,nottake);
+    }
+    int maxSizeSlices(vector<int>& slices) {
+        int k=slices.size()/3;
+        int case1=solve(0,k,0,slices,slices.size()-1);
+        int case2=solve(1,k,0,slices,slices.size());
+
+        return max(case1,case2);
+    }
+};
+
+here instead of n-1 we used count alright
+
 1:recursion
 class Solution {
 public:
@@ -61,6 +88,29 @@ In this approach, we are using recursive functions, so in worst case, a total sp
 
 
 2:memorization
+
+ class Solution {
+public:
+    int solve(int i,int k,int count,vector<int>&slices,int endindex,vector<vector<int>>&dp){
+        if(i>=endindex or count==k) return 0;
+
+        if(dp[i][count]!=-1) return dp[i][count];
+
+        int take=slices[i]+solve(i+2,k,count+1,slices,endindex,dp);
+        int nottake=0+solve(i+1,k,count,slices,endindex,dp);
+        return dp[i][count]=max(take,nottake);
+    }
+    int maxSizeSlices(vector<int>& slices) {
+        int k=slices.size()/3;
+        vector<vector<int>>dp1(slices.size(),vector<int>(k+1,-1));
+        vector<vector<int>>dp2(slices.size(),vector<int>(k+1,-1));
+
+        int case1=solve(0,k,0,slices,slices.size()-1,dp1);
+        int case2=solve(1,k,0,slices,slices.size(),dp2);
+
+        return max(case1,case2);
+    }
+};
 
 class Solution {
 public:
@@ -110,6 +160,37 @@ O(N^2), where ‘N’ is the number of elements in array ‘ARR’.
 In this approach, we are using extra space of O(N^2) for storing ‘DP’ array and O(N*N) space will be used by memory stack in recursion for each recursive state. Hence the overall space complexity is O(N*N).
 
 3:bottom-up
+
+int maxSizeSlices(vector<int>& slices) {
+        int k=slices.size()/3;
+        vector<vector<int>>dp1(slices.size()+2,vector<int>(k+2,0));
+        vector<vector<int>>dp2(slices.size()+2,vector<int>(k+2,0));
+
+        for(int i=slices.size()-2;i>=0;i--){
+            for(int count=k-1;count>=0;count--){ //start from k-1 because if count==k then it is already set to 0
+                int take=slices[i]+dp1[i+2][count+1];
+                int nottake=0+dp1[i+1][count];
+                dp1[i][count]=max(take,nottake);
+            }
+        }
+
+        int case1=dp1[0][0]; //and here same as we pass 0,0 so store it only alright
+
+        for(int i=slices.size()-1;i>=1;i--){
+            for(int count=k-1;count>=0;count--){
+                int take=slices[i]+(i+2<slices.size() ? dp2[i+2][count+1]:0);
+                int nottake=0+dp2[i+1][count];
+                dp2[i][count]=max(take,nottake);
+            }
+        }
+
+        int case2=dp2[1][0];
+
+
+
+
+        return max(case1,case2);
+    }
 
 
 
@@ -195,6 +276,48 @@ In this approach, we are using extra space of O(N^2) for storing ‘DP’ array 
 
 
 4:space optimized
+
+int maxSizeSlices(vector<int>& slices) {
+        int k=slices.size()/3;
+        int n=slices.size();
+   
+
+        vector<int>prev1(k+2,0);
+        vector<int>next1(k+2,0);
+        vector<int>curr1(k+2,0);
+        vector<int>prev2(k+2,0);
+        vector<int>next2(k+2,0);
+        vector<int>curr2(k+2,0);
+
+
+        for(int i=slices.size()-2;i>=0;i--){
+            for(int count=k-1;count>=0;count--){
+                int take=slices[i]+next1[count+1];
+                int nottake=0+curr1[count];
+                prev1[count]=max(take,nottake);
+            }
+            next1=curr1;
+            curr1=prev1;
+        }
+
+        int case1=curr1[0];
+
+        for(int i=slices.size()-1;i>=1;i--){
+            for(int count=k-1;count>=0;count--){
+                int take=slices[i]+next2[count+1];
+                int nottake=0+curr2[count];
+                prev2[count]=max(take,nottake);
+            }
+            next2=curr2;
+            curr2=prev2;
+        }
+
+        int case2=curr2[0];
+        return max(case1,case2);
+    }
+
+
+alright
 
 class Solution {
 public:
