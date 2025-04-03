@@ -22,6 +22,8 @@ The total height is 95 + 50 + 45 = 190.
 
 
 
+so is code me ham reverse direction me ja rhe means in decreasing order so here we included base first and then new box
+
 class Solution {
 public:
 
@@ -100,3 +102,59 @@ public:
 
 t.c:-O(N^2)
 s.c:-O(N^2)
+
+
+but in this top down approach we used normal sequence that whether the box can be fit in the new box alright so changed check condition
+
+
+class Solution {
+public:
+    bool check(vector<int>&base,vector<int>&newbox){
+        if(newbox[0]>=base[0] and newbox[1]>=base[1] and newbox[2]>=base[2]) return true;
+        return false;
+    }
+    int solve(int n,vector<vector<int>>& a,int currindex,int previndex,vector<vector<int>>&dp){
+        if(currindex==n){
+            return 0;
+        }
+        
+        if(dp[currindex][previndex+1]!=-1){
+            return dp[currindex][previndex+1];
+        }
+        
+        
+        int include=0;
+        //include case
+        if(previndex==-1 || check(a[previndex],a[currindex])){//2 condn ek ki pahla element hai and 2nd uske bad vala
+            include=a[currindex][2]+solve(n,a,currindex+1,currindex,dp);//curr ko aage bda do and prev 
+            //ab curr ke equal ho jayega
+        }
+        
+        //exclude case
+        int exclude=0+solve(n,a,currindex+1,previndex,dp);//curr to aage bd gya but not prev vo vhi rhega
+        
+        dp[currindex][previndex+1]=max(include,exclude);
+        return dp[currindex][previndex+1]; //very imp previndex can be negative so doing +1 to make it correct within the bound alright
+    }
+    
+    int longestSubsequence(int n,vector<vector<int>>& a)
+    {
+       // your code here
+       //size n hi li because 0 se n-1 tk curr and -1 se n-1 tk prev ja rha hai to total n element ho gye hai
+       //because 0 se leke n-1 = n elemnt and -1 se n-1 tk n+1 eleemnts
+       vector<vector<int>>dp(n,vector<int>(n+1,-1));//because curr and prev are changing
+       return solve(n,a,0,-1,dp);
+    }
+    int maxHeight(vector<vector<int>>& cuboids) {
+        for(auto &i:cuboids){
+            sort(i.begin(),i.end());
+        }
+
+        sort(cuboids.begin(),cuboids.end());
+
+        return longestSubsequence(cuboids.size(),cuboids);
+    }
+};
+
+
+
