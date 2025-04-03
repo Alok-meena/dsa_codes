@@ -28,6 +28,10 @@ Output: 1
 the below is my code
 
 
+main bat ye hai ki jo hamne same width pe height ko decreasing order me kiya because same width ka ek hi envelope le skte hai as we want strictly greater alright
+that's why we did this
+
+
 
 JUST KYA KIYA PAHLE WIDTH KE ACCORDING SORT KIYA AND THEN IF WIDTH EQUAL AAYI THEN HEIGHT KE ACCORDING DESCENDING ORDER ME SORT KIYA
 BECASUE LIS HMARA INCREASING ORDER ME FIND KARTA HAI SEQUENCE KO SO LARGE HEIGHT KO PAHLE LE AAYE IF 2 WIDHTS ARE EQUAL FIR TO AGER EQUAL AA GYI 2 WIDTH
