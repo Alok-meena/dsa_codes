@@ -147,7 +147,7 @@ public:
     }
     int maxHeight(vector<vector<int>>& cuboids) {
         for(auto &i:cuboids){
-            sort(i.begin(),i.end());
+            sort(i.begin(),i.end()); //sorting isliye kiya because kisi bhi dimension ko height leke we have to maximize the height alright
         }
 
         sort(cuboids.begin(),cuboids.end());
