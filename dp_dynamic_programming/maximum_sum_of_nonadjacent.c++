@@ -40,7 +40,7 @@ int solve(vector<int>&nums,int n){
         return nums[0]; //not required mostly
     }
 
-    int incl=solve(nums,n-2)+nums[n];
+    int incl=solve(nums,n-2)+nums[n]; 
     int excl=solve(nums,n-1)+0;
 
     return max(incl,excl);
@@ -56,15 +56,15 @@ can start from starting also
 #include <bits/stdc++.h> 
 int solve(vector<int>&nums,int n,int i){
     //to ye vala base case +2 index ke liye necessary hai alright
-    if(i>n){
+    if(i>=n){
         return 0;
     }
     if(i==n){
         return nums[i];
     }
 
-    int incl=solve(nums,n,i+2)+nums[i];
-    int excl=solve(nums,n,i+1)+0;
+    int incl=solve(nums,n,i+2)+nums[i]; //ager curr ko include kr liya to i+2 
+    int excl=solve(nums,n,i+1)+0;//ager exclude kiya hai to bhailog agle ko include krenge to i+1 hi to hoga alright
 
     return max(incl,excl);
 }
