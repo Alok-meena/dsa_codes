@@ -99,6 +99,28 @@ t.c:-O(n*h) worst case n is the total nodes s.c:-O(h)
 in bst t.c:-O(n*logn) 
 
 
+and if tree is not symmetric if 4 is removed from above example then this code may not work so we have to use postorder like this 
+
+ class Solution {
+public:
+    pair<int, TreeNode*> dfs(TreeNode* root) {
+        if (!root) return {0, nullptr};
+
+        auto left = dfs(root->left);
+        auto right = dfs(root->right);
+
+        if (left.first == right.first) return {left.first + 1, root};
+        return left.first > right.first ? make_pair(left.first + 1, left.second)
+                                        : make_pair(right.first + 1, right.second);
+    }
+
+    TreeNode* lcaDeepestLeaves(TreeNode* root) {
+        return dfs(root).second;
+    }
+};
+
+
+
 
 and this is the same code for smallest subtree with all the deepest leaves alright same ditto code
 
