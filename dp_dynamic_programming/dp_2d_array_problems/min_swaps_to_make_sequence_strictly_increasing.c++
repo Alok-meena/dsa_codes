@@ -268,3 +268,43 @@ public:
         return solve(nums1,nums2);
     }
 }; 
+
+
+if u dont understand above solution of space optimization then this is the code for you
+
+int minSwap(vector<int>& nums1, vector<int>& nums2) {
+        nums1.insert(nums1.begin(),-1);
+        nums2.insert(nums2.begin(),-1);
+        vector<vector<int>>dp(nums1.size()+1,vector<int>(3,0));
+        vector<int>curr(3,0);
+        vector<int>next(3,0);
+
+        for(int i=nums1.size()-1;i>=1;i--){
+            for(int swapped=1;swapped>=0;swapped--){
+                int prev1=nums1[i-1];
+                int prev2=nums2[i-1];
+
+                int ans=INT_MAX;
+
+                if(swapped){
+                    swap(prev1,prev2);
+                }
+
+                //notswap
+                if(nums1[i]>prev1 and nums2[i]>prev2){
+                    ans=next[0];
+                }
+
+                //swap
+                if(nums1[i]>prev2 and nums2[i]>prev1){
+                    ans=min(ans,1+next[1]);
+                }
+
+                curr[swapped]=ans;
+            }
+            next=curr;
+        }
+
+        return next[0];
+
+    }
