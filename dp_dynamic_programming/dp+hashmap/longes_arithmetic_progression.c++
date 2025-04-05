@@ -13,7 +13,47 @@ progression is {1, 7, 13, 19}.
 
 VERY VERY IMP
 
+brute force store all subsequences of length 2 and check for ap and store longest length alright
 
+class Solution {
+  public:
+    void solve(vector<int>&a,vector<int>output,vector<vector<int>>&ans,int i){
+        if(i>=a.size()){
+            if(output.size()>=2) ans.push_back(output);
+            return;
+        }
+        
+        solve(a,output,ans,i+1);
+        
+        output.push_back(a[i]);
+        solve(a,output,ans,i+1);
+    }
+    int lengthOfLongestAP(vector<int>& arr) {
+        // code here
+        if(arr.size()<=1) return 1;
+        
+        vector<vector<int>>ans;
+        vector<int>output;
+        solve(arr,output,ans,0);
+        
+        int len=0;
+        
+        for(int i=0;i<ans.size();i++){
+            int d=ans[i][1]-ans[i][0];
+            int count=0;
+            for(int j=1;j<ans[i].size();j++){
+                if(ans[i][j]-ans[i][j-1]==d){
+                    count++;
+                }
+                else break;
+            }
+            len=max(len,count+1);
+        }
+        return len;
+    }
+};
+
+t.c and s.c : - O(2^n * n)
 
 1:recursion
 
