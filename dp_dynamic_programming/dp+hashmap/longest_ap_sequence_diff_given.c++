@@ -45,3 +45,61 @@ public:
 };
 
 t.c:-O(n) and s.c:-O(n)
+
+
+can do like this also 
+
+class Solution {
+public:
+    int longestSubsequence(vector<int>& arr, int difference) {
+        int len=1;
+        if(arr.size()<=1) return 1;
+        
+        for(int i=0;i<arr.size();i++){
+             int k=i-1;
+                int ele=arr[i];
+                int count=0;
+                while(k>=0){
+                    if(ele-difference==arr[k]){
+                        ele=arr[k];
+                        count++;
+                    }
+                    k--;
+                }
+                
+                len=max(len,count+1);
+        }
+        
+        return len;
+    }
+};
+
+means at each step checking if there is a ele backward with given diff means arr[i]-diff===arr[k] then do count ++ but gives tle alright
+
+optimized 
+
+class Solution {
+public:
+    int longestSubsequence(vector<int>& arr, int difference) {
+        unordered_map<int, int> dp;
+        int len = 1;
+
+        for (int i = 0; i < arr.size(); i++) {
+            int ele = arr[i];
+            int prev = ele - difference;
+
+            // if there's a sequence ending at prev, extend it
+            if (dp.find(prev) != dp.end()) {
+                dp[ele] = dp[prev] + 1;
+            } else {
+                dp[ele] = 1; // start a new subsequence
+            }
+
+            len = max(len, dp[ele]);
+        }
+
+        return len;
+    }
+};
+
+cant use vector here instead of map because ele can be negative also alright
