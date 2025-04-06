@@ -40,7 +40,7 @@ public:
 
         int ans=INT_MAX;
         for(int i=start;i<=end;i++){
-            ans=min(ans,i+max(solve(start,i-1),solve(i+1,end)));
+            ans=min(ans,i+max(solve(start,i-1),solve(i+1,end))); //so ye to pta tha ki hame min ans lena hai of all numbers but then currcost + wors case take max
         }
         return ans;
     }
