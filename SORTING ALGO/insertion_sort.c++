@@ -29,6 +29,21 @@ int main() {
 isme ham mante hai ki left part sorted hai aor pure array se compare krke us part ko sort krte hai okk
 
 
+int main() {
+    vector<int> v = {5, 4, 3, 2, 1};
+    int n = v.size();
+
+    for (int i = 1; i < n; i++) { // Start from the second element
+        int j = i;
+
+        // Move elements of v[0..i-1], that are greater than key, one position ahead
+        while (j >0 && v[j] > v[j-1]) {
+            swap(v[j],v[j-1])
+            j--;
+        }
+
+    }
+
 
 but the above one is more efficient 
 
