@@ -143,4 +143,55 @@ int main(){
 O(n) and O(1) are t.c and s.c
 
 
+class Solution {
+public:
+    void moveZeroes(vector<int>& nums) {
+        int n=nums.size();
+
+        int i=0;
+        int j=0;
+        while(i<n and j<n){
+            if(nums[j]==0){
+                j++;
+            }
+            else{
+                swap(nums[i],nums[j]);
+                i++;
+                j++;
+            }
+        }
+        
+    }
+};
+
+in this solution we are just iterating and j is finding non zero element and then swapping with i and then i++  but more easy solution to understand is below
+
+t.c:-O(n) and s.c:-O(1)
+
+class Solution {
+public:
+    void moveZeroes(vector<int>& nums) {
+        int n=nums.size();
+
+        int j=n;
+        for(int i=0;i<n;i++){
+            if(nums[i]==0){
+                j=i;
+                break;
+            }
+        }
+
+        for(int i=j+1;i<n;i++){
+            if(nums[i]!=0){
+                swap(nums[i],nums[j]);
+                j++;
+            }
+        }
+        
+    }
+};
+
+in this j is pointing to zero element and i is to non zero and as we find non zero ele we will swap it and j++ alright O(n) 
+
+
 
