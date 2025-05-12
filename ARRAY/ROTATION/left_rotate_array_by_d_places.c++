@@ -83,6 +83,38 @@ class Solution{
 
 t.c:-O(n+d) and s.c:-O(d)
 
+t.c:-O(N*min(N,n))
+
+int main(){
+    vector<int>v={1,2,3,4};
+    int N=v.size();
+    
+
+    for(auto i:v){
+        cout<<i<<" ";
+    }
+    cout<<endl; 
+    int n;
+    cout<<"times to rotate array:";
+    cin>>n;
+
+    int rotations=n%N;
+
+    for(int k=1;k<=rotations;k++){
+        int j=v[0];
+        for(int i=1;i<N;i++){
+            v[i-1]=v[i];
+        }
+        v[v.size()-1]=j;
+    }
+
+    for(auto i:v){
+        cout<<i<<" ";
+    }
+    
+}
+
+
 3rd:O(n) t.c and O(1) space
 
 class Solution{
