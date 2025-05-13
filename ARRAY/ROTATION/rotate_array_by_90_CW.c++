@@ -1,4 +1,27 @@
+#include <bits/stdc++.h>
+using namespace std;
 
+int main(){
+
+    vector<vector<int>>v={
+        {1,2,3},
+        {4,5,6},
+        {7,8,9}
+    };
+
+    int n=v.size();
+
+    for(int i=0;i<n;i++){
+        for(int j=n-1;j>=0;j--){
+            cout<<v[j][i]<<" ";
+        }
+        cout<<endl;
+    }
+    
+    
+    
+} 
+we can do this also
 
 
 
