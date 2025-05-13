@@ -147,3 +147,69 @@ int main(){
     
     
 } 
+
+
+the below code is also correct but the thing is i choose the parameters wrong as
+to go left to right and right to left use these two only and same for top and bottom alright.
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+    
+    vector<vector<int>>v={
+        {1,2,3,4,5},
+        {6,7,8,9,10},
+        {11,12,13,14,15},
+        {16,17,18,19,20}};
+    int n=v.size();
+    int m=v[0].size();
+    int top=0;
+    int bottom=n-1;
+    int left=0;
+    int right=m-1;
+    int count=0;
+
+    int total=n*m;
+
+    while(left<=right and top<=bottom and count<total){
+        int i=left;
+        while(i<=right){
+            cout<<v[top][i]<<" ";
+            i++;
+            count++;
+        }
+        
+        left++;
+        i=top+1;
+        while(i<=bottom){
+            cout<<v[i][right]<<" ";
+            i++;
+            count++;
+        }
+
+        right--;
+        i=right;
+        while(i>=top){
+            cout<<v[bottom][i]<<" ";
+            i--;
+            count++;
+        }
+
+        bottom--;
+        i=bottom;
+        while(i>top){
+            cout<<v[i][top]<<" ";
+            i--;
+            count++;
+        }
+
+        top++;
+    }
+}
+
+           this is also correct but the thing is we have to use correct thing 
+means left to right top remain same and top to bottom right remain same right to left bottom
+reamin same and bottom to top left remain same alright
+
