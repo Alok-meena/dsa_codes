@@ -86,3 +86,35 @@ int main() {
 
 }
 
+
+instead of these what we can do is push all the words in vector then just issue the reverse order in a string that's it
+
+
+
+class Solution {
+public:
+    string reverseWords(string s) {
+        int n=s.length();
+        vector<string>v;
+        int i=0;
+        while(i<s.length()){
+            string d;
+            if(s[i]!=' '){
+                while(i<n and s[i]!=' '){
+                    d.push_back(s[i]);
+                    i++;
+                }
+                v.push_back(d);
+            }
+            else i++;
+        }
+
+        string ans;
+        for(int i=v.size()-1;i>=0;i--){
+            ans+=v[i];
+            if(i!=0) ans+=' ';
+        }
+        return ans;
+    }
+};
+
