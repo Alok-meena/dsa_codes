@@ -120,3 +120,24 @@ public:
         return {k,j};
     }
 };
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        int n=nums.size();
+        unordered_map<int,int>mp;
+        for(int i=0;i<n;i++){
+            mp[nums[i]]=i;
+        }
+        
+        for(int i=0;i<n;i++){
+            int value=target-nums[i];
+            if(mp.count(value) and mp[value]!=i){
+                return {i,mp[value]};
+            }
+        }
+        return {0,0};
+    }
+};
+
+t.c and s.c is O(n)
