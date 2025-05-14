@@ -77,6 +77,26 @@ public:
     }
 };
 
+
+or 
+
+class Solution {
+public:
+
+    bool solve(int idx,vector<int>&arr){
+        if(idx>=arr.size()-1) return true;
+        
+        for(int i=1;i<=arr[idx];i++){
+            if(solve(idx+i,arr)) return true;
+        }
+
+        return false;
+    }
+    bool canJump(vector<int>& nums) {
+        return solve(0,nums);
+    }
+};
+
 shows tle and after adding memorization it will work
 
 2:
@@ -102,5 +122,26 @@ public:
     bool canJump(vector<int>& nums) {
        vector<int>dp(nums.size(),-1);
        return solve(0,nums,dp);
+    }
+};
+
+
+class Solution {
+public:
+
+    bool solve(int idx,vector<int>&arr,vector<int>&dp){
+        if(idx>=arr.size()-1) return true;
+
+        if(dp[idx]!=-1) return dp[idx];
+        
+        for(int i=1;i<=arr[idx];i++){
+            if(solve(idx+i,arr,dp)) return dp[idx]=true;
+        }
+
+        return dp[idx]=false;
+    }
+    bool canJump(vector<int>& nums) {
+        vector<int>dp(nums.size()+1,-1);
+        return solve(0,nums,dp);
     }
 };
