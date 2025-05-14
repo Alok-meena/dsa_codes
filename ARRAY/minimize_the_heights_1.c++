@@ -77,5 +77,7 @@ class Solution {
     }
 };
 
+here we are assuming that ith ele is the last one to get +k and i+1 is the first one to be -k so ith can become largest and the next one can become smallest 
+because till ith index 0-i elements cant  be -k as can become negative 
 
 explanation in copy course copy small one 
