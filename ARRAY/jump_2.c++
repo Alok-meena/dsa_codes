@@ -10,7 +10,9 @@ Each element nums[i] represents the maximum length of a forward jump from index 
 i + j < n
 Return the minimum number of jumps to reach nums[n - 1]. The test cases are generated such that you can reach nums[n - 1].
 
- 
+
+
+
 
 Example 1:
 
@@ -20,6 +22,31 @@ Explanation: The minimum number of jumps to reach the last index is 2. Jump 1 st
 
 1 recursion here we are trying all possible combinations and taking out the min as answer
 
+
+can also use the below code of 2d dp with memo but giving tle so use 1d dp only
+
+class Solution {
+  public:
+    int solve(int idx,int jumps,vector<int>&arr,vector<vector<int>>&dp){
+        if(idx>=arr.size()-1) return jumps;
+        
+        if(dp[idx][jumps]!=-1) return dp[idx][jumps];
+        
+        int mini=INT_MAX;
+        for(int i=1;i<=arr[idx];i++){
+            mini=min(mini,solve(idx+i,jumps+1,arr,dp));
+        }
+        return dp[idx][jumps]=mini;
+    }
+    int minJumps(vector<int>& arr) {
+        // code here
+        vector<vector<int>>dp(arr.size()+1,vector<int>(arr.size()+1,-1));
+        int value=solve(0,0,arr,dp);
+        return value==INT_MAX?-1:value;
+    }
+};
+
+from exponential N^N to O(n^2)  t.c and s.c
 class Solution {
 public:
     int solve(int index,int jumps,vector<int>&nums){
@@ -163,3 +190,32 @@ class Solution{
         
     }
 };
+
+
+class Solution {
+  public:
+    int minJumps(vector<int>& arr) {
+        // code here
+        int n=arr.size();
+        int l=0,r=0,jumps=0;
+        if(arr[0]==0) return -1;
+        
+        
+        while(r<arr.size()-1){
+            int farthest=0;
+            for(int i=l;i<=r;i++){
+                farthest=max(farthest,i+arr[i]);
+            }
+            
+            if(farthest<=r) return -1;
+            
+            l=r+1;
+            r=farthest;
+            jumps++;
+        }
+        
+        return jumps;
+    }
+};
+
+t.c:-O(n) and s.c:-O(1)
