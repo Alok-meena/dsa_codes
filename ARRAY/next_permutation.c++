@@ -86,6 +86,46 @@ public:
     }
 };
 
+t.c:-O(n!*n)
+
+but this may give wrong ans as we want unique permutations not duplicate like in 1 1 5
+
+so 
+
+ void permutation(vector<int> nums, int index, set<vector<int>>& ans) {
+    if (index >= nums.size()) {
+        ans.insert(nums);  // will automatically remove duplicates
+        return;
+    }
+    for (int j = index; j < nums.size(); j++) {
+        swap(nums[index], nums[j]);
+        permutation(nums, index + 1, ans);
+        swap(nums[index], nums[j]);
+    }
+}
+
+void nextPermutation(vector<int>& nums) {
+    set<vector<int>> ans;
+    permutation(nums, 0, ans);
+
+    vector<vector<int>> sortedPerms(ans.begin(), ans.end());  // now duplicates are gone
+
+    int index = -1;
+    for (int i = 0; i < sortedPerms.size(); i++) {
+        if (sortedPerms[i] == nums) {
+            index = i + 1;
+            break;
+        }
+    }
+
+    if (index >= sortedPerms.size()) {
+        sort(nums.begin(), nums.end());
+    } else {
+        nums = sortedPerms[index];
+    }
+}
+
+t.c:-O(n!*n*log(n!)) log factor due to insertion in set
 
 2: most optimized soln
 
