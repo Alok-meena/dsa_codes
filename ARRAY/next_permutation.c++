@@ -162,3 +162,33 @@ vector<int> nextPermutation(vector<int> &permutation, int n)
         return permutation;
 }
 t.c:-O(n) and s.c:-O(1) here t.c is O(3n) due to 3 loops which is O(n)
+
+
+class Solution {
+public:
+    void nextPermutation(vector<int>& nums) {
+        //find the breakpoint
+        int index=-1;
+        int n=nums.size();
+        for(int i=n-2;i>=0;i--){
+            if(nums[i]<nums[i+1]){
+                index=i;
+                break;
+            }
+        }
+
+        if(index==-1){
+            reverse(nums.begin(),nums.end());
+            return;
+        }
+
+        for(int i=n-1;i>=0;i--){
+            if(nums[i]>nums[index]){
+                swap(nums[i],nums[index]);
+                break;
+            }
+        }
+
+        reverse(nums.begin()+index+1,nums.end());
+    }
+}; this is the right solution
