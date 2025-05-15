@@ -83,6 +83,21 @@ void merge(vector<int>&v,int low,int high,int mid){
         v[i]=temp[i-low];
     }
 
+    here i-low in temp because i is the indices of the original array alright and we want index from 0 for temp of size low to high
+
+    ex:
+    arr = [4, 2, 5, 3, 1]
+low = 1, high = 3
+So arr[1..3] = [2, 5, 3] needs sorting.
+
+temp = sorted [2, 3, 5] → indices 0 to 2
+
+i = 1 → arr[1] = temp[0]
+
+i = 2 → arr[2] = temp[1]
+
+i = 3 → arr[3] = temp[2]
+
 
 }
 void mergesort(vector<int>&v,int low,int high){
