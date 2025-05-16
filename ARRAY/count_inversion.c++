@@ -64,8 +64,10 @@ class Solution {
                 temp[k++]=nums[left++];
             }
             else{
-                temp[k++]=nums[right++];
-                count=count+(mid-left+1);
+                temp[k++]=nums[right++]; 
+                count=count+(mid-left+1); //to is case me if nums[left]>=nums[right] hai to jaise hi mila to yha pe to bs nums[left] se aage ke sare
+              //nums[right] se bde honge so do mid-left+1 and we know that the left and right part are already sorted in merge sort we just have to merge tehm
+              //alright
             }
         }
 
@@ -91,6 +93,7 @@ class Solution {
         }
     
         long long mid=low+(high-low)/2;
+        //and here we have to combine the two divided part and the combined part also alright
         count+=mergesort(nums,low,mid);
         count+=mergesort(nums,mid+1,high);
         count+=merge(nums,low,high,mid);//have to pass mid here to merege both the left right subarray using the low high and mid
