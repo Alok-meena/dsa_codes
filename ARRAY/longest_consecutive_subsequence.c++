@@ -57,6 +57,8 @@ class Solution{
     }
 };
 
+this brute force is also wrong for duplicate ele's
+
 t.c:-O(n^2) and s.c:-O(1)
 
 2: optimal solution
@@ -92,6 +94,37 @@ class Solution{
     
     }
 };
+
+or 
+
+class Solution {
+  public:
+    int longestConsecutive(vector<int>& arr) {
+        int ans = 1;
+        int n = arr.size();
+        int currlen=1;
+
+        sort(arr.begin(), arr.end());
+
+        for (int i = 1; i < n; i++) {
+            if (arr[i] == arr[i - 1]) continue;
+            if (arr[i]==arr[i - 1]+1) {
+                currlen++;
+            }
+            else{
+                ans=max(ans,currlen);
+                currlen=1;
+            }
+        }
+
+        // Final update in case the longest sequence ends at the last index
+        ans = max(ans,currlen);
+
+        return ans;
+    }
+};
+
+best 
 
 t.c:-O(nlogn) nlogn for sorting is there and s.c:-O(1)
 
@@ -139,4 +172,8 @@ class Solution{
     }
 };
 
+O(n) for inserting alright O(n) for traversing and we are starting from the start of each sequence alright so it is mpp O(n)+O(2n)=O(3n)
+
 t.c:-O(3N) and s.c:-O(N) 
+
+to main bat ye hai ki hamne only start element of sequence se hi start kra hai alright and it is linear
