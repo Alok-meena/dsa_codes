@@ -112,8 +112,31 @@ t.c:-O(N^2) ans constant space complexity
 
 
 
+are bhai ham sum krte jayenge and store the count of the curr sum and if currsum-k jitni bar hoga utni bar hi sum k bhi hoga that's all explained in copy
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        int n=nums.size();
+        unordered_map<int,int>freq;
+        freq[0]=1;
+
+        int prefixsum=0;
+        int count=0;
+        for(int i=0;i<n;i++){
+            prefixsum+=nums[i];
+            if(freq.count(prefixsum-k)){
+                count+=freq[prefixsum-k];
+            }
+            freq[prefixsum]++;
+        }
+
+        return count;
 
 
+    }
+};
+
+t.c:-O(n) and s.c:-O(n)
 
 
 
