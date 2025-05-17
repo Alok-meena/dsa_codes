@@ -47,6 +47,28 @@ public:
 t.c:-O(n) and s.c:-O(2n) n/2 and n/2 for positive and negative and n for ans
 
 
+best approach
+
+class Solution {
+  public:
+    void rearrange(vector<int> &arr) {
+        // code here
+        vecot<int>pos,neg;
+        for(auto i:arr){
+            if(i>=0) pos.push_back(i);
+            else neg.push_back(i);
+        }
+        
+        int i=0,j=0;
+        while(k<arr.size()){
+            if(i<pos.size()) arr[k++]=pos[i++];
+            if(j<neg.size()) arr[k++]=neg[j++];
+        }
+    }
+};
+
+O(n) t.c and s.c
+
 class Solution {
 public:
     vector<int> rearrangeArray(vector<int>& nums) {
@@ -71,4 +93,6 @@ public:
         return ans;
     }
 };
+
+it is not good as if we got out of bounds by placing positiv only at even indices even if odd ele are finished alright
 t.c:-O(n) and s.c:-O(n)
