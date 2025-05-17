@@ -67,3 +67,33 @@ public:
     }
 };
 t.c:-O(n) and s.c:-O(n)
+
+
+
+class Solution {
+  public:
+    // Complete this function
+    // Function to check whether there is a subarray present with 0-sum or not.
+    bool subArrayExists(vector<int>& arr) {
+        // Your code here
+        int n=arr.size();
+        unordered_map<int,int>freq;
+        freq[0]=1;
+
+        int prefixsum=0;
+        int count=0;
+        for(int i=0;i<n;i++){
+            prefixsum+=arr[i];
+            if(freq.count(prefixsum)){
+                return true;
+            }
+            freq[prefixsum]++;
+        }
+
+        return false;
+    }
+};
+
+t.c:- O(n) and s.c:-O(n)
+
+same concept used for subarray with sum k alright 
