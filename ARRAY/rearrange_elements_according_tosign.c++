@@ -94,5 +94,10 @@ public:
     }
 };
 
-it is not good as if we got out of bounds by placing positiv only at even indices even if odd ele are finished alright
+it is not good as if we got out of bounds by placing positiv only at even indices even if odd ele are finished alright so we have to do like below code
+
+where store pos and neg and then put them similarly even odd to pos neg and if one of them becomes empty then put rem ele in arr including consecutive indices
+
 t.c:-O(n) and s.c:-O(n)
+
+this ques cant be done in O(1) s.c alright
