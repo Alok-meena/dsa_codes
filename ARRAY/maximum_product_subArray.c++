@@ -74,3 +74,27 @@ Time Complexity: O(n), where n is the size of the input array. It iterates throu
 Space Complexity: O(1) since the algorithm uses a constant amount of extra space regardless of the input size. It doesn't use any additional data structures that depend on the input size.
 
 Useful links to help you understand the concepts of this problem:
+
+
+class Solution {
+  public:
+    // Function to find maximum product subarray
+    int maxProduct(vector<int> &arr) {
+        // Your Code Here
+        int n=arr.size();
+        int maxi=INT_MIN;
+        int prefix=1,suffix=1;
+        for(int i=0;i<n;i++){
+            if(prefix==0) prefix=1;
+            if(suffix==0) suffix=1;
+            prefix*=arr[i];
+            suffix*=arr[n-i-1];
+            maxi=max(maxi,max(prefix,suffix));
+        }
+        
+        
+        return maxi;
+    }
+};
+
+t.c:-O(n) and s.c:-O(1)
