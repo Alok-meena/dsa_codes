@@ -57,6 +57,37 @@ Time Complexity: O(N2) - The outer loop runs for N times, and for each iteration
 Space Complexity: O(N) 
 
 
+class Solution {
+  public:
+    vector<int> factorial(int n) {
+        // code here
+        int factorial=1;
+        vector<int>ans;
+        ans.push_back(1);
+        int i=1;
+        while(i<=n){
+            int carry=0;
+            for(int j=0;j<ans.size();j++){
+                int val=ans[j]*i+carry;
+                ans[j]=val%10;
+                carry=val/10;
+            }
+            
+            while(carry){
+                ans.push_back(carry%10);
+                carry/=10;
+            }
+            i++;
+        }
+        
+        reverse(ans.begin(),ans.end());
+        
+        
+        return ans;
+    }
+};
+
+
 
 we can use string also
 #include <bits/stdc++.h>
@@ -93,4 +124,7 @@ string solve(int n) {
 string calculateFactorial(int n) {
     return solve(n);
 }
+
+
+
 
