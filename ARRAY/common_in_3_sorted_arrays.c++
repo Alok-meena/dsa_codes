@@ -13,7 +13,28 @@ Output: [-1]
 Explanation: There are no common elements in arr, brr and crr.
 
 
+class Solution {
+  public:
+    // Function to find common elements in three arrays.
+    vector<int> commonElements(vector<int> &arr1, vector<int> &arr2,
+                               vector<int> &arr3) {
+        // Code Here
+        unordered_set<int>a(arr1.begin(),arr1.end());
+        unordered_set<int>b(arr2.begin(),arr2.end());
+        unordered_set<int>c(arr3.begin(),arr3.end());
+        
+        vector<int>ans;
+        for(auto i:a){
+            if(a.count(i) and b.count(i) and c.count(i)) ans.push_back(i);
+        }
+        
+        sort(ans.begin(),ans.end());
+        
+        return ans;
+    }
+};
 
+t.c:-O(n1+n2+n3+klogk) and s.c:-O(n1+n2+n3)
 
 
 
@@ -50,4 +71,4 @@ class Solution {
     }
 };
 
-t.c:-O(n) and s.c:-O(n)
+t.c:-O(nlogn) and s.c:-O(n)
