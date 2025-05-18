@@ -106,3 +106,38 @@ public:
         return minswaps;
     }
 };
+
+
+
+best code :
+
+
+class Solution {
+  public:
+    int minSwap(vector<int>& arr, int k) {
+        // code here
+        int count=0;
+        for(auto i:arr){
+            if(i<=k) count++;
+        }
+        
+        int i=0,j=count-1;
+        int ans=INT_MAX;
+
+        while(j<arr.size()){
+            int swaps=0;
+            
+            for(int m=i;m<=j;m++){
+                if(arr[m]>k) swaps++;
+            }
+            
+
+            ans=min(ans,swaps);
+            i++;j++;
+        }
+        
+        return ans==INT_MAX?0:ans;
+    }
+};
+
+t.c:-O(n) and s.c:-O(1)
