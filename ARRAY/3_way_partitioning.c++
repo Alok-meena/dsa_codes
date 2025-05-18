@@ -85,3 +85,34 @@ public:
         
     }
 };
+
+
+class Solution {
+  public:
+    // Function to partition the array around the range such
+    // that array is divided into three parts.
+    void threeWayPartition(vector<int>& arr, int a, int b) {
+        // code here
+        vector<int>v(arr.begin(),arr.end());
+        
+        int j=0;
+        for(auto i:v){
+            if(i<a){
+                arr[j++]=i;
+            }
+        }
+        
+        
+        for(auto i:v){
+            if(i>=a and i<=b){
+                arr[j++]=i;
+            }
+        }
+        
+        for(auto i:v){
+            if(i>b){
+                arr[j++]=i;
+            }
+        }
+    }
+};
