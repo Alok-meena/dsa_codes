@@ -51,3 +51,21 @@ public:
 		    return ans;
 		}
 };
+
+
+
+class Solution {
+  public:
+    double findMedian(vector<int> &arr) {
+        // code here.
+        sort(arr.begin(),arr.end());
+        int n=arr.size();
+        if(n%2!=0) return arr[n/2];
+        double v1=arr[n/2];
+        double v2=arr[(n-1)/2];
+        double v3=(v1+v2)/2;
+        return v3;
+    }
+};
+
+O(nlogn) is the time complexity
