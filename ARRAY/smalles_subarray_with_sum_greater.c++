@@ -81,3 +81,35 @@ class Solution {
         return minlength;
     }
 };
+
+
+more easy code than this
+
+class Solution {
+  public:
+    int smallestSubWithSum(int x, vector<int>& arr) {
+        // Your code goes here
+        int n=arr.size();
+        int i=0,j=0;
+        int ans=INT_MAX;
+        
+        int sum=0;
+        
+        while(j<n){
+            sum+=arr[j];
+            if(sum>x){
+                while(sum>x){
+                    ans=min(ans,j-i+1);
+                    sum-=arr[i];
+                    i++;
+                }
+            }
+            
+            j++;
+        }
+        
+        return ans==INT_MAX?0:ans;
+    }
+};
+
+O(n) and s.c:-O(1)
