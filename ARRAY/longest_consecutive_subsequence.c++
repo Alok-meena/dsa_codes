@@ -118,7 +118,7 @@ class Solution {
         }
 
         // Final update in case the longest sequence ends at the last index
-        ans = max(ans,currlen);
+        ans = max(ans,currlen); //this is necessary if at last ele are 5 5 then ans will not be updated in case of duplicate ele's alright that's why
 
         return ans;
     }
