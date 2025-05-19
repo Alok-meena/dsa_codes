@@ -46,6 +46,8 @@ class Solution {
         int top=0,bottom=row-1;
         int total=row*col;
         int count=0;
+
+        to count ko har bar check karna hai alright because vo har bar change ho rha hai alright 
         
         while(left<=right && top<=bottom && count<total){
             //storing the elements of the first row
