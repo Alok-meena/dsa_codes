@@ -59,7 +59,7 @@ class Solution {
         double m1=-1;//n-1th ele
         double m2=-1;//nth ele
         
-        for(int k=0;k<=n;k++){
+        for(int k=0;k<=n;k++){ //isko hamne 0-n tk chlaya means n+1 alright kyo because we want last ele of a and first of b as size always even rhegi
             //these are the cases for what if all ele of a are smaller than b then nth ele will 
             //be b[0] and a[0] in vice versa alright. 
             if(i==n){
