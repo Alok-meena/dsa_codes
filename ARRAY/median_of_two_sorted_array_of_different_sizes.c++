@@ -164,6 +164,41 @@ double median(vector<int>& a, vector<int>& b) {
 t.c:-O(n1+n2) and s.c:-O(1)
 
 
+or can also write just like this O(n) t.c in case of same size sorted array we did 
+
+class Solution {
+  public:
+    double medianOf2(vector<int>& a, vector<int>& b) {
+        int i = 0, j = 0;
+        int n = a.size(), m = b.size();
+        int total = n + m;
+
+        double m1 = -1, m2 = -1;
+
+        for(int k = 0; k <= total / 2; k++) {
+            m1 = m2;
+
+            if(i == n) {
+                m2 = b[j++];
+            }
+            else if(j == m) {
+                m2 = a[i++];
+            }
+            else if(a[i] <= b[j]) {
+                m2 = a[i++];
+            }
+            else {
+                m2 = b[j++];
+            }
+        }
+
+        if(total % 2 != 0) return m2;
+        return (m1 + m2) / 2.0;
+    }
+};
+
+t.c:-O(n+m) and sc:-O(1)
+
 3rd:
 
 #include <bits/stdc++.h>
