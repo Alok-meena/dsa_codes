@@ -76,6 +76,30 @@ class Solution{
     }
 };
 
+here we did many things but if we use function then
+
+class Solution {
+  public:
+    double medianOf2(vector<int>& a, vector<int>& b) {
+        // Your code goes here
+        vector<int>c(a.begin(),a.end());
+        for(auto i:b) c.push_back(i);
+        
+        sort(c.begin(),c.end());
+        
+        int n=c.size();
+        
+        if(n%2!=0) return c[n/2];
+        
+        double v1=c[n/2];
+        double v2=c[(n-1)/2];
+        double v3=(v1+v2)/2;
+        return v3;
+    }
+};
+
+same t.c and s.c
+
 t.c:-O((n+m)log(n+m)) s.c:-O(n+m)
   
 gives tle
