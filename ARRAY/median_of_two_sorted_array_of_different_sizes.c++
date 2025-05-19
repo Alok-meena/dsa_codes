@@ -104,11 +104,46 @@ t.c:-O((n+m)log(n+m)) s.c:-O(n+m)
   
 gives tle
 
+but we can directly merge in O(n+m) t.c and s.c alright
 
+class Solution {
+  public:
+    double medianOf2(vector<int>& a, vector<int>& b) {
+        // Your code goes here
+        int n=a.size();
+        int m=b.size();
+        vector<int>c(n+m);
+        
+        int i=0,j=0,k=0;
+        
+        while(i<n and j<m){
+            if(a[i]<=b[j]) c[k++]=a[i++];
+            else c[k++]=b[j++];
+        }
+        
+        while(i<n){
+            c[k++]=a[i++];
+        }
+        while(j<m){
+            c[k++]=b[j++];
+        }
+        
+        int d=c.size();
+        if(d%2!=0) return c[d/2];
+        
+        double v1=c[d/2];
+        double v2=c[(d-1)/2];
+        double v3=(v1+v2)/2;
+        return v3;
+    }
+};
+
+so this is better 
 
 2:optimized code
 
 
+now in this code also t.c is n+m but s.c is optimized to O(1) alright
 
 double median(vector<int>& a, vector<int>& b) {
 	// Write your code here.
@@ -195,7 +230,7 @@ class Solution {
         if(total % 2 != 0) return m2;
         return (m1 + m2) / 2.0;
     }
-};
+};   if this code is not understandable use above code alright
 
 t.c:-O(n+m) and sc:-O(1)
 
@@ -263,3 +298,41 @@ Median of the two arrays are
 3
 Time Complexity: O(min(log m, log n)): Since binary search is being applied on the smaller of the 2 arrays
 Auxiliary Space: O(1)
+
+
+here is the simpler code
+
+class Solution {
+  public:
+    double medianOf2(vector<int>& a, vector<int>& b) {
+        // Your code goes here
+        int n=a.size();
+        int m=b.size();
+        
+        if(n>m) return medianOf2(b,a);
+        
+        int low=0,high=n;
+        int left_elements=(n+m+1)/2;
+        
+        while(low<=high){
+            int mid1=(low+high)/2;
+            int mid2=left_elements-mid1;
+            int l1=INT_MIN,l2=INT_MIN;
+            int r1=INT_MAX,r2=INT_MAX;
+            
+            if(mid1<n) r1=a[mid1];
+            if(mid2<m) r2=b[mid2];
+            if(mid1-1>=0) l1=a[mid1-1];
+            if(mid2-1>=0) l2=b[mid2-1];
+            
+            if(l1<=r2 and l2<=r1){
+                if((n+m)%2!=0) return max(l1,l2);
+                return ((double)(max(l1,l2)+min(r1,r2))/2.0);
+            }
+            else if(l1>r2) high=mid1-1;
+            else low=mid1+1;
+        }
+        
+        return 0;
+    }
+};
