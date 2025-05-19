@@ -37,3 +37,61 @@ class Solution {
 };
 
 t.c:-O((n+m)log(n+m)) and s.c:-O(n+m)
+
+
+2nd optimized:
+
+O(n) t.c and O(1) s.c
+
+what we will do listen both having same size right so if both have even size then even+even=even and odd+odd=odd and cant be even+odd and vice versa due to 
+same size so we get to know that always both will have same size so we just have to find out n-1th and nth element and return their average alright
+
+just do it
+
+
+class Solution {
+  public:
+    double medianOf2(vector<int>& a, vector<int>& b) {
+        // Your code goes here
+        int i=0,j=0;
+        int n=a.size();
+        
+        double m1=-1;//n-1th ele
+        double m2=-1;//nth ele
+        
+        for(int k=0;k<=n;k++){
+            //these are the cases for what if all ele of a are smaller than b then nth ele will 
+            //be b[0] and a[0] in vice versa alright. 
+            if(i==n){
+                m1=m2;
+                m2=b[0];
+                break;
+            }
+            else if(j==n){
+                m1=m2;
+                m2=a[0];
+                break;
+            }
+            
+            //and if not above case then remaining case
+            if(a[i]<=b[j]){
+                m1=m2; //because m1 me chota and next max m1 me jo m2 me tha and update m2
+                m2=a[i];
+                i++;
+            }
+            else{
+                m1=m2;
+                m2=b[j];
+                j++;
+            }
+        }
+        
+        return (m1+m2)/2;
+    }
+};
+
+ab bat esi hai na ki ya to pahla pura array 2nd se chota hoga means a[n-1]<b[0] or b[n-1]<a[0] to is case ko handle kr liya and o/w normally bhi
+m1 hmara 2nd max and m2 1st max so update m1 with m2 before updating m2 alright bs yhi concept hai 
+
+
+and we can use binarysearch also for O(logn) t.c and s.c:-(1) alright
