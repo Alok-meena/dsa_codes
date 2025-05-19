@@ -227,7 +227,9 @@ t.c:-O(n) and s.c:-O(1)
         int n=arr.size();
         int l=0,r=0;
         int jumps=0;
-        
+
+        //we have to run this only n-1 times because if we are reaching n-1 then we have to return the jumps alright so we have to run it till n-2 not n-1 
+        //o/w it may do wrong in calculating jumps alright
         while(r<n-1){
             int farthest=0;
             
