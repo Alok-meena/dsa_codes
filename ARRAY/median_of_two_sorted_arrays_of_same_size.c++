@@ -95,3 +95,38 @@ m1 hmara 2nd max and m2 1st max so update m1 with m2 before updating m2 alright 
 
 
 and we can use binarysearch also for O(logn) t.c and s.c:-(1) alright
+
+
+exactly same code of binarysearch is working here also 
+
+int n=a.size();
+        int m=b.size();
+        
+        if(n>m) return medianOf2(b,a);
+        
+        int low=0,high=n;
+        int left_elements=(n+m+1)/2;
+        
+        while(low<=high){
+            int mid1=(low+high)/2;
+            int mid2=left_elements-mid1;
+            int l1=INT_MIN,l2=INT_MIN;
+            int r1=INT_MAX,r2=INT_MAX;
+            
+            if(mid1<n) r1=a[mid1];
+            if(mid2<m) r2=b[mid2];
+            if(mid1-1>=0) l1=a[mid1-1];
+            if(mid2-1>=0) l2=b[mid2-1];
+            
+            if(l1<=r2 and l2<=r1){
+                if((n+m)%2!=0) return max(l1,l2);
+                return ((double)(max(l1,l2)+min(r1,r2))/2.0);
+            }
+            else if(l1>r2) high=mid1-1;
+            else low=mid1+1;
+        }
+        
+        return 0;
+}
+
+t.c:-O(log(n)) and s.c:-O(1)
