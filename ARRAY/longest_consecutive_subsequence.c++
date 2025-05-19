@@ -154,7 +154,7 @@ class Solution{
             //point o/w there is no point in starting with that eleemnt ex with 2 if 1 
             //already exists
             if(st.find(i-1)==st.end()){
-                int count=1;
+                int count=1; //we have to start with count = 1 as we are checking further x+1 so if it is present then count should already be 1 alright
                 int x=i;//store the starting point
                 
                 while(st.find(x+1)!=st.end()){
