@@ -28,7 +28,7 @@ class Solution {
         sort(c.begin(),c.end());
         
         int n=c.size();
-        if(n%2!=0) return c[n/2];
+        // if(n%2!=0) return c[n/2]; no need of this as always combined size would be even alright
         double v1=c[n/2];
         double v2=c[(n-1)/2];
         double v3=(v1+v2)/2;
