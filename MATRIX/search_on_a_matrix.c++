@@ -92,8 +92,51 @@ public:
     }
 };
 
+
 t.c:-O(n*log(m)) constant space complexity
 
+or
+
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+        int m=matrix.size();
+        int n=matrix[0].size();
+
+        for(int i=0;i<m;i++){
+            if(binary_search(matrix[i].begin(),matrix[i].end(),target)) return true;
+        }
+
+        return false;
+    }
+};
+
+t.c:-O(mlogn) alright
+
+
+
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+        int m=matrix.size();
+        int n=matrix[0].size();
+
+        int i=0;
+        int j=n-1;
+
+        while(i<m and j>=0){
+            if(matrix[i][j]==target) return true;
+            else if(matrix[i][j]>target){
+                j--;
+            }
+            else i++;
+        }
+
+        return false;
+    }
+};
+
+t.c:-O(n+m) s.c:-O(1)
 
 most optimal
 
