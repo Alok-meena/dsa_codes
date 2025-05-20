@@ -51,7 +51,7 @@ public:
     
 };
 
-t.c:-O(n+m)+O((n+m)log(n+m)) and s.c:-O(m*n)
+t.c:-O(n*m)+O((n*m)log(n*m)) and s.c:-O(m*n)
 
 
 2:optimized solution
@@ -120,6 +120,10 @@ public:
 
     
 };
+
+
+are bhai khuch nhi hai dekho kya hai ki we know median ke left ke ele's >=n/2 honge alright so find first ele whose left ele's are >=n/2 that's what we are doing
+on our search space from min to max alright
 
 the first is for binarysearch and the second one is for counting smallervalues for every mid value
 t.c:-O((log(INT_MAX)*(n*logM))
