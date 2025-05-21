@@ -139,7 +139,7 @@ int findMaxValue(vector<vector<int>>& mat, int n) {
 	// Write your code here.
     vector<vector<int>>maxMatrix(n,vector<int>(n));
 
-    maxMatrix[n-1][n-1]=mat[n-1][n-1];
+    maxMatrix[n-1][n-1]=mat[n-1][n-1]; //last value ko to st krna hi pdega
     //filling last row;
     for(int i=n-2;i>=0;i--){
         maxMatrix[n-1][i]=max(mat[n-1][i],maxMatrix[n-1][i+1]);//to bat suno current index to ham given mat me hi dekhenge bas nex element maxmatrix
@@ -160,9 +160,10 @@ int findMaxValue(vector<vector<int>>& mat, int n) {
 
     //now compute the values;
     int ans=INT_MIN;
-    for(int a=0;a<n-1;a++){
+    for(int a=0;a<n-1;a++){ //n-1 tk chlega because c d bde hai a b se alright yes
         for(int b=0;b<n-1;b++){
-            ans=max(ans,maxMatrix[a+1][b+1]-mat[a][b]);
+            ans=max(ans,maxMatrix[a+1][b+1]-mat[a][b]); //and jab ham ans compute kr rhe hai to suno hamne maxmatrix bnaya for max value but min value to
+	    //original mat se hi lenge na ager maxmatrix se liya means we are subtracting maxima-maixma which is wrong
         }
     }
 
