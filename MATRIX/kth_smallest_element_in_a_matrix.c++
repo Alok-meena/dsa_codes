@@ -69,6 +69,32 @@ int kthSmallest(int mat[MAX][MAX], int n, int k) {
 
 it has same t.c
 
+
+class Solution {
+  public:
+    int kthSmallest(vector<vector<int>> &matrix, int k) {
+        // code here
+        priority_queue<int>pq;
+        int n=matrix.size();
+
+
+        //we are just mantaining a k size window and just have to return kth ele right so remove all ele's greater than that kth ele alright and at the end we 
+        //will got our answer 
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                pq.push(matrix[i][j]);
+                if(pq.size()>k) pq.pop();
+            }
+        }
+        return pq.top();
+    }
+};
+
+
+this is will work even if the matrix is not sorted alright
+
+t.c:-O(n*mlogk) it is much efficient when k is much smaller than n^2 alright means all elements
+
 2: using binary search and upper_bound
 
 
@@ -78,6 +104,7 @@ public:
         int n=matrix.size();
      int low=matrix[0][0];
     int high=matrix[n-1][n-1];
+      int ans=-1;
     
     while(low<high){
         int count=0;
@@ -89,12 +116,13 @@ public:
         if(count<k){
             low=mid+1;
         }
-        else{
+        else if(count>=k){
+            ans=mid;
             high=mid;
         }
     }
     
-    return low;
+    return low; //either return this or store in ans variable and return 
     }
 };
 
