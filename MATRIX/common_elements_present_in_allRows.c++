@@ -118,3 +118,33 @@ vector<int> findCommonElements(vector<vector<int>> &mat)
 }
 
 t.c:-O(n*(mlogm)) s.c :- O(m)
+
+same code as above but used count here alright
+
+#include <bits/stdc++.h>
+
+vector<int> findCommonElements(vector<vector<int>> &mat)
+{
+    // Write your code here
+    int n=mat.size();
+    int m=mat[0].size();
+    set<int>s;
+    for(int i=0;i<m;i++){
+        s.insert(mat[0][i]);
+    }
+
+    for(auto i:mat){
+        set<int>temp;
+        for(auto j:i){
+            if(s.count(j)){
+                temp.insert(j);
+            }
+        }
+        s=temp;
+    }
+
+    vector<int>v(s.begin(),s.end());
+    return v;
+}
+
+and O(n*m) and s.c:-O(m) in case of unordered_set alright
