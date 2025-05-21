@@ -132,7 +132,46 @@ t.c:-O((log(INT_MAX)*(n*logM))
   as max value given is 10^9
 
 
+if we want same code as kth smallest element as count<k then use n*n+1/2 alright as it is best for median
 
+
+class Solution {
+  public:
+    int median(vector<vector<int>> &matrix) {
+        // code here
+         int n=matrix.size();
+         int k=(n*n+1)/2 ;
+        
+        int low=INT_MAX;
+        int high=INT_MIN;
+        
+        for(int i=0;i<n;i++){
+            low=min(low,matrix[i][0]);
+            high=max(high,matrix[i][n-1]);
+        }
+        int ans=-1;
+        
+        while(low<=high){
+            int mid=(low+high)/2;
+            
+            int count=0;
+            for(int i=0;i<n;i++){
+                count+=(upper_bound(matrix[i].begin(),matrix[i].end(),mid)-matrix[i].begin());
+            }
+            
+            if(count<k){
+                low=mid+1;
+            }
+            else{
+                high=mid-1;
+                ans=mid;
+            }
+        }
+        
+        
+        return ans;
+    }
+};
 
 
   
