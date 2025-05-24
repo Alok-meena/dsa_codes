@@ -78,11 +78,11 @@ int findMin(vector<int>& arr)
 
         //left part sorted
         if(arr[low]<=arr[mid]){
-            ans=min(ans,arr[low]);
+            ans=min(ans,arr[low]); //ager left sorted hai to min to low hi hoga alright
             low=mid+1;
         }
         else{
-            ans=min(ans,arr[mid]);
+            ans=min(ans,arr[mid]); //ager right sorted hai to right me jane k ko fayda nhi for min as curr ele is possible min and update ans and go to left alright
             high=mid-1;
         }
     }
