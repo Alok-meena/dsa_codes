@@ -41,37 +41,34 @@ using namespace std;
 
 
 
-int main() {
-    // Define the grammar as a map of non-terminal to its productions
-    vector<int>arr={4,5,1,2,3};
-    int n=37;
+class Solution {
+public:
+    int mySqrt(int x) {
+        int l=1;
+        int h=x;
+        int ans=0;
 
-    int low=0;
-    int high=n-1;
-    int ans=INT_MIN;
+        while(l<=h){
+            int mid=l+(h-l)/2;
 
-    while(low<=high){
-        int mid=(low+high)/2;
-
-        if(mid*mid<=n){
-            ans=max(ans,mid);
-            low=mid+1;
+            if((long long)mid*mid<=x){
+                ans=mid;
+                l=mid+1;
+            }
+            else h=mid-1;
         }
-        else if(mid*mid>n){
-            high=mid-1;
-        }
-        else{
-            low=mid+1;
-        }
+        
+        return ans;
     }
-    cout<<ans;
-}
+};
 
 nth root
 
 #include <bits/stdc++.h>
 using namespace std;
 
+
+brute force check each no. from 1 to given number multiply that n times check if equal to target or not that's it O(n*m) alright
 
 
 int main() {
@@ -81,7 +78,7 @@ int main() {
 
     int low=0;
     int high=Num-1;
-    int ans=INT_MIN;
+    int ans=0;
     int n;
     cout<<"which Nth square root you want ?:";
     cin>>n;
@@ -96,16 +93,15 @@ int main() {
         }
 
         if(val<=Num){
-            ans=max(ans,mid);
+            ans=mid;
             low=mid+1;
-        }
-        else if(mid*mid>n){
-            high=mid-1;
         }
         else{
-            low=mid+1;
+            high=mid-1;
         }
     }
     cout<<ans;
 }
+
+t.c:-O(nlog(m)) alright
 
