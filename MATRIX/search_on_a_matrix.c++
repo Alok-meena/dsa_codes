@@ -156,7 +156,8 @@ public:
         
         while(start<=end){
             int mid=(end+start)/2;
-            int element=matrix[mid/col][mid%col];
+            int element=matrix[mid/col][mid%col]; //first of all hame elements of horizontal order me lagana hai alright  that's why we have used col and
+            //we have to use divide first then mod because divide is used to get the right row and mod is used to get the right element alright
             if(element==target){
                 return true;
             }
