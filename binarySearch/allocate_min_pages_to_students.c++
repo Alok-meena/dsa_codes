@@ -59,6 +59,7 @@ class Solution {
     int findPages(vector<int> &arr, int k) {
         // code here
         if(k>arr.size()) return -1;
+        //baki chlega to min aor 0 pe bhi but for efficiency take max ele only alright
         int mini=*max_element(arr.begin(),arr.end()); //it is imp to take max value because hame max no. of pages allcoated ko minimize karna hai 
         //aor bhai ssuno we have to minimize the max no. of pages so in worst case jo max pages honge vo array ke max pages hi honge alright
         int maxi=0;
