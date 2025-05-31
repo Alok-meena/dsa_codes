@@ -67,7 +67,7 @@ because we have to maximize the answer okk o/w we should move towards left becaa
 
 
 
-FOR THIS PROBLEM SORTING IS MUST 
+FOR THIS PROBLEM SORTING IS MUST because then only next dist - prev dist can be positive o/w it can be negative alright
 
 O(n)
 
@@ -76,6 +76,7 @@ bool canplace(vector<int>&stalls,int k,int n,int minDistance){
     int last_cow_location=stalls[0];
     
     for(int i=1;i<n;i++){
+        //and we are chceking if this difference is greater than equal to mindist alright then only we can place o/w we cannot place for this distance alright
         if(stalls[i]-last_cow_location>=minDistance){
             placed_cows++;
             last_cow_location=stalls[i];
@@ -116,7 +117,7 @@ int aggressiveCows(vector<int> &stalls, int k)
 
         if(canplace(stalls,k,n,mid)){
             ans=max(ans,mid);
-            l=mid+1;
+            l=mid+1; //as we have to maximmize our ans so always have to go to the right alright
         }
         else{
             h=mid-1;
