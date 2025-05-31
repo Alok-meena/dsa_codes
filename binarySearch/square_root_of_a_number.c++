@@ -105,3 +105,54 @@ int main() {
 
 t.c:-O(nlog(m)) alright
 
+
+for ans with decimal also
+
+#include <bits/stdc++.h>
+using namespace std;
+
+
+int mySqrt(int x) {
+        int l=1;
+        int h=x;
+        int ans=0;
+
+        while(l<=h){
+            int mid=l+(h-l)/2;
+
+            if((long long)mid*mid<=x){
+                ans=mid;
+                l=mid+1;
+            }
+            else h=mid-1;
+        }
+        
+        return ans;
+    }
+
+double precise(int n,int tempsol,int precision){
+    double factor=1;
+    double ans=tempsol;
+
+    for(int i=0;i<precision;i++){
+        factor/=10;
+
+        for(double j=ans;j*j<n;j=j+factor){
+            ans=j;
+        }
+    }
+
+    return ans;
+}
+
+we did pass till how many decimal places we want our ans alright so we did run it till it then each time added a factor of .1 and check that's all
+
+int main() {
+    // Define the grammar as a map of non-terminal to its productions
+    int tempsol=mySqrt(101);
+    double precise_ans=precise(101,tempsol,3);
+    cout<<precise_ans;
+}
+
+
+
