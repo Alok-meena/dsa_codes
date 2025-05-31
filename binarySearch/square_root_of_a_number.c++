@@ -145,6 +145,8 @@ double precise(int n,int tempsol,int precision){
     return ans;
 }
 
+so here for first precision .1 we are checking till .9 which will match then for next precision alright
+
 we did pass till how many decimal places we want our ans alright so we did run it till it then each time added a factor of .1 and check that's all
 
 int main() {
