@@ -147,5 +147,6 @@ pair<int, int> firstAndLastPosition(vector<int>& arr, int n, int k)
 
 }
 
+in this same ques if we have to find total occurrences of k then we have to do last_occ-first_occ+1 alright yes
 
 t.c:-O(logn) and s.c:-O(1)
