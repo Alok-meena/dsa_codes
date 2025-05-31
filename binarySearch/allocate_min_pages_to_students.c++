@@ -77,7 +77,7 @@ class Solution {
             int mid=(low+high)/2;
             
             if(ispossilbe(arr,k,mid)){
-                ans=mid;
+                ans=mid; //so this is one of the possible ans but we want to minimize this max ans so store it and go to left
                 high=mid-1;
             }
             else low=mid+1;
