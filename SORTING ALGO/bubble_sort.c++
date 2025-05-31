@@ -9,7 +9,7 @@ int main(){
     int n=5;
     
     for(int i=0;i<n;i++){
-        for(int j=0;j<n-i-1;j++){
+        for(int j=0;j<n-i-1;j++){ //ab ager last pos pe largest element aata jayega to usko compare krne ki require nhi hogi to har round me 1 step km chlega alright
             if(v[j]>v[j+1]) swap(v[j],v[j+1]);
         }
     }
