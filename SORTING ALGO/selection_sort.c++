@@ -26,3 +26,9 @@ int main() {
 
     return 0;
 }
+
+
+not stable , not adaptive , inplace
+
+
+not stable because in ex 5 5 3 1 in this the first pos 5 will be swapped with 1 so equal ele order is changed alright 
