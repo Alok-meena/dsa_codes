@@ -37,16 +37,16 @@ t.c:-O(nlogs)
 class Solution {
   public:
     bool ispossilbe(vector<int>&v,int k,int value){
-        int student_count=1;
+        int student_count=1; //here we have to start with 1st student alright as we are allocating pages to that student
         int page_sum=0;
         
         for(auto i:v){
-            if(page_sum+i<=value){
+            if(page_sum+i<=value){ //and it should be less than equal to vlaue alright not only less than 
                 page_sum+=i;
             }
             else{
                 student_count++;
-                if(student_count>k or i>value){
+                if(student_count>k or i>value){ //and here if stduent_c  is greater than only dont include equal to o/w wrong ans
                     return false;
                 }
                 page_sum=0;
