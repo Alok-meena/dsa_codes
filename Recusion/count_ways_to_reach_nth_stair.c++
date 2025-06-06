@@ -102,3 +102,22 @@ int countDistinctWays(int nStairs) {
 optimized 
 
 in this if one of the case is giving tle or wrong ans then do use mod alright
+
+this is same as fibonacci solution 
+
+#include <bits/stdc++.h> 
+int mod=1e9+7;
+int countDistinctWays(int nStairs) {
+    //  Write your code here.
+    int a=1;
+    int b=1;
+
+    if(nStairs==0 or nStairs==1) return 1;
+
+    for(int i=2;i<=nStairs;i++){
+        int c=(a+b)%mod;
+        a=b;
+        b=c;
+    }
+    return b;
+} this also works
