@@ -43,7 +43,7 @@ fantastic code alright t.c : -O(nlogn) and s.c:-O(1)
 the quicksort is called n times so O(n) and each time the array got halved to solve it so at last total recursive levels is o(logn) so u know
 
 
-but worst case t.c of q.s is O(n^2) alright
+but worst case t.c of q.s is O(n^2) ( possible when the array is already sorted alright )
 
 
 
