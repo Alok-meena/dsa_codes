@@ -1,3 +1,6 @@
+
+in selection sort we are just selecting min index alright and in insertion sort we are assuming that the left part is sorted and comparing with it alright
+
 #include <bits/stdc++.h>
 using namespace std;
 
