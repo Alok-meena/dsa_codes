@@ -11,7 +11,7 @@ int main() {
 
         // Move elements of v[0..i-1], that are greater than key, one position ahead
         while (j >= 0 && v[j] > key) {
-            v[j + 1] = v[j];
+            v[j + 1] = v[j]; //are bhai ager picla element chota hai to shift bhi to kroge elements ko alright very imp
             j--;
         }
 
