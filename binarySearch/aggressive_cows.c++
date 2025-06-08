@@ -77,10 +77,10 @@ bool canplace(vector<int>&stalls,int k,int n,int minDistance){
     
     for(int i=1;i<n;i++){
         //and we are chceking if this difference is greater than equal to mindist alright then only we can place o/w we cannot place for this distance alright
-        if(stalls[i]-last_cow_location>=minDistance){
+        if(stalls[i]-last_cow_location>=minDistance){ //min dist se jyada hai to bdiya
             placed_cows++;
             last_cow_location=stalls[i];
-            if(placed_cows>=k) return true;
+            if(placed_cows>=k) return true; //aor ager jitni cows hame place krni hai utni ho gyi y jyada to bs shi hai aor apna kam bhi ho jayega alright
         }
     }
 
@@ -129,3 +129,10 @@ int aggressiveCows(vector<int> &stalls, int k)
 }
 
 therefore t.c:-O(nlog(maxDistance)) and s.c:-O(1)
+
+
+bat ye hai ki ager 2 dist pe nhi ld rhi to isse jyada dist pe bhi nhi ldegi aor ager 2 pe ld rhi hai so isse jyada dist pe bhi ldegi that is what the approach
+
+that if not possible at any dist then move the dist to lower side alright
+
+
