@@ -134,3 +134,47 @@ public:
 };
 
 t.c:-O(2^n)
+
+
+
+or this is also correct
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+void solve(int idx,vector<vector<int>>&ans,vector<int>&output,vector<int>&v,int target){
+    if(idx>=v.size()){
+        int sum=accumulate(output.begin(),output.end(),0);
+        if(sum==target){
+            ans.push_back(output);
+        }
+        return;
+    }
+
+    //exclude
+    solve(idx+1,ans,output,v,target);
+
+    //include
+    output.push_back(v[idx]);
+    solve(idx+1,ans,output,v,target);
+    output.pop_back();
+}
+
+int main(){
+    vector<int>v={1,2,4,7};
+
+    int target=7;
+
+    vector<vector<int>>ans;
+    vector<int>output;
+
+    solve(0,ans,output,v,target);
+
+    for(auto i:ans){
+        for(auto j:i) cout<<j<<" ";
+        cout<<endl;
+    }
+}
+
+but instead of this use method in which till sum becomes zero
