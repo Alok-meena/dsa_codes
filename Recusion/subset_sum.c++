@@ -87,3 +87,29 @@ vector<int> subsetSum(vector<int> &num){
 }
 
 t.c:- O(2^n)+O(klogk) where k is 2^n
+
+
+class Solution {
+  public:
+    bool solve(int idx,vector<int>&arr,int sum,vector<vector<int>>&dp){
+        if(sum==0) return true;
+        if(sum<0) return false;
+        if(idx>=arr.size()) return false;
+        
+        if(dp[idx][sum]!=-1) return dp[idx][sum];
+        
+        //exclude
+        bool op1=solve(idx+1,arr,sum,dp);
+        
+        //include
+        bool op2=solve(idx+1,arr,sum-arr[idx],dp);
+        
+        return dp[idx][sum]=op1 or op2;
+    }
+    bool isSubsetSum(vector<int>& arr, int sum) {
+        // code here
+        vector<vector<int>>dp(arr.size()+1,vector<int>(sum+1,-1));
+        if(solve(0,arr,sum,dp)) return true;
+        return false;
+    }
+};
