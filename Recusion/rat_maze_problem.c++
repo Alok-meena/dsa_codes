@@ -239,3 +239,83 @@ int main(){
 
 
 }
+
+
+
+we can mark visited in the each direction also or once also outside alright
+
+class Solution {
+  public:
+    void solve(int i,int j,int n,vector<string>&ans,string &output,vector<vector<int>>&mat,vector<vector<int>>&visited){
+        if(i==n-1 and j==n-1){
+            if(!output.empty()){
+                ans.push_back(output);
+            }
+            return;
+        }
+        
+        visited[i][j]=1;
+        
+        int newi,newj;
+        
+        //up
+        newi=i-1;
+        newj=j;
+        
+        if((newi>=0 and newj<n) and visited[newi][newj]==0 and mat[newi][newj]==1){
+            output.push_back('U');
+            solve(newi,newj,n,ans,output,mat,visited);
+            output.pop_back();
+        }
+        
+        //down
+        newi=i+1;
+        newj=j;
+        
+        if((newi<n and newj<n) and visited[newi][newj]==0 and mat[newi][newj]==1){
+            output.push_back('D');
+            solve(newi,newj,n,ans,output,mat,visited);
+            output.pop_back();
+        }
+        
+        //left
+        newi=i;
+        newj=j-1;
+        
+        if((newi<n and newj>=0) and visited[newi][newj]==0 and mat[newi][newj]==1){
+            output.push_back('L');
+            solve(newi,newj,n,ans,output,mat,visited);
+            output.pop_back();
+        }
+        
+        //right
+        newi=i;
+        newj=j+1;
+        
+        if((newi<n and newj<n) and visited[newi][newj]==0 and mat[newi][newj]==1){
+            output.push_back('R');
+            solve(newi,newj,n,ans,output,mat,visited);
+            output.pop_back();
+        }
+        
+        visited[i][j]=0;
+    }
+    vector<string> ratInMaze(vector<vector<int>>& maze) {
+        // code here
+        vector<string>ans;
+        
+        if(maze[0][0]==0) return ans;
+         
+        string output;
+        int n=maze.size();
+        
+        vector<vector<int>>visited(n,vector<int>(n,0));
+        
+        solve(0,0,n,ans,output,maze,visited);
+        sort(ans.begin(),ans.end());
+        
+        return ans;
+    }
+};
+
+look this is 
