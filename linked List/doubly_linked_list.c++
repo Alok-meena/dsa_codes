@@ -125,6 +125,43 @@ void deleteAtPos(node* &head,node* &tail,int pos){
     }
 }
 
+this is also correct and easy one alright
+
+void deletepos(node* &head,node* &tail,int pos){
+    if(pos==1){
+        node *temp=head;
+        head=head->next;
+        head->prev=NULL;
+        temp->next=NULL;
+        delete temp;
+        return;
+    }
+    node *p=head;
+    node *curr=head->next;
+
+    int count=1;
+    while(count<pos-1){
+        p=p->next;
+        curr=curr->next;
+        count++;
+    }
+
+
+    if(curr->next==NULL){
+        p->next=NULL;
+        curr->prev=NULL;
+        tail=p;
+        delete curr;
+        return;
+    }
+
+    p->next=curr->next;
+    curr->next->prev=p;
+    curr->next=NULL;
+    curr->prev=NULL;
+    delete curr;
+}
+
 
 int getlength(node* &head){
     int len=0;
