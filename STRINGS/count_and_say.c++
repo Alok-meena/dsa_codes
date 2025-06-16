@@ -156,4 +156,42 @@ n-th term would involve summing up a geometric series of the form
 2
  +…+(1.5) 
 n−1
+
+
+class Solution {
+public:
+    string countAndSay(int n) {
+        string ans="1";
+        if(n==1) return ans;
+
+        for(int i=0;i<n-1;i++){
+            queue<char>q;
+            for(auto i:ans){
+                q.push(i);
+            }
+
+            string temp="";
+            while(!q.empty()){
+                char ch=q.front();
+                cout<<ch<<" ";
+                q.pop();
+
+                int count=1;
+                while(!q.empty()){
+                    char c=q.front();
+                    if(c!=ch) break;
+                    count++;
+                    q.pop();
+                }
+                temp+=to_string(count);
+                temp.push_back(ch);
+            }
+            ans=temp;
+        }
+        
+        return ans;
+    }
+};
+
+my code t.c:-O(exponential)
  
