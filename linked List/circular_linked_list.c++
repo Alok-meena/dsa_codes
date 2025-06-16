@@ -75,11 +75,14 @@ void deleteNode(node* &tail,int value){
         }
 
         prev->next=curr->next;
+
+        //it is very imp here we firstly have to check condition for single node alright curr==prev this one 
+        //if we check curr==tail first then it is true in case of single node also and will not do tail=null which result in error alright
         if(curr==prev){
             tail=NULL;
         }
         else if(tail==curr){
-            tail=prev;
+            tail=prev; //does not matter ki kis ele ko point krvaye because circular list hai alright
         }
         curr->next=NULL;
         delete curr;
