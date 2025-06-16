@@ -16,7 +16,7 @@ Expected Space Complexity: O(1)
 
 
 
-
+t.c:-O(n) and s.c:-O(n) due to n/k recursive stack calls alright
 
 
 class Solution {
