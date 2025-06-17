@@ -44,3 +44,34 @@ class Solution {
         
     }
 };
+
+
+can do like this also  alright
+
+
+class Solution {
+  public:
+    Node *moveToFront(Node *head) {
+        // code here
+        int lastele;
+        
+        Node *prev=head;
+        Node *curr=head->next;
+        
+        while(curr->next!=NULL){
+            prev=curr;
+            curr=curr->next;
+        }
+        
+        lastele=curr->data;
+        prev->next=NULL;
+        delete curr;
+        
+        Node *newnode=new Node(lastele);
+        newnode->next=head;
+        head=newnode;
+        return newnode;
+    }
+};
+
+t.c:-O(n) and s.c:O(1)
