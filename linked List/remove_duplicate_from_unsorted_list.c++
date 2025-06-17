@@ -34,6 +34,70 @@ Sample Output 2 :
 10 20 30 -1
 
 
+brute force O(n) t.c and s.c
+
+void insertattail(Node* &head,Node* &tail,int value){
+    if(head==NULL){
+        Node *newnode=new Node(value);
+        head=newnode;
+        tail=newnode;
+    }
+    else{
+        Node *newnode=new Node(value);
+        tail->next=newnode;
+        tail=newnode;
+    }
+}
+Node *removeDuplicates(Node *head)
+{
+    // Write your code here
+    vector<int>v;
+    Node *temp=head;
+    while(temp!=NULL){
+        if(find(v.begin(),v.end(),temp->data)==v.end()) v.push_back(temp->data);
+        temp=temp->next;
+    }
+
+    Node *newhead=NULL;
+    Node *tail=NULL;
+    for(auto i:v){
+        insertattail(newhead,tail,i);
+    }
+
+    return newhead;
+}
+
+another brute force of same t.c using map but not creating a new list
+
+
+Node *removeDuplicates(Node *head)
+{
+    // Write your code here
+    if(head==NULL or head->next==NULL) return head;
+    map<int,bool>m;
+
+    Node *prev=head;
+    Node *curr=head->next;
+
+    m[prev->data]=true;
+    while(curr!=NULL){
+        if(m[curr->data]){
+            Node *temp=curr;
+            prev->next=curr->next;
+            temp->next=NULL;
+            delete temp;
+            curr=prev->next;
+        }
+        else{
+            m[curr->data]=true;
+            prev=prev->next;
+            curr=curr->next;
+        }
+    }
+
+    return head;
+}
+
 1) brute force using two loops remove the duplicates 
 
 Node *removeDuplicates(Node *head)
