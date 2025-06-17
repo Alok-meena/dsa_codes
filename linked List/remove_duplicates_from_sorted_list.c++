@@ -54,3 +54,88 @@ Node * removeDuplicates(Node *head)
     }
     return head;
 }
+
+
+can do this also
+
+
+Node * removeDuplicates(Node *head)
+{
+    // Write your code here
+    if(head==NULL or head->next==NULL) return head;
+    Node *p=head;
+    Node *curr=head;
+
+    while(curr!=NULL){
+        if(curr->next!=NULL and curr->data!=curr->next->data){
+            p=p->next;
+            curr=curr->next;
+            continue;
+        }
+
+        if(curr->next!=NULL) curr=curr->next;
+
+        while(curr!=NULL and curr->data==p->data) curr=curr->next;
+        p->next=curr;
+        if(curr!=NULL) curr->prev=p;
+        p=curr;
+    }
+
+    return head;
+}
+
+
+for singly list can do the same code
+
+
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        if(head==NULL or head->next==NULL) return head;
+        ListNode *p=head;
+        ListNode *curr=head;
+
+        while(curr!=NULL){
+            if(curr->next!=NULL and curr->val!=curr->next->val){
+                p=p->next;
+                curr=curr->next;
+                continue;
+            }
+
+            if(curr->next!=NULL) curr=curr->next;
+
+            while(curr!=NULL and curr->val==p->val) curr=curr->next;
+            p->next=curr;
+            p=curr;
+        }
+
+        return head;
+    }
+};
+
+t.c:-O(n) and s.c:-O(1) alright
+
+
+OR CAN DO THIS ALSO FOR DOUBLY
+
+Node * removeDuplicates(Node *head)
+{
+    // Write your code here
+    if(head==NULL or head->next==NULL) return head;
+    Node *curr=head;
+
+    while(curr!=NULL){
+        if(curr->next!=NULL and curr->data==curr->next->data){
+            Node *next_to_next=curr->next->next;
+            Node *temp=curr->next;
+            curr->next=next_to_next;
+            if(next_to_next!=NULL) next_to_next->prev=curr;
+            temp->next=NULL;
+            temp->prev=NULL;
+            delete temp;
+        }
+        else curr=curr->next;
+    }
+
+    return head;
+}
