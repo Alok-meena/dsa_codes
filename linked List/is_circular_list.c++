@@ -87,3 +87,25 @@ bool isCircular(Node* head){
 }
 
 you can check it by drawing it on a paper it works for both even and odd length linked list
+
+
+
+can use map also t.c:-O(n) and s.c:-O(n)
+
+class Solution {
+  public:
+    bool isCircular(Node *head) {
+        // Your code here
+        if(head==NULL) return true;
+        map<Node*,bool>m;
+        
+        Node *temp=head;
+        while(temp!=NULL){
+            if(m[temp]) return true;
+            m[temp]=true;
+            temp=temp->next;
+        }
+        
+        return false;
+    }
+};
