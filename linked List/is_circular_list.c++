@@ -109,3 +109,20 @@ class Solution {
         return false;
     }
 };
+
+and to give true only if circular not during any loop then code will be 
+
+bool isCircular(Node* head){
+    // Write your code here.
+    if(head==NULL) return true;
+        map<Node*,bool>m;
+        
+        Node *temp=head;
+        while(temp!=NULL){
+            if(m[temp]) return temp==head;
+            m[temp]=true;
+            temp=temp->next;
+        }
+        
+        return false;
+}
