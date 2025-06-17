@@ -69,7 +69,53 @@ but if in ques given we cant replace the values then
 use this
 
 
-void insertattail(Node* &tail,Node *curr){
+
+void insertattail(Node* &head,Node* &tail,int value){
+    if(head==NULL){
+        Node *newnode=new Node(value);
+        head=newnode;
+        tail=newnode;
+    }
+    else{
+        Node *newnode=new Node(value);
+        tail->next=newnode;
+        tail=newnode;
+    }
+}
+
+Node* sortList(Node *head){
+    // Write your code here.
+    vector<int>s;
+    Node *temp=head;
+
+    while(temp!=NULL){
+        s.push_back(temp->data);
+        temp=temp->next;
+    }
+
+    sort(s.begin(),s.end());
+
+
+    Node *newhead=NULL;
+    Node *tail=NULL;
+
+    for(auto i:s){
+        insertattail(newhead,tail,i);
+    }
+
+    return newhead;
+}
+
+t.c:-O(nlogn) and s.c:-O(n)
+
+next approach::
+
+
+below one takes O(1) space alright
+
+
+
+void insertattail(Node* &tail,Node *curr){ //here curr is passed by value but only address is copied not entire node alright so points to same node
     tail->next=curr;
     tail=curr;
 }
