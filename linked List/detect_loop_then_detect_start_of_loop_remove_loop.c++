@@ -151,3 +151,39 @@ Node *removeLoop(Node *head)
 }
 
 O(n) and s.c:-O(1)
+
+
+just find whether loop is present or not alright if fast and slow meet then find intersection point start from head and fast or slow till both meet then
+u will get beginning of list then just go to the end of loop and point it to NULL alright .
+
+Node *removeLoop(Node *head)
+{
+    // Write your code here.
+    Node *slow=head;
+    Node *fast=head;
+
+    while(fast!=NULL and fast->next!=NULL){
+        slow=slow->next;
+        fast=fast->next->next;
+        if(fast==slow) break;
+    }
+
+    if(fast==NULL) return head;
+
+    slow=head;
+
+    while(fast!=slow){
+        fast=fast->next;
+        slow=slow->next;
+    }
+
+    fast=fast->next;
+    while(fast->next!=slow) fast=fast->next;
+
+    fast->next=NULL;
+
+    return head;
+}
+
+
+or to find the beginning or loop we can use map also but then s.c:-O(n)
