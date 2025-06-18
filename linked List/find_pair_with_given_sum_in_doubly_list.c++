@@ -70,6 +70,47 @@ t.c:-O(n^2) and s.c:-O(n) as find option has O(n) t.c
 
 optimized
 
+class Solution {
+  public:
+    vector<pair<int, int>> findPairsWithGivenSum(Node *head, int target) {
+        // code here
+        vector<pair<int,int>>ans;
+        
+        vector<int>v;
+        Node *temp=head;
+        while(temp!=NULL){
+            v.push_back(temp->data);
+            temp=temp->next;
+        }
+        
+        int n=v.size();
+        for(int i=0;i<n-1;i++){
+            int value=target-v[i];
+            
+            int l=i+1;
+            int h=n-1;
+            
+            while(l<=h){
+                int mid=(l+h)/2;
+                if(v[mid]==value){
+                    ans.push_back({v[i],v[mid]});
+                    break;
+                }
+                else if(v[mid]>value){
+                    h=mid-1;
+                }
+                else l=mid+1;
+            }
+        }
+        
+        return ans;
+    }
+};
+
+t.c:-O(nlogn) and s.c:-O(n)
+
+more optimized
+
 class Solution
 {
 public:
