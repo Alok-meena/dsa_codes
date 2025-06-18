@@ -89,6 +89,52 @@ void deleteNode(node* &tail,int value){
     }
 }
 
+this deletion code is correct but cannot handle if the data is equal to head node and duplicate values are also present alright
+
+like 5->1->2->3->5->5->head  in this case wrong 5 will be deleted alright
+
+Node* deleteNode(Node* head, int key) {
+        
+        // code here
+        Node *prev=head;
+        Node *curr=head->next;
+        
+        if(head->data==key){
+            Node *temp=head->next;
+            while(temp->next!=head){
+                temp=temp->next;
+            }
+            
+            Node *d=head;
+            
+            temp->next=head->next;
+            head=d->next;
+            
+            d->next=NULL;
+            delete d;
+            return head;
+        }
+        while(curr->data!=key){
+            if(curr==head) return head;
+            prev=curr;
+            curr=curr->next;
+        }
+        
+        prev->next=curr->next;
+        
+        if(curr==prev){
+            head=NULL;
+        }
+        else if(curr==head){
+            head=prev;
+        }
+        
+        curr->next=NULL;
+        delete curr;
+        
+        return head;
+    }
+
 Node* reverse(Node* head) {
         // code here
         Node *prev=head;
