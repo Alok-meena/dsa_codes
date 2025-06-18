@@ -147,6 +147,10 @@ class Solution {
     }
 };
 
+
+i thought there no need to sort the vector because vertical lists are already sorted but the thing is they are sorted vertically not horizontally alright
+so we should have to sort them alright
+
 t.c:-O(n*m)*2 + n*m log(n*m) where n is horizontal length and m is vertical length
 and s.c:-O(n*m)*2 for ans array and list created
 
@@ -192,6 +196,8 @@ Node* merge(Node* &first,Node* &second){
 
     return dummy->child;
 }
+
+and everywhere we should have to point next to NULL as we are only changing the links so it will not point to null by default alright 
 
 Node* flattenLinkedList(Node* head) 
 {
