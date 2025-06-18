@@ -144,3 +144,61 @@ class Solution {
 just similar to prev if the smaller list is traversed then put both pointers or swap them to headd after reaching NULL then both will start at the same distance
 
 t.c:-O(n1+n2)
+
+
+
+or 
+
+same code
+
+class Solution {
+  public:
+    int length(Node* head){
+        Node *temp=head;
+        int count=0;
+        while(temp!=NULL){
+            count++;
+            temp=temp->next;
+        }
+        
+        return count;
+    }
+    Node* intersectPoint(Node* head1, Node* head2) {
+        //  Code Here
+        int len1=length(head1);
+        int len2=length(head2);
+        Node *a=NULL;
+        Node *b=NULL;
+        
+        if(len1>len2){
+            int steps=len1-len2;
+            a=head1;
+            b=head2;
+            while(steps){
+                a=a->next;
+                steps--;
+            }
+            
+            while(a!=b){
+                a=a->next;
+                b=b->next;
+            }
+        }
+        else{
+            int steps=len1-len2;
+            a=head1;
+            b=head2;
+            while(steps){
+                b=b->next;
+                steps--;
+            }
+            
+            while(a!=b){
+                a=a->next;
+                b=b->next;
+            }
+        }
+        
+        return a;
+    }
+};
