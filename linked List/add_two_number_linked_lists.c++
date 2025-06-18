@@ -27,6 +27,97 @@ Constraints:
 
 
 
+brute force t.c:-O(n+m) and s.c is O(max(n,m)) alright
+
+
+#include <bits/stdc++.h>
+
+class Solution {
+  public:
+    vector<int> findArraySum(vector<int>&a, int n, vector<int>&b, int m) {
+	// Write your code here.
+    	int i=n-1;
+    	int j=m-1;
+    
+    	vector<int>ans;
+    	int carry=0;
+    
+    	while(i>=0 and j>=0){
+    		int value=a[i]+b[j]+carry;
+    		ans.push_back(value%10);
+    		carry=value/10;
+    		i--;j--;
+    	}
+    
+    	while(i>=0){
+    		int value=a[i]+carry;
+    		ans.push_back(value%10);
+    		carry=value/10;
+    		i--;
+    	}
+    
+    	while(j>=0){
+    		int value=b[j]+carry;
+    		ans.push_back(value%10);
+    		carry=value/10;
+    		j--;
+    	}
+    
+    	while(carry){
+    		ans.push_back(carry%10);
+    		carry/=10;
+    	}
+    
+    	reverse(ans.begin(),ans.end());
+    
+    	return ans;
+}
+    
+    void insertattail(Node* &head,Node* &tail,int value){
+        if(head==NULL){
+            Node *newnode=new Node(value);
+            head=newnode;
+            tail=newnode;
+        }
+        else{
+            Node *newnode=new Node(value);
+            tail->next=newnode;
+            tail=newnode;
+        }
+    }
+    Node* addTwoLists(Node* num1, Node* num2) {
+        // code here
+        vector<int>a;
+        vector<int>b;
+        
+        Node *temp=num1;
+        
+        while(temp->data==0) temp=temp->next;
+        while(temp!=NULL){
+            a.push_back(temp->data);
+            temp=temp->next;
+        }
+        
+        temp=num2;
+        while(temp->data==0) temp=temp->next;
+        while(temp!=NULL){
+            b.push_back(temp->data);
+            temp=temp->next;
+        }
+        
+        vector<int>ans=findArraySum(a,a.size(),b,b.size());
+        
+        Node *head=NULL;
+        Node *tail=NULL;
+        
+        for(auto i:ans){
+            insertattail(head,tail,i);
+        }
+        
+        return head;
+    }
+};
+
 
 
 
