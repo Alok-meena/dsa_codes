@@ -37,3 +37,28 @@ class Solution {
         return p;
     }
 };
+
+2nd time
+
+class Solution {
+  public:
+    // Function to reverse a doubly linked list
+    DLLNode* reverseDLL(DLLNode* head) {
+        // Your code here
+        DLLNode *temp=head;
+        DLLNode *prev=NULL;
+        
+        while(temp!=NULL){
+            prev=temp;
+            DLLNode *curr_prev=temp->prev;
+            DLLNode *curr_next=temp->next;
+            
+            temp->next=curr_prev;
+            temp->prev=curr_next;
+            
+            temp=temp->prev;
+        }
+        
+        return prev;
+    }
+};
