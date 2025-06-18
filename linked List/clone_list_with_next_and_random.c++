@@ -61,6 +61,53 @@ class Solution {
 t.c:-O(n) and s.c:-O(n)
 
 
+instead of this short code with same t.c and s.c
+
+class Solution {
+  public:
+    void insertattail(Node* &head,Node* &tail,int value){
+        if(head==NULL){
+            Node *newnode=new Node(value);
+            head=newnode;
+            tail=newnode;
+        }
+        else{
+            Node *newnode=new Node(value);
+            tail->next=newnode;
+            tail=newnode;
+        }
+    }
+    Node *cloneLinkedList(Node *head) {
+        // Write your code here
+        Node *clonehead=NULL;
+        Node *clonetail=NULL;
+        
+        unordered_map<Node*,Node*>oldtonew;
+        
+        Node *oldhead=head;
+        while(oldhead!=NULL){
+            insertattail(clonehead,clonetail,oldhead->data);
+            oldtonew[oldhead]=clonetail;
+            
+            oldhead=oldhead->next;
+        }
+        
+        oldhead=head;
+        Node *temp=clonehead;
+        
+        while(oldhead!=NULL){
+            temp->random=oldtonew[oldhead->random];
+            oldhead=oldhead->next;
+            temp=temp->next;
+        }
+        
+        return clonehead;
+        
+        
+    }
+};
+
+
 optimized with s.c:-O(1) and t.c:-O(n)
 
 class Solution {
@@ -140,5 +187,76 @@ class Solution {
         }
         
         return cloneHead;
+    }
+};
+
+
+2nd time
+
+class Solution {
+  public:
+    void insertattail(Node* &head,Node* &tail,int value){
+        if(head==NULL){
+            Node *newnode=new Node(value);
+            head=newnode;
+            tail=newnode;
+        }
+        else{
+            Node *newnode=new Node(value);
+            tail->next=newnode;
+            tail=newnode;
+        }
+    }
+    Node *cloneLinkedList(Node *head) {
+        // Write your code here
+        Node *clonehead=NULL;
+        Node *clonetail=NULL;
+        
+        Node *oldhead=head;
+        while(oldhead!=NULL){
+            insertattail(clonehead,clonetail,oldhead->data);
+            oldhead=oldhead->next;
+        }
+        
+        oldhead=head;
+        Node *cloneptr=clonehead;
+        
+        while(cloneptr!=NULL and oldhead!=NULL){
+            Node *old_next=oldhead->next;
+            oldhead->next=cloneptr;
+            oldhead=old_next;
+            
+            Node *clone_next=cloneptr->next;
+            cloneptr->next=oldhead;
+            cloneptr=clone_next;
+        }
+        
+        oldhead=head;
+
+        while(oldhead!=NULL){
+            if(oldhead->next!=NULL and oldhead->random!=NULL){
+                oldhead->next->random=oldhead->random->next;
+            }
+            else oldhead->next->random=NULL;
+            oldhead=oldhead->next->next;
+        }
+        
+        oldhead=head;
+        cloneptr=clonehead;
+        
+        while(oldhead!=NULL){
+            Node *old_next=cloneptr->next;
+            oldhead->next=old_next;
+            oldhead=old_next;
+            
+            Node *clone_next=NULL;
+            if(oldhead!=NULL) clone_next=oldhead->next;
+            cloneptr->next=clone_next;
+            cloneptr=clone_next;
+        }
+        
+        return clonehead;
+        
+        
     }
 };
