@@ -58,7 +58,7 @@ class Solution {
 };
 
 
-t.c:-O(n+m) and s.c:-O(1)
+t.c:-O(n+m) and s.c:-O(n+m)
 
 and we can also use a dummy node then no need of more if conditions 
 
