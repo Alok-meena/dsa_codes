@@ -47,11 +47,14 @@ class Solution {
         // Your code here
         DLLNode *temp=head;
         DLLNode *prev=NULL;
+
+        DLLNode *curr_prev=NULL;
+        DLLNode *curr_next=temp->next;
         
         while(temp!=NULL){
             prev=temp;
-            DLLNode *curr_prev=temp->prev;
-            DLLNode *curr_next=temp->next;
+            curr_prev=temp->prev;
+            curr_next=temp->next;
             
             temp->next=curr_prev;
             temp->prev=curr_next;
