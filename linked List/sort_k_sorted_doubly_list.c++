@@ -28,7 +28,31 @@ Sample Input 2 :
 Sample Output 2 :
 4 7 8 9 10 50 60 70 -1
 
+before this how to sort k sorted array in O(nlogk) t.c and O(k) s.c
 
+class Solution {
+  public:
+    void nearlySorted(vector<int>& arr, int k) {
+        // code
+        priority_queue<int,vector<int>,greater<int>>pq;
+        
+        int i=0;
+        for(auto j:arr){
+            pq.push(j);
+            
+            if(pq.size()>k){
+                arr[i++]=pq.top();
+                pq.pop();
+            }
+        }
+        
+        while(!pq.empty()){
+            arr[i++]=pq.top();
+            pq.pop();
+        }
+        
+    }
+};
 
 
 
