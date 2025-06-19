@@ -63,3 +63,35 @@ class Solution {
         return temp->data;
     }
 };
+
+more easy code
+
+class Solution {
+  public:
+    int getKthFromLast(Node *head, int k) {
+        // Your code here
+        int length=0;
+        Node *temp=head;
+        while(temp!=NULL){
+            length++;
+            temp=temp->next;
+        }
+        
+        
+        if(k>length) return -1;
+        
+        k=length-k;
+        
+        int count=1;
+        temp=head;
+        while(count<=k and temp!=NULL){
+            temp=temp->next;
+            count++;
+        }
+        
+        if(temp==NULL) return -1;
+        return temp->data;
+    }
+};
+
+t.c:-O(n) and s.c:-O(1) alright
