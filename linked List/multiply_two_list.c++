@@ -72,3 +72,34 @@ class solution {
 };
 
 t.c:-O(n+m) and s.c:-O(n+m)
+
+
+same t.c and s.c code
+
+int mod=1e9+7;
+class solution {
+  public:
+    long long multiplyTwoLists(Node *first, Node *second) {
+        // code here
+        string a;
+        string b;
+        
+        Node *temp=first;
+        while(temp!=NULL){
+            a.push_back(temp->data+'0');
+            temp=temp->next;
+        }
+        
+        temp=second;
+        while(temp!=NULL){
+            b.push_back(temp->data+'0');
+            temp=temp->next;
+        }
+        
+        long long num1=stoll(a);
+        long long num2=stoll(b);
+        
+        long long ans=(num1*num2)%mod;
+        return ans;
+    }
+};
