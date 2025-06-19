@@ -130,3 +130,37 @@ class Solution {
 t.c:-O(nlogk) and s.c:-O(k+1)
 
 as queue takes logk time for it's operations like push and pop okk
+
+if u didnt understand above code so simple code
+
+
+class Solution {
+  public:
+    // function to sort a k sorted doubly linked list
+    DLLNode *sortAKSortedDLL(DLLNode *head, int k) {
+        // code here
+        priority_queue<int,vector<int>,greater<int>>pq;
+        
+        DLLNode *temp=head;
+        DLLNode *a=head;
+        
+        while(temp!=NULL){
+            
+            if(pq.size()>k){
+                a->data=pq.top();
+                pq.pop();
+                a=a->next;
+            }
+            pq.push(temp->data);
+            temp=temp->next;
+        }
+        
+        while(!pq.empty()){
+            a->data=pq.top();
+            a=a->next;
+            pq.pop();
+        }
+        
+        return head;
+    }
+}; with same t.c and s.c
