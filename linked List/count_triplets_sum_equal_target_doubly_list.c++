@@ -107,3 +107,52 @@ int countTriplets(DLLNode* head, int x)
 
 
 t.c:-O(n^2) and s.c:-O(1)
+
+
+ya same t.c and s.c but just diff code
+
+int findPairsWithGivenSum(DLLNode *head, int target)
+    {
+        // code here
+        if(head==NULL) return 0;
+        int ans=0;        
+        DLLNode *ptr1=head;
+        DLLNode *ptr2=head;
+        while(ptr2->next!=NULL){
+            ptr2=ptr2->next;
+        }
+        
+        while(ptr1!=ptr2 && ptr2->next!=ptr1){
+            int sum=ptr1->data + ptr2->data; 
+            
+            if(sum==target){
+                ans++;
+                ptr2=ptr2->prev;
+                ptr1=ptr1->next;
+            }
+            else if(target>sum){
+                ptr1=ptr1->next;
+            }
+            else{
+                ptr2=ptr2->prev;
+            }
+        }
+        
+        return ans;
+        
+    }
+int countTriplets(DLLNode* head, int x)
+{
+    // WRITE YOUR CODE HERE
+    DLLNode *temp=head;
+    int ans=0;
+
+    while(temp!=NULL){
+        int value=x-(temp->data);
+        ans+=findPairsWithGivenSum(temp->next,value);
+        temp=temp->next;
+    }
+
+    return ans;
+
+}  
