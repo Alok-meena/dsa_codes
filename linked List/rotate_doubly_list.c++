@@ -72,6 +72,44 @@ class Solution {
     }
 };
 
+
+or 
+
+
+class Solution {
+  public:
+    void rotateArr(vector<int>& arr, int d) {
+        // code here
+        int n=arr.size();
+        d=d%n;
+        reverse(arr.begin(),arr.begin()+d);
+        reverse(arr.begin()+d,arr.end());
+        reverse(arr.begin(),arr.end());
+    }
+    Node *rotateDLL(Node *head, int p) {
+
+        // code here..
+        vector<int>v;
+        Node *temp=head;
+        
+        while(temp!=NULL){
+            v.push_back(temp->data);
+            temp=temp->next;
+        }
+    
+        
+        rotateArr(v,p);
+        
+        temp=head;
+        for(auto i:v){
+            temp->data=i;
+            temp=temp->next;
+        }
+
+        return head;
+    }
+};
+
 t.c:-O(n) and s.c:-O(n)
 
 but this code is little clumsy and takes space
@@ -121,6 +159,181 @@ class Solution {
         temp->next=NULL;
         
         return newhead;
+        
+    }
+};
+
+or
+
+class Solution {
+  public:
+    int length(Node *head){
+        Node *temp=head;
+        int length=0;
+        while(temp!=NULL){
+            length++;
+            temp=temp->next;
+        }
+        return length;
+    }
+    Node *rotateDLL(Node *head, int p) {
+
+        // code here..
+        int len=length(head);
+        if(head==NULL or head->next==NULL or p%len==0 or p==0) return head;
+        
+        p=p%len;
+        
+        Node *temp=head;
+        int count=1;
+        while(count<p and temp!=NULL){
+            count++;
+            temp=temp->next;
+        }
+        
+        Node *secondhalf=NULL;
+        if(temp and temp->next){
+            secondhalf=temp->next;
+            temp->next=NULL;
+            secondhalf->prev=NULL;
+        }
+        
+        temp=secondhalf;
+        while(temp->next!=NULL){
+            temp=temp->next;
+        }
+        
+        temp->next=head;
+        head->prev=temp;
+        
+        return secondhalf;
+    }
+};
+
+t.c:-O(n) and s.c:-O(1)
+
+or
+
+array code conversion
+
+void rotateArr(vector<int>& arr, int d) {
+        // code here
+        int n=arr.size();
+        d=d%n;
+        reverse(arr.begin(),arr.begin()+d);
+        reverse(arr.begin()+d,arr.end());
+        reverse(arr.begin(),arr.end());
+    }
+
+same t.c and s.c
+
+
+ class Solution {
+  public:
+    int length(Node *head){
+        Node *temp=head;
+        int length=0;
+        while(temp!=NULL){
+            length++;
+            temp=temp->next;
+        }
+        return length;
+    }
+    Node* reverse2(Node* head) {
+        // Your code here
+        Node *temp=head;
+        Node *prev=NULL;
+        
+        while(temp!=NULL){
+            prev=temp;
+            Node *curr_prev=temp->prev;
+            Node *curr_next=temp->next;
+            
+            temp->prev=curr_next;
+            temp->next=curr_prev;
+            
+            temp=curr_next;
+        }
+        
+        return prev;
+    }
+    
+    Node* reverse1(Node* head, int d) {
+    int count = 0;
+    Node *temp = head;
+    Node *p = NULL;
+    
+    while(count < d && temp != NULL){
+        p = temp;
+        Node *curr_prev = temp->prev;
+        Node *curr_next = temp->next;
+        
+        temp->prev = curr_next;
+        temp->next = curr_prev;
+        
+        temp = curr_next;
+        count++;
+    }
+
+    // Now p is the new head of reversed part
+    if(p) p->prev = NULL;
+
+    // Find original head (now tail of reversed part)
+    Node* tail = p;
+    while(tail && tail->next != NULL){
+        tail = tail->next;
+    }
+
+    if(temp) {
+        tail->next = temp;
+        temp->prev = tail;
+    }
+
+    return p;
+}
+
+    
+    void rotateArr(vector<int>& arr, int d) {
+        // code here
+        int n=arr.size();
+        d=d%n;
+        reverse(arr.begin(),arr.begin()+d);
+        reverse(arr.begin()+d,arr.end());
+        reverse(arr.begin(),arr.end());
+    }
+     
+    Node *rotateDLL(Node *head, int p) {
+
+        // code here..
+        int len=length(head);
+        if(head == NULL || head->next == NULL || p == 0 || p % len == 0) return head;
+        p=p%len;
+        
+        head=reverse1(head,p);
+        
+         Node *temp = head;
+        int count = 1;
+        while(count < p && temp != NULL){
+            temp = temp->next;
+            count++;
+        }
+
+        Node *secondHalf = NULL;
+        if(temp && temp->next){
+            secondHalf = temp->next;
+            temp->next = NULL;
+            secondHalf->prev = NULL;
+        }
+
+        Node *second = reverse2(secondHalf);
+        
+
+        temp->next = second;
+        if(second) second->prev = temp;
+
+        head = reverse2(head);
+        
+        return head;
         
     }
 };
