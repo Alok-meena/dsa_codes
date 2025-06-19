@@ -202,6 +202,128 @@ class Solution {
 
 t.c:-O(n*k) and s.c:-O(1)
 
+another code with same t.c and s.c
+
+class Solution {
+  public:
+    Node* solve(Node* &first,Node* &second){
+        if(first->next==NULL){
+            first->next=second;
+            return first;
+        }
+        
+        Node *curr1=first;
+        Node *next1=curr1->next;
+        Node *curr2=second;
+        Node *next2=second->next;//to have pointer to the remaining list
+        
+        while(next1!=NULL && curr2!=NULL){
+            
+            if(curr2->data>=curr1->data && curr2->data<=next1->data){
+                curr1->next=curr2;
+                next2=curr2->next;
+                curr2->next=next1;
+                curr1=curr2;
+                curr2=next2;
+            }
+            else{
+                curr1=next1;
+                next1=next1->next;
+
+                //if first list is fully traversed then connect remaining seconnd list okk
+                
+                if(next1==NULL){
+                    curr1->next=curr2;
+                    return first;
+                }
+            }
+        }
+        return first;
+    }
+    Node* mergeKLists(vector<Node*>& arr) {
+        // Your code here
+        Node *head=NULL;
+        
+        if(arr.size()==0) return NULL;
+        if(arr.size()==1) return arr[0];
+        
+        if(arr[0]->data<=arr[1]->data){
+            head=solve(arr[0],arr[1]);
+        }
+        else head=solve(arr[1],arr[0]);
+        
+        for(int i=2;i<arr.size();i++){
+            if(head->data<=arr[i]->data){
+                head=solve(head,arr[i]);
+            }
+            else head=solve(arr[i],head);
+        }
+        
+        return head;
+    }
+};
+
+another
+
+
+class Solution {
+  public:
+    Node* merge(Node* &left,Node* &right){
+        
+        if(left==NULL){
+            return right;
+        }
+        if(right==NULL){
+            return left;
+        }
+        
+        Node *dummy=new Node(-1);
+        Node *temp=dummy;
+        
+        while(left!=NULL && right!=NULL){
+            if(left->data<right->data){
+                temp->next=left;
+                temp=left;
+                left=left->next;
+            }
+            else{
+                temp->next=right;
+                temp=right;
+                right=right->next;
+            }
+        }
+        
+        while(left!=NULL){
+            temp->next=left;
+            temp=left;
+            left=left->next;
+        }
+        
+        while(right!=NULL){
+            temp->next=right;
+            temp=right;
+            right=right->next;
+        }
+        
+        
+        temp=dummy->next;
+        dummy->next=NULL;
+        delete dummy;
+        
+        return temp;
+    }
+    Node* mergeKLists(vector<Node*>& arr) {
+        // Your code here
+        Node *head=merge(arr[0],arr[1]);
+        
+        for(int i=2;i<arr.size();i++){
+            head=merge(head,arr[i]);
+        }
+        
+        return head;
+    }
+};
+
 
 using priority queue
 
