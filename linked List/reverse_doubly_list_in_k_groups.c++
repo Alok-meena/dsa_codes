@@ -90,7 +90,60 @@ Node* reverseDLLInGroups(Node* head, int k)
 				head->next->prev=head;
 			}
         }
+	else{
+		head->next=NULL;
+	}
        
 
         return p; 
+}
+
+
+or
+
+int length(Node *head){
+        Node *temp=head;
+        int len=0;
+        while(temp!=NULL){
+            len++;
+            temp=temp->next;
+        }
+        return len;
+    }
+Node* reverseDLLInGroups(Node* head, int k)
+{	
+    // Write your code here. 
+    if(head==NULL or head->next==NULL) return head;
+
+    int len=length(head);
+
+    Node *curr=head;
+    Node *p=NULL;
+    int count=0;
+    while(curr!=NULL and count<k){
+        p=curr;
+        Node *curr_prev=curr->prev;
+        Node *curr_next=curr->next;
+
+        curr->next=curr_prev;
+        curr->prev=curr_next;
+        curr=curr_next;
+
+        count++;
+    }
+
+    if(p->prev!=NULL){
+        p->prev=NULL;
+    }
+
+    if(curr!=NULL){
+        Node *ans=reverseDLLInGroups(curr,k);
+        head->next=ans;
+        if(ans!=NULL) ans->prev=head;
+    }
+    else{
+            head->next=NULL;
+        }
+
+    return p;
 }
