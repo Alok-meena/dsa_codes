@@ -15,7 +15,8 @@ class Stack{
     }
 
     void push(int val){
-        if(top<size-1){
+        if(top<size-1){ top<size-1 because ex size is 5 so 0-4 tk hi dal skte hai to ager ham 3 pe hai to hi 4 pe dal skte means top<size-1 not top<size then hm 4
+                       pe hai to stack is full now stack overflow will occur;
             top++;
             arr[top]=val;
         }
