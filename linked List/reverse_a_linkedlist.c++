@@ -85,6 +85,7 @@ LinkedListNode<int>* reverse(LinkedListNode<int>* &head){
     }
 
   //so it will return the new head of the reversed linked list 
+  //to bhai ye newhead k koi kam nhi bs yhi kam hai ki reverselist ka head return ho jayega alright
     LinkedListNode<int> *newhead=reverse(head->next);
 
     head->next->next=head;//to point 1->2-> this pointer which is head->next->next to the head itself we did so
