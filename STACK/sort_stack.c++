@@ -65,7 +65,7 @@ void sortStack(stack<int> &stack)
 	}
 }
 
-t.c:-O(nlogn) and s.c:-O(N)
+t.c:-O(nlogn) and s.c:-O(N) it is better optimized than below one alright
 
 
 using recursion
@@ -102,4 +102,4 @@ void sortStack(stack<int> &stack)
 	sortInsert(stack,val); to is function me stack me jab bhi val se chota top mila val ko push kr do alright 
 }
 
-t.c:-O(N^2) and s.c:-O(n)
+t.c:-O(N^2) and s.c:-O(n) it's s.c is O(n^2) because comparison for each value will be done 
