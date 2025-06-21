@@ -99,7 +99,7 @@ void sortStack(stack<int> &stack)
 	stack.pop();
 	sortStack(stack);
 
-	sortInsert(stack,val);
+	sortInsert(stack,val); to is function me stack me jab bhi val se chota top mila val ko push kr do alright 
 }
 
 t.c:-O(N^2) and s.c:-O(n)
