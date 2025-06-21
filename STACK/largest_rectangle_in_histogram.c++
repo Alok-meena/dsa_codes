@@ -95,6 +95,31 @@ public:
 
 t.c:-O(N^2) and s.c:-O(1)
 
+or can do this also
+
+class Solution {
+public:
+    int largestRectangleArea(vector<int>& heights) {
+        int area=0;
+        int n=heights.size();
+        for(int i=0;i<n;i++){
+            int l=i-1;
+            int r=i+1;
+
+            while(l>=0 and heights[l]>=heights[i]) l--;
+            while(r<n and heights[r]>=heights[i]) r++;
+
+
+            cout<<r<<" "<<l<<endl;
+
+            int curr_area=(r-l-1)*heights[i];
+            area=max(area,curr_area);
+        }
+
+        return area;
+    }
+};
+
 
 2) optimized
 
