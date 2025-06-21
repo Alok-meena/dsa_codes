@@ -26,7 +26,29 @@ Constraints:
 
 
 
+#include <bits/stdc++.h> 
+void deleteMiddle(stack<int>&inputStack, int N){
+	
+   // Write your code here
+   stack<int>ans;
+   int count=0;
+   int step=(N+2)/2;
 
+   while(count<step){
+      ans.push(inputStack.top());
+      inputStack.pop();
+      count++;
+   }
+
+   ans.pop();
+
+   while(!ans.empty()){
+      inputStack.push(ans.top());
+      ans.pop();
+   }
+
+}
+O(n) t.c and s.c
 
 class Solution {
   public:
