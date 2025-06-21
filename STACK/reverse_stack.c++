@@ -85,7 +85,8 @@ void reverseStack(stack<int> &stack) {
     int val=stack.top();
     stack.pop();
 
-    reverseStack(stack);
+    reverseStack(stack); //to pahle ham last of stack pahuch jayenge then har ek ele ko bottom me insert krenge ex 1 2 3 4 hai to 4 dala bottom pe then 3 ko to 4 3
+    //and so on alright
 
     insertatBottom(stack,val);
 }
