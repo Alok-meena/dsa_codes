@@ -176,6 +176,10 @@ public:
             if(nextsmaller[i]==-1){
                 nextsmaller[i]=n;
             }
+
+            //hme ese hi next[i] ki tarah prev[i] ka nhi chahihe because next[i] ko size se ek dam aage n diya to prev[i] ko 0 se ek kadam piche -1 dena hoga
+            //jo ki pahle se hi hai alright
+            
             int length=heights[i];
             int breadth=nextsmaller[i]-prevsmaller[i]-1; //to suno hame only next smaller ke pahle index tk ki length chahihe okk that's why -1 kiya u can
             //check by doing dry run okk
