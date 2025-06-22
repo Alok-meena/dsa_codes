@@ -23,7 +23,41 @@ Constraints:
 
 
 
+normal approach of t.c:-O(n^2) and s.c:-O(1)
 
+//khuch mt kro har ek possible celebrity ki row check kro ki vo kisi ko na janta ho and col check kro ki sb  use jante ho alright excluding diagonal vaules alright
+class Solution {
+  public:
+    int celebrity(vector<vector<int> >& mat) {
+        // code here
+
+        int n=mat.size();
+        
+        for(int i=0;i<n;i++){
+            
+            bool possible_celebrity=true;
+            
+            //row check
+            for(int col=0;col<n;col++){
+                if(i!=col and mat[i][col]==1){
+                    possible_celebrity=false;
+                    break;
+                }
+            }
+            
+            //col check
+            for(int row=0;row<n;row++){
+                if(i!=row and mat[row][i]==0){
+                    possible_celebrity=false;
+                }
+            }
+            
+            if(possible_celebrity) return i;
+        }
+        
+        return -1;
+    }
+};
 
 
 
