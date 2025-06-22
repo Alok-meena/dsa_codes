@@ -181,6 +181,7 @@ class minStack
         // we did used this formula because we want that value to be smaller than the mini but if we used 3* then it wont be possible so choose formula wisely
 				s.push(2*num-mini); //now due to this if the s.top() is smaller than the min then it represents a change in the min value and modify it
 				mini=num;
+				 //to yha mini ko update bad me karna pahle purana mini use ho rha hai alright 
 			}
 			else{
 				s.push(num);
