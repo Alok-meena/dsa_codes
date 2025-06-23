@@ -83,3 +83,45 @@ bool findRedundantBrackets(string &s)
 
     return !st.empty();
 }
+
+
+class Solution {
+  public:
+    bool isoperator(char i){
+        if(i=='+' or i=='-' or i=='*' or i=='/') return true;
+        return false;
+    }
+    int checkRedundancy(string s) {
+        // code here
+        stack<char>st;
+        
+        for(auto i:s){
+            if(i=='('){
+                st.push(i);
+            }
+            else if(isoperator(i)){
+                st.push(i);
+            }
+            else if(i==')'){
+                bool isop=false;
+                
+                while(!st.empty() and st.top()!='('){
+                    if(isoperator(st.top())) isop=true;
+                    st.pop();
+                }
+                
+                st.pop();
+                
+                if(st.empty() and !isop){
+                    return true;
+                }
+                
+                if(!st.empty() and !isop){
+                    return true;
+                }
+            }
+        }
+        
+        return false;
+    }
+};
