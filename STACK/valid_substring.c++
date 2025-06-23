@@ -35,7 +35,7 @@ class Solution {
         int max_len=0;
         stack<int>st;
         
-        st.push(-1);
+        st.push(-1); // -1 dala taki ager stack empty bhi ho to s.top() nikalne me error na aaye alright and rest u can check by dry run
         
         for(int i=0;i<s.length();i++){
             if(s[i]=='('){
