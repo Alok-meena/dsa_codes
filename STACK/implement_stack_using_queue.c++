@@ -8,33 +8,35 @@ public:
     int pop();
 };
  */
-
-//Function to push an element into stack using two queues.
-void QueueStack :: push(int x)
-{
-        // Your Code
-        q1.push(x);
-        
-        while(!q2.empty()){
-            q1.push(q2.front());
-            q2.pop();
-        }
-        
-        while(!q1.empty()){
-            q2.push(q1.front());
-            q1.pop();
-        }
-}
-
-//Function to pop an element from stack using two queues. 
-int QueueStack :: pop()
-{
-        // Your Code  
-        if(q2.empty()) return -1;
-        int val=q2.front();
+void QueueStack ::push(int x) {
+    // code here
+    q2.push(x);
+    
+    while(!q1.empty()){
+        q2.push(q1.front());
+        q1.pop();
+    }
+    
+    while(!q2.empty()){
+        q1.push(q2.front());
         q2.pop();
-        return val;
+    }
 }
+
+int QueueStack ::pop() {
+
+    
+    // code here
+    if(q1.empty()) return -1;
+    int val=q1.front();
+    q1.pop();
+    return val;
+    
+}
+
+pahle q2 me dal diya alright
+then q1 ke sare ele q2 me dal do
+then q2 ke sare ele q1 me dal do alright
 
 
 using single queue
@@ -63,4 +65,4 @@ int QueueStack :: pop()
 
 okkkk
 
-isme bs khuch nhi values ko last me inert krte hao size-1 times okk
+pahle value insert ki phir starting ki sari values curr se pahle ki (size-1) se pahle ki insert kr di queue me alright
