@@ -188,7 +188,7 @@ public:
         if(front==rear){
             front=rear=-1;
         }
-        else if(rear==0){
+        else if(rear==0){ //here dont include front!=size-1 it will give tle alright
             rear=size-1;
         }
         else{
