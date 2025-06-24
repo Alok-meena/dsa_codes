@@ -198,6 +198,8 @@ class minStack
 			s.pop();
 
 			if(tp<mini){
+				//bhai suppose apka stack hai -1 5 to top value pop krke return kroge to aapka mini hi top value hoga alright and 
+				//store it separately and to update mini the below formula is used alright
 				int original=mini;
 				mini=2*mini-tp; 
 				return original;
