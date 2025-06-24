@@ -128,3 +128,47 @@ long long sumOfMaxAndMin(vector<int> &nums, int n, int k) {
     return ans;
 }
 it is a very deep ques check using dryrun
+
+
+2nd time
+
+#include <bits/stdc++.h> 
+long long sumOfMaxAndMin(vector<int> &nums, int n, int k) {
+	// Write your code here.
+    deque<int>maxi;
+    deque<int>mini;
+
+    long long sum=0;
+
+    for(int i=0;i<k;i++){
+        while(!maxi.empty() and nums[maxi.back()]<=nums[i]) maxi.pop_back();
+        while(!mini.empty() and nums[mini.back()]>=nums[i]) mini.pop_back();
+
+        maxi.push_back(i);
+        mini.push_back(i);
+    }
+
+    for(auto i:mini) cout<<i<<" ";
+    cout<<endl;
+
+    sum+=nums[maxi.front()]+nums[mini.front()];
+
+    for(int i=k;i<n;i++){
+        //out of bound check
+        while(!maxi.empty() and i-maxi.front()>=k) maxi.pop_front();
+        while(!mini.empty() and i-mini.front()>=k) mini.pop_front();
+
+        //update deque
+        while(!maxi.empty() and nums[maxi.back()]<=nums[i]) maxi.pop_back();
+        while(!mini.empty() and nums[mini.back()]>=nums[i]) mini.pop_back();
+
+        maxi.push_back(i);
+        mini.push_back(i);
+
+        sum+=nums[maxi.front()]+nums[mini.front()];
+    }
+
+    return sum;
+
+}
+
