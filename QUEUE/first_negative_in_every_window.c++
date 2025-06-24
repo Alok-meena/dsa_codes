@@ -68,6 +68,44 @@ class Solution {
     }
 };
 
+or
+
+class Solution {
+  public:
+    vector<int> firstNegInt(vector<int>& arr, int k) {
+        // write code here
+        queue<int>q;
+        
+        int n=arr.size();
+        
+        vector<int>ans;
+        
+        for(int i=0;i<n;i++){
+            q.push(arr[i]);
+            
+            if(q.size()==k){
+                queue<int>q2=q;
+                bool neg=false;
+                
+                while(!q2.empty()){
+                    if(q2.front()<0){
+                        ans.push_back(q2.front());
+                        neg=true;
+                        break;
+                    }
+                    q2.pop();
+                }
+                
+                if(!neg) ans.push_back(0);
+                
+                q.pop();
+            }
+        }
+        
+        return ans;
+    }
+};
+
 s.c:-O(n) and t.c:-O(n*k)
 
 
@@ -121,3 +159,47 @@ class Solution {
 };
 
 t.c:-O(n) and s.c:-O(n)
+
+
+no need to use dequeue can use queue like below
+
+
+class Solution {
+  public:
+    vector<int> firstNegInt(vector<int>& arr, int k) {
+        // write code here
+        queue<int>q;
+        vector<int>ans;
+        
+        int n=arr.size();
+        
+        for(int i=0;i<k;i++){
+            if(arr[i]<0) q.push(i);
+        }
+        
+        if(!q.empty()) ans.push_back(arr[q.front()]);
+        else ans.push_back(0);
+        
+        for(int i=k;i<n;i++){
+            //removal logic
+            if(!q.empty() and i-q.front()>=k){
+                q.pop();
+            }
+            
+            //insert element
+            if(arr[i]<0){
+                q.push(i);
+            }
+            
+            //update ans
+            if(!q.empty()){
+                ans.push_back(arr[q.front()]);
+            }
+            else ans.push_back(0);
+        }
+        
+        return ans;
+    }
+};
+
+with same t.c and s.c
