@@ -60,6 +60,43 @@ void interLeaveQueue(queue < int > & q) {
     }
 }
 
+or
+
+class Solution {
+  public:
+    queue<int> rearrangeQueue(queue<int> q) {
+        // code here
+        queue<int>a;
+        queue<int>b;
+        
+        int n=q.size();
+        
+        int cnt=0;
+        while(cnt<n/2){
+            a.push(q.front());
+            q.pop();
+            cnt++;
+        }
+        
+        while(!q.empty() and cnt<n){
+            b.push(q.front());
+            q.pop();
+            cnt++;
+        }
+        
+        cnt=0;
+        
+        while(!a.empty() and !b.empty()){
+            q.push(a.front());
+            q.push(b.front());
+            a.pop();
+            b.pop();
+        }
+        
+        return q;
+    }
+};
+
 t.c:-O(n) and s.c:-O(n)
 
 with same t.c and s.c
