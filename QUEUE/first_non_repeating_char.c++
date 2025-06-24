@@ -27,7 +27,7 @@ class Solution {
   public:
     string FirstNonRepeating(string &s) {
         // Code here
-        map<char,int>mp;
+        unordered_map<char,int>mp;
         queue<char>q;
         
         // for(auto i:s){
@@ -59,3 +59,29 @@ class Solution {
 simple sa code tha char add kor aor count bdao jab tk count>1 na ho push krte jaoo o/w pop and if queue size 0 then push #
 
 t.c:-O(n) and s.c:-(n)
+
+class Solution {
+  public:
+    string FirstNonRepeating(string &s) {
+        // Code here
+        vector<int>freq(26,0);
+        queue<char>q;
+        
+        string ans;
+        
+        for(auto i:s){
+            int idx=i-'a';
+            freq[idx]++;
+            q.push(i);
+            
+            while(!q.empty() and freq[q.front()-'a']>1) q.pop();
+            
+            if(!q.empty()) ans.push_back(q.front());
+            else ans.push_back('#');
+        }
+        
+        return ans;
+    }
+};
+
+or can use vector also to store the frequency of the chars
