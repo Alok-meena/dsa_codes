@@ -121,6 +121,8 @@ long long sumOfMaxAndMin(vector<int> &nums, int n, int k) {
         maxi.push_back(i);
         mini.push_back(i);
 
+	//to bhai dekho queue me ans dalne ke bad hi ans ko update krna o/w if queue empty ho gyi aor ans add kiya to error aa skta hai alright
+
         ans+=nums[maxi.front()]+nums[mini.front()];
 
     }
