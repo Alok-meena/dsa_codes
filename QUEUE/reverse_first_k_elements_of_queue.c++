@@ -107,4 +107,4 @@ class Solution
     }
 };
 
-same t.c and s.c
+O(k) + O(k) + O(n-k) so same t.c and s.c
