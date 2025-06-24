@@ -80,6 +80,7 @@ class Solution
     // Function to reverse first k elements of a queue.
     queue<int> modifyQueue(queue<int> q, int k) {
         // add code here.
+        if(k>arr.size()) return q;
         int n=q.size();
         stack<int>s;
 
