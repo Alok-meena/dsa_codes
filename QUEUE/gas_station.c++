@@ -61,6 +61,9 @@ class Solution {
         
         for(int i=0;i<gas.size();i++){
             balance=balance+gas[i]-cost[i];
+          //dekho deficit ki requirement isliye pdi because suppose start ke liye balance >0 hai but it is possible ki vapas ghum ke jane ke bad
+          //balance negative ho jaye to pahle jab balance negative aaya tha ager usko start vala balance positive kr deta hai to simple se 
+          //vhi return kr do o/w return -1
             if(balance<0){
                 deficit+=balance;
                 start=i+1;
