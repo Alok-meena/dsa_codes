@@ -152,3 +152,34 @@ class Solution {
 
 Expected Time Complexity: O(NlogN)
 Expected Auxiliary Space: O(N). logn for inserting into map
+
+
+class Solution {
+  public:
+    // Function to return a list of nodes visible from the top view
+    // from left to right in Binary Tree.
+    void solve(map<int,pair<int,int>>&m,int hd,int level,Node* root){
+        if(root==NULL){
+            return;
+        }
+        if(m.find(hd)==m.end() or m[hd].first>level){
+            m[hd]={level,root->data};
+        }
+        solve(m,hd-1,level+1,root->left);
+        solve(m,hd+1,level+1,root->right);
+    }
+    vector<int> topView(Node *root) {
+        // code here
+        if(root==NULL) return {};
+        map<int,pair<int,int>>m; //hd , level value
+        solve(m,0,0,root);
+        vector<int>ans;
+        for(auto i:m){
+            ans.push_back(i.second.second);
+        }
+        return ans;
+        
+    }
+};
+
+short code
