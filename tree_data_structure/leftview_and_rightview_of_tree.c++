@@ -18,8 +18,53 @@ Input:
 3    2
 Output: 1 3
 
+can do by bfs also
+
+class Solution {
+  public:
+    vector<int> solve(Node* root){
+        if(root==NULL) return {};
+        
+        queue<Node*>q;
+        q.push(root);
+        q.push(NULL);
+        
+        bool first=false;
+        
+        vector<int>ans;
+        ans.push_back(root->data);
+        
+        while(!q.empty()){
+            Node* front=q.front();
+            q.pop();
+            
+            if(front==NULL){
+                first=true;
+                if(!q.empty()) q.push(NULL);
+            }
+            else{
+                if(first){
+                    first=false;
+                    ans.push_back(front->data);
+                }
+            
+                if(front->left) q.push(front->left);
+                if(front->right) q.push(front->right);
+            }
+        }
+        
+        return ans;
+    }
+    vector<int> leftView(Node *root) {
+        // code here
+        return solve(root);
+    }
+};
+
 // to bs hm khuch nhi kr rhe har level pe jo pahla element aayega usko store kra rhe hai ab yha hmne recursion ka use kiya and we can also do it by level order
 //traversal okkk
+
+
 
 we can also use a map data structure here like this 
 
@@ -172,4 +217,52 @@ class Solution
 
 
  Time Complexity: O(N).
+
  Auxiliary Space: O(Height of the Tree).
+
+
+right view
+
+class Solution {
+  public:
+    vector<int> solve(Node* root){
+        if(root==NULL) return {};
+        
+        queue<Node*>q;
+        q.push(root);
+        q.push(NULL);
+        
+        bool first=false;
+        
+        vector<int>ans;
+        ans.push_back(root->data);
+        
+        while(!q.empty()){
+            Node* front=q.front();
+            q.pop();
+            
+            if(front==NULL){
+                first=true;
+                if(!q.empty()) q.push(NULL);
+            }
+            else{
+                if(first){
+                    first=false;
+                    ans.push_back(front->data);
+                }
+                
+                if(front->right) q.push(front->right);
+                if(front->left) q.push(front->left);
+            }
+        }
+        
+        return ans;
+    }
+    // Function to return list containing elements of right view of binary tree.
+    vector<int> rightView(Node *root) {
+        // Your Code here
+        return solve(root);
+    }
+};
+
+simple last value chaahihe to reverse call kr diya that's it alright
