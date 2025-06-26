@@ -87,3 +87,84 @@ public:
 
 Expected Time Complexity: O(N). ( O(n)+O(n)+O(n) )
 Expected Auxiliary Space: O(Height of the Tree).
+
+
+2nd time
+
+
+/*
+// Tree Node
+class Node {
+  public:
+    int data;
+    Node* left;
+    Node* right;
+
+    // Constructor to initialize a new node
+    Node(int val) {
+        data = val;
+        left = NULL;
+        right = NULL;
+    }
+};
+*/
+
+class Solution {
+  public:
+    void traverseleft(Node* root,vector<int>&ans){
+        if(root==NULL) return;
+        
+        if(root->left==NULL and root->right==NULL) return;
+        
+        ans.push_back(root->data);
+        
+        if(root->left) traverseleft(root->left,ans);
+        else traverseleft(root->right,ans);
+    }
+    
+    void traverseleaf(Node* root,vector<int>&ans){
+        if(root==NULL) return;
+        if(root->left==NULL and root->right==NULL){
+            ans.push_back(root->data);
+            return;
+        }
+        
+        traverseleaf(root->left,ans);
+        traverseleaf(root->right,ans);
+    }
+    
+    void traverseright(Node* root,vector<int>&ans){
+        if(root==NULL) return;
+        if(root->left==NULL and root->right==NULL) return;
+        
+        if(root->right) traverseright(root->right,ans);
+        else traverseright(root->left,ans);
+        
+        ans.push_back(root->data); //ye hame reverse order me chahihe tha to last me pahle gye then vapas jate time push kr diya ans ko
+    }
+    vector<int> boundaryTraversal(Node *root) {
+        // code here
+        vector<int>ans;
+        
+        if(root==NULL) return ans;
+        
+        ans.push_back(root->data);
+        
+        //left nodes
+        traverseleft(root->left,ans);
+        
+        //leaf nodes
+        //left subtree
+        traverseleaf(root->left,ans);
+        
+        //right subtree
+        traverseleaf(root->right,ans);
+        
+        //right nodes
+        traverseright(root->right,ans);
+        
+        return ans;
+    }
+};
+
+sbse bdi bat to leftsubtree and right ke liye alg se call krna for leaf nodes nhi to root node 2 bar print ho jayega alright
