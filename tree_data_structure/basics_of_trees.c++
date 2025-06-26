@@ -149,7 +149,7 @@ class Solution {
             s.push(node->data);
 
             // Enqueue left and right children
-            if (node->right) q.push(node->right);
+            if (node->right) q.push(node->right); //yha pahle right ko dalna pdega tabhi to stack use reverse krega alright ye dekh lena
             if (node->left) q.push(node->left);
         }
 
@@ -162,6 +162,81 @@ class Solution {
         return result;
     }
 };
+
+or
+
+void levelordertraversal(node* root){
+    queue<node*>q;
+    stack<node*>s;
+    q.push(root);
+    q.push(NULL);
+
+    while(!q.empty()){
+        node *temp=q.front();
+        q.pop();
+
+        if(temp==NULL){
+            if(!q.empty()){
+                q.push(NULL);
+                s.push(NULL);
+            }
+        }
+
+        else{
+            s.push(temp);
+        
+            if(temp->right) q.push(temp->right);
+            if(temp->left) q.push(temp->left);
+        }
+    }
+
+    while(!s.empty()){
+        node *temp=s.top();
+        if(temp==NULL) cout<<endl;
+        else{
+            cout<<temp->data<<" ";
+        }
+        s.pop();
+    }
+}
+
+to get how many levels in the tree use the below code :
+
+void levelordertraversal(node* root){
+    queue<node*>q;
+    q.push(root);
+    q.push(NULL);
+    int level=0;
+
+    while(!q.empty()){
+        node *temp=q.front();
+        q.pop();
+
+        if(temp==NULL){
+            cout<<"level:"<<level<<endl;
+            level++;
+            cout<<endl;
+            if(!q.empty()){
+                q.push(NULL);
+            }
+        }
+
+        else{
+            cout<<temp->data<<" ";        
+            if(temp->left) q.push(temp->left);
+            if(temp->right) q.push(temp->right);
+        }
+    }
+}
+
+
+this is also correct 
+
+for : 
+
+1         4 5 6
+2 3       2 3
+4 5 6     1
 
 this is the best approach dry run and u will understand
 so if we first go to the right and push it's data then we will get the data in correct reverse level order okkk
