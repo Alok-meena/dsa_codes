@@ -48,6 +48,45 @@ class Solution{
     }
 };
 
+or can do 
+
+
+class Solution {
+  public:
+    // Function to store the zig zag order traversal of tree in a list.
+    vector<int> zigZagTraversal(Node* root) {
+        // Code here
+        vector<int>ans;
+        
+        queue<Node*>q;
+        q.push(root);
+
+        int level=0;
+        
+        while(!q.empty()){
+            int size=q.size();
+            vector<int>v(size);
+            for(int i=0;i<size;i++){
+                Node *temp=q.front();
+                q.pop();
+                v[i]=temp->data;
+                if(temp->left) q.push(temp->left);
+                if(temp->right) q.push(temp->right);
+            }
+            
+            if(level%2==0){
+                for(int i=0;i<v.size();i++) ans.push_back(v[i]);
+            }
+            else for(int i=size-1;i>=0;i--) ans.push_back(v[i]);
+            
+            level++;
+        }
+        
+        
+        return ans;
+    }
+};
+
 in the below solution we just removed this overhead
 
 Example 1:
