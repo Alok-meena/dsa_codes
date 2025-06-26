@@ -108,3 +108,39 @@ class Solution
 
 Expected Time Complexity: O(NlogN)
 Expected Auxiliary Space: O(N).
+
+2nd time
+
+
+class Solution {
+  public:
+    vector<vector<int>> verticalOrder(Node *root) {
+        // Your code here
+        vector<vector<int>>answer;
+        if(root==NULL) return answer;
+        
+        map<int,vector<int>>ans; //hz dist ke corresponding ans store
+        
+        queue<pair<int,Node*>>q;
+        q.push({0,root});
+        
+        while(!q.empty()){
+            int hz=q.front().first;
+            Node *temp=q.front().second;
+            q.pop();
+            
+            ans[hz].push_back(temp->data);
+            
+            if(temp->left) q.push({hz-1,temp->left});
+            if(temp->right) q.push({hz+1,temp->right});
+        }
+        
+
+        for(auto i:ans){
+            answer.push_back(i.second);
+        }
+        
+        return answer;
+        
+    }
+};
