@@ -32,7 +32,7 @@ class Solution
          pair<bool,int>ans;
          if(isLeftsumtree && isRightsumtree && condition){
              ans.first=true;// to first ko to ture krna hi h;
-             ans.second=2*root->data;// are bhai hme uper niche ka total sum bhejna hai yad rkha kro ye cheez
+             ans.second=2*root->data;// are bhai hme uper niche ka total sum bhejna hai yad rkha kro ye cheez and ye tabhi ho rha hai jab sum equal hai
          }
          else{
              ans.first=false;// ager answer false h to us case me second yani sum calculate krne ki jrurat hi nhi h
@@ -51,3 +51,43 @@ class Solution
 
 Expected Time Complexity: O(N)
 Expected Auxiliary Space: O(Height of the Tree)
+
+
+class Solution {
+  public:
+    pair<int,bool> solve(Node* root){
+        if(root==NULL){
+            return {0,true};
+        }
+        
+        pair<int,bool> left=solve(root->left);
+        pair<int,bool> right=solve(root->right);
+        
+        int sum=left.first+right.first+root->data;
+        
+        int childsum=left.first+right.first;
+        
+        pair<int,bool> ans;
+        
+
+        if(left.second and right.second){
+            if(root->left==NULL and root->right==NULL) ans.second=true;
+            else if(root->data==childsum) ans.second=true;
+            else ans.second=false;
+            ans.first=sum;
+        }
+        else ans.second=false;
+        
+        // cout<<ans.first<<" "<<ans.second<<endl;
+        
+        return ans;
+        
+        
+    }
+    bool isSumTree(Node* root) {
+        // Your code here
+        pair<int,bool> ans=solve(root);
+        // cout<<ans.first<<" "<<ans.second;
+        return ans.second;
+    }
+}; it is written in a clumsy way
