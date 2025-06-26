@@ -144,3 +144,49 @@ class Solution {
         
     }
 };
+
+
+
+only this is accepted at leetcode at same level should be sorted alright
+
+class Solution {
+public:
+    vector<vector<int>> verticalOrder(TreeNode *root) {
+        // Your code here
+        vector<vector<int>>answer;
+        if(root==NULL) return answer;
+        
+        map<int,map<int,vector<int>>>ans; //hz dist ke corresponding ans store
+        
+        queue<pair<int,pair<int,TreeNode*>>>q;
+        q.push({0,{0,root}});
+        
+        while(!q.empty()){
+            int hz=q.front().first;
+            int level=q.front().second.first;
+            TreeNode *temp=q.front().second.second;
+            q.pop();
+            
+            ans[hz][level].push_back(temp->val);
+            
+            if(temp->left) q.push({hz-1,{level+1,temp->left}});
+            if(temp->right) q.push({hz+1,{level+1,temp->right}});
+        }
+        
+
+        for(auto i:ans){
+            vector<int>v;
+            for(auto j:i.second){
+                sort(j.second.begin(),j.second.end());
+                for(auto val:j.second) v.push_back(val);
+            }
+            answer.push_back(v);
+        }
+        
+        return answer;
+        
+    }
+    vector<vector<int>> verticalTraversal(TreeNode* root) {
+        return verticalOrder(root);
+    }
+};
