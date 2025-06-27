@@ -169,3 +169,31 @@ int kthAncestor(Node *root, int k, int node)
     return v[n-k];
 }
 t.c:-O(n) and s.c:-O(h)
+
+
+class Solution {
+  public:
+    bool preorder(Node *root,int node,vector<int>&v){
+        if(root==NULL) return false;
+        
+        v.push_back(root->data);
+        
+        if(root->data==node) return true;
+        
+        if(preorder(root->left,node,v) or preorder(root->right,node,v)) return true;
+        
+        v.pop_back();
+        return false;
+    }
+    int kthAncestor(Node *root, int k, int node) {
+        // Code here
+        vector<int>v;
+        
+        
+        bool found=preorder(root,node,v);
+        int idx=v.size()-1-k;
+        return idx>=0 and found?v[idx]:-1;
+    }
+};
+
+here we are passing bool to stop and not calculating further alright
