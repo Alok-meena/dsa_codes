@@ -15,7 +15,42 @@ Explanation:
 Path 1 : 1 + 2 = 3
 Path 2 : only leaf node 3
 
+brute force
 
+class Solution {
+  public:
+    void solve2(Node* root,int k,int &count,int sum){
+        if(root==NULL) return;
+        
+        sum+=root->data;
+        
+        if(sum==k) count++;
+        
+        solve2(root->left,k,count,sum);
+        solve2(root->right,k,count,sum);
+    }
+    
+    void solve(Node* root,int k,int &count,int &sum){
+        if(root==NULL){
+            return;
+        }
+        
+        solve2(root,k,count,0); //khuch nhi problem ye thi ki har node se new path start krna tha ok to hmane curr node se har bar new path start kiya but
+        //is vajah se t.c O(n^2) hogyi alright
+        
+        solve(root->left,k,count,sum);
+        solve(root->right,k,count,sum);
+    }
+    int sumK(Node *root, int k) {
+        // code here
+        int count=0;
+        int sum=0;
+        solve(root,k,count,sum);
+        return count;
+    }
+};
+
+t.c:-O(n^2) and s.c:O(n) alright
 
 class Solution{
   public:
@@ -55,34 +90,38 @@ class Solution{
 };
 
 
-but it's t.c is O(N*height)
+but it's t.c is O(N*height) in worst case O(n^2) alright
   s.c:-O(N) so it can cause tle due to t.c only in some cases
 
 2nd approach using map:-
 
-class Solution{
-    private:
-     #define ll long long
-    map<ll ,int> mp;
-    int ans=0;
-    void solve(Node* root, int targetSum,ll currSum){
-        if(root==NULL) return;
-        currSum+=root->data;
-        ans+=mp[currSum-targetSum];//it mean between the ongoing process there is a place where targetSum is generated.
-        mp[currSum]++;
-        solve(root->left , targetSum,currSum);
-        solve(root->right , targetSum,currSum);
-        mp[currSum]--;
-        currSum-=root->data;
-
-    }
+class Solution {
   public:
-    int sumK(Node *root,int k)
-    {
-        // code here 
-        mp[0]++;
-        ll currSum=0;
-        solve(root,k,currSum);
-        return ans;
+    void solve(Node *root,int k,map<int,int>&m,int &count,int currsum){
+        if(root==NULL) return;
+        
+        currsum+=root->data;
+        if(currsum==k) count++;
+        if(m.find(currsum-k)!=m.end()){
+            count+=m[currsum-k];
+        }
+        
+        m[currsum]++;
+        
+        solve(root->left,k,m,count,currsum);
+        solve(root->right,k,m,count,currsum);
+        
+        m[currsum]--;
+        // currsum-=root->data; do this only when currsum is passed by reference alright
+    }
+    int sumK(Node *root, int k) {
+        // code here
+        map<int,int>m;
+        int count=0;
+        int currsum=0;
+        solve(root,k,m,count,currsum);
+        return count;
     }
 };
+
+so this is the optimied approach t.c:-O(n) and s.c:-O(n) in case of skew tree alright
