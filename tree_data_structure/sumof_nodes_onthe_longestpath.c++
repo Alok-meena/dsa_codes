@@ -96,3 +96,35 @@ class Solution {
         return ans.second;
     }
 };
+
+class Solution {
+  public: 
+    void solve(Node *root,int len,int sum,int &maxsum,int &maxlen){
+        if(root==NULL){
+            return;
+        }
+        
+        sum+=root->data;
+        
+        if(root->left==NULL and root->right==NULL){
+            if(len>maxlen){
+                maxlen=len;
+                maxsum=sum;
+            }
+            else if(len==maxlen){
+                maxsum=max(maxsum,sum);
+            }
+        }
+        
+        solve(root->left,len+1,sum,maxsum,maxlen);
+        solve(root->right,len+1,sum,maxsum,maxlen);
+    }
+    int sumOfLongRootToLeafPath(Node *root) {
+        // code here
+        int maxsum=0;
+        int maxlen=0;
+        
+        solve(root,0,0,maxsum,maxlen);
+        return maxsum;
+    }
+};
