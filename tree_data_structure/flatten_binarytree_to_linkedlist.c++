@@ -124,3 +124,37 @@ public:
 };
 
 
+2nd time
+
+
+class Solution {
+  public:
+    void flatten(Node *root) {
+        // code here
+        Node *curr=root;
+        
+        while(curr!=NULL){
+            if(curr->left!=NULL){
+                Node *temp=curr->left;
+                
+                while(temp->right!=NULL) temp=temp->right;
+                
+                if(temp->right==NULL){
+                    temp->right=curr->right;
+                    curr->right=curr->left;
+                    curr->left=NULL;
+                    curr=curr->right;
+                }
+            }
+            else{
+                curr=curr->right;
+            }
+        }
+    }
+};
+
+in the ques it is given that we have to make their left ptr equal TO null AND have to use right ptr to connect the list alright
+
+t.c:-O(n) and s.c:-O(1)
+
+
