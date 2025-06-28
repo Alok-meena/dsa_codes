@@ -294,3 +294,92 @@ Node* findTarget(Node* root, int target) {
 };
 
 
+
+2nd time ( correct ) 
+
+
+class Solution {
+  public:
+    Node* mapping(map<Node*,Node*>&m,Node* root,int target){
+        Node *temp=NULL;
+        
+        
+        queue<Node*>q;
+        q.push(root);
+        
+        m[root]=NULL;
+        
+        while(!q.empty()){
+            Node* front=q.front();
+            q.pop();
+            
+            if(front->data==target){
+                temp=front;
+            }
+            
+            if(front->left){
+                m[front->left]=front;
+                q.push(front->left);
+            }
+            if(front->right){
+                m[front->right]=front;
+                q.push(front->right);
+            }
+        }
+        
+        return temp;
+    }
+    
+    void burntree(map<Node*,Node*>nodetoparent,Node* node,map<Node*,bool>visited,int &time){
+        queue<Node*>q;
+        q.push(node);
+        
+        visited[node]=true;
+        
+        while(!q.empty()){
+            bool insert=false;
+            
+            int size=q.size();
+            
+            for(int i=0;i<size;i++){
+                Node *front=q.front();
+                q.pop();
+                
+                if(front->left and !visited[front->left]){
+                    q.push(front->left);
+                    visited[front->left]=true;
+                    insert=true;
+                }
+                
+                if(front->right and !visited[front->right]){
+                    q.push(front->right);
+                    visited[front->right]=true;
+                    insert=true;
+                }
+                if(nodetoparent[front]!=NULL and !visited[nodetoparent[front]]){
+                    q.push(nodetoparent[front]);
+                    visited[nodetoparent[front]]=true;
+                    insert=true;
+                }
+            }
+            
+            if(insert) time++;
+        }
+    }
+    int minTime(Node* root, int target) {
+        // code here
+        map<Node*,Node*>nodetoparent;
+        Node *node;
+        
+        node=mapping(nodetoparent,root,target);
+        
+        map<Node*,bool>visited;
+        
+        int time=0;
+        
+        burntree(nodetoparent,node,visited,time);
+        
+        return time;
+    }
+};
+
