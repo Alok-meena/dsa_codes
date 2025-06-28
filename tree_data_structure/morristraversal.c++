@@ -215,8 +215,44 @@ public:
 };
 
 
-c). for post order:-
+3rd time
 
+class Solution {
+  public:
+    // Function to return a list containing the inorder traversal of the tree.
+    vector<int> inOrder(Node* root) {
+        // Your code here
+        vector<int>ans;
+        
+        Node *curr=root;
+        
+        while(curr!=NULL){
+            if(curr->left==NULL){
+                ans.push_back(curr->data);
+                curr=curr->right;
+            }
+            else{
+                Node *temp=curr->left;
+                
+                while(temp->right!=NULL and temp->right!=curr){
+                    temp=temp->right;
+                }
+                
+                if(temp->right==NULL){
+                    temp->right=curr;
+                    curr=curr->left;
+                }
+                else{
+                    ans.push_back(curr->data);
+                    temp->right=NULL;
+                    curr=curr->right;
+                }
+            }
+        }
+        
+        return ans;
+    }
+};
   
 
 
