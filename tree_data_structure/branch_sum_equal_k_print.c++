@@ -114,3 +114,6 @@ int main(){
 	int sum=0;
 	preorder(root,v,k,sum);
 }
+
+
+it is the same ques of k path sum alright
