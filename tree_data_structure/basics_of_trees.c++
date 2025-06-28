@@ -369,11 +369,12 @@ void iterativePostorder(node *root) {
     }
 }
 
-void build_from_levelorder(node* &root){
+node* build_from_levelorder(node* &root){
     queue<node*>q;
     int data;
     cout<<"enter data for root:"<<endl;
     cin>>data;
+    if(data==-1) return NULL;
     root=new node(data);
     q.push(root);
 
@@ -397,6 +398,8 @@ void build_from_levelorder(node* &root){
             q.push(temp->right);
         }
     }
+
+    return root;
 }
 
 int main(){
