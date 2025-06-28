@@ -1,43 +1,44 @@
-pair<int, int> predecessorSuccessor(TreeNode *root, int key){
-    TreeNode *temp=root;
 
+pair<int, int> predecessorSuccessor(TreeNode *root, int key)
+{
+    // Write your code here.
     int pre=-1;
     int succ=-1;
+    TreeNode *temp=root;
 
-    while(temp->data!=key){
-        if(temp->data>key){
-            succ=temp->data;
-            temp=temp->left;
+    while(temp){
+        if (temp->data == key) break;
+        else if (temp->data < key) {
+            pre = temp->data; // potential predecessor because right me ja rhe to ye chota hai to pre possible hai same for below dry run and understand alright
+            temp = temp->right;
+        } else {
+            succ = temp->data; // potential successor
+            temp = temp->left;
         }
-        else{
-            pre=temp->data;
-            temp=temp->right;
-        }
     }
 
-    TreeNode * leftsubtree=temp->left;
-    while(leftsubtree!=NULL){
-        pre=leftsubtree->data;
-        leftsubtree=leftsubtree->right;
+    if(temp==NULL) return {pre,succ};
+
+    TreeNode *pred=temp->left;
+    while(pred){
+        pre=pred->data;
+        pred=pred->right;
     }
 
-    TreeNode *rightsubtree=temp->right;
-    while(rightsubtree!=NULL){
-        succ=rightsubtree->data;
-        rightsubtree=rightsubtree->left;
+    TreeNode *successor=temp->right;
+    while(successor){
+        succ=successor->data;
+        successor=successor->left;
     }
 
-    pair<int,int>ans=make_pair(pre,succ);
-    return ans;
-} 
+    return {pre,succ};
+}
 t.c:-O(N)
 s.c:-O(1)
 
-don't know why this code cause tle for some cases....  
 
 // to inorder pre hoga left subtree me se max value and inorder successor is min value from right subtree
 
-this above code will not work in all cases as the curr can be null also okk so in that case and if the value is not found then also take care
 
 
 
