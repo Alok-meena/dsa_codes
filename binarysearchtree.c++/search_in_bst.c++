@@ -5,6 +5,9 @@ bool searchInBST(BinaryTreeNode<int> *root, int x) {
     if(root==NULL){
         return false;
     }
+
+    // it is absolutely correct ager ham pahle hi left jate to wrong ho jata pahle chcek kro then according to val left y right jao alright
+    
     if(root->data==x){
         return true;
     }
