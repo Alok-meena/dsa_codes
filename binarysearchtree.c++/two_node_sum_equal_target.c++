@@ -53,4 +53,36 @@ bool twoSumInBST(BinaryTreeNode<int>* root, int target) {
 
 t.c:-O(N) // O(N) for the traversal of each node and O(N) for the traversal of the vector --O(N)
 s.c:-O(N) as for vector in s.c is O(n) and for recursive is O(h) and for skew tree it is O(n) okk
-by the vector to store the inorder traversal     ..............        can use morris inorder traversal for O(1) time complexity
+by the vector to store the inorder traversal     ..............        can use morris inorder traversal for O(1) s.c
+
+here we have used two ptr right so t.c:-O(n) but we can also use binary search but it will increase the complexity alright
+
+void inorder(BinaryTreeNode<int>* root,vector<int>&v){
+    if(root==NULL) return;
+
+    inorder(root->left,v);
+    v.push_back(root->data);
+    inorder(root->right,v);
+}
+bool twoSumInBST(BinaryTreeNode<int>* root, int target) {
+	//Write your code here
+    vector<int>v;
+    inorder(root,v);
+    
+    for(int k=0;k<v.size();k++){
+        int val=target-v[k];
+        int i=k+1,j=v.size()-1;
+        while(i<=j){
+            int mid=(i+j)/2;
+            if(val==v[mid]) return true;
+            else if(v[mid]<val) i=mid+1;
+            else j=mid-1;
+        }
+    }
+
+    return false;
+}
+
+t.c:-O(nlogn) and s.c:-O(n)
+
+
