@@ -20,6 +20,46 @@ O(N), where ‘N’ is the total number of nodes in the given BST.
 We are storing the values of all the nodes in an array after the inorder traversal. Hence, the overall space complexity will be O(N).
 
 
+brute force
+
+void solve(TreeNode<int>* root,vector<int>&v){
+    if(root==NULL) return;
+
+    solve(root->left,v);
+    v.push_back(root->data);
+    solve(root->right,v);
+}
+
+void insertattail(TreeNode<int>* &head,TreeNode<int>* &tail,int val){
+    TreeNode<int> *newnode=new TreeNode(val);
+    if(head==NULL){
+        head=newnode;
+        tail=newnode;
+        return;
+    }
+
+    tail->right=newnode;
+    tail=newnode;
+    return;
+}
+TreeNode<int>* flatten(TreeNode<int>* root)
+{
+    // Write your code here
+    vector<int>in;
+    solve(root,in);
+
+    TreeNode<int>* temp=NULL;
+    TreeNode<int>* tail=NULL;
+
+    for(auto i:in){
+        insertattail(temp,tail,i);
+    }
+
+    return temp;
+}
+
+or
+
 
 void inorder(TreeNode<int>* root,vector<int>&in){
     if(root==NULL){
@@ -56,6 +96,35 @@ s.c:-O(N)
 
 
  instead of creating more nodes we can link the given nodes only by tis
+
+
+void inorder(TreeNode<int>* curr,TreeNode<int>* &prev){
+    if(curr==NULL) return ;
+
+    inorder(curr->left,prev);
+
+    curr->left=NULL; // ya fir prev->left=NULL ye bhi shi hai alright
+    prev->right=curr;
+    prev=curr;
+
+    inorder(curr->right,prev);
+}
+TreeNode<int>* flatten(TreeNode<int>* root)
+{
+    // Write your code here
+    TreeNode<int>* dummy=new TreeNode(-1);
+    TreeNode<int>* prev=dummy;
+    
+    inorder(root,prev);
+    
+    prev->left=NULL;
+    prev->right=NULL;
+
+    return dummy->right;
+}
+
+
+it is optimized code t.c:-O(n) and s.c:-O(h) but partially accept
 
 
 
@@ -144,6 +213,8 @@ TreeNode<int>* flatten(TreeNode<int>* root)
     
 
 }
+
+bhai ye to smj nhi aaya 
 
 
 now i tried using morris traversal but didnt work
