@@ -24,7 +24,26 @@ Constraints:
 
 
 
+in below code we used swap function or can do manually also
 
+class Solution {
+  public:
+    // Function to convert a binary tree into its mirror tree.
+    void mirror(Node* node) {
+        // code here
+        if(node==NULL) return;
+        
+        Node *temp=node->left;
+        Node *t=node->right;
+        node->left=t;
+        node->right=temp;
+        
+        mirror(node->left);
+        mirror(node->right);
+    }
+};
+
+like above alright
 
 class Solution {
   public:
