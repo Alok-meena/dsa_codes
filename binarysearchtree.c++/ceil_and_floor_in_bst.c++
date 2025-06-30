@@ -128,3 +128,46 @@ int findCeil(Node* root, int input) {
 
     // Your code here
 }
+
+
+
+
+iterative way
+
+
+
+int floorInBST(TreeNode<int> * root, int X)
+{
+    // Write your code here.
+    TreeNode<int> *temp=root;
+    
+    int ans=-1;
+    while(temp!=NULL){
+        if(temp->val<=X){
+            ans=temp->val;
+            temp=temp->right;
+        }
+        else if(temp->val>X) temp=temp->left;
+        else temp=temp->left;
+    }
+    return ans;
+}
+
+
+
+
+int findCeil(Node* root, int input) {
+    // Your code here
+    Node *temp=root;
+    
+    int ans=-1;
+    while(temp!=NULL){
+        if(temp->data>=input){
+            ans=temp->data;
+            temp=temp->left;
+        }
+        else if(temp->data<input) temp=temp->right;
+        else temp=temp->left;
+    }
+    return ans;
+}
