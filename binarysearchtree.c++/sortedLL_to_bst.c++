@@ -92,7 +92,7 @@ TreeNode<int>* sortlinkedlisttobst(Node<int>* &head,int n){
     }
 
    TreeNode<int>* left=sortlinkedlisttobst(head,n/2);
-    TreeNode<int>* root = new TreeNode<int>(head->data);
+    TreeNode<int>* root = new TreeNode<int>(head->data); //yha to nya node bnana hi pdega as both list and tree have diff classes for their nodes alright
 
     head=head->next;
     
