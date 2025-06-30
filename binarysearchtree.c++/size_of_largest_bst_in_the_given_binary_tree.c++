@@ -81,9 +81,10 @@ info solve(TreeNode *root,int &ans){
 
     currentnode.size=left.size+right.size+1;// 1 add kiya for the root node itself
     currentnode.maxi=max(root->data,right.maxi);// class kee variables ko update kr diya
-    currentnode.mini=min(root->data,left.mini);
+    currentnode.mini=min(root->data,left.mini);//min ya to curr value ya fir left ki value hogi alright 
 
-    if(left.isbst && right.isbst && (root->data > left.maxi && root->data < right.mini)){// check for isbst 
+    if(left.isbst && right.isbst && (root->data > left.maxi && root->data < right.mini)){// check for isbst  aor value left ki maxi and right ki mini ke beech me hona chiahei
+            
         currentnode.isbst=true;
     }
     else{
@@ -106,3 +107,40 @@ int largestBST(TreeNode * root){
 
 t.c:- O(N) because each node is traversed only once
 s.c:- O(1)
+
+
+2nd time
+
+
+class info{
+    public:
+    bool isbst;
+    int size;
+    int mini;
+    int maxi;
+};
+
+info solve(TreeNode *root,int &maxsize){
+    if(root==NULL){
+        return {true,0,INT_MAX,INT_MIN};
+    }
+
+    info left=solve(root->left,maxsize);
+    info right=solve(root->right,maxsize);
+
+    if(left.isbst and right.isbst and root->data>left.maxi and root->data<right.mini){
+        int currsize=left.size+right.size+1;
+        maxsize=max(maxsize,currsize);
+        return {true,currsize,min(root->data,left.mini),max(root->data,right.maxi)};
+    }
+
+    return {false,0,0,0};
+}
+
+
+int largestBST(TreeNode * root){
+    // Write your code here.
+    int maxsize=0;
+    info ans=solve(root,maxsize);
+    return maxsize;
+}
