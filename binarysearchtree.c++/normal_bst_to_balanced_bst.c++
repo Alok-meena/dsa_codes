@@ -11,7 +11,9 @@ void inorder(TreeNode<int>* root,vector<int>&in){
     inorder(root->right,in);
 }
 // bs mid find krke usko root bna diay aor same binarysearch ki tarah create kiya balanced bs create kr diya
-TreeNode<int>* inordertobst(int s,int e,vector<int>&in){
+
+//iski t.c hai har bar O(n/2) call ho rha hai and by default har ek element ko node bnana hai alright to t.c : -O(n) ho jayegi alright 
+TreeNode<int>* inordertobst(int s,int e,vector<int>&in){   
     if(s>e){
         return NULL;
     }
