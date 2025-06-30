@@ -3,6 +3,38 @@ Your task is to construct a Balanced Binary Search Tree with the same data eleme
 
 A Balanced BST is defined as a BST in which the height of two subtrees of every node differs no more than 1.
 
+code t.c:-O(n) and s.c:-O(h) because we visit every node once and then returns alright
+
+class Solution {
+public:
+    TreeNode* solve(ListNode* start,ListNode* end){
+        if(start==end) return NULL;
+
+        ListNode* slow=start;
+        ListNode* fast=start;
+
+        while(fast!=end and fast->next!=end){  //end ke equal check kiya why ? because in other part of list fast will never reach NULL alright 
+            slow=slow->next;
+            fast=fast->next->next;
+        }
+
+        TreeNode *newnode=new TreeNode(slow->val);
+
+        newnode->left=solve(start,slow);
+        newnode->right=solve(slow->next,end);
+
+        return newnode;
+    }
+    TreeNode* sortedListToBST(ListNode* head) {
+        return solve(head,NULL);
+    }
+};
+
+
+
+second:
+
+
 
 
 
@@ -41,3 +73,5 @@ TreeNode<int>* sortedListToBST(Node<int>* head)
     return sortlinkedlisttobst(head,length);
 }
 
+
+t.c:-O(n) and s.c:-O(h) if excluding the tree building space 
