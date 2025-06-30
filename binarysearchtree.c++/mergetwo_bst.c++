@@ -343,3 +343,154 @@ vector<int> mergeBST(TreeNode *root1, TreeNode *root2)
 isme step 1: convert bst to sorted list
      step 2: merge sorted lists
      step 3: return inorder / convert inorder bst ( if converted to bst then s.c:-O(N+m) due to new nodes created alright )
+
+
+so here we got sorted list right now we can convert this to bst like below
+
+int countNodes(TreeNode* head) {
+    int count = 0;
+    while (head != NULL) {
+        count++;
+        head = head->right;
+    }
+    return count;
+}
+
+TreeNode* sortedLLToBST(TreeNode* &head, int n) {
+    if (n <= 0 || head == NULL) return NULL;
+
+    TreeNode* left = sortedLLToBST(head, n / 2);
+
+    TreeNode* root = new TreeNode(head->data);  // Copy value only
+    root->left = left;
+
+    head = head->right;
+
+    root->right = sortedLLToBST(head, n - n / 2 - 1);
+    return root;
+}
+
+
+so below is the updated code alright
+
+
+and t.c:-O(n+m) and optimized s.c :- O(h1 + h2 + log(n + m)) == O(h1+h2) alright
+
+
+
+
+void inorder(TreeNode* curr,TreeNode* &prev){
+        if(curr==NULL) return ;
+    
+        inorder(curr->left,prev);
+    
+        prev->left=NULL;
+        prev->right=curr;
+        prev=curr;
+    
+        inorder(curr->right,prev);
+    }
+    TreeNode *flattenBST(TreeNode *root) {
+        // code here
+        TreeNode* dummy=new TreeNode(-1);
+        TreeNode* prev=dummy;
+        
+        inorder(root,prev);
+    
+        return dummy->right;
+    }
+
+ TreeNode* solve(TreeNode *&a,TreeNode *&b){
+        if(a->right==NULL){
+            a->right=b;
+            return a;
+        }
+
+
+        TreeNode *curr1=a;
+        TreeNode *next1=curr1->right;
+        TreeNode *curr2=b;
+        TreeNode *next2=curr2->right;
+
+        while(next1!=NULL and curr2!=NULL){
+            if(curr2->data>=curr1->data and curr2->data<=next1->data){
+                curr1->right=curr2;
+                next2=curr2->right;
+                curr2->right=next1;
+                curr1=curr2;
+                curr2=next2;
+            }
+            else{
+                curr1=next1;
+                next1=next1->right;
+
+                if(next1==NULL){
+                    curr1->right=curr2;
+                    return a;
+                }
+            }
+        }
+
+        return a;
+    }
+    TreeNode* mergeTwoLists(TreeNode* list1, TreeNode* list2) {
+        if(list1==NULL) return list2;
+        if(list2==NULL) return list1;
+
+        if(list1->data<=list2->data){
+            return solve(list1,list2);
+        }
+        else{
+            return solve(list2,list1);
+        }
+    }
+
+    int countNodes(TreeNode* head) {
+        int count = 0;
+        while (head != NULL) {
+            count++;
+            head = head->right;
+        }
+        return count;
+    }
+
+TreeNode* sortedLLToBST(TreeNode* &head, int n) {
+    if (n <= 0 || head == NULL) return NULL;
+
+    TreeNode* left = sortedLLToBST(head, n / 2);
+
+    TreeNode* root =head;  // Copy value only   new TreeNode(head->data); do this if converting actual list to bst then node of tree and list have diff class of nodes
+    root->left = left;
+
+    head = head->right;
+
+    root->right = sortedLLToBST(head, n - n / 2 - 1);
+    return root;
+}
+
+void inorder2(TreeNode* root,vector<int>&v){
+    if(root==NULL) return;
+
+    inorder2(root->left,v);
+    v.push_back(root->data);
+    inorder2(root->right,v);
+}
+vector<int> mergeBST(TreeNode *root1, TreeNode *root2)
+{
+    // Write your code here.
+    root1=flattenBST(root1);
+    root2=flattenBST(root2);
+
+    TreeNode* root=mergeTwoLists(root1,root2);
+    
+    int n=countNodes(root);
+
+    root=sortedLLToBST(root,n);
+
+    vector<int>v;
+    inorder2(root,v);
+    return v;
+}
+
+alright
+
