@@ -51,7 +51,7 @@ public:
         if(n<=0 or head==NULL) return NULL;
 
         TreeNode *left=sortedlisttobst(head,n/2);
-        TreeNode* root = new TreeNode(head->val);
+        TreeNode* root = new TreeNode(head->val); //as head is passed by reference so after creation of leftsubtree head is pointing to mid node alright 
         root->left=left;
 
         head=head->next;
