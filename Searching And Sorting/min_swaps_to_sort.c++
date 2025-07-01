@@ -29,7 +29,7 @@ Expected Auxiliary Space: O(n)
 
 
 
-
+what we are doing is ham given array ko sort kr rhe and then pahle jaise tha usme convert krne me kitne step lg rhe vo count kr rhe alright
 
 
 class Solution 
