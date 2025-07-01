@@ -53,7 +53,7 @@ class Solution {
   public:
     // function to construct tree from string
     void solve(Node* &root,string &s,int &i){
-        if(i>=s.length() or s[i]==')'){
+        if(i>=s.length() or s[i]==')'){ //yha condition me or rkhna hi hai ex 1()(2) hua to and satisfy nhi hoga to ager closing hai to bhi i++ krke skip krke return kr do alright
             i++;
             return;
         }
