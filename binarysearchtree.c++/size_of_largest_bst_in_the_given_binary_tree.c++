@@ -79,7 +79,7 @@ info solve(TreeNode *root,int &ans){
 
     info currentnode;
 
-    currentnode.size=left.size+right.size+1;// 1 add kiya for the root node itself
+    currentnode.size=left.size+right.size+1;// 1 add kiya for the root node itself //okk curr size me ham currsize hi bhejenge maxsize nhi , varna galat ans add hoga
     currentnode.maxi=max(root->data,right.maxi);// class kee variables ko update kr diya
     currentnode.mini=min(root->data,left.mini);//min ya to curr value ya fir left ki value hogi alright 
 
@@ -131,7 +131,7 @@ info solve(TreeNode *root,int &maxsize){
     if(left.isbst and right.isbst and root->data>left.maxi and root->data<right.mini){
         int currsize=left.size+right.size+1;
         maxsize=max(maxsize,currsize);
-        return {true,currsize,min(root->data,left.mini),max(root->data,right.maxi)};
+        return {true,currsize,min(root->data,left.mini),max(root->data,right.maxi)}; // okk curr size me ham currsize hi bhejenge maxsize nhi , varna galat ans add hoga
     }
 
     return {false,0,0,0};
