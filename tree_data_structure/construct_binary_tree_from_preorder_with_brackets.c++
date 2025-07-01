@@ -68,12 +68,12 @@ class Solution {
         
         root=new Node(sum);
         
-        if(i<s.length() and s[i]=='('){
+        if(i<s.length() and s[i]=='('){ //jab pahla open bracket aaye to left subtree create kro
             i++;
             solve(root->left,s,i);
         }
         
-        if(i<s.length() and s[i]=='('){
+        if(i<s.length() and s[i]=='('){ //jab doosra aaye to right subtree alright
             i++;
             solve(root->right,s,i);
         }
