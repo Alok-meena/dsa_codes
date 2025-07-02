@@ -66,6 +66,8 @@ BinaryTreeNode<int>* solve(vector<int>&preorder,int &i,int mini,int maxi){
     if(preorder[i]<mini || preorder[i]>maxi){// lie out of the range then return null also
         return NULL;
     }
+
+    //aor preorder me pahla to root hi hota hai 
     BinaryTreeNode<int>* root=new BinaryTreeNode<int>(preorder[i++]);// nhi to node create kr do aor left right ki call mar do
     root->left=solve(preorder,i,mini,root->data);
     root->right= solve(preorder,i,root->data,maxi);
