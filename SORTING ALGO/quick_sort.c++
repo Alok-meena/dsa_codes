@@ -8,7 +8,7 @@ int partition(int low,int high,vector<int>&arr){
 
     while(i<=j){
         while(i<=high and arr[i]<=arr[pivot]) i++;
-        while(j>=low and arr[j]>arr[pivot]) j--;
+        while(j>=low and arr[j]>arr[pivot]) j--; // to bhai <= sare pivot ke left hone chahihe anr greater right me that's why yha equality nhi lgayi alright
         
         if(i<j){
             swap(arr[i],arr[j]);
