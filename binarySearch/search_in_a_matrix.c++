@@ -25,7 +25,7 @@ bool searchMatrix(vector<vector<int>>& mat, int target) {
 
 t.c:-O(n+m) and s.c:-O(1)
 
-
+we can apply this method only in row and col wise both type sorted matrix alright
 
 
 
