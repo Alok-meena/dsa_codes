@@ -144,5 +144,41 @@ That’s **why the time complexity is exponential** in terms of `n` (number of d
 * Yes, **each letter on the left combines with each letter on the right**, just like nested loops.
 * And since the number of digits (`n`) is variable, the **branching factor** at each level causes the total to grow **exponentially** → `O(4^n)` in the worst case.
 
+ 
 Let me know if you want help visualizing this as a tree!
+
+
+3rd time
+
+
+class Solution {
+public:
+    void solve(string digits,vector<string>&mapping,vector<string>&ans,string output,int idx){
+        if(idx>=digits.length()){
+            ans.push_back(output);
+            return;
+        }
+
+        int digit=digits[idx]-'0';
+
+        for(int i=0;i<mapping[digit].length();i++){
+            output.push_back(mapping[digit][i]);
+            solve(digits,mapping,ans,output,idx+1);
+            output.pop_back();
+        }
+    }
+    vector<string> letterCombinations(string digits) {
+
+        if(digits.empty()) return {};
+        vector<string>mapping={"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+
+        vector<string>ans;
+
+        string output;
+
+        solve(digits,mapping,ans,output,0);
+
+        return ans;
+    }
+};
 
