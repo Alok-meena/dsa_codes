@@ -171,7 +171,8 @@ using namespace std;
 
 
 bool isvalid(vector<vector<int>>&board,int n,int row,int col){
-    // Check column
+    // Check column   sbse imp ye hai ki we are only placing a single queen in each row so there will be no extra queen but we have to check curr column
+    // if it is selected previosly or not alright 
     for (int i = 0; i < row; i++) {
         if (board[i][col] == 1) return false;
     }
