@@ -261,3 +261,71 @@ public:
      //as hamne 0th level ko pahle hi 1 kr diya i mean rotten orange k count nhi krna hme okk
     }
 };
+
+
+
+to bhai ye sare tarike shi hai and suddenly i also coded the below one which is correct for single source alright
+
+class Solution {
+public:
+    int bfs(int i,int j,int level,vector<vector<int>>&grid){
+        int n=grid.size();
+        int m=grid[0].size();
+
+        int ans=0;
+
+        queue<pair<int,pair<int,int>>>q;
+        q.push({level,{i,j}});
+
+        //ye bfs bhi shi hai but sare rotten ko ek sath process nhi kr rhe but level jo hai vo shi ja rhi hai alright that's why shi hai but use above bfs only
+       //in which curr sizse of queue first alright
+
+        while(!q.empty()){
+            int lev=q.front().first;
+            i=q.front().second.first;
+            j=q.front().second.second;
+            q.pop();
+
+            ans=max(ans,lev);
+
+            int dirx[4]={-1,0,0,1};
+            int diry[4]={0,-1,1,0};
+
+            for(int d=0;d<4;d++){
+                int newi=i+dirx[d];
+                int newj=j+diry[d];
+
+                if(newi>=0 and newi<n and newj>=0 and newj<m and grid[newi][newj]==1){
+                    grid[newi][newj]=2;
+                    q.push({lev+1,{newi,newj}});
+                }
+            }
+        }
+
+        return ans;
+    }
+    int orangesRotting(vector<vector<int>>& grid) {
+        int time=0;
+
+        int n=grid.size();
+        int m=grid[0].size();
+
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(grid[i][j]==2){
+                    int level=0;
+                    int t=bfs(i,j,level,grid);
+                    time=max(time,t);
+                }
+            }
+        }
+
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(grid[i][j]==1) return -1;
+            }
+        }
+
+        return time;
+    }
+};
