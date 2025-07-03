@@ -202,7 +202,7 @@ int main()
 
     // weighted
     // vector<pair<int, int>> adjlist[n + 1];
-    // [0] -> {  {neig1, val} , { neig2, val}  }
+    // [0] -> {  {neig1,wt} , { neig2, wt}  }
 
     for (int i = 0; i < edges; i++)
     {
