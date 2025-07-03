@@ -191,7 +191,7 @@ public:
     bool push(int x, int m)
     {
         // Write your code here.
-        if(freespot==-1) return false;
+        if(freespot==-1) return false; //imp condition learn
 
         int index=freespot;
 
@@ -211,7 +211,7 @@ public:
     {
         //in pop just reverse what u do in push but firstly check if the stack is empty or not okk
         // Write your code here.
-        if(top[m-1]==-1) return -1;
+        if(top[m-1]==-1) return -1; //imp condition free==0 is not that condition we have to check either mth stack is empty or not by checking it's top array alright
 
         int index=top[m-1];
         top[m-1]=next[index];
