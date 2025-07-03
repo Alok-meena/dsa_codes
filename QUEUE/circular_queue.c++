@@ -199,7 +199,8 @@ class CircularQueue{
 
         int ans=arr[front];
         
-        if(front==rear){
+        if(front==rear){  ///bhai ye mat sochna ki jaise aapne 1(f) , 3(r) hai pop kiya 3(f,r)  but jb hi thodi pop hoke f r se age jayega vapas jb call 
+            //ayega pop k tb ye condition check hogi alright
             front=-1;
             rear=-1;
         }
