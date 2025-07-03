@@ -100,6 +100,6 @@ void deleteMiddle(stack<int>&inputStack, int N){
    solve(inputStack,N,count);
 }
 
-t.c:-O(n) and s.c:-O(n) okkkkkk
+t.c:-O(n) and s.c:-O(n) okkkkkk because atmost recursive calls are n/2 ==> O(n) alright
 
   
