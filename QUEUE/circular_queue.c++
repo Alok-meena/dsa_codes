@@ -133,6 +133,9 @@ class CircularQueue{
 
         int ans=arr[front];
         arr[front]=-1;
+
+        //to dekho ager pop krne ke bad queue empty ho jati hai to -1 pe le jana hoga aor ager ye niche vali conditionn pahle check krte aor queue empty hoti
+        //to f and r ko -1 pe nhi le ja pate right aor ans wrong ho jatat alright 
         if(front==rear){
             front=rear=-1;
         }
