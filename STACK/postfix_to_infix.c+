@@ -24,3 +24,35 @@ class Solution {
         return s.top();
     }
 };
+
+
+or can do 
+
+// User function Template for C++
+
+class Solution {
+  public:
+    string postToInfix(string exp) {
+        // Write your code here
+        stack<string>s;
+        
+        for(auto i:exp){
+            if(isalnum(i)){
+                string d;
+                d.push_back(i);
+                s.push(d);
+            }
+            else{
+                string t1=s.top();
+                s.pop();
+                string t2=s.top();
+                s.pop();
+                
+                string ans='('+t2+i+t1+')';
+                s.push(ans);
+            }
+        }
+        
+        return s.top();
+    }
+};
