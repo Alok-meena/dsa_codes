@@ -153,51 +153,44 @@ done second time by me
 
 #include <bits/stdc++.h>
 
-bool dfs(vector<int> adj[],vector<bool>&visited,unordered_map<int,int>&node_to_parent,int currnode,vector<bool>&dfsCall){
-    visited[currnode]=true;
-    dfsCall[currnode]=true; //we have to mark it true as soon as we start the dfs call for the currnode right and after loop when we return we have
-    //have to mark it false also remember 
+bool dfs(int curr,vector<int> adj[],vector<bool>&vis,vector<bool>&dfs_call){
+    vis[curr]=true;
+    dfs_call[curr]=true;
 
-    //and here we cant use the approach of undirected graph u all know why okk u can check it by dry run 
-
-
-    for(auto neigh:adj[currnode]){
-        if(!visited[neigh]){
-            node_to_parent[neigh]=currnode;
-            if(dfs(adj,visited,node_to_parent,neigh,dfsCall)) return true;
+    for(auto neigh:adj[curr]){
+        if(vis[neigh] and dfs_call[neigh]){
+            return true;
         }
-        else if(visited[neigh] and dfsCall[neigh]) return true;
+        else if(!vis[neigh]){
+            if(dfs(neigh,adj,vis,dfs_call)) return true; //aor yha direct return mt krna only check if true then only return o/w check all connected comp not only current one alright
+        }
     }
 
-    dfsCall[currnode]=false;
-    
+    dfs_call[curr]=false; //jate jate return kr rhe ho to ise mark krte jao alright
+
     return false;
 }
 
 int detectCycleInDirectedGraph(int n, vector < pair < int, int >> & edges) {
   // Write your code here.
-   vector<int> adj[n+1];
-    for(int i=0;i<edges.size();i++){
-        int u=edges[i].first;
-        int v=edges[i].second;
+  vector<int> adj[n+1];
 
-        adj[u].push_back(v);
-        // adj[v].push_back(u);
-    }
+  for(int i=0;i<edges.size();i++){
+      int u=edges[i].first;
+      int v=edges[i].second;
 
-    vector<bool>visited(n+1,false);
-    unordered_map<int,int>node_to_parent;
-    node_to_parent[1]=-1;
+      adj[u].push_back(v);
+  }
+  
+  vector<bool>vis(n+1,false);
+  vector<bool>dfs_call(n+1,false);
 
-    vector<bool>dfsCall(n+1,false);
+  for(int i=1;i<=n;i++){
+      if(!vis[i]){
+          bool cycle=dfs(i,adj,vis,dfs_call);
+          if(cycle) return true;
+      }
+  }
 
-
-    for(int i=1;i<n+1;i++){
-        if(!visited[i]){
-            bool cycle=dfs(adj,visited,node_to_parent,i,dfsCall);
-            if(cycle) return 1;
-        }
-    }
-
-    return 0;
+  return false;
 }
