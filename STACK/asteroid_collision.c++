@@ -55,7 +55,7 @@ public:
         int n=asteroids.size();
         
         for(int i=0;i<n;i++){
-            while(!s.empty() and s.top()>0 and asteroids[i]<0){
+            while(!s.empty() and s.top()>0 and asteroids[i]<0){ //+ and - yhi condition hai ager collision hua to alright that's why yhi use ki
                 int sum=s.top()+asteroids[i];
                 if(sum<0){
                     s.pop();
