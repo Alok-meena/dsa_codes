@@ -49,6 +49,44 @@ There will not be any multiple flights between two cities.
 src != dst
 
 
+if in this ques we only have to find out shortest path to reach dest with min cost then we can use below code alright
+
+class Solution {
+public:
+    int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int k) {
+        vector<pair<int,int>> adj[n];
+
+        for(int i=0;i<flights.size();i++){
+            int u=flights[i][0];
+            int v=flights[i][1];
+            int wt=flights[i][2];
+
+            adj[u].push_back({v,wt});
+        }
+
+        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;
+        pq.push({0,src});
+
+        vector<int>dist(n,INT_MAX);
+        dist[src]=0;
+        
+        while(!pq.empty()){
+            int wt=pq.top().first;
+            int curr=pq.top().second;
+            pq.pop();
+
+            for(auto neigh:adj[curr]){
+                if(wt+neigh.second<dist[neigh.first]){
+                    dist[neigh.first]=wt+neigh.second;
+                    pq.push({dist[neigh.first],neigh.first});
+                }
+            }
+        }
+
+        return dist[dst];
+    }
+};
+
 
 
 it is dont similar to dijkstra algo 
@@ -99,6 +137,11 @@ t.c of dijkstra is of nlogn type
 
 
 so now we are giving priority to k first so we will get values based on min k okk and we are also maintatinng a mincost array to give priority to cost also okk
+
+ARE BHAI MERI BAT SUN VEERYIMP
+
+ye dijkstra hi to hai bs kya bola hai ki cost min nhi chahihe vo cost chaihhe jisme stops k hi liye hho barabar to k ko prioritize kr do and dist ki tarah
+cost ka vector bna ke simple se solve kr do alright simple
 
 class Solution {
 public:
@@ -180,5 +223,5 @@ public:
     }
 };
 
-aor isme hamne normal queue use kiya becaue no. of stops always 1 se hi badh rhe hai okk
+aor isme hamne normal queue use kiya becaue no. of stops always 1 se hi badh rhe hai okk to min  k lene ki jarurat hi nahi hai alright
 
