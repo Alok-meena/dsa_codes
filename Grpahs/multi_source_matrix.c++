@@ -53,7 +53,7 @@ public:
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
                 if(mat[i][j]==0){
-                    dist[i][j]=0;
+                    dist[i][j]=0; //we are updating in dist 2d vector not in original mat alright
                     vis[i][j]=true;
                     q.push({i,j,0});
                 }
