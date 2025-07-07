@@ -264,26 +264,41 @@ public:
 
 
 
-to bhai ye sare tarike shi hai and suddenly i also coded the below one which is correct for single source alright
+can do like this also
+
+
+
+
+very impooo
+
+
 
 class Solution {
 public:
-    int bfs(int i,int j,int level,vector<vector<int>>&grid){
+    int orangesRotting(vector<vector<int>>& grid) {
+        queue<pair<int,pair<int,int>>>q;
+
         int n=grid.size();
         int m=grid[0].size();
 
+
+        //push all rotten oranges in queue to process parallely
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(grid[i][j]==2){
+                    q.push({0,{i,j}});
+                }
+            }
+        }
+
+        int level=0;
         int ans=0;
 
-        queue<pair<int,pair<int,int>>>q;
-        q.push({level,{i,j}});
-
-        //ye bfs bhi shi hai but sare rotten ko ek sath process nhi kr rhe but level jo hai vo shi ja rhi hai alright that's why shi hai but use above bfs only
-       //in which curr sizse of queue first alright
-
+        //bfs
         while(!q.empty()){
             int lev=q.front().first;
-            i=q.front().second.first;
-            j=q.front().second.second;
+            int i=q.front().second.first;
+            int j=q.front().second.second;
             q.pop();
 
             ans=max(ans,lev);
@@ -301,31 +316,17 @@ public:
                 }
             }
         }
-
-        return ans;
-    }
-    int orangesRotting(vector<vector<int>>& grid) {
-        int time=0;
-
-        int n=grid.size();
-        int m=grid[0].size();
-
-        for(int i=0;i<n;i++){
-            for(int j=0;j<m;j++){
-                if(grid[i][j]==2){
-                    int level=0;
-                    int t=bfs(i,j,level,grid);
-                    time=max(time,t);
-                }
-            }
-        }
-
+        //check
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
                 if(grid[i][j]==1) return -1;
             }
         }
 
-        return time;
+        return ans;
+
     }
 };
+
+bhai apna ye vala code bhi shi hai bhale hi ham sare sources ko ek sath access nhi kr rhe but level bhi to nhi bdha rhe aor is code me to level-1 krne ki 
+jrurat bhi nhi hai alright
