@@ -142,3 +142,52 @@ public:
 };
 
 
+or we can also use the given mat as a vis array if allowed if not then can use upside code
+
+
+class Solution {
+public:
+    vector<vector<int>> updateMatrix(vector<vector<int>>& mat) {
+        int n=mat.size();
+        int m=mat[0].size();
+
+        vector<vector<int>>dist(n,vector<int>(m,0));
+
+        queue<pair<int,pair<int,int>>>q;
+
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(mat[i][j]==0){
+                    q.push({0,{i,j}});
+                }
+            }
+        }
+
+
+        while(!q.empty()){
+            int distance=q.front().first;
+            int i=q.front().second.first;
+            int j=q.front().second.second;
+            q.pop();
+
+            int dirx[4]={-1,0,0,1};
+            int diry[4]={0,-1,1,0};
+
+            for(int d=0;d<4;d++){
+                int newi=i+dirx[d];
+                int newj=j+diry[d];
+
+                if(newi>=0 and newi<n and newj>=0 and newj<m and mat[newi][newj]==1){
+                    dist[newi][newj]=distance+1;
+                    mat[newi][newj]=0;
+                    q.push({distance+1,{newi,newj}});
+                }
+            }
+        }
+
+        return dist;
+
+    }
+};
+
+
