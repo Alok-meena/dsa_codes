@@ -126,7 +126,7 @@ here we just have to return the minweight so returned it
 
 if u and v does not belong to same compo then merge them by size / rank and if belong to same compo then skip them alright
 
-
+overall t.c:-O(nloge) alright and s.c:-O(m+n) for edges and parent rank/size array
 
 
 and if we have to return {{u,v},wt} of mst then code is ( for coding ninja also )
