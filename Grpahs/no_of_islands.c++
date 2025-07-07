@@ -38,7 +38,7 @@ n == grid[i].length
 grid[i][j] is '0' or '1'.
 
 
-
+int this we only have to return no. of connected compo's alright
 
 
 
