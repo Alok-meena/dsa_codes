@@ -79,7 +79,9 @@ vector<int> dijkstra(vector<vector<int>> &vec, int vertices, int edges, int sour
         for(auto neighbour:adjlist[topnode]){
             if(nodedistance+neighbour.second<distance[neighbour.first]){
                 
-                //finding record
+                //finding record   here search if any dist is there corresponding to this neighbour if yes then remove it to improve complexity 
+                //find dist[n.first] only not the dist we are going to update as we dont know which dist is there corresponding to this n.first alright 
+                //so it will fetch it from dist[n.first] alright
                 auto record=st.find(make_pair(distance[neighbour.first],neighbour.first));
                  // if record found than erase it
                 // If the element is found, st.find returns an iterator to the element.
