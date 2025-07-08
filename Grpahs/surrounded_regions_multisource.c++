@@ -97,6 +97,7 @@ public:
 
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
+                //chahe pahle y->o me ya o->y me kro dono shi h but use else if o/w curr y ko o kiya aor fir x bhi krke wrong kr doge
                 if(grid[i][j]=='Y') grid[i][j]='O';
                 else if(grid[i][j]=='O') grid[i][j]='X';
             }
