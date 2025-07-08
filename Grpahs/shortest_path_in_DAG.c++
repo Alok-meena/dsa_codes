@@ -1,3 +1,59 @@
+we can also use bfs to find topo sort alright
+
+
+vector<int> shortestPathInDAG(int n, int m, vector<vector<int>> &edges)
+{
+    vector<int> indegree(n, 0);
+    vector<pair<int,int>> adj[n];
+
+    // Step 1: Build Graph and Indegree Array
+    for (auto &edge : edges) {
+        int u = edge[0], v = edge[1], wt = edge[2];
+        adj[u].push_back({v, wt});
+        indegree[v]++;
+    }
+
+    // Step 2: Topological Sort (Kahn's Algorithm)
+    queue<int> q;
+    for (int i = 0; i < n; ++i) {
+        if (indegree[i] == 0) q.push(i);
+    }
+
+    vector<int> topoOrder;
+    while (!q.empty()) {
+        int node = q.front(); q.pop();
+        topoOrder.push_back(node);
+        for (auto &neigh : adj[node]) {
+            indegree[neigh.first]--;
+            if (indegree[neigh.first] == 0) q.push(neigh.first);
+        }
+    }
+
+    // Step 3: Distance Relaxation
+    vector<int> dist(n, INT_MAX);
+    dist[0] = 0;  // Source is node 0
+
+    for (int node : topoOrder) {
+        if (dist[node] != INT_MAX) {
+            for (auto &neigh : adj[node]) {
+                if (dist[node] + neigh.second < dist[neigh.first]) {
+                    dist[neigh.first] = dist[node] + neigh.second;
+                }
+            }
+        }
+    }
+
+    // Replace INT_MAX with -1 for unreachable nodes
+    for (auto &d : dist) {
+        if (d == INT_MAX) d = -1;
+    }
+
+    return dist;
+}
+
+
+or dfs also like below
+
 
 
 #include <iostream>
