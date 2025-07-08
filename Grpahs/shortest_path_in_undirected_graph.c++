@@ -30,6 +30,48 @@ Sample Output 1 :
 ( 1 , 3 , 4 )
 
 
+As a brute force we can also use a queue data structure but it will lead to traversing too many paths unnecessarily alright 
+
+code:
+
+#include <bits/stdc++.h> 
+vector<int> dijkstra(vector<vector<int>> &vec, int vertices, int edges, int source) {
+    // Write your code here.
+    vector<pair<int,int>> adj[vertices];
+
+    for(int i=0;i<vec.size();i++){
+        int u=vec[i][0];
+        int v=vec[i][1];
+        int wt=vec[i][2];
+
+        adj[u].push_back({v,wt});
+        adj[v].push_back({u,wt});
+    }
+
+    queue<pair<int,int>>pq;
+    vector<int>dist(vertices,INT_MAX);
+    dist[source]=0;
+    pq.push({0,source});
+
+    while(!pq.empty()){
+        int curr=pq.front().first;
+        int wt=pq.front().second;
+        pq.pop();
+
+        for(auto neigh:adj[curr]){
+            if(dist[curr]+neigh.second<dist[neigh.first]){
+                dist[neigh.first]=dist[curr]+neigh.second;
+                pq.push({neigh.first,dist[neigh.first]});
+            }
+        }
+    }
+
+    return dist;
+}
+
+
+it may work faster like in t.c:-O(v+e) alright but may give invalid answers in many cases 
+
 #include <unordered_map>
 #include <queue>
 #include <list>
