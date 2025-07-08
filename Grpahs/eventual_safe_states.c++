@@ -52,7 +52,7 @@ class Solution {
     
         for(auto neigh:adj[curr]){
             if(vis[neigh] and dfs_call[neigh]){
-                check[neigh]=false;
+                check[neigh]=false; //ye yha aor niche krne ki jrurat hi nhi because ham initially false hi kr rkhe hai jaise hi enter kr alright
                 return true;
             }
             else if(!vis[neigh]){
