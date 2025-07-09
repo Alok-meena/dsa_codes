@@ -220,7 +220,7 @@ vector<pair<pair<int, int>, int>> calculatePrimsMST(int n, int m, vector<pair<pa
         int v=edges[i].second.second;
 
         if(ds.findUPar(u)!=ds.findUPar(v)){
-            mst.push_back({{u,v},wt});
+            mst.push_back({{u,v},wt});  //can push u v or v u no problem as graph is undirected alright
             ds.unionBySize(u,v);
         }
     }
@@ -230,3 +230,80 @@ vector<pair<pair<int, int>, int>> calculatePrimsMST(int n, int m, vector<pair<pa
 
 
 same t.c and s.c
+
+
+
+i did this little diff code which is also correct 
+
+
+#include <bits/stdc++.h> 
+
+class DisjointSet{
+    public:
+
+    vector<int>parent,rank;
+
+    DisjointSet(int size){
+        parent.resize(size+1);
+        rank.resize(size+1,0);
+
+        for(int i=0;i<=size;i++){
+            parent[i]=i;
+        }
+    }
+
+    int findUP(int u){
+        if(parent[u]==u) return u;
+        return parent[u]=findUP(parent[u]);
+    }
+
+    void UnionByRank(int u,int v){
+        int up=findUP(u);
+        int vp=findUP(v);
+
+        if(up==vp) return;
+        
+        if(rank[up]<rank[vp]){
+            parent[up]=vp;
+        }
+        else if(rank[vp]<rank[up]){
+            parent[vp]=up;
+        }
+        else{
+            parent[vp]=up;
+            rank[up]++;
+        }
+    }
+};
+
+
+vector<pair<pair<int, int>, int>> calculatePrimsMST(int n, int m, vector<pair<pair<int, int>, int>> &g)
+{
+    // Write your code here.
+    // sort(g.begin(),g.end(),[](auto &a,auto &b){
+    //     return a.second<b.second;
+    // });
+sort(g.begin(), g.end(), [](const pair<pair<int, int>, int> &a, const pair<pair<int, int>, int> &b) {
+    return a.second < b.second;
+});
+
+    DisjointSet ds(n);
+
+    vector<pair<pair<int,int>,int>>ans;
+
+    for(int i=0;i<m;i++){
+        int u=g[i].first.first;
+        int v=g[i].first.second;
+        int wt=g[i].second;
+
+        int up=ds.findUP(u);
+        int vp=ds.findUP(v);
+
+        if(up==vp) continue;
+        ds.UnionByRank(u,v);
+        ans.push_back({{v,u},wt});
+        
+    }
+
+    return ans;
+}
