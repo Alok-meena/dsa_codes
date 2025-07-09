@@ -136,7 +136,8 @@ vector<pair<pair<int, int>, int>> calculatePrimsMST(int n, int m, vector<pair<pa
     vector<pair<pair<int, int>, int>>ans;
     //0 se nhi chalaya because node 1 se start hai and 1 se bhi nhi because 1 ke parent -1 hai so 2 se start kiya hai taki ho ske to 2 ka parent 1 ho jaye
     for(int i=2;i<=n;i++){
-        ans.push_back({{parent[i], i}, key[i]});// we do like this because hme output is format me hi dena hai ((parent,node),weight)
+        ans.push_back({{parent[i], i}, key[i]});// we do like this because hme output is format me hi dena hai ((parent,node),weight) bhai ager edge
+        //show krni hai 1->2 to 2 k parent to 1 hai to parent[2],2 ===>  parent[i],i alright
     }
     return ans;
 }
