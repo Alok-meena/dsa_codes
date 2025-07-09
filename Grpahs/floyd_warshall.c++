@@ -75,7 +75,7 @@ public:
 	    // Code here
         vector<vector<int>> mat(n, vector<int>(n, 1e8));
 
-        // Fill the diagonal with 0
+        // Fill the diagonal with 0 because dist to itself will always be 0 alright
         for(int i = 0; i < n; i++) mat[i][i] = 0;
 
         // Populate initial distances from edges
