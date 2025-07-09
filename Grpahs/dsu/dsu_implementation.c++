@@ -10,7 +10,7 @@ class DisjointSet{
     DisjointSet(int size){
         rank.resize(size+1,0);
         parent.resize(size+1);
-        this->size.resize(size+1,1);
+        this->size.resize(size+1,1); //this points to address of current obj and we are just dereferencing the address okk using arrow operator alright
         for(int i=0;i<=size;i++){
             parent[i]=i;
         }
