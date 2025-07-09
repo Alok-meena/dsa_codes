@@ -136,5 +136,8 @@ class Solution {
 };
 
 
+here for n cc we require n-1 extra edges so just find extra edges and if extra>=n-1 so return n-1 edges as requird ans o/w -1 alright
+
+
 Time Complexity: O(m + n)
 ✔ Space Complexity: O(m + n)
