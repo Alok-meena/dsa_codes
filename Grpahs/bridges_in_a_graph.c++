@@ -3,6 +3,49 @@ A bridge in any graph is defined as an edge which, when removed, makes the graph
 
 
 
+in leetcode critical n/w connections same code will be used like below
+
+
+
+1192. Critical Connections in a Network
+Solved
+Hard
+Topics
+premium lock icon
+Companies
+Hint
+There are n servers numbered from 0 to n - 1 connected by undirected server-to-server connections forming a network where connections[i] = [ai, bi] represents a connection between servers ai and bi. Any server can reach other servers directly or indirectly through the network.
+
+A critical connection is a connection that, if removed, will make some servers unable to reach some other server.
+
+Return all critical connections in the network in any order.
+
+ 
+
+Example 1:
+
+
+Input: n = 4, connections = [[0,1],[1,2],[2,0],[1,3]]
+Output: [[1,3]]
+Explanation: [[3,1]] is also accepted.
+Example 2:
+
+Input: n = 2, connections = [[0,1]]
+Output: [[0,1]]
+ 
+
+Constraints:
+
+2 <= n <= 105
+n - 1 <= connections.length <= 105
+0 <= ai, bi <= n - 1
+ai != bi
+There are no repeated connections.
+
+
+
+ 
+
 
 #include <unordered_map>
 #include <list>
@@ -69,3 +112,63 @@ vector<vector<int>> findBridges(vector<vector<int>> &edges, int v, int e) {
 
 t.c:-O(V+E)
   s.c:-O(V)
+
+
+
+ 2nd time
+
+#include <bits/stdc++.h>
+
+
+void dfs(int curr,int &timer,vector<int> adj[],vector<int>&discoveryTime,vector<int>&lowestTime,vector<int>&nodeToparent,vector<int>&vis,vector<vector<int>>&ans){
+    vis[curr]=1;
+    discoveryTime[curr]=lowestTime[curr]=timer++;
+
+    for(auto neigh:adj[curr]){
+        if(neigh==nodeToparent[curr]){
+            continue;
+        }
+        else if(!vis[neigh]){
+            nodeToparent[neigh]=curr;
+            dfs(neigh,timer,adj,discoveryTime,lowestTime,nodeToparent,vis,ans);
+            lowestTime[curr]=min(lowestTime[curr],lowestTime[neigh]);
+
+            //check if bridge
+            if(lowestTime[nei gh]>discoveryTime[curr]){
+                ans.push_back({curr,neigh});
+            }
+        }
+        else{
+            //back edge (vis bhi hai aor parent bhi nhi hai)
+            lowestTime[curr]=min(lowestTime[curr],discoveryTime[neigh]);
+        }
+    }
+}
+vector<vector<int>> findBridges(vector<vector<int>> &edges, int v, int e) {
+    // Write your code here
+    vector<int> adj[v];
+
+    for(int i=0;i<e;i++){
+        int u=edges[i][0];
+        int v=edges[i][1];
+
+        adj[u].push_back(v);
+        adj[v].push_back(u);
+    }
+
+    vector<int>discoveryTime(v,-1);
+    vector<int>lowestTime(v,-1);
+    vector<int>nodeToparent(v);
+    vector<int>vis(v,0);
+    vector<vector<int>>ans;
+
+    for(int i=0;i<v;i++){
+        if(!vis[i]){
+            int timer=0;
+            dfs(i,timer,adj,discoveryTime,lowestTime,nodeToparent,vis,ans);
+        }
+    }
+
+    return ans;
+
+}
