@@ -153,3 +153,57 @@ class Solution {
 };
 
 alright
+
+
+
+or can do this by topo sort also alright
+
+
+// User function Template for C++
+
+class Solution {
+  public:
+    vector<int> eventualSafeNodes(int V, vector<int> a[]) {
+        // code here
+         int n=V;
+         vector<int> adj[n];
+         
+         // Reverse the graph
+    for (int i = 0; i < n; i++) {
+        for (auto j : a[i]) { //means edge i->j so do j->i alright
+            adj[j].push_back(i);
+        }
+    }
+       
+        vector<int>indegree(n,0);
+        for(int i=0;i<n;i++){
+            for(auto j:adj[i]){
+                indegree[j]++;
+            }
+        }
+
+        queue<int>q;
+        for(int i=0;i<n;i++){
+            if(indegree[i]==0) q.push(i);
+        }
+
+        vector<int>ans;
+
+        while(!q.empty()){
+            int front=q.front();
+            q.pop();
+
+            ans.push_back(front);
+
+            for(auto neigh:adj[front]){
+                indegree[neigh]--;
+                if(indegree[neigh]==0) q.push(neigh);
+            }
+        }
+
+       //mtlb ager cycle hai to return kro empty topo sort o/w return the ans of toposort
+       sort(ans.begin(),ans.end());
+        return ans;
+    }
+};
+
