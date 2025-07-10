@@ -150,7 +150,8 @@ class Solution {
                         if(newi>=0 and newi<n and newj>=0 and newj<n and grid[newi][newj]==1){
                             int neigh=(newi*n)+newj;
                             
-                            int ultimate_parent_of_neigh=ds.findUPar(neigh);
+                            int ultimate_parent_of_neigh=ds.findUPar(neigh); //that here we have to find ultimate parent dont do like ds.parent[neigh] it is wrong
+                            //path in this no path compression is done so wrong parent may be called not  ultimate parent alright
                             uniqueUPar.insert(ultimate_parent_of_neigh);
                         }
                     }
