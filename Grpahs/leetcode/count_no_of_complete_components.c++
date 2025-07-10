@@ -77,8 +77,14 @@ public:
             if(!visited[i]){
                 dfs(adj,visited,i,nodes);
                 int flag=true;
+               //and we have to check every node of the compo that whether it is connected to k-1 nodes or not for a complete graph compo alright
                 for(auto node:nodes){
-                    if(adj[node].size()!=nodes.size()-1){ //in undirected graph we have to check whether each node connected to n-1 nodes  if yes then complete component
+                  //khuch nhi bhai for a graph compo with k nodes it should be connected with k-1 nodes for complete graph component 
+                 //we just call dfs for any component and count no. of nodes in that component and checking all the nodes in the compo
+                  //are connected with k-1 nodes or not if yes thn complete and cnt++ if not then not complete and no cnt ++ alright
+
+                  int k=nodes.size();
+                    if(adj[node].size()!=k-1){ //in undirected graph we have to check whether each node connected to n-1 nodes  if yes then complete component
                         flag=false;
                         break;
                     }
