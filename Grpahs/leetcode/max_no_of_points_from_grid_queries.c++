@@ -41,6 +41,64 @@ k == queries.length
 1 <= grid[i][j], queries[i] <= 106
 
 
+
+ brute force :
+
+applying bfs for every query alright
+
+class Solution {
+public:
+    
+    vector<int> maxPoints(vector<vector<int>>& grid, vector<int>& queries) {
+        int n=grid.size();
+        int m=grid[0].size();
+        
+        int k=queries.size();
+        vector<int>ans(k,0);
+
+        for(int d=0;d<k;d++){
+            vector<vector<bool>>vis(n,vector<bool>(m,false));
+
+            int i=0,j=0;
+
+            if(grid[i][j]>=queries[d]){
+                ans[d]=0;
+                continue;
+            }
+
+            queue<pair<int,int>>q;
+            q.push({i,j});
+            int points=1;
+            vis[i][j]=1;
+
+            while(!q.empty()){
+                int i=q.front().first;
+                int j=q.front().second;
+                q.pop();
+
+                int dirx[4]={-1,0,0,1};
+                int diry[4]={0,-1,1,0};    
+
+                for(int f=0;f<4;f++){
+                    int newi=i+dirx[f];
+                    int newj=j+diry[f];
+
+                    if(newi>=0 and newi<n and newj>=0 and newj<m and !vis[newi][newj] and grid[newi][newj]<queries[d]){
+                        vis[newi][newj]=1;
+                        points++;
+                        q.push({newi,newj});
+                    }
+                }            
+            }
+
+            ans[d]=points;
+        }
+
+        return ans;
+    }
+};
+
+t.c:-O(k*n*m) 
   
 
 
@@ -144,4 +202,67 @@ public:
 O(K∗Log(K)+M∗N∗Log(K))
 
 
+written 2nd time
 
+
+class Solution {
+public:
+    
+    vector<int> maxPoints(vector<vector<int>>& grid, vector<int>& queries) {
+        int n=grid.size();
+        int m=grid[0].size();
+        
+        int k=queries.size();
+
+        vector<pair<int,int>>query;
+        for(int i=0;i<k;i++){
+            query.push_back({queries[i],i});
+        }
+
+        sort(query.begin(),query.end());
+        vector<int>ans(k,0);
+
+        priority_queue<pair<int,pair<int,int>>,vector<pair<int,pair<int,int>>>,greater<pair<int,pair<int,int>>>>pq;
+        
+        vector<vector<int>>vis(n,vector<int>(m,0));
+        int dirx[]={-1,0,0,1};
+        int diry[]={0,-1,1,0};
+
+        int points=0;
+
+        vis[0][0]=1;
+        pq.push({grid[0][0],{0,0}});
+
+        for(auto q:query){
+            int query_val=q.first;
+            int query_idx=q.second;
+
+            while(!pq.empty() and pq.top().first<query_val){
+                int gridval=pq.top().first;
+                int i=pq.top().second.first;
+                int j=pq.top().second.second;
+                pq.pop();
+
+                points++;
+
+
+                for(int f=0;f<4;f++){
+                    int newi=i+dirx[f];
+                    int newj=j+diry[f];
+
+                    if(newi>=0 and newi<n and newj>=0 and newj<m and !vis[newi][newj]){
+                        vis[newi][newj]=1;
+                        pq.push({grid[newi][newj],{newi,newj}});
+                    }
+                } 
+            }
+            
+            ans[query_idx]=points;
+        }
+
+        return ans;
+    }
+};
+
+
+and here pq is used to get min grid value each time alright and dont involve grid[0][0] check it will taken care of in the loop alright
