@@ -80,3 +80,42 @@ class Solution {
         return -1;
     }
 };
+
+
+2nd time:
+
+
+// User function Template for C++
+
+int mod=100000;
+class Solution {
+  public:
+    int minimumMultiplications(vector<int>& arr, int start, int end) {
+        // code here
+        queue<pair<int,int>>q;
+        vector<int>dist(100000,0);
+        q.push({0,start});
+        
+        while(!q.empty()){
+            int steps=q.front().first;
+            int val=q.front().second;
+            q.pop();
+            
+            if(val==end) return steps;
+            
+            for(auto i:arr){
+                int newval=(val*i)%mod;
+                if(!dist[newval]){
+                    dist[newval]=1;
+                    q.push({steps+1,newval});
+                }
+            }
+        }
+        
+        return -1;
+    }
+};
+
+
+we have to use dist array because o/w we will repetedly push same values again and again in queue and cause tle suppose if we got 75 at steps 3
+then to push 75 at step 4 so push it only if it is not visited alright o/w push it 
