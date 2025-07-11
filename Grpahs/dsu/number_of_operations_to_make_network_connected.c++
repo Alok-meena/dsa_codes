@@ -126,7 +126,7 @@ class Solution {
         }
         
         int cnt=0;
-        for(int i=0;i<n;i++){
+        for(int i=0;i<n;i++){  //as graph is 0 indexed so start from 0 only o/w from 1 alright
             if(ds.parent[i]==i) cnt++;
         }
         
