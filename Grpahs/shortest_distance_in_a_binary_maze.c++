@@ -111,3 +111,49 @@ class Solution {
 
 
 t.c:-O(n*m) and same s.c alright
+
+
+and below is also correct instead of storing dist we stored in dist 2d vector and used it as a vis array alright
+
+
+// User function Template for C++
+
+class Solution {
+  public:
+    int shortestPath(vector<vector<int>> &grid, pair<int, int> source,
+                     pair<int, int> destination) {
+        // code here
+        int n=grid.size();
+        int m=grid[0].size();
+        
+        vector<vector<int>>dist(n,vector<int>(m,0));
+        dist[source.first][source.second]=1;
+        
+        queue<pair<int,int>>q;
+        q.push({source.first,source.second});
+        
+        while(!q.empty()){
+            int i=q.front().first;
+            int j=q.front().second;
+            q.pop();
+            
+            if(i==destination.first and j==destination.second) return dist[i][j]-1;
+            
+            int dirx[4]={-1,0,0,1};
+            int diry[4]={0,-1,1,0};
+            
+            for(int d=0;d<4;d++){
+                int newi=i+dirx[d];
+                int newj=j+diry[d];
+                
+                if(newi>=0 and newi<n and newj>=0 and newj<m and dist[newi][newj]==0 and grid[newi][newj]==1){
+                    dist[newi][newj]=dist[i][j]+1;
+                    q.push({newi,newj});
+                }
+            }
+        }
+        
+        return -1;
+    }
+};
+
