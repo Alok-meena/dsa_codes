@@ -110,6 +110,67 @@ public:
 but this is giving tle for N^2 so have to optimize that thing
 
 
+we can just save the set in vector and access them instead of creating and calling each time 
+
+
+class Solution {
+public:
+    void dfs(int curr,vector<int> adj[],vector<int>&vis){
+        vis[curr]=1;
+
+        for(auto neigh:adj[curr]){
+            if(!vis[neigh]){
+                dfs(neigh,adj,vis);
+            }
+        }
+    }
+    int numberOfComponents(vector<vector<int>>& properties, int k) {
+        int n=properties.size();
+
+        vector<int> adj[n];
+
+        vector<unordered_set<int>>sets(n);
+
+        for(int i=0;i<n;i++){
+            sets[i]=unordered_set<int>(properties[i].begin(),properties[i].end());
+        }
+
+        for(int i=0;i<n;i++){
+            for(int j=i+1;j<n;j++){
+
+                int common=0;
+                for(auto value:sets[i]){
+                    if(sets[j].count(value)){
+                        common++;
+                    }
+                }
+                
+                if(common>=k){
+                    adj[i].push_back(j);
+                    adj[j].push_back(i);
+                }
+            }
+        }
+
+        vector<int>vis(n,0);
+
+        int ans=0;
+        for(int i=0;i<n;i++){
+            if(!vis[i]){
+                dfs(i,adj,vis);
+                ans++;
+            }
+        }
+
+        return ans;
+    }
+};
+
+Complexity	Value
+Time	O(n² × m)
+Space	O(n²)
+
+
 class Solution {
 public:
     void dfs(vector<int> adj[],vector<bool>&visited,int node){
