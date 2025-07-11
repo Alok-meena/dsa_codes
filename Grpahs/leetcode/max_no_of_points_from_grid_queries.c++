@@ -99,7 +99,9 @@ public:
 };
 
 t.c:-O(k*n*m) 
-  
+
+
+bhai ye uper vala tle isliye de rha tha because har pointke liye bfs lga rhe the
 
 
 class Solution {
@@ -145,6 +147,8 @@ bfs
 khuch nhi kiya hamne kya kiya ki query ko sort kr liya alright and smaller qury ka count aa gya jo ki uske aage ki query me bhi involve hoga that's why hamne ek
 hi count bnaya hai alright
 
+
+yha niche kya kiya hai ki sort kr diya queries ko alright and jitne point smallest query ko milenge vo aage add hi honge to bfs ek hi bar call ki hai hamne alrigh
 class Solution {
 public:
     vector<int> maxPoints(vector<vector<int>>& grid, vector<int>& queries) {
