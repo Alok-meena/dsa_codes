@@ -76,7 +76,8 @@ public:
                     pq.push({dist[neigh.first],neigh.first});
                     ways[neigh.first]=ways[node];
                 }
-                else if(distance==dist[neigh.first]){
+                else if(distance==dist[neigh.first]){ //iska mtlb hai ki ek aor path se yha pahuche hai with same dist to vha se aane ke ways aor yha current node
+                 //ke ways dono ko add kr do that's it
                     ways[neigh.first]=(ways[neigh.first]+ways[node])%mod;
                 }
             }
