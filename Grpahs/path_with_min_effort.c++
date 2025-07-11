@@ -64,7 +64,8 @@ class Solution {
             int j=pq.top()[2];
             pq.pop();
             
-            if(i==n-1 and j==m-1) return effort;
+            if(i==n-1 and j==m-1) return effort; //dont worry if u think like we are returning ans but what if other min is there but the thing is we are using
+            //pq and it will always provide us with mindiff alright
             
             int dirx[4]={-1,0,0,1};
             int diry[4]={0,-1,1,0};
@@ -75,6 +76,7 @@ class Solution {
                 
                 if (newi >= 0 && newi < n && newj >= 0 && newj < m) {
                     int newEffort = max(abs(heights[i][j] - heights[newi][newj]),dist[i][j]);
+                    //and this is the only thing in this ques to understand alright which we didnt just like dijkstra ques with dist array 
                     if (newEffort < dist[newi][newj]) {
                         dist[newi][newj] = newEffort;
                         pq.push({newEffort, newi, newj});
