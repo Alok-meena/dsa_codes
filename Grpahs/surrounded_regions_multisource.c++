@@ -106,3 +106,58 @@ public:
 };
 
 bs kya kiya ki jo boundary ke 'O' the unhe y se mark kr diya aor uske sath valo ko bhi visit kr diya alright ab jo bche O hai unhe X kr do and Y ko O kr do
+
+
+ 2nd time
+
+
+class Solution {
+public:
+    void solve(vector<vector<char>>& grid) {
+        int n=grid.size();
+        int m=grid[0].size();
+        
+        vector<vector<int>>vis(n,vector<int>(m,0));
+        
+        queue<pair<int,int>>q;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(i==0 or j==0 or i==n-1 or j==m-1){
+                    if(grid[i][j]=='O'){
+                        q.push({i,j});
+                        vis[i][j]=1;
+                        grid[i][j]='Y';
+                    }
+                }
+            }
+        }
+        
+        while(!q.empty()){
+            int i=q.front().first;
+            int j=q.front().second;
+            q.pop();
+                        
+            int dirx[4]={-1,0,0,1};
+            int diry[4]={0,-1,1,0};
+            
+            for(int d=0;d<4;d++){
+                int newi=i+dirx[d];
+                int newj=j+diry[d];
+                
+                if(newi>=0 and newi<n and newj>=0 and newj<m and vis[newi][newj]==0 and grid[newi][newj]=='O'){
+                    grid[newi][newj]='Y';
+                    vis[newi][newj]=1;
+                    q.push({newi,newj});
+                }
+            }
+        }
+        
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(grid[i][j]=='O') grid[i][j]='X';
+                else if(grid[i][j]=='Y') grid[i][j]='O';
+            }
+        }
+
+    }
+};
