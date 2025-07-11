@@ -151,6 +151,8 @@ class Solution {
                 break;
             }
         }
+
+        //if first string is longer than second so it is wrong order return false
         
         if(!found and a.length()>b.length()) return "";
         i++;
@@ -187,7 +189,7 @@ class Solution {
 
         string order;
         
-        if(ans.empty() or ans.size()!=s.size()) return "";
+        if(ans.empty() or ans.size()!=s.size()) return ""; //if cycle is present then also return false
         for(auto i:ans){
             order.push_back('a'+i);
         }
@@ -234,5 +236,79 @@ public:
         }
 
         return true;
+    }
+};
+
+
+
+
+2nd time
+
+
+class Solution {
+  public:
+    string findOrder(vector<string> &words) {
+        // code here
+        set<char>s;
+        for(auto i:words){
+            for(auto ch:i) s.insert(ch);
+        }
+        
+        int k=s.size();
+        
+        vector<int> adj[26];
+        
+        for(int i=0;i<words.size()-1;i++){
+            string a=words[i];
+            string b=words[i+1];
+            
+            int len=min(a.length(),b.length());
+            int j=0;
+            bool found=false;
+            while(j<len){
+                if(a[j]!=b[j]){
+                    adj[a[j]-'a'].push_back(b[j]-'a');
+                    found=true;
+                    break;
+                }
+                j++;
+            }
+            
+            if(!found and a.length()>b.length()) return "";
+        }
+        
+        vector<int>indegree(26,0);
+        for(int i=0;i<26;i++){
+            for(auto j:adj[i]) indegree[j]++;
+        }
+        
+        queue<int>q;
+        
+        for(int i=0;i<26;i++){
+            if(s.count(i+'a') and indegree[i]==0) q.push(i);
+        }
+        
+        vector<int>ans;
+        
+        while(!q.empty()){
+            int front=q.front();
+            q.pop();
+            
+            ans.push_back(front);
+            
+            for(auto neigh:adj[front]){
+                indegree[neigh]--;
+                if(indegree[neigh]==0) q.push(neigh);
+            }
+        }
+        
+        if(ans.size()!=k) return "";
+        
+        string st;
+        for(auto i:ans){
+            st.push_back(i+'a');
+        }
+        
+        return st;
     }
 };
