@@ -98,7 +98,7 @@ class Solution {
         int u=edge[i][0];
         int v=edge[i][1];
         int wt=edge[i][2];
-        edges.push_back({wt,{u,v}});
+        edges.push_back({wt,{u,v}});  //so do it till edges.size() only and push only once as ur are creating edges list no adj list alright
     }
 
     sort(edges.begin(),edges.end());  //sorting edges based on weights to get mst alright
