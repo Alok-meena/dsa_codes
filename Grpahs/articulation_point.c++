@@ -71,6 +71,7 @@ int main(){
     vector<int>low(n);
     unordered_map<int,bool>visited;
 
+    //if we want unique ap then we can also store them in set and also they will be sorted alright
     vector<int>ap(n,0);//means of n size and each element initialized with 0
     
     for(int i=0;i<n;i++){
