@@ -59,6 +59,10 @@ public:
         
         queue<pair<string,int>>q; // string , steps
         q.push({startWord,1});
+
+        //edge case should be included alright
+        if(wordlist.find(endWord)==wordlist.end()) return 0;
+
         
         while(!q.empty()){
             string s=q.front().first;
