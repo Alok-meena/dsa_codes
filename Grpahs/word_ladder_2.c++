@@ -98,8 +98,8 @@ class Solution {
                     if(wordlist.find(word)!=wordlist.end()){
                         v.push_back(word);
                         q.push(v);
-                        usedonlevel.push_back(word);
-                        v.pop_back();
+                        usedonlevel.push_back(word); //pushing all the words used which we will clear on the next level alright 
+                        v.pop_back(); // because same hi vector ko use kr rhe to nyi transformation aa skti hai to isko remove kr do alright
                     }
                 }
                 
