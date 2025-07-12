@@ -181,7 +181,8 @@ class Solution {
         //and to get unique parents with size 1 we know if parent[i]==i and size is greater than 1 then just take it 
         
         for(int i=0;i<(maxrow+maxcol+2);i++){
-            if(ds.parent[i]==i && ds.size[i]>1){
+            if(ds.parent[i]==i && ds.size[i]>1){ //here we are checking size is greater than 1 and unionbysize is used both should be same but do use the last 
+            //code approach only alright
                 cnt++;
             }
         }
@@ -224,7 +225,7 @@ class Solution {
         int cnt=0;
         
         for(int i=0;i<(maxrow+maxcol+2);i++){
-            if(ds.parent[i]==i && ds.rank[i]>0){
+            if(ds.parent[i]==i && ds.rank[i]>0){ //here also unionbyrank is called and rank is used so both should be same alright
                 cnt++;
             }
         }
@@ -232,3 +233,66 @@ class Solution {
         return n-cnt;
     }
 };
+
+
+2nd time
+
+ int maxRemove(vector<vector<int>>& stones, int n) {
+        // Code here
+        int maxrow=0;
+        int maxcol=0;
+        
+
+        for(int i=0;i<stones.size();i++){
+            maxrow=max(maxrow,stones[i][0]);
+            maxcol=max(maxcol,stones[i][1]);
+        }
+        
+        DisjointSet ds(maxrow+maxcol+2);
+        
+        for(int i=0;i<n;i++){
+            int row=stones[i][0];
+            int col=stones[i][1]+maxrow+1;
+            
+            //this is not mandatory it is handled in the union operation already okk 
+            //if(ds.findUPar(row)==ds.findUPar(col)) continue;
+            
+            ds.unionByRank(row,col);
+        }
+        
+        int connected_compo=0;
+        
+        for(int i=0;i<(maxrow+maxcol+2);i++){
+            if(ds.parent[i]==i and ds.rank[i]>0) connected_compo++;
+        }
+        
+        return n-connected_compo;
+    }
+
+if the compo's counting part giving wrong ans then count only for those whose union is done and also unique ones only alright like below :::
+
+
+set<int>v;
+        
+        for(int i=0;i<n;i++){
+            int row=stones[i][0];
+            int col=stones[i][1]+maxrow+1;
+            
+
+            if(ds.findUPar(row)==ds.findUPar(col)) continue;
+            
+            ds.unionByRank(row,col);
+            v.insert(row);
+            v.insert(col);
+        }
+        
+        int connected_compo=0;
+        
+        for(auto i:v) if(ds.findUPar(i)==i) connected_compo++;
+        
+        // for(int i=0;i<(maxrow+maxcol+2);i++){
+        //     if(ds.parent[i]==i and ds.rank[i]>0) connected_compo++;
+        // }
+        
+        return n-connected_compo;
+    } ookkk
