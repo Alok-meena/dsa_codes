@@ -86,3 +86,41 @@ public:
         return 0;
     }
 };
+
+
+2nd time 
+
+class Solution {
+public:
+    int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
+        queue<pair<int,string>>q;
+        q.push({1,beginWord});
+
+        unordered_set<string>wordlist(wordList.begin(),wordList.end());
+        if(wordlist.find(endWord)==wordlist.end()) return 0;
+
+        while(!q.empty()){
+            int steps=q.front().first;
+            string word=q.front().second;
+            q.pop();
+
+            if(word==endWord) return steps;
+
+            for(int i=0;i<word.length();i++){
+                char original=word[i];
+                for(char ch='a';ch<='z';ch++){
+                    word[i]=ch;
+                    if(wordlist.find(word)!=wordlist.end()){
+                        q.push({steps+1,word});
+                        wordlist.erase(word);
+                    }
+                }
+                word[i]=original;
+            }
+        }
+
+        return 0;
+    }
+};
+
+just dont break after erasing the word as we can find other quick transformations also alright
