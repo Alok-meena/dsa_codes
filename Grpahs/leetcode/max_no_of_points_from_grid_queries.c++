@@ -46,6 +46,7 @@ k == queries.length
 
 applying bfs for every query alright
 
+but this code can given wrong ans when the min value is not present at curr cell
 class Solution {
 public:
     
@@ -202,6 +203,9 @@ public:
         return ans;
     }
 };
+
+
+aor ye bat suno if u are thinking like in pq also if the min value is at the end index and if u are not able to reach there then just not it is the ques 
 
 O(K∗Log(K)+M∗N∗Log(K))
 
