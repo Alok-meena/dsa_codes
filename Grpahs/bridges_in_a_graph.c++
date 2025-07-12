@@ -131,15 +131,21 @@ void dfs(int curr,int &timer,vector<int> adj[],vector<int>&discoveryTime,vector<
         else if(!vis[neigh]){
             nodeToparent[neigh]=curr;
             dfs(neigh,timer,adj,discoveryTime,lowestTime,nodeToparent,vis,ans);
+            // return hoke aane ke bad update kr do khud k low neigh ke low se because it is possible ki neigh tk aane k koi aor rsta bhi ho 
+            //because vhi ex lo 0 - 1 0 -2 0-3 3-4 okk to jb ham 2 se vapas 1 pe aaaye with (1\1) okk to ager curr ka low update kre bina hi ager ham lot jaye
+            //to jb 0 pe (0\0)  brdige ki codntion check hogi to true aa jayega 1>0 mtlb 1 tk jane k yhi ek rsta tha but esa nhi hai to ager 1 tk jane k koi aor
+            //chota rsta hai hai to update kro and we will know ki ye bridge nhi hai tik hai bs yhi imp hai okk
             lowestTime[curr]=min(lowestTime[curr],lowestTime[neigh]);
 
-            //check if bridge
-            if(lowestTime[nei gh]>discoveryTime[curr]){
+            //check if bridge aor bhai brdige ke time pe jab aap vapas aaye to apko ye dekhna hai ager neigh k low bda hai khud se to mtlb us tk jane
+            //ka yhi ek rsta hai to ye bridge k edge hai but ager nhi to koi aor rsta bhi hai that's why us tk ja skte y nhi to uske sath low check krna hai 
+            //khud ka nhi 
+            if(lowestTime[neigh]>discoveryTime[curr]){
                 ans.push_back({curr,neigh});
             }
         }
         else{
-            //back edge (vis bhi hai aor parent bhi nhi hai)
+            //back edge (vis bhi hai aor parent bhi nhi hai to apne low times ko uske disc time se update kr lo)
             lowestTime[curr]=min(lowestTime[curr],discoveryTime[neigh]);
         }
     }
