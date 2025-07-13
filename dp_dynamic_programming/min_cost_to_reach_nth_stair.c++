@@ -14,6 +14,102 @@ Explanation: You will start at index 1.
 - Pay 15 and climb two steps to reach the top.
 The total cost is 15.
 
+brute force:
+
+class Solution {
+public:
+    int solve(int i,int n,vector<int>&cost){
+        if(i>=n) return 0;
+
+        int a=cost[i]+solve(i+1,n,cost);
+        int b=cost[i]+solve(i+2,n,cost);
+
+        return min(a,b);
+    }
+    int minCostClimbingStairs(vector<int>& cost) {
+        int n=cost.size();
+        return min(solve(0,n,cost),solve(1,n,cost));
+    }
+};
+
+if we are starting from either 0 or 1st stair
+
+
+exponential t.c and s.c O(n) alright
+
+not top down + memorization ( to dekha no need ki always n to 0 hi ho here it is from 0 to n ) 
+
+class Solution {
+public:
+    int solve(int i,int n,vector<int>&dp,vector<int>&cost){
+        if(i>=n) return 0;
+
+        if(dp[i]!=-1) return dp[i];
+
+        int a=cost[i]+solve(i+1,n,dp,cost);
+        int b=cost[i]+solve(i+2,n,dp,cost);
+
+        return dp[i]=min(a,b);
+    }
+    int minCostClimbingStairs(vector<int>& cost) {
+        int n=cost.size();
+        vector<int>dp(n+1,-1);
+        return min(solve(0,n,dp,cost),solve(1,n,dp,cost));
+    }
+};
+
+optimized t.c:-O(n) and s.c:-O(n)
+
+
+and now to convert this to bottom up base case i>=n 0 so make all 0 and just start doing
+
+int minCostClimbingStairs(vector<int>& cost) {
+        int n=cost.size();
+        vector<int>dp(n+2,0);
+
+        for(int i=n-1;i>=0;i--){
+            int a=cost[i]+dp[i+1];
+            int b=cost[i]+dp[i+2];
+            dp[i]=min(a,b);
+        }
+
+        return min(dp[0],dp[1]);
+    }
+simple sa with same t.c and s.c
+
+
+
+and now for space optimization what we have to do nothing start me sabhi value 0 hai so do start
+
+int minCostClimbingStairs(vector<int>& cost) {
+        int n=cost.size();
+        
+        int a=0;
+        int b=0;
+
+        for(int i=n-1;i>=0;i--){
+            int curr=cost[i]+min(a,b);
+            a=b;
+            b=curr;
+        }
+
+        return min(a,b);
+    }
+
+t.c same s.c : O(1)
+
+ and now below are the codes in which we started from nth index
+
+
+
+
+
+
+
+
+
+
+
 
  and array size is n so only n-1 tk ki cost given hai and we only have to add cost if we jump from that index to next so no need to add destination cost alright
  
