@@ -25,6 +25,90 @@ Sample Output 1:
 Explanation to Sample Output 1:
 In test case 1, the sum of 'ARR[0]' & 'ARR[2]' is 5 which is greater than 'ARR[1]' which is 2 so the answer is 5.
 
+if we start from 0 to n 
+
+int solve(int i,vector<int>&nums){
+    if(i>=nums.size()) return 0;
+
+    //skip;
+    int nottake=solve(i+1,nums);
+
+    int take=nums[i]+solve(i+2,nums);
+    
+    return max(nottake,take);
+}
+int maximumNonAdjacentSum(vector<int> &nums){
+    // Write your code here.
+    return solve(0,nums);
+}
+
+
+top down + memo
+
+int solve(int i,vector<int>&nums,vector<int>&dp){
+    if(i>=nums.size()) return 0;
+
+    if(dp[i]!=-1) return dp[i];
+
+    //skip;
+    int nottake=solve(i+1,nums,dp);
+
+    int take=nums[i]+solve(i+2,nums,dp);
+    
+    return dp[i]=max(nottake,take);
+}
+int maximumNonAdjacentSum(vector<int> &nums){
+    // Write your code here.
+    vector<int>dp(nums.size()+1,-1);
+    return solve(0,nums,dp);
+}
+
+bottom up
+
+int maximumNonAdjacentSum(vector<int> &nums){
+    // Write your code here.
+    int n=nums.size();
+    vector<int>dp(nums.size()+2,0);
+
+
+    for(int i=n-1;i>=0;i--){
+        int nottake=dp[i+1];
+
+        int take=nums[i]+dp[i+2];
+        
+        dp[i]=max(nottake,take);
+    }
+
+    return dp[0];
+}
+
+space optimization
+
+int maximumNonAdjacentSum(vector<int> &nums){
+    // Write your code here.
+    int n=nums.size();
+    vector<int>dp(nums.size()+2,0);
+
+    int next1=0;
+    int next2=0;
+
+    for(int i=n-1;i>=0;i--){
+        int nottake=next1;
+
+        int take=nums[i]+next2;
+        
+        int curr=max(nottake,take);
+        next2=next1;
+        next1=curr;
+    }
+
+    return next1;
+}
+
+this is optimized that's it my lord
+
+    
+
 
 
 
@@ -52,27 +136,7 @@ int maximumNonAdjacentSum(vector<int> &nums){
 }
 
 
-can start from starting also
-#include <bits/stdc++.h> 
-int solve(vector<int>&nums,int n,int i){
-    //to ye vala base case +2 index ke liye necessary hai alright
-    if(i>=n){
-        return 0;
-    }
-    if(i==n){
-        return nums[i];
-    }
 
-    int incl=solve(nums,n,i+2)+nums[i]; //ager curr ko include kr liya to i+2 
-    int excl=solve(nums,n,i+1)+0;//ager exclude kiya hai to bhailog agle ko include krenge to i+1 hi to hoga alright
-
-    return max(incl,excl);
-}
-int maximumNonAdjacentSum(vector<int> &nums){
-    // Write your code here.
-    int ans=solve(nums,nums.size(),0);
-    return ans;
-}
 
 
 Time Complexity
@@ -93,32 +157,7 @@ from our subsequence then there will be the depth of the recursion tree will be 
 
 2nd approach : recursion + memorization
 
-#include <bits/stdc++.h> 
-int solve(vector<int>&nums,int n,int i,vector<int>&dp){
-    if(i>n){
-        return 0;
-    }
-    if(i==n){
-        return nums[i];
-    }
 
-    if(dp[i]!=0){
-        return dp[i];
-    }
-
-    int incl=solve(nums,n,i+2,dp)+nums[i];
-    int excl=solve(nums,n,i+1,dp)+0;
-
-    dp[i]=max(incl,excl);
-    return dp[i];
-}
-int maximumNonAdjacentSum(vector<int> &nums){
-    // Write your code here.
-    int n=nums.size();
-    vector<int>dp(n,0);
-    int ans=solve(nums,nums.size(),0,dp);
-    return ans;
-}
 
 //can use this also
 #include <bits/stdc++.h> 
@@ -176,6 +215,7 @@ int solve2(vector<int>&nums,int n){
     dp[0]=nums[0];
 
     for(int i=1;i<n;i++){
+        //but not correct as i-2 may be out of bound so use below one
         int incl=dp[i-2]+nums[i];//here i-2 and i-1 because we are not starting from 0 it is from 1 ok!
         int excl=dp[i-1]+0;
 
@@ -188,6 +228,20 @@ int maximumNonAdjacentSum(vector<int> &nums){
     int n=nums.size();
     int ans=solve2(nums,n);
     return ans;
+}
+
+int solve2(vector<int>&nums,int n){
+    vector<int>dp(n+1,0);
+    dp[0]=nums[0];
+    dp[1]=max(dp[0],nums[1]);
+
+    for(int i=2;i<n;i++){
+        int incl=dp[i-2]+nums[i];//here i-2 and i-1 because we are not starting from 0 it is from 1 ok!
+        int excl=dp[i-1]+0;
+
+        dp[i]=max(incl,excl);
+    }
+    return dp[n-1];
 }
 
 t.c:-O(N) and s.c:-O(N)
