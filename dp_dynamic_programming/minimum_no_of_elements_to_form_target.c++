@@ -40,6 +40,147 @@ int minimumElements(vector<int> &num, int x)
 but it will not work for evry case so we need to use dp alright
 
 
+i tried brute force of take or not take alright
+
+#include <bits/stdc++.h> 
+
+int solve(int i,int count,vector<int>&nums,vector<vector<int>>&dp,int tar){
+    if(i>=nums.size()) return INT_MAX;
+
+    if(tar<0) return INT_MAX;
+    if(tar==0) return count;
+
+    if(dp[i][tar]!=-1){
+        return dp[i][tar];
+    }
+
+    //exclude
+    int nottake=solve(i+1,count,nums,dp,tar);
+
+    //include
+    int take=solve(i,count+1,nums,dp,tar-nums[i]);
+
+    return dp[i][tar]=min(nottake,take);
+}
+int minimumElements(vector<int> &num, int x)
+{
+    // Write your code here.
+    int n=num.size();
+    vector<vector<int>>dp(n+1,vector<int>(x+1,-1));
+    int ans=solve(0,0,num,dp,x);
+    return ans==INT_MAX?-1:ans;
+}
+
+but in this 3 values are changing so either make 3d vector or remove that count variable
+
+
+so look it works just 1 case not passed for 3d vector
+
+#include <bits/stdc++.h> 
+
+int solve(int i,int count,vector<int>&nums,vector<vector<vector<int>>>&dp,int tar){
+    if(i>=nums.size()) return INT_MAX;
+
+    if(tar<0) return INT_MAX;
+    if(tar==0) return count;
+
+    if(dp[i][tar][count]!=-1){
+        return dp[i][tar][count];
+    }
+
+    //exclude
+    int nottake=solve(i+1,count,nums,dp,tar);
+
+    //include
+    int take=solve(i,count+1,nums,dp,tar-nums[i]);
+
+    return dp[i][tar][count]=min(nottake,take);
+}
+int minimumElements(vector<int> &num, int x)
+{
+    // Write your code here.
+    int n=num.size();
+    vector<vector<vector<int>>>dp(n+1,vector<vector<int>>(x+1,vector<int>(x+1,-1)));
+    int ans=solve(0,0,num,dp,x);
+    return ans==INT_MAX?-1:ans;
+}
+
+but now remove count
+
+
+#include <bits/stdc++.h> 
+
+int solve(int i,vector<int>&nums,vector<vector<int>>&dp,int tar){
+    if(i>=nums.size()) return INT_MAX;
+
+    if(tar<0) return INT_MAX;
+    if(tar==0) return 0;
+
+    if(dp[i][tar]!=-1){
+        return dp[i][tar];
+    }
+
+    //exclude
+    int nottake=solve(i+1,nums,dp,tar);
+
+    //include
+    int take=INT_MAX;
+    //but fir intmax se initialize necessary alright and if intmax comes then nothing if not then only do count+1 alright
+    if(nums[i]<=tar){
+        int ans=solve(i,nums,dp,tar-nums[i]);
+        if(ans!=INT_MAX) take=1+ans;
+    }
+
+    return dp[i][tar]=min(nottake,take);
+}
+int minimumElements(vector<int> &num, int x)
+{
+    // Write your code here.
+    int n=num.size();
+    vector<vector<int>>dp(n+1,vector<int>(x+1,-1));
+    int ans=solve(0,num,dp,x);
+    return ans==INT_MAX?-1:ans;
+}
+
+this is working correctly
+
+now it's bottom up (mene conversion hi galat kiya baki sb khuch shi tha to khuch nhi just reverse everything )
+
+int minimumElements(vector<int> &nums, int x)
+{
+    // Write your code here.
+    int n=nums.size();
+    vector<vector<int>>dp(n+1,vector<int>(x+1,INT_MAX)); //to uper ke according har bar INT_MAX STORE KRO only
+    //if tar==0 to us case me pure me 0 store kr do
+
+    for(int i=0;i<=n;i++){
+        dp[i][0]=0;
+    }
+
+    //in above one i is from 0 to n and tar is fromm tar to 0 right just reverse loops i from n to 0 and tar from 0 to x alright
+    for(int i=n-1;i>=0;i--){
+        for(int j=0;j<=x;j++){
+            int nottake=dp[i+1][j];
+
+            //include
+            int take=INT_MAX;
+
+            if(nums[i]<=j){
+                int ans=dp[i][j-nums[i]];
+                if(ans!=INT_MAX) take=1+ans;
+            }
+            dp[i][j]=min(nottake,take);
+        }
+    }
+
+    return dp[0][x]==INT_MAX?-1:dp[0][x];  //and we have to return dp[0][x] whhy it shows min ways to convert to tar x alright because vha ans me hamne
+    //dp[i][tar] bheja tha jha i is n and tar is 0 so yha is is 0 and tar is x alright
+}
+
+it is correct
+
+
+
 VERYA VERYA IMP KI AAP  1 HI ELEMENT KO KITNI BHI BAR USE KAR SKTE HAI OKKK
 
 1st : recursion approach : cause TLE
