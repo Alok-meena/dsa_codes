@@ -1,3 +1,4 @@
+
 Frog Jump
 Difficulty: MediumAccuracy: 49.55%Submissions: 121K+Points: 4Average Time: 15m
 Given an integer array height[] where height[i] represents the height of the i-th stair, a frog starts from the first stair and wants to reach the top. From any stair i, the frog has two options: it can either jump to the (i+1)th stair or the (i+2)th stair. The cost of a jump is the absolute difference in height between the two stairs. Determine the minimum total cost required for the frog to reach the top.
@@ -24,6 +25,98 @@ Constraints:
 normal recursive code:
 
 
+brute froce , top dwon , bottom up
+
+class Solution {
+  public:
+    int solve(int i,vector<int>&height,vector<int>&dp){
+        if(i>=height.size()) return INT_MAX;
+        if(i==height.size()-1) return 0;
+        
+        if(dp[i]!=-1) return dp[i];
+        
+        int onejump=INT_MAX;
+        if(i+1<height.size()) onejump=min(onejump,abs(height[i]-height[i+1])+solve(i+1,height,dp));
+        
+        int twojump=INT_MAX;
+        if(i+2<height.size()) twojump=min(twojump,abs(height[i]-height[i+2])+solve(i+2,height,dp));
+        
+        return dp[i]=min(onejump,twojump);
+    }
+    int minCost(vector<int>& height) {
+        // Code here
+        int n=height.size();
+        int ans=solve(0,height,dp);
+        return ans==INT_MAX?-1:ans;
+    }
+};
+
+
+
+bottom up
+
+int minCost(vector<int>& height) {
+        // Code here
+        int n=height.size();
+        vector<int>dp(height.size()+2,INT_MAX);
+        dp[n-1]=0;
+        
+        for(int i=n-2;i>=0;i--){
+            int onejump=INT_MAX;
+            if(i+1<n) onejump=min(onejump,abs(height[i]-height[i+1])+dp[i+1]);
+            
+            int twojump=INT_MAX;
+            if(i+2<n) twojump=min(twojump,abs(height[i]-height[i+2])+dp[i+2]);
+            
+            dp[i]=min(onejump,twojump);
+        }
+        
+        return dp[0];
+    }
+
+
+space optimized
+
+
+int minCost(vector<int>& height) {
+        // Code here
+        int n=height.size();
+        int next1=0;
+        int next2=INT_MAX;
+        
+        for(int i=n-2;i>=0;i--){
+            int onejump=INT_MAX;
+            if(i+1<n) onejump=min(onejump,abs(height[i]-height[i+1])+next1);
+            
+            int twojump=INT_MAX;
+            if(i+2<n) twojump=min(twojump,abs(height[i]-height[i+2])+next2);
+            
+            int curr=min(onejump,twojump);
+            next2=next1;
+            next1=curr;
+        }
+        
+        return next1;
+    }
+
+
+have to start from n-2 right 
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+just according to above top down approach alright
 
 class Solution {
   public:
