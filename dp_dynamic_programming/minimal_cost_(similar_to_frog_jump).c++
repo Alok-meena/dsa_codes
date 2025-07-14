@@ -17,6 +17,107 @@ Constraints:
 1 <= arr[i] <= 104
 
 
+the wrong code i did
+
+class Solution {
+  public:
+    
+    int solve(int i,int k,int n,vector<int>&arr){
+        if(i==n-1) return 0;
+        
+        if(i>=n) return INT_MAX;
+        
+        int mini=INT_MAX;
+
+        //mistakes so listen what we have to do we can jump k steps ahead from current index i right but what we are doing j is from i why in this case we 
+        //considering the current index also and j+i will become too large 
+
+        //the ques is very simple that from i we can make k jumps so from 1-k loop and check i+j<n is correct and i+j jumps are made and arr[j] is the next jump 
+        //value so why complicating so much 
+        
+        for(int j=i;j<=i+k;j++){ 
+            int ans=INT_MAX;
+            if(i+j<n){
+                ans=min(ans,abs(arr[i]-arr[j])+solve(i+j,k,n,arr));
+            }
+            mini=min(mini,ans);
+        }
+        
+        return mini;
+    }
+    
+    int minimizeCost(int k, vector<int>& arr) {
+        // Code here
+        int n=arr.size();
+        return solve(0,k,n,arr);
+    }
+};
+
+we have to run only from 1 to k jumps alright as given i+1 i+2 .. i+k
+
+
+class Solution {
+  public:
+    
+    int solve(int i,int k,int n,vector<int>&arr,vector<int>&dp){
+        if(i==n-1) return 0;
+        
+        if(i>=n) return INT_MAX;
+        
+        if(dp[i]!=-1) return dp[i];
+        
+        int mini=INT_MAX;
+        
+        for(int j=1;j<=k;j++){
+            int ans=INT_MAX;
+            if(i+j<n){
+                ans=min(ans,abs(arr[i]-arr[i+j])+solve(i+j,k,n,arr,dp));
+            }
+            mini=min(mini,ans);
+        }
+        
+        return dp[i]=mini;
+    }
+    
+    int minimizeCost(int k, vector<int>& arr) {
+        // Code here
+        int n=arr.size();
+        vector<int>dp(n+1,-1);
+        return solve(0,k,n,arr,dp);
+    }
+};
+
+
+bottom up
+
+
+int minimizeCost(int k, vector<int>& arr) {
+        // Code here
+        int n=arr.size();
+        vector<int>dp(n+1,0);
+        dp[0]=0;
+        
+        for(int i=n-2;i>=0;i--){
+            int mini=INT_MAX;
+        
+            for(int j=1;j<=k;j++){
+                int ans=INT_MAX;
+                if(i+j<n){
+                    ans=min(ans,abs(arr[i]-arr[i+j])+dp[i+j]);
+                }
+                mini=min(mini,ans);
+            }
+            
+            dp[i]=mini;
+            }
+        return dp[0];
+    }
+
+space optimized
+
+we cant do as i+j so we have to store k variables so again same space alright
+
+below is all correct but wait see above
 normal recursion : exponential
 
 class Solution {
