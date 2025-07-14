@@ -20,6 +20,73 @@ In the second case, there is no way to cut into segments of 3 length only as the
 
 1:recursion
 
+below is the way to do also but i also found a new way to solve this ques just from previous questions 
+
+#include <bits/stdc++.h>
+
+int solve(int i,vector<int>&arr,int tar,vector<vector<int>>&dp){
+	if(i>=arr.size() or tar<0) return INT_MIN;
+	if(tar==0) return 0;
+
+	if(dp[i][tar]!=-1) return dp[i][tar];
+
+	//nottake
+	int nottake=solve(i+1,arr,tar,dp);
+
+	int take=INT_MIN;
+	if(arr[i]<=tar){
+		int ans=solve(i,arr,tar-arr[i],dp);
+		if(ans!=INT_MIN) take=ans+1;
+	}
+
+	return dp[i][tar]=max(nottake,take);
+}
+
+int cutSegments(int n, int x, int y, int z) {
+	// Write your code here.
+	vector<int>arr={x,y,z};
+	vector<vector<int>>dp(4,vector<int>(n+1,-1));
+	int ans=solve(0,arr,n,dp);
+	return ans==INT_MIN?0:ans;
+}
+
+
+bottom up
+
+int cutSegments(int n, int x, int y, int z) {
+	// Write your code here.
+	vector<int>arr={x,y,z};
+	vector<vector<int>>dp(4,vector<int>(n+1,INT_MIN));
+
+	for(int i=0;i<=3;i++){
+		dp[i][0]=0;
+	}
+
+	for(int i=2;i>=0;i--){
+		for(int tar=1;tar<=n;tar++){ // and start tar from 1 not from 0 as for 0 u already done things
+			//nottake
+			int nottake=(i+1<3)?dp[i+1][tar]:INT_MIN;
+
+			int take=INT_MIN;
+			if(tar-arr[i]>=0 and dp[i][tar-arr[i]]!=INT_MIN){ //bound check is also necessary 
+				take=dp[i][tar-arr[i]]+1;
+			}
+
+			dp[i][tar]=max(nottake,take);
+		}
+	}
+
+	return dp[0][n]==INT_MIN?0:dp[0][n];  //everything u have to check
+}
+
+alright bdi dikkat ayi isme
+here what it means just we have to make tar from the values that's it
+but space is mor due to 2d dp
+
+
+
+
+
 #include <limits.h>
 int solve(int n,int x,int y,int z){
 	if(n==0){
