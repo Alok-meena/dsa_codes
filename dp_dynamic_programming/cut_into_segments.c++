@@ -79,6 +79,46 @@ int cutSegments(int n, int x, int y, int z) {
 	return dp[0][n]==INT_MIN?0:dp[0][n];  //everything u have to check
 }
 
+
+can do below one also 
+
+#include <bits/stdc++.h>
+
+int solve(int n,int x,int y,int z,vector<int>&dp){
+	if(n<0) return INT_MIN;
+	if(n==0) return 0;
+
+	if(dp[n]!=-1) return dp[n];
+
+	int a=solve(n-x,x,y,z,dp)+1;
+	int b=solve(n-y,x,y,z,dp)+1;
+	int c=solve(n-z,x,y,z,dp)+1;
+
+	return dp[n]=max(a,max(b,c));
+}
+int cutSegments(int n, int x, int y, int z) {
+	// Write your code here.
+    vector<int>dp(n+1,-1);
+	dp[0]=0;
+
+	for(int i=1;i<=n;i++){
+		int a=INT_MIN,b=INT_MIN,c=INT_MIN;
+		if(i-x>=0 and dp[i-x]!=INT_MIN){
+			a=dp[i-x]+1;
+		}
+		if(i-y>=0 and dp[i-y]!=INT_MIN){
+		    b=dp[i-y]+1;
+		}
+		if(i-z>=0 and dp[i-z]!=INT_MIN){
+			c=dp[i-z]+1;
+		}
+
+		dp[i]=max(a,max(b,c));
+	}
+
+	return dp[n]==INT_MIN?0:dp[n];
+}
+
 alright bdi dikkat ayi isme
 here what it means just we have to make tar from the values that's it
 but space is mor due to 2d dp
