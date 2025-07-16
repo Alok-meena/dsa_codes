@@ -109,6 +109,31 @@ int uniquePaths(int m, int n) {
     }
 
 
+we have to do this 
+class Solution {
+public:
+    int uniquePaths(int m, int n) {
+        vector<vector<int>>dp(m,vector<int>(n,0));
+        for (int i = 0; i < m; i++) dp[i][n - 1] = 1; // last column
+        for (int j = 0; j < n; j++) dp[m - 1][j] = 1; // last row
+
+
+        for(int i=m-2;i>=0;i--){
+            for(int j=n-2;j>=0;j--){
+                //down
+                int total=0;
+                total+=dp[i+1][j];
+
+                //right
+                total+=dp[i][j+1];
+
+                dp[i][j]=total;
+            }
+        }
+        return dp[0][0];
+    }
+};
+
 space optimization t.c:-O(same) and s.c:-O(n)
 
 int uniquePaths(int m, int n) {
@@ -123,6 +148,24 @@ int uniquePaths(int m, int n) {
         }
         return prev[0];
     }
+
+
+int uniquePaths(int m, int n) {
+    vector<int> next(n, 1);  // last row: all paths = 1
+
+    for (int i = m - 2; i >= 0; i--) {
+        vector<int> curr(n, 0);  // current row
+        for (int j = n - 2; j >= 0; j--) {
+            curr[j] = curr[j + 1] + next[j];  // right + down
+        }
+        next = curr;
+    }
+
+    return next[0];
+}
+
+
+use this above code
 
 
 💡 Why curr[j] = curr[j+1] + prev[j] Works
