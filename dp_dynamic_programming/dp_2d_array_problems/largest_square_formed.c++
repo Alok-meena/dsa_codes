@@ -158,6 +158,39 @@ public:
     }
 };
 
+
+and according to top down if n and m is reached by i and j then it should be 0
+
+
+so code for it
+
+int maxSquare(vector<vector<int>>& mat) {
+        // code here
+        int n=mat.size();
+        int m=mat[0].size();
+        vector<vector<int>>dp(mat.size()+1,vector<int>(mat[0].size()+1,-1));
+        int maxi=0;
+        
+        for(int i=0;i<=n;i++) dp[i][m]=0;
+        for(int j=0;j<=m;j++) dp[n][j]=0;
+        
+        for(int i=n-1;i>=0;i--){
+            for(int j=m-1;j>=0;j--){
+                 int right=dp[i][j+1];
+                int diagonal=dp[i+1][j+1];
+                int down=dp[i+1][j];
+                
+                if(mat[i][j]==1){
+                    int ans=1+min(right,min(diagonal,down));
+                    maxi=max(maxi,ans);
+                    dp[i][j]=ans;
+                }
+                else dp[i][j]=0;
+            }
+        }
+        return maxi;
+    }
+
 t.c:-O(m*n) s.c:-O(m*n)
 
 4:space optimization
@@ -165,6 +198,37 @@ t.c:-O(m*n) s.c:-O(m*n)
 
 (because ham ya to current row ya next row pe depend kr rhe hai to hamne curr bnayi for present row and next for next row and after each iteration 
 ham curr ko next row ke equal kr denge
+
+
+ int maxSquare(vector<vector<int>>& mat) {
+        // code here
+        int n=mat.size();
+        int m=mat[0].size();
+        vector<int>next(m+1,0);
+        vector<int>curr(m+1,0);
+        int maxi=0;
+        
+        next[m]=0;
+        curr[m]=0;
+        
+        for(int i=n-1;i>=0;i--){
+            for(int j=m-1;j>=0;j--){
+                 int right=curr[j+1];
+                int diagonal=next[j+1];
+                int down=next[j];
+                
+                if(mat[i][j]==1){
+                    int ans=1+min(right,min(diagonal,down));
+                    maxi=max(maxi,ans);
+                    curr[j]=ans;
+                }
+                else curr[j]=0;
+            }
+            next=curr;
+        }
+        return maxi;
+    }
+
 
 class Solution{
 public:
