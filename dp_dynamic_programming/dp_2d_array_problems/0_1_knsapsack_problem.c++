@@ -30,7 +30,7 @@ mostly start with 0 only it will be easy to understand alright
 
 int solve(vector<int>&weight,vector<int>&value,int n,int capacity,int idx){
   if(idx==n-1){
-    if(weight[idx]<=capacity){
+    if(weight[idx]<=capacity){ //if we not return like this then also it is fine
       return value[idx];
     }
     else return 0;
@@ -50,6 +50,167 @@ int knapsack(vector<int> weight, vector<int> value, int n, int maxWeight)
 	// Write your code here
   return solve(weight,value,n,maxWeight,0);
 }
+
+
+or can do this with a diff wt factor also
+
+#include <bits/stdc++.h> 
+
+int solve(int i,int wt,vector<int>&weight,vector<int>&value,int maxWeight,int n,vector<vector<int>>&dp){
+  if(i>=n){
+    // if(wt+weight[i]<=maxWeight){
+    //   return value[i];
+    // }
+    return 0;
+  }
+
+  if(dp[i][wt]!=-1) return dp[i][wt];
+
+  int op1=0,op2=0;
+  op2=solve(i+1,wt,weight,value,maxWeight,n,dp);
+
+  if(wt+weight[i]<=maxWeight){
+    op1=value[i]+solve(i+1,wt+weight[i],weight,value,maxWeight,n,dp);
+  }
+
+  return dp[i][wt]=max(op1,op2);
+}
+int knapsack(vector<int> weight, vector<int> value, int n, int maxWeight) 
+{
+	// Write your code here
+  vector<vector<int>>dp(n+1,vector<int>(maxWeight+1,-1));
+  return solve(0,0,weight,value,maxWeight,n,dp);
+}
+
+
+the bottom up
+
+int knapsack(vector<int> weight, vector<int> value, int n, int maxWeight) 
+{
+	// Write your code here
+  vector<vector<int>>dp(n+1,vector<int>(maxWeight+1,0));
+
+  for(int wt=0;wt<=maxWeight;wt++){
+    if(wt+weight[n-1]<=maxWeight){
+      dp[n-1][wt]=value[n-1];
+    }
+  }
+  
+  for(int i=n-2;i>=0;i--){
+    for(int wt=maxWeight;wt>=0;wt--){
+      int op1=0,op2=0;
+      op2=dp[i+1][wt];
+
+      if(wt+weight[i]<=maxWeight){
+        op1=value[i]+dp[i+1][wt+weight[i]];
+      }
+
+      dp[i][wt]=max(op1,op2);
+    }
+  }
+  return dp[0][0];
+}
+
+
+space optimization
+
+int knapsack(vector<int> weight, vector<int> value, int n, int maxWeight) 
+{
+	// Write your code here
+  vector<vector<int>>dp(n+1,vector<int>(maxWeight+1,0));
+  
+  for(int capacity=0;capacity<=maxWeight;capacity++){
+    if(weight[n-1]<=capacity){
+      dp[n-1][capacity]=value[n-1];
+    }
+  }
+
+  for(int i=n-2;i>=0;i--){
+    for(int capacity=0;capacity<=maxWeight;capacity++){
+      int op1=0,op2=0;
+      op2=dp[i+1][capacity];
+
+      if(weight[i]<=capacity){
+        op1=value[i]+dp[i+1][capacity-weight[i]];
+      }
+
+      dp[i][capacity]=max(op1,op2);
+    }
+  }
+  return dp[0][maxWeight];
+} 
+
+
+in above one idx i and capacity is curr row and i+1 ( whatever the capacity is the next row alright
+
+
+int knapsack(vector<int> weight, vector<int> value, int n, int maxWeight) 
+{
+	// Write your code here
+  vector<vector<int>>dp(n+1,vector<int>(maxWeight+1,0));
+  vector<int>next(maxWeight+1,0);
+  vector<int>curr(maxWeight+1,0);
+  
+  for(int capacity=0;capacity<=maxWeight;capacity++){
+    if(weight[n-1]<=capacity){
+      curr[capacity]=value[n-1];
+    }
+  }
+
+  next=curr; //in this curr is updated but then also update the next row alright
+
+  for(int i=n-2;i>=0;i--){
+    for(int capacity=0;capacity<=maxWeight;capacity++){
+      int op1=0,op2=0;
+      op2=next[capacity];
+
+      if(weight[i]<=capacity){
+        op1=value[i]+next[capacity-weight[i]];
+      }
+
+      curr[capacity]=max(op1,op2);
+    }
+    next=curr;
+  }
+  return next[maxWeight];
+} 
+
+
+in this this optimization is just as per to above code
+
+more optimized
+
+int knapsack(vector<int> weight, vector<int> value, int n, int maxWeight) 
+{
+	// Write your code here
+  vector<vector<int>>dp(n+1,vector<int>(maxWeight+1,0));
+  vector<int>curr(maxWeight+1,0);
+  
+  for(int capacity=0;capacity<=maxWeight;capacity++){
+    if(weight[n-1]<=capacity){
+      curr[capacity]=value[n-1];
+    }
+  }
+
+
+  for(int i=n-2;i>=0;i--){
+    for(int capacity=maxWeight;capacity>=0;capacity--){
+      int op1=0,op2=0;
+      op2=curr[capacity];
+
+      if(weight[i]<=capacity){
+        op1=value[i]+curr[capacity-weight[i]];
+      }
+
+      curr[capacity]=max(op1,op2);
+    }
+  }
+  return curr[maxWeight];
+} 
+
+1 hi vector use kiya because dekho curr value either apne curr y next pe depend kr rhi thi to bs 
+
+like this
 
   
 #include <bits/stdc++.h> 
@@ -223,6 +384,11 @@ int knapsack(vector<int> weight, vector<int> value, int n, int maxWeight) {
   // Write your code here
   return solve2(weight, value, n, maxWeight);
 }
+
+
+
+
+
 
 Time Complexity
 O(index * W), where ‘N’ is the number of items and ‘W’ is the weight of bag.
