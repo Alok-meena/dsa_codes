@@ -119,8 +119,55 @@ class Solution {
     }
 };
 
-bottom up
+or can do like 
 
+class Solution {
+  public:
+    bool solve(int i,vector<int>&arr,int sum,vector<vector<int>>&dp){
+        if(sum==0) return true; //and very imp thing is it should be at top o/w if ur sum becomes 0 it will still return false if u will go out of bound alright
+        if(i>=arr.size()) return false;
+        
+        if(sum<0) return false;
+        
+        if(dp[i][sum]!=-1) return dp[i][sum];
+        //skip
+        bool op1=solve(i+1,arr,sum,dp);
+        
+        //take
+        bool op2=solve(i+1,arr,sum-arr[i],dp);
+        
+        return dp[i][sum]=op1 or op2;
+    }
+    bool isSubsetSum(vector<int>& arr, int sum) {
+        // code here
+        vector<vector<int>>dp(arr.size()+1,vector<int>(sum+1,-1));
+        return solve(0,arr,sum,dp);
+    }
+};
+
+bottom up
+bool isSubsetSum(vector<int>& arr, int S) {
+        // code here
+        int n=arr.size();
+        vector<vector<int>>dp(arr.size()+1,vector<int>(S+1,0));
+        for(int i=0;i<=n;i++){
+            dp[i][0]=1;
+        }
+        
+        for(int i=n-1;i>=0;i--){
+            for(int sum=1;sum<=S;sum++){
+                //skip
+                bool op1=dp[i+1][sum];
+                
+                //take
+                bool op2=false;
+                if(sum-arr[i]>=0) op2=dp[i+1][sum-arr[i]];
+                
+                dp[i][sum]=op1 or op2;
+                    }
+                }
+        return dp[0][S];
+    }
 
 bool isSubsetSum(vector<int>& arr, int sum) {
         // code here
@@ -209,3 +256,30 @@ bool isSubsetSum(vector<int>& arr, int sum) {
         }
 
 to bs khuch nhi idx+1 so next pe depend kr rha hai to bs rows ke equla means sum+1 sizse k bna liya 
+
+
+
+bool isSubsetSum(vector<int>& arr, int S) {
+        // code here
+        int n=arr.size();
+        // vector<vector<int>>dp(arr.size()+1,vector<int>(S+1,0));
+        vector<int>next(S+1,0);
+        vector<int>curr(S+1,0);
+        next[0]=1; //pahle har ek row ki value ko kr rha tha to yha ek ko hi krenge na ki sbhi ko alright
+        
+        for(int i=n-1;i>=0;i--){
+            curr[0]=1; //have to do this because can always make sum 0
+            for(int sum=1;sum<=S;sum++){
+                //skip
+                bool op1=next[sum];
+                
+                //take
+                bool op2=false;
+                if(sum-arr[i]>=0) op2=next[sum-arr[i]];
+                
+                curr[sum]=op1 or op2;
+                    }
+                    next=curr;
+                }
+        return next[S];
+    }
