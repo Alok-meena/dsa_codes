@@ -46,6 +46,77 @@ public:
 };
 
 
+more simple
+
+class Solution {
+  public:
+    int solve(int dice,int x,int n,int m,vector<vector<int>>&dp){
+        if(dice==n){
+            if(x==0) return 1;
+            return 0;
+        }
+        
+        if(x<0) return 0;
+        
+        if(dp[dice][x]!=-1) return dp[dice][x];
+        
+        int ans=0;
+        for(int face=1;face<=m;face++){
+            ans+=solve(dice+1,x-face,n,m,dp);
+        }
+        
+        return dp[dice][x]=ans;
+    }
+    int noOfWays(int m, int n, int x) {
+        // code here
+        vector<vector<int>>dp(n+1,vector<int>(x+1,-1));
+        return solve(0,x,n,m,dp);
+    }
+};
+
+bottom up
+int noOfWays(int m, int n, int X) {
+        // code here
+        vector<vector<int>>dp(n+2,vector<int>(X+1,0));
+        
+        dp[n][0]=1;
+        
+        for(int dice=n-1;dice>=0;dice--){
+            for(int x=0;x<=X;x++){
+                int ans=0;
+                for(int face=1;face<=m;face++){
+                    if(x-face>=0) ans+=dp[dice+1][x-face];
+                }
+                
+                dp[dice][x]=ans;
+            }
+        }
+        return dp[0][X];
+
+
+space optimized
+
+int noOfWays(int m, int n, int X) {
+        // code here
+        vector<int>next(X+1,0);
+        vector<int>curr(X+1,0);
+        
+        next[0]=1;
+        
+        for(int dice=n-1;dice>=0;dice--){
+            for(int x=0;x<=X;x++){
+                int ans=0;
+                for(int face=1;face<=m;face++){
+                    if(x-face>=0) ans+=next[x-face];
+                }
+                
+                curr[x]=ans;
+            }
+            next=curr;
+        }
+        return next[X];
+    }
+
 1:recusion
 
 class Solution {
