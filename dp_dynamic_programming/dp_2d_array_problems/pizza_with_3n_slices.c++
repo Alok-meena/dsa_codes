@@ -26,6 +26,44 @@ THIS IS SAME AS ROBBERY QUES WHERE HOUSES ARE ALSO IN CIRUCLAR LOOP
  can do like this also
 
 
+are normally use robbery vala ques code na 
+
+class Solution {
+public:
+   int solve(int idx,int k,vector<int>&house){
+    if(k==0) return 0;
+
+    if(idx>=house.size()) return 0;
+
+
+    int exc=solve(idx+1,k,house)+0;
+
+    int inc=solve(idx+2,k-1,house)+house[idx];
+
+    return max(exc,inc);
+}
+
+    int maxSizeSlices(vector<int>& valueInHouse) {
+        int n=valueInHouse.size();
+    
+    if(n==1){
+        return valueInHouse[0];
+    }
+
+    vector<int>start,end;
+    for(int i=0;i<n;i++){
+        if(i!=n-1){
+            start.push_back(valueInHouse[i]);
+        }
+        if(i!=0){
+            end.push_back(valueInHouse[i]);
+        }
+    }
+    int k=n/3;
+    return max(solve(0,k,start),solve(0,k,end));
+    }
+};
+
 to bhai log same to same house robbery vala ques just we have to stop if we eat n/3 slices alright as each will get n/3 only 
 
 class Solution {
