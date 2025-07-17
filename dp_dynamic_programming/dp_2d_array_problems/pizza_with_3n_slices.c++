@@ -64,6 +64,50 @@ public:
     }
 };
 
+
+memo
+
+class Solution {
+public:
+   int solve(int idx,int k,vector<int>&house,vector<vector<int>>&dp){
+    if(k==0) return 0;
+
+    if(idx>=house.size()) return 0;
+
+    if(dp[idx][k]!=-1) return dp[idx][k];
+
+
+    int exc=solve(idx+1,k,house,dp)+0;
+
+    int inc=solve(idx+2,k-1,house,dp)+house[idx];
+
+    return dp[idx][k]=max(exc,inc);
+}
+
+    int maxSizeSlices(vector<int>& valueInHouse) {
+        int n=valueInHouse.size();
+    
+    if(n==1){
+        return valueInHouse[0];
+    }
+
+    vector<int>start,end;
+    for(int i=0;i<n;i++){
+        if(i!=n-1){
+            start.push_back(valueInHouse[i]);
+        }
+        if(i!=0){
+            end.push_back(valueInHouse[i]);
+        }
+    }
+    int k=n/3;
+
+    vector<vector<int>>dp1(n+1,vector<int>(k+1,-1));
+    vector<vector<int>>dp2(n+1,vector<int>(k+1,-1));
+    return max(solve(0,k,start,dp1),solve(0,k,end,dp2));
+    }
+};
+
 to bhai log same to same house robbery vala ques just we have to stop if we eat n/3 slices alright as each will get n/3 only 
 
 class Solution {
