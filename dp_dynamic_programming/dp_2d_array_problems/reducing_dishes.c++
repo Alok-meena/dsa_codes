@@ -16,7 +16,31 @@ Explanation: After Removing the second and last dish, the maximum total like-tim
 Each dish is prepared in one unit of time.
 
 
+i tried brute force and it works 
 
+class Solution {
+public:
+    int maxSatisfaction(vector<int>& v) {
+        sort(v.begin(),v.end());
+        int maxi=INT_MIN;
+
+        for(int i=0;i<v.size();i++){
+            int k=1;
+            int sum=0;
+            for(int j=i;j<v.size();j++){
+                int val=v[j]*k;
+                sum+=val;
+                k++;
+            }
+            maxi=max(maxi,sum);
+        }
+        
+        if(maxi<0) return 0;
+        return maxi;
+    }
+};
+
+t.c:-O(n^2)
 
 
 
