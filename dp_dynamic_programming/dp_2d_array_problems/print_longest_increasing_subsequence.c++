@@ -11,7 +11,7 @@ void lis(vector<int>&arr){
 
     for(int i=0;i<n;i++){
         hash[i]=i;
-        for(int prev=0;prev<i;prev++){
+        for(int prev=0;prev<i;prev++){ //ise hme only i tk hi chlana hai means curr ele se ek piche tk hi to check krenge na 
             if(arr[prev]<arr[i] and 1+dp[prev]>dp[i]){
                 dp[i]=1+dp[prev];
                 hash[i]=prev;
