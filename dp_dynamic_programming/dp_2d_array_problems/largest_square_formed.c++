@@ -42,7 +42,7 @@ public:
         // code 
         int maxi=0;
         solve(mat,0,0,maxi);
-        return maxi;
+        return maxi; //if area is asked then just return maxi*maxi that's all u ronkak
     }
 };
 
