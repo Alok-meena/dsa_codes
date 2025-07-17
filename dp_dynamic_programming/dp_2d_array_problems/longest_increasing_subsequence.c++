@@ -16,7 +16,34 @@ One such Longest increasing subsequence is {5,7,9}.
     Expected Time Complexity : O( n*log(n) )
     Expected Auxiliary Space: O(n)
 
+i used brute force with space so it is not optimal and also we cant apply memo on this as it should return any value okk
 
+class Solution {
+  public:
+    void solve(int i,vector<int>&temp,int &maxi,vector<int>&arr){
+        if(i>=arr.size()){
+            maxi=max(maxi,(int)temp.size());
+            return;
+        }
+        
+        solve(i+1,temp,maxi,arr);
+        
+        if(temp.empty() or arr[i]>temp.back()){
+            temp.push_back(arr[i]);
+            solve(i+1,temp,maxi,arr);
+            temp.pop_back();
+        }
+    }
+    int lis(vector<int>& arr) {
+        // code here
+        vector<int>temp;
+        int maxi=INT_MIN;
+        
+        solve(0,temp,maxi,arr);
+        
+        return maxi;
+    }
+};
 
 
 class Solution
