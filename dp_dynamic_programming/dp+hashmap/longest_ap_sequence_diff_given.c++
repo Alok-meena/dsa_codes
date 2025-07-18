@@ -18,26 +18,6 @@ Example 3:
 
 
 
-lis concept used
-
-class Solution {
-public:
-    int solve(int i,int diff,vector<int>&arr){
-        if(i>=arr.size()) return 0;
-
-        int op1=solve(i+1,diff,arr);
-
-        int op2=0;
-        for(int j=i+1;j<arr.size();j++){
-            if(arr[j]-arr[i]==diff) op2=1+solve(j,diff,arr);
-        }
-
-        return max(op1,op2);
-    }
-    int longestSubsequence(vector<int>& arr, int difference) {
-        return solve(0,difference,arr);
-    }
-};
 
 
 
