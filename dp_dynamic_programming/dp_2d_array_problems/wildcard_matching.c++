@@ -24,7 +24,42 @@ Explanation: '?' matches 'c', but the second letter is 'a', which does not match
  
 
 
+or can do like this also
 
+class Solution {
+public:
+    bool solve(int i,int j,string a,string b,vector<vector<int>>&dp){
+        if(i>=a.length() and j>=b.length()) return true;
+        if(i<a.length() and j>=b.length()) return false;
+        if(i>=a.length() and j<b.length()){
+            for(int k=j;k<b.length();k++){
+                if(b[k]!='*') return false;
+            }
+
+            return true;
+        }
+
+        if(dp[i][j]!=-1) return dp[i][j];
+
+        if(a[i]==b[j] or b[j]=='?'){
+            return dp[i][j]=solve(i+1,j+1,a,b,dp);
+        }
+
+        else if(b[j]=='*'){
+            bool op1=solve(i,j+1,a,b,dp);
+            bool op2=solve(i+1,j,a,b,dp);
+            return dp[i][j]=op1 or op2;
+        }
+
+        return dp[i][j]=false;
+    }
+    bool isMatch(string s, string p) {
+        vector<vector<int>>dp(s.length()+1,vector<int>(p.length()+1,-1));
+        return solve(0,0,s,p,dp);
+    }
+};
+
+alright
 
 1:recursion
 
