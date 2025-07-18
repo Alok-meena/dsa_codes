@@ -35,7 +35,7 @@ public:
         //to ager koi bhi string khtm ho gyi and we need to convert s1 to s2 and s1 is over then we have to add rem char of s2 to s1 alright so return rem lenght of s2 
        
         if(i==s1.length()){
-            return s2.length()-j;
+            return s2.length()-j; //-1 nhi kiya because fun call hone ke bad yha aya to obviously j aage bd gya hoga same for i
         }
         //and if s2 khtm ho gyi then rem chars of s1 needed to be deleted so that it can be converted to s2 alright so return remaining length of s1 alright
         if(j==s2.length()){
