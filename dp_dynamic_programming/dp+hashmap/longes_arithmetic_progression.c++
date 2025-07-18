@@ -55,10 +55,55 @@ class Solution {
 
 t.c and s.c : - O(2^n * n)
 
+
+another brute force in which we will apply recursion later on alright
+
+
+// User function template for C++
+
+class Solution {
+  public:
+    int lengthOfLongestAP(vector<int>& arr) {
+        // code here
+        int maxlen=INT_MIN;
+        int n=arr.size();
+        if(n==1) return 1;
+        
+        
+        for(int i=0;i<n-1;i++){
+            for(int j=i+1;j<n;j++){
+                int cnt=2;
+                int diff=arr[j]-arr[i];
+                int curr=arr[i];
+                
+                for(int k=i-1;k>=0;k--){
+                    if(curr-arr[k]==diff){
+                        cnt++;
+                        curr=arr[k];
+                    }
+                }
+                
+                maxlen=max(maxlen,cnt);
+            }
+        }
+        
+        return maxlen;
+    }
+};
+
+
+O(n^3) is t.c and s.c:- is O(1)
+
+  
+
 1:recursion
 
 
 
+
+
+
+this code is same as above brute force
  
 class Solution{   
 public:
@@ -98,12 +143,15 @@ public:
     }
 };
 
+t.c:-O(n^3) and s.c:-O(n)
+
+  
 2:memorization but using dp array where each index stores a map
 
 
 class Solution {
 public:
-int solve(int index,int diff,vector<int>&a,unordered_map<int,int>dp[]){//by reference by nhi kiya because [] works as it
+int solve(int index,int diff,vector<int>&a,unordered_map<int,int> dp[]){//by reference by nhi kiya because [] works as it
         //backward index (to ye base case hai because hm ye func piche check kr rhe ki diff ka koi element hai kya)
         if(index<0){
             return 0;
@@ -128,7 +176,7 @@ int solve(int index,int diff,vector<int>&a,unordered_map<int,int>dp[]){//by refe
             return n;
         }
 
-        unordered_map<int,int>dp[n+1];//this means we have a array and at each  index a map is stored which stores multiple differnces and their respective lengths
+        unordered_map<int,int> dp[n+1];//this means we have a array and at each  index a map is stored which stores multiple differnces and their respective lengths
         
         int ans=0;
         
@@ -225,37 +273,6 @@ O(1) Space Solution
 
 //User function template for C++
 
-best solution
 
-This solution is just same as the first approach of recursion
 
-class Solution{   
-public:
-    int lengthOfLongestAP(int A[], int n) {
-        // code here
-        if(n<=2) return n;
-        
-        int ans=0;
-        
-        for(int i=0;i<n;i++){//to i and j ko ap ke last element mana and then inke piche dekha using solve function 
-            for(int j=i+1;j<n;j++){
-                int count=2;
-                int n1=A[i];
-                int n2=A[j];
-                int diff=n2-n1;
 
-               //now i and j mil gye hai to bs piche ke elements ko traverse kiya hai
-                for(int k=i-1;k>=0;k--){
-                    if(n1-A[k]==diff){
-                        count++;
-                        n1=A[k];
-                    }
-                }
-                ans=max(ans,count);
-            }
-        }
-        return ans;
-    }
-};
-
-O(n^2) is t.c and s.c:- is O(1)
