@@ -46,3 +46,53 @@ int main() {
 
     longestCommonSubsequence(a, b);
 }
+
+
+
+
+class Solution {
+public:
+    int solve(int i,int j,string a,string b,vector<vector<int>>&dp){
+        if(i<0 or j<0) return 0;
+
+        if(dp[i][j]!=-1) return dp[i][j];
+
+        int ans=0;
+        if(a[i]==b[j]){
+            ans=1+solve(i-1,j-1,a,b,dp);
+        }
+        else{
+            int op1=solve(i-1,j,a,b,dp);
+            int op2=solve(i,j-1,a,b,dp);
+            ans+=max(op1,op2);
+        }
+
+        return dp[i][j]=ans;
+    }
+    int longestCommonSubsequence(string a, string b) {
+        vector<vector<int>>dp(a.length()+1,vector<int>(b.length()+1,0));
+
+        int n=a.length();
+        int m=b.length();
+
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=m;j++){
+                int ans=0;
+                if(a[i-1]==b[j-1]){
+                    ans=1+dp[i-1][j-1];
+                }
+                else{
+                    int op1=dp[i-1][j];
+                    int op2=dp[i][j-1];
+                    ans+=max(op1,op2);
+                }
+
+                dp[i][j]=ans;
+            }
+        }
+
+        return dp[n][m];
+
+        
+    }
+};
