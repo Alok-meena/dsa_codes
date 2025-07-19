@@ -86,3 +86,89 @@ class Solution
 };
 
 t.c:-O(nlogn)+O(n*k) ans s.c:-O
+
+
+    or
+
+
+
+class Solution {
+  public:
+    vector<int> jobSequencing(vector<int> &deadline, vector<int> &profit) {
+        // code here
+        vector<vector<int>>v; //profit,deadline
+        
+        
+        for(int i=0;i<profit.size();i++){
+            v.push_back({profit[i],deadline[i],i}); //profit ,dead, id
+        }
+        
+        sort(v.begin(),v.end(),[](auto a,auto b){
+            return a[0]>b[0];
+        });
+        
+
+        int jobs=0;
+        int profiT=0;
+        
+       int maxDead = *max_element(deadline.begin(), deadline.end());
+       vector<int> vis(maxDead + 1, -1);
+
+        
+        for(int i=0;i<v.size();i++){
+            int profitt=v[i][0];
+            int dead=v[i][1];
+            int jobid=v[i][2];
+            
+            for(int k=dead;k>0;k--){
+                if(vis[k]==-1){
+                    profiT+=profitt;
+                    jobs++;
+                    vis[k]=jobid;
+                    break;
+                }
+            }
+        }
+        
+        return {jobs,profiT};
+    }
+};
+
+or can use priority queue also t.c:-O(nlogn)
+
+class Solution {
+  public:
+    vector<int> jobSequencing(vector<int> &deadline, vector<int> &profit) {
+        // code here
+        vector<pair<int,int>>v; //dead,profit;
+        
+        for(int i=0;i<profit.size();i++){
+            v.push_back({deadline[i],profit[i]});
+        }
+        
+        sort(v.begin(),v.end());
+        
+        priority_queue<int,vector<int>,greater<int>>pq;
+        
+        for(int i=0;i<v.size();i++){
+            if(v[i].first>pq.size()){
+                pq.push(v[i].second);
+            }
+            else if(!pq.empty() and pq.top()<v[i].second){
+                pq.pop();
+                pq.push(v[i].second);
+            }
+        }
+        
+        int jobs=0;
+        int profitt=0;
+        
+        while(!pq.empty()){
+            jobs++;
+            profitt+=pq.top();
+            pq.pop();
+        }
+        
+        return {jobs,profitt};
+    }
+};
