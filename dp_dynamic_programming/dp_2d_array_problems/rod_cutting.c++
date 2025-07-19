@@ -100,3 +100,35 @@ int cutRod(vector<int> &price, int n)
 
 	return solve(0,arr,price,n,dp);
 }
+
+
+
+or instead of creating a separate array for rod len can do like below
+
+
+
+
+int solve(int idx,vector<int>&price,int tar,vector<vector<int>>&dp){
+	if(idx>=price.size()){
+		return 0;
+	}
+	
+	if(dp[idx][tar]!=-1) return dp[idx][tar];
+	
+	int exc=solve(idx+1,price,tar,dp);
+
+	int inc=0;
+	int rodlen=idx+1;
+	if(rodlen<=tar){
+		inc=price[idx]+solve(idx,price,tar-rodlen,dp);
+	}
+
+	return dp[idx][tar]=max(inc,exc);
+}
+int cutRod(vector<int> &price, int n)
+{
+	// Write your code here.
+	vector<vector<int>>dp(n+1,vector<int>(n+1,-1));
+
+	return solve(0,price,n,dp);
+}
