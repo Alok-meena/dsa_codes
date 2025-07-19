@@ -52,3 +52,48 @@ class Solution {
 };
 
 O(n) and O(n)
+
+or can use this
+
+
+// class implemented
+/*
+struct Item{
+    int value;
+    int weight;
+};
+*/
+
+class Solution {
+  public:
+    double fractionalKnapsack(vector<int>& val, vector<int>& wt, int capacity) {
+        // code here
+        vector<vector<double>>v;
+        
+        for(int i=0;i<val.size();i++){
+            double value=(double)val[i]/(double)wt[i];
+            
+            v.push_back({value,val[i],wt[i]});
+        }
+        
+        sort(v.begin(),v.end(),[](auto a,auto b){
+            return a[0]>b[0];
+        });
+        
+        double value=0;
+        
+        for(int i=0;i<v.size();i++){
+            if(v[i][2]<=capacity){
+                value+=(v[i][1]);
+                capacity-=v[i][2];
+            }
+            else if(v[i][2]>capacity){
+                value+=(capacity*v[i][0]);
+                break;
+            }
+        }
+        
+        return value;
+    }
+};
+
