@@ -50,3 +50,35 @@ public:
 
 if((7*M > 6*N && S>6) || N < M) return -1 ;
 return (S*M+(N-1))/N ; this is also ans t.c:-O(1) and O(1) for s.c also
+
+
+
+
+// User function Template for C++
+
+class Solution {
+  public:
+    int minimumDays(int s, int n, int m) {
+        // code here
+        if(m>n) return -1;
+        if(s>6){
+           if((7*m)>(6*n)) return -1;
+        }
+        
+        int sundays=s/7;
+        int buyDays=s-sundays;
+        int tfood=s*m;
+        
+        if(tfood>(buyDays*n)) return -1;
+        
+        int ans=0;
+        if(tfood%n==0){
+            ans=tfood/n;
+        }
+        else{
+            ans=(tfood/n)+1;
+        }
+        
+        return ans;
+    }
+};
