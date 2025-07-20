@@ -131,12 +131,12 @@ void printlcs(string a,string b){
         int n=a.length(),m=b.length();
         int i=0,j=0;
 
-        while(i<n and j<m){
+       while(i<n and j<m){
             if(a[i]==b[j]){
                 ans.push_back(a[i]);
                 i++;j++;
             }
-            else if(dp[i][j-1]>dp[i-1][j]){
+            else if(dp[i][j+1]>dp[i+1][j]){
                 j++;
             }
             else i++;
