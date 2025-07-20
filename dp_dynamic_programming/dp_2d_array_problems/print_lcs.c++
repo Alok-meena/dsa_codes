@@ -96,3 +96,57 @@ public:
         
     }
 };
+
+
+
+or we can also start from top also in that case no need of index alsi
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+
+void printlcs(string a,string b){
+      vector<vector<int>>dp(a.length()+1,vector<int>(b.length()+1,0));
+        for(int i=a.length()-1;i>=0;i--){
+            for(int j=b.length()-1;j>=0;j--){
+                //inc
+                int inc=0;
+                if(a[i]==b[j]){
+                    inc=1+dp[i+1][j+1];
+                }
+
+                int exc1=0+dp[i+1][j];
+                int exc2=0+dp[i][j+1];
+                dp[i][j]=max(inc,max(exc1,exc2));
+            }
+        }
+
+        // for(auto i:dp){
+        //     for(auto j:i) cout<<j<<" ";
+        //     cout<<endl;
+        // }
+        
+        string ans;
+        int n=a.length(),m=b.length();
+        int i=0,j=0;
+
+        while(i<n and j<m){
+            if(a[i]==b[j]){
+                ans.push_back(a[i]);
+                i++;j++;
+            }
+            else if(dp[i][j-1]>dp[i-1][j]){
+                j++;
+            }
+            else i++;
+        }
+        
+        cout<<ans;
+}
+int main(){
+    string a="abcd";
+    string b="abde";
+
+    printlcs(a,b);
+}
