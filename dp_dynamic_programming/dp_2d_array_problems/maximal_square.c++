@@ -14,6 +14,54 @@ Explanation: The maximum length of a side of the square sub-matrix is 2. The mat
 1:recursion
 
 
+       // User function Template for C++
+
+class Solution {
+  public:
+    int solve(int i,int j,int n,int m,vector<vector<int>>&mat,vector<vector<int>>&dp){
+        if(mat[i][j]==0) return 0;
+        
+        if(dp[i][j]!=-1) return dp[i][j];
+        
+        int maxi=0;
+        
+        
+        int right=0,diagonal=0,down=0;
+        
+        if(j+1<m) right=solve(i,j+1,n,m,mat,dp);
+        if(i+1<n and j+1<m) diagonal=solve(i+1,j+1,n,m,mat,dp);
+        if(i+1<n) down=solve(i+1,j,n,m,mat,dp);
+        
+        if(mat[i][j]==1){
+            int ans=1+min(right,min(diagonal,down));
+            maxi=max(maxi,ans);
+        }
+        
+        return dp[i][j]=maxi;
+    }
+    int maxSquare(vector<vector<int>>& mat) {
+        // code here
+        int n=mat.size();
+        int m=mat[0].size();
+        
+        int ans=0;
+        
+        vector<vector<int>>dp(n+1,vector<int>(m+1,-1));
+        
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(mat[i][j]==1){
+                    ans=max(ans,solve(i,j,n,m,mat,dp));
+                }
+            }
+        }
+        
+        return ans;
+    }
+};
+
+this will also work
+
 
 class Solution{
 public:
