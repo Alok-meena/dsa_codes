@@ -95,7 +95,36 @@ class Solution {
 O(n^3) is t.c and s.c:- is O(1)
 
   
+// User function template for C++
 
+class Solution {
+  public:
+    int lengthOfLongestAP(vector<int>& arr) {
+        // code here
+        int maxi=0;
+        
+        int n=arr.size();
+    
+        for(int i=1;i<n;i++){
+            int cnt=1;
+            int curr=arr[i];
+            int diff=curr-arr[i-1];
+            for(int j=i-1;j>=0;j--){
+                if(curr-arr[j]==diff){
+                    cnt++;
+                    curr=arr[j];
+                }
+            }
+            
+            maxi=max(maxi,cnt+1);
+        }
+        
+        return maxi;
+    }
+};
+
+
+i tried this also but it is wrong as it is not taking diff of all pairs alright so take i j and k check all pairs before i and then incremtn j 
 1:recursion
 
 
