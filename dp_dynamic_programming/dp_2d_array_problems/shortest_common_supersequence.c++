@@ -100,3 +100,61 @@ public:
 
     }
 };
+
+
+but if we do from top then no need to reverse alright
+
+
+class Solution {
+public:
+    string shortestCommonSupersequence(string a, string b) {
+        int n=a.length();
+        int m=b.length();
+        vector<vector<int>>dp(a.length()+1,vector<int>(b.length()+1,0));
+        for(int i=a.length()-1;i>=0;i--){
+            for(int j=b.length()-1;j>=0;j--){
+                //inc
+                int inc=0;
+                if(a[i]==b[j]){
+                    inc=1+dp[i+1][j+1];
+                }
+
+                int exc1=0+dp[i+1][j];
+                int exc2=0+dp[i][j+1];
+                dp[i][j]=max(inc,max(exc1,exc2));
+            }
+        }
+
+            
+
+
+        string ans="";  // initialize with dummy chars
+        int i = 0, j = 0;
+
+        while (i<n and j<m) {
+            if (a[i] == b[j]) {
+                ans+=a[i];
+                i++;
+                j++;
+            } else if (dp[i][j+1] > dp[i+1][j]) {
+                ans+=b[j];
+                j++;
+            } else {
+                ans+=a[i];
+                i++;
+            }
+        }
+
+        while(i<n){
+            ans+=a[i];i++;
+        }
+        while(j<m){
+            ans+=b[j];j++;
+        }
+
+        // reverse(ans.begin(),ans.end());
+        return ans;
+
+
+    }
+};
