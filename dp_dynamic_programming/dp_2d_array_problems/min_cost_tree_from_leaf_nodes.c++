@@ -98,3 +98,26 @@ public:
 t.c:-O(n^3) and s.c:-O(
 
 can also do bottom-up similarly
+
+class Solution {
+public:
+    long long solve(int i,int j,vector<int>&arr){
+        if(i>=j) return 0;
+        long long ans=LLONG_MAX;
+        for(int k=i;k<j;k++){
+            long long leftmax=*max_element(arr.begin()+i,arr.begin()+k+1);
+            long long rightmax=*max_element(arr.begin()+k+1,arr.begin()+j+1);
+            long long value=leftmax*rightmax;
+            long long total=1LL*value+solve(i,k,arr)+solve(k+1,j,arr);
+            ans=min(ans,total);
+        }
+
+        return ans;
+    }
+    int mctFromLeafValues(vector<int>& arr) {
+         return solve(0,arr.size()-1,arr);
+    }
+};
+
+
+use this
