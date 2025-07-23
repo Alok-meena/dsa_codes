@@ -146,7 +146,7 @@ class Solution {
             v.push_back({deadline[i],profit[i]});
         }
         
-        sort(v.begin(),v.end());
+        sort(v.begin(),v.end()); //so that same deadline me max profit store kr ske alright aor koi bdi deadline ayi to use pq me dal ske uske profit ko alright
         
         priority_queue<int,vector<int>,greater<int>>pq;
         
