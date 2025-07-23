@@ -258,7 +258,8 @@ public:
                     int newi=i+dirx[f];
                     int newj=j+diry[f];
 
-                    if(newi>=0 and newi<n and newj>=0 and newj<m and !vis[newi][newj]){
+                    if(newi>=0 and newi<n and newj>=0 and newj<m and !vis[newi][newj]){ //yha pe query_val>grid[newi][newj] ye condition check mat krna 
+                     //nhi to sare direction explore nhi hogi alright bahut imp hai it chceked during entery of the while looop loook this carefully alright
                         vis[newi][newj]=1;
                         pq.push({grid[newi][newj],{newi,newj}});
                     }
