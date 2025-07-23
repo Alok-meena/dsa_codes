@@ -1,3 +1,4 @@
+
 1043. Partition Array for Maximum Sum
 Solved
 Medium
@@ -64,3 +65,29 @@ public:
         return solve(0,k,arr,dp);
     }
 };
+
+
+bottom up 
+
+
+int maxSumAfterPartitioning(vector<int>& arr, int k) {
+        vector<int>dp(arr.size()+1,0);
+
+        for(int i=arr.size()-1;i>=0;i--){
+            int len=0;
+            int maxi=0;
+            int maxsum=0;
+
+            for(int j=i;j<min((int)arr.size(),i+k);j++){
+                len++;
+                maxi=max(maxi,arr[j]);
+                int sum=len*maxi;
+                maxsum=max(maxsum,sum+dp[j+1]);
+            }
+
+            dp[i]=maxsum;
+        }
+        return dp[0];
+    }
+
+t.c:-O(n*k)
