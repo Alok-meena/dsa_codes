@@ -95,3 +95,45 @@ t.c:-O(nlogn) and s.c:-O(n)
 
   By making it static, you indicate that this function belongs to the class Solution and does not rely on instance-specific data.
 If you were to use cmp as a non-static member function, it would require an instance of Solution to call it, which would complicate its usage with std::sort.
+
+
+
+we can also store the order of meetings like
+
+
+class Solution {
+  public:
+    // Function to find the maximum number of meetings that can
+    // be performed in a meeting room.
+    int maxMeetings(vector<int>& start, vector<int>& end) {
+        // Your code here
+        int n=start.size();
+        
+        vector<vector<int>>v;
+        
+        for(int i=0;i<n;i++){
+            v.push_back({start[i],end[i],i+1});
+        }
+        
+        sort(v.begin(),v.end(),[](auto a,auto b){
+            return a[1]<b[1];
+        });
+        
+        int cnt=1;
+        int End=v[0][1];
+        
+        for(int i=1;i<n;i++){
+            if(v[i][0]>End){
+                cnt++;
+                End=v[i][1];
+                cout<<v[i][2]<<" ";
+            }
+        }
+        
+        cout<<v[n-1][2]<<endl;
+        
+        return cnt;
+    }
+};
+
+t.c:-O(nlogn) and s.c:-O(n)
