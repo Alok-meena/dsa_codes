@@ -110,3 +110,79 @@ class Solution {
         
     }
 };
+
+
+
+simple
+
+
+
+node *findmid(node *head){
+    node *slow=head;
+    node *fast=head->next;
+    while(fast!=NULL and fast->next!=NULL){
+        slow=slow->next;
+        fast=fast->next->next;
+    }
+
+    return slow;
+}
+
+node* solve(node* &a,node* &b){
+    node *prev=a;
+    node *curr=a->next;
+
+    node *temp=b;
+
+    while(curr!=NULL and temp!=NULL){
+        if(temp->data>=prev->data and temp->data<=curr->data){
+            prev->next=temp;
+            node *next1=temp->next;
+            
+            prev=temp;
+            temp->next=curr;
+            temp=next1;
+        }
+        else{
+            prev=curr;
+            curr=curr->next;
+        }
+    }
+
+    if(temp!=NULL) prev->next=temp; //imp ager 1 hi ele hua 2nd list me to pahle hi ham prev ko null kr rhe jo shi nhi ager last me temp null nhi h
+    //to prev ko temp se jod do aor ager null hai then no tension already merged 
+
+    return a;
+
+}
+
+node *merge(node* &a,node* &b){
+    if(a==NULL) return b;
+    if(b==NULL) return a;
+
+    if(a->data<=b->data){
+        return solve(a,b);
+    }
+    else return solve(b,a);
+}
+node* mergeSort(node *head) {
+    // Write your code here.
+    if(head==NULL or head->next==NULL) return head;
+
+    node *mid=findmid(head);
+
+    node *left=head;
+    node *right=mid->next;
+
+    mid->next=NULL;
+
+    //call merge sort for left and right part individually
+    left=mergeSort(left);
+    right=mergeSort(right);
+    
+    //type of merge 2 sorted list 
+    node *result=merge(left,right);
+
+    return result;
+}
+
