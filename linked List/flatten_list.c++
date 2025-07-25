@@ -213,3 +213,64 @@ Node* flattenLinkedList(Node* head)
 }
 
 t.c:-O(n*(n+m)) and s.c:-O(n) due to recursive calls
+
+
+
+another time
+
+
+Node* solve(Node* &a,Node* &b){
+    if(a==NULL) return b;
+    if(b==NULL) return a;
+
+    Node *dummy=new Node(-1);
+    Node *ans=dummy;
+
+    Node *l=a;
+    Node *r=b;
+
+    while(l!=NULL and r!=NULL){
+        if(l->data<=r->data){
+            ans->child=l;
+            ans=l;
+            l=l->child;
+        }
+        else{
+            ans->child=r;
+            ans=r;
+            r=r->child;
+        }
+        ans->next=NULL;
+    }
+
+    while(l!=NULL){
+        ans->child=l;
+        ans=l;
+        ans->next=NULL;
+        l=l->child;
+    }
+
+    while(r!=NULL){
+        ans->child=r;
+        ans=r;
+        ans->next=NULL;
+        r=r->child;
+    }
+
+    Node *head=dummy->child;
+    dummy->child=NULL;
+    delete dummy;
+
+    return head;
+}
+Node* flattenLinkedList(Node* head) 
+{
+	// Write your code here
+    if(head==NULL or head->next==NULL) return head;
+
+    Node *newhead=flattenLinkedList(head->next);
+    head=solve(head,newhead);
+
+    return head;
+}
+
