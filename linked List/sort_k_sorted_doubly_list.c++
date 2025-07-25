@@ -164,3 +164,38 @@ class Solution {
         return head;
     }
 }; with same t.c and s.c
+
+
+
+3rd time
+
+
+class Solution {
+  public:
+    // function to sort a k sorted doubly linked list
+    DLLNode *sortAKSortedDLL(DLLNode *head, int k) {
+        // code here
+        priority_queue<int,vector<int>,greater<int>>pq;
+        
+        DLLNode *start=head;
+        DLLNode *a=head;
+        
+        while(start!=NULL){
+            pq.push(start->data);
+            
+            if(pq.size()>k){
+                a->data=pq.top();
+                pq.pop();
+                a=a->next;
+            }
+            
+            start=start->next;
+        }
+        
+        while(!pq.empty()){
+            a->data=pq.top();pq.pop();a=a->next;
+        }
+        
+        return head;
+    }
+};
