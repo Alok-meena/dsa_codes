@@ -187,3 +187,37 @@ Node *removeLoop(Node *head)
 
 
 or to find the beginning or loop we can use map also but then s.c:-O(n)
+
+
+
+another time
+
+Node *removeLoop(Node *head)
+{
+    // Write your code here.
+    Node *slow=head;
+    Node *fast=head;
+
+    while(fast!=NULL and fast->next!=NULL){
+        slow=slow->next;
+        fast=fast->next->next;
+        if(slow==fast) break;
+    }
+
+    if(slow!=fast) return head;
+
+    Node *temp=head;
+    while(slow!=temp){
+        slow=slow->next;
+        temp=temp->next;
+    }
+
+    Node *t=temp;
+    while(t->next!=temp){
+        t=t->next;
+    }
+
+    t->next=NULL;
+
+    return head; 
+}
