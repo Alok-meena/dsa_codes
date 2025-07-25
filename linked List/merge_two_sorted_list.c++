@@ -3,7 +3,48 @@
 
 
 
+simplest of all
 
+
+Node* solve(Node* &a,Node* &b){
+        Node *prev=a;
+        Node *curr1=a->next;
+        
+        Node *curr2=b;
+        
+        while(curr1!=NULL and curr2!=NULL){
+            if(prev->data<=curr2->data and curr2->data<=curr1->data){
+                prev->next=curr2;
+                Node *forward=curr2->next;
+                curr2->next=curr1;
+                prev=curr2;
+                curr2=forward;
+            }
+            else{
+                prev=curr1;
+                curr1=curr1->next;
+            }
+        }
+        
+        if(curr2!=NULL) prev->next=curr2;
+        
+        return a;
+    }
+    Node* sortedMerge(Node* head1, Node* head2) {
+        // code here
+        if(!head1) return head2;
+        if(!head2) return head1;
+        
+        if(head1->data<head2->data){
+            return solve(head1,head2);
+        }
+        else{
+            return solve(head2,head1);
+        }
+    }
+
+
+O(n) t.c and s.c: O(1) alright that's it
 
 
 
