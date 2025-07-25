@@ -351,7 +351,8 @@ class Solution {
             oldtemp=next1;
             newtemp=next2;
         }
-        
+
+        to null ptr ka dhyan create aor mapping ke bad dena 
         //assign random ptr
         
         oldtemp=head;
@@ -362,7 +363,7 @@ class Solution {
             else newtemp->random=NULL;
             
             oldtemp=newtemp->next;
-            if(oldtemp==NULL) break;
+            if(oldtemp==NULL) break; //mistake if oldtemp is null then cant access it's next
             newtemp=oldtemp->next;
         }
         
@@ -374,7 +375,7 @@ class Solution {
         while(oldtemp!=NULL){
             oldtemp->next=newtemp->next;
             oldtemp=oldtemp->next;
-            if(oldtemp==NULL){
+            if(oldtemp==NULL){ //yha mistake ki thi
                 newtemp->next=NULL;
                 break;
             }
