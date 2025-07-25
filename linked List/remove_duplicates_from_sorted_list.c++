@@ -32,6 +32,31 @@ Sample Output 1 :
 Explanation For Sample Input 1 :
 We will delete the duplicate values ‘2’ present in the linked list.
 
+simplest
+
+Node * removeDuplicates(Node *head)
+{
+    // Write your code here
+    Node *curr=head;
+
+    while(curr!=NULL and curr->next!=NULL){
+        if(curr->data==curr->next->data){
+            Node *temp=curr->next;
+            curr->next=temp->next;
+            if(temp->next!=NULL) temp->next->prev=curr;
+            temp->next=NULL;
+            temp->prev=NULL;
+            delete temp;
+        }
+        else curr=curr->next;
+    }
+
+    return head;
+}
+
+
+same code for singly list also alright
+
 
 
 Node * removeDuplicates(Node *head)
@@ -135,6 +160,34 @@ Node * removeDuplicates(Node *head)
             delete temp;
         }
         else curr=curr->next;
+    }
+
+    return head;
+}
+
+
+
+or
+
+
+Node * removeDuplicates(Node *head)
+{
+    // Write your code here
+    Node *pre=head;
+    Node *curr=head->next;
+
+    while(curr!=NULL){
+        if(pre->data==curr->data){
+            Node *temp=curr;
+            while(temp!=NULL and temp->data==pre->data){
+                temp=temp->next;
+                curr=temp;
+            }
+            pre->next=temp;
+            if(temp!=NULL) temp->prev=pre;
+        }
+        pre=curr;
+        if(curr!=NULL) curr=curr->next;
     }
 
     return head;
