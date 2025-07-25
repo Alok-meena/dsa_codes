@@ -25,7 +25,104 @@ Constraints:
 1 <= size of both linked lists <= 106
 0 <= elements of both linked lists <= 9
 
+for gfg
 
+class Solution {
+  public:
+    Node* reverse(Node* &a){
+        Node *prev=NULL;
+        Node *curr=a;
+        
+        while(curr!=NULL){
+            Node *forward=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=forward;
+        }
+        
+        return prev;
+    }
+    Node* addTwoLists(Node* num1, Node* num2) {
+        // code here
+        while(num1->data==0) num1=num1->next;
+        while(num2->data==0) num2=num2->next;
+        
+        num1=reverse(num1);
+        num2=reverse(num2);
+        
+        Node *head=NULL;
+        Node *tail=NULL;
+        
+        Node *curr1=num1;
+        Node* curr2=num2;
+        int carry=0;
+        
+        while(curr1!=NULL and curr2!=NULL){
+            int sum=curr1->data+curr2->data+carry;
+            carry=sum/10;
+            
+            Node *newnode=new Node(sum%10);
+            
+            if(head==NULL){
+                head=newnode;
+                tail=newnode;
+            }
+            else{
+                tail->next=newnode;
+                tail=newnode;
+            }
+            
+            curr1=curr1->next;
+            curr2=curr2->next;
+        }
+        
+
+        while(curr1!=NULL){
+            int sum=curr1->data+carry;
+            carry=sum/10;
+            
+            Node *newnode=new Node(sum%10);
+            
+            if(head==NULL){
+                head=newnode;
+                tail=newnode;
+            }
+            else{
+                tail->next=newnode;
+                tail=newnode;
+            }
+            curr1=curr1->next;
+        }
+        
+        while(curr2!=NULL){
+            int sum=curr2->data+carry;
+            carry=sum/10;
+            
+            Node *newnode=new Node(sum%10);
+            
+            if(head==NULL){
+                head=newnode;
+                tail=newnode;
+            }
+            else{
+                tail->next=newnode;
+                tail=newnode;
+            }
+            
+            curr2=curr2->next;
+        }
+        
+        if(carry>0){
+            Node *newnode=new Node(carry);
+            tail->next=newnode;
+            tail=newnode;
+        }
+        
+        head=reverse(head);
+        
+        return head;
+    }
+};
 
 brute force t.c:-O(n+m) and s.c is O(max(n,m)) alright
 
