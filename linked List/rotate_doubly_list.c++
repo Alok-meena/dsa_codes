@@ -19,7 +19,54 @@ Constraints:
 
 
 
+bestm best solution just jis part ko aage ya piche lgana hai utha lo alg kro aor lga do like below
 
+class Solution {
+  public:
+    int length(Node *head){
+        Node *temp=head;
+        int length=0;
+        while(temp!=NULL){
+            length++;
+            temp=temp->next;
+        }
+        return length;
+    }
+    Node *rotateDLL(Node *head, int p) {
+
+        // code here..
+        int len=length(head);
+        if(head==NULL or head->next==NULL or p%len==0 or p==0) return head;
+        
+        p=p%len;
+        
+        Node *temp=head;
+        int count=1;
+        while(count<p and temp!=NULL){
+            count++;
+            temp=temp->next;
+        }
+        
+        Node *secondhalf=NULL;
+        if(temp and temp->next){
+            secondhalf=temp->next;
+            temp->next=NULL;
+            secondhalf->prev=NULL;
+        }
+        
+        temp=secondhalf;
+        while(temp->next!=NULL){
+            temp=temp->next;
+        }
+        
+        temp->next=head;
+        head->prev=temp;
+        
+        return secondhalf;
+    }
+};
+
+and aget right me krna hota to n-p times chlate aor kr dete simple
 
 
 
