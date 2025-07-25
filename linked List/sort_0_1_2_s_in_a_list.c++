@@ -167,3 +167,71 @@ Node* sortList(Node *head){
 }
 
 same t.c and s.c
+
+
+
+another time
+
+
+
+Node* sortList(Node *head){
+    // Write your code here.
+    Node *zerohead=new Node(-1);
+    Node *onehead=new Node(-1);
+    Node *twohead=new Node(-1);
+
+    Node *zerotail=zerohead;
+    Node *onetail=onehead;
+    Node *twotail=twohead;
+
+    Node *curr=head;
+
+    while(curr!=NULL){
+        if(curr->data==0){
+            zerotail->next=curr;
+            zerotail=curr;
+        }
+        else if(curr->data==1){
+            onetail->next=curr;
+            onetail=curr;
+        }
+        else{
+            twotail->next=curr;
+            twotail=curr;
+        }
+        curr=curr->next;
+    }
+
+    if(onehead->next!=NULL){
+        zerotail->next=onehead->next;
+        onetail->next=twohead->next;
+    }
+    else zerotail->next=twohead->next;
+
+    twotail->next=NULL;
+
+    head=zerohead->next;
+
+    delete zerohead;
+    delete onehead;
+    delete twohead;
+
+    return head;
+}
+
+and also we dont need to create the nodes with values but then we have to do like below
+
+
+if (curr->data == 0) {
+    if (zeroHead == NULL) {
+        zeroHead = curr;
+        zeroTail = curr;
+    } else {
+        zeroTail->next = curr;
+        zeroTail = curr;
+    }
+}
+// same for 1s and 2s
+
+
+separatly handle if first node to connect as set both head and tail to the start node like this then can use only tail
