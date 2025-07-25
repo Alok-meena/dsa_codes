@@ -65,3 +65,33 @@ class Solution {
         return prev;
     }
 };
+
+
+3rd time
+
+class Solution {
+  public:
+    // Function to reverse a doubly linked list
+    DLLNode* reverseDLL(DLLNode* head) {
+        // Your code here
+        if(head==NULL or head->next==NULL) return head;
+        
+        DLLNode* nex=NULL;
+        DLLNode* pre=NULL;
+        
+        DLLNode* curr=head;
+        DLLNode* newhead=NULL;
+        
+        while(curr!=NULL){
+            nex=curr->next;
+            pre=curr->prev;
+            curr->next=pre;
+            curr->prev=nex;
+            
+            curr=curr->prev;
+            if(curr!=NULL) newhead=curr;
+        }
+        
+        return newhead;
+    }
+};
