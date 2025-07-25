@@ -46,6 +46,50 @@ Node* solve(Node* &a,Node* &b){
 
 O(n) t.c and s.c: O(1) alright that's it
 
+bhai ye uper vala simplest jrur hai but best to yhi hai 
+
+node* solve(node* &a,node* &b){
+    if(a==NULL) return b;
+    if(b==NULL) return a;
+
+    node *dummy=new node(-1);
+    node *ans=dummy;
+
+    node *l=a;
+    node *r=b;
+
+    while(l!=NULL and r!=NULL){
+        if(l->data<=r->data){
+            ans->next=l;
+            ans=l;
+            l=l->next;
+        }
+        else{
+            ans->next=r;
+            ans=r;
+            r=r->next;
+        }
+    }
+
+    while(l!=NULL){
+        ans->next=l;
+        ans=l;
+        l=l->next;
+    }
+
+    while(r!=NULL){
+        ans->next=r;
+        ans=r;
+        r=r->next;
+    }
+
+    node *head=dummy->next;
+    dummy->next=NULL;
+    delete dummy;
+
+    return head;
+}
+
 
 
 class Solution {
