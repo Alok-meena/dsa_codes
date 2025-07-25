@@ -107,6 +107,50 @@ class Solution {
     }
 };
 
+or
+
+class Solution {
+  public:
+    Node *cloneLinkedList(Node *head) {
+        // Write your code here
+        Node *newhead=NULL;
+        Node *newtail=NULL;
+        
+        unordered_map<Node*,Node*>mapping;
+        
+        Node *oldtemp=head;
+        
+        while(oldtemp!=NULL){
+            Node *newnode=new Node(oldtemp->data);
+            
+            if(newhead==NULL){
+                newhead=newnode;
+                newtail=newnode;
+            }
+            else{
+                newtail->next=newnode;
+                newtail=newnode;
+            }
+            
+            mapping[oldtemp]=newnode;
+            
+            oldtemp=oldtemp->next;
+        }
+        
+        oldtemp=head;
+        Node *newtemp=newhead;
+        
+        while(newtemp!=NULL){
+            Node *new_random=mapping[oldtemp->random];
+            newtemp->random=new_random;
+            newtemp=newtemp->next;
+            oldtemp=oldtemp->next;
+        }
+        
+        return newhead;
+    }
+};
+
 
 optimized with s.c:-O(1) and t.c:-O(n)
 
@@ -258,5 +302,86 @@ class Solution {
         return clonehead;
         
         
+    }
+};
+
+
+
+
+3time
+
+class Solution {
+  public:
+    Node *cloneLinkedList(Node *head) {
+        // Write your code here
+        Node *newhead=NULL;
+        Node *newtail=NULL;
+        
+        //create new list
+        
+        Node *oldtemp=head;
+        
+        while(oldtemp!=NULL){
+            Node *newnode=new Node(oldtemp->data);
+            
+            if(newhead==NULL){
+                newhead=newnode;
+                newtail=newnode;
+            }
+            else{
+                newtail->next=newnode;
+                newtail=newnode;
+            }
+            
+            oldtemp=oldtemp->next;
+        }
+        
+        //create mapping with O(1) space
+        
+        oldtemp=head;
+        Node *newtemp=newhead;
+        
+        while(oldtemp!=NULL){
+            Node *next1=oldtemp->next;
+            oldtemp->next=newtemp;
+            
+            Node *next2=newtemp->next;
+            newtemp->next=next1;
+            
+            oldtemp=next1;
+            newtemp=next2;
+        }
+        
+        //assign random ptr
+        
+        oldtemp=head;
+        newtemp=newhead;
+        
+        while(oldtemp!=NULL){
+            if(oldtemp->random!=NULL) newtemp->random=oldtemp->random->next;
+            else newtemp->random=NULL;
+            
+            oldtemp=newtemp->next;
+            if(oldtemp==NULL) break;
+            newtemp=oldtemp->next;
+        }
+        
+        //remove the mapping
+        
+        oldtemp=head;
+        newtemp=newhead;
+        
+        while(oldtemp!=NULL){
+            oldtemp->next=newtemp->next;
+            oldtemp=oldtemp->next;
+            if(oldtemp==NULL){
+                newtemp->next=NULL;
+                break;
+            }
+            newtemp->next=oldtemp->next;
+            newtemp=newtemp->next;
+        }
+        
+        return newhead;
     }
 };
