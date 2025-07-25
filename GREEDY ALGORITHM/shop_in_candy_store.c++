@@ -56,3 +56,38 @@ public:
 };
 
 t.c:-O(nlogn) and s.c:-O(1)
+
+
+or can also do like
+
+
+class Solution {
+  public:
+    vector<int> minMaxCandy(vector<int>& arr, int k) {
+        // Code here
+        int mini=0;
+        int maxi=0;
+        
+        int candies=arr.size();
+        
+        sort(arr.begin(),arr.end());
+        
+        for(int i=0;i<arr.size();i++){
+            mini+=arr[i];
+            candies=candies-k-1;
+            if(candies<=0) break;
+        }
+
+        candies=arr.size();
+        
+        for(int i=arr.size()-1;i>=0;i--){
+            maxi+=arr[i];
+            candies=candies-k-1;
+            if(candies<=0) break;
+        }
+        
+        return {mini,maxi};
+        
+        
+    }
+};
