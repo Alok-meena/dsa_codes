@@ -74,6 +74,52 @@ Node *reverseLinkedList(Node *head) {
 }
 
 
+can also do like 
+
+class Solution {
+  public:
+    Node* solve(Node* &prev,Node* &curr){
+        if(curr==NULL) return prev;
+        
+        Node *forward=curr->next;
+        curr->next=prev;
+        
+        return solve(curr,forward);
+    }
+    Node* reverseList(struct Node* head) {
+        // code here
+        Node *prev=NULL;
+        Node *curr=head;
+        
+        return solve(prev,curr);
+    }
+};
+
+or
+
+
+class Solution {
+  public:
+    void solve(Node* &head,Node* &prev,Node* &curr){
+        if(curr==NULL){
+            head=prev;
+            return;
+        }
+        
+        Node *forward=curr->next;
+        solve(head,curr,forward);
+        curr->next=prev;
+    }
+    Node* reverseList(struct Node* head) {
+        // code here
+        Node *prev=NULL;
+        Node *curr=head;
+        
+        solve(head,prev,curr);
+        return head;
+    }
+};
+
 
 
 2nd approach in recursive approach
