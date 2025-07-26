@@ -89,3 +89,36 @@ vector<int> nextSmallerElement(vector<int> &arr, int n)
 
     return ans;
 }
+
+
+yes this is finding first smaller on right okk
+
+but if we have to find min ele on right have to use priority_queue alright
+
+#include <bits/stdc++.h>
+using namespace std;
+
+void solve(vector<int> &arr, int n)
+{
+    // Write your code here.
+    vector<int>ans(n);
+
+    priority_queue<int,vector<int>,greater<int>>s;
+
+    for(int i=n-1;i>=0;i--){
+        if(s.empty()){
+            ans[i]=-1;
+        }
+        else ans[i]=s.top();
+
+        s.push(arr[i]);
+    }
+
+    for(auto i:ans) cout<<i<<" ";
+}
+
+int main(){
+    vector<int>v={3,2,1};
+
+    solve(v,v.size());
+}
