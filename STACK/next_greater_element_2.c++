@@ -129,3 +129,37 @@ vector<int> nextGreaterElementII(vector<int>& a) {
 
 
 or we can also return the original ans till n size by resizing it using resize ans.resize(n)
+
+like
+
+class Solution {
+public:
+    vector<int> nextGreaterElements(vector<int>& arr) {
+        int n=arr.size();
+        arr.resize(2*n);
+
+        for(int i=0;i<n;i++){
+            arr[n+i]=arr[i];
+        }
+
+        vector<int>ans(2*n);
+        stack<int>s;
+
+        for(int i=2*n-1;i>=0;i--){
+            while(s.size()!=0 && s.top()<=arr[i]){
+                s.pop();
+            }
+
+            if(s.size()==0){
+                ans[i]=-1;
+            }
+            else{
+                ans[i]=s.top();
+            }
+            s.push(arr[i]);
+        }
+
+        ans.resize(n);
+        return ans;
+    }
+};
