@@ -1,3 +1,5 @@
+
+
 Valid Substring
 Difficulty: MediumAccuracy: 23.37%Submissions: 128K+Points: 4
 Given a string s consisting only of opening and closing parentheses ( and ), find the length of the longest valid (well-formed) parentheses substring.
@@ -58,3 +60,54 @@ class Solution {
 };
 
 t.c:-O(n) and s.c:-O(n)
+
+
+optimized in O(1) space
+
+
+class Solution {
+  public:
+    int maxLen(string& S) {
+        // code here
+        int left=0,right=0;
+        int maxlen=0;
+        
+        for(int i=0;i<S.length();i++){
+            if(S[i]=='('){
+                left++;
+            }
+            else{
+                right++;
+            }
+            
+            if(left==right){
+                maxlen=max(maxlen,2*left);
+            }
+            else if(right>left){
+                left=0;
+                right=0;
+            }
+        }
+        
+        left=0,right=0;
+        
+        for(int i=S.length()-1;i>=0;i--){
+            if(S[i]=='('){
+                left++;
+            }
+            else{
+                right++;
+            }
+            
+            if(left==right){
+                maxlen=max(maxlen,2*left);
+            }
+            else if(left>right){
+                left=0;
+                right=0;
+            }
+        }
+        
+        return maxlen;
+    }
+};
