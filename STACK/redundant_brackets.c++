@@ -45,6 +45,37 @@ In the first test case, there are no redundant brackets. Hence, the output is �
 In the second test case, the brackets around the subexpression “(a+b)” ( index 0 and index 6) are redundant. Hence the output is “Yes”.
 
 
+simplest
+
+#include <bits/stdc++.h> 
+
+bool isoperator(char ch){
+    return ch=='+' or ch=='-' or ch=='/' or ch=='*';
+}
+bool findRedundantBrackets(string &S)
+{
+    // Write your code here.
+    stack<char>s;
+
+    for(auto i:S){
+        if(i=='(' or isoperator(i)){
+            s.push(i);
+        }
+        else if(i==')'){
+            if(isoperator(s.top())) s.pop();
+            else return true;
+
+            while(!s.empty() and s.top()!='('){
+                s.pop();
+            }
+            s.pop();
+        }
+    }
+
+    return false;
+}
+
+alright bs kya hai open h dal do operator h dal do closing h to top operator h no redundant and then pop the open bracket in stack also continue
 
 
 
