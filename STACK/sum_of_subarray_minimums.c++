@@ -52,3 +52,76 @@ public:
         return sum;
     }
 };
+
+O(n^2) t.c
+
+
+optimized  t.c:-O(n) and s.c:-O(n)
+
+
+class Solution {
+public:
+    int mod=1e9+7;
+
+    vector<int> solve1(vector<int>&arr){
+        int n=arr.size();
+        vector<int>ans(n);
+
+        stack<int>s;
+
+        for(int i=n-1;i>=0;i--){
+            while(!s.empty() and arr[s.top()]>=arr[i]){
+                s.pop();
+            }
+
+            if(!s.empty()){
+                ans[i]=s.top();
+            }
+            else ans[i]=-1;
+
+            s.push(i);
+        }
+
+        return ans;
+    }
+
+    vector<int> solve2(vector<int>&arr){
+        int n=arr.size();
+        vector<int>ans(n);
+
+        stack<int>s;
+
+        for(int i=0;i<n;i++){
+            while(!s.empty() and arr[s.top()]>arr[i]){
+                s.pop();
+            }
+
+            if(!s.empty()){
+                ans[i]=s.top();
+            }
+            else ans[i]=-1;
+
+            s.push(i);
+        }
+
+        return ans;
+    }
+    int sumSubarrayMins(vector<int>& arr) {
+        vector<int>nextsmaller=solve1(arr);
+        vector<int>prevsmaller=solve2(arr);
+
+        int sum=0;
+
+        int n=arr.size();
+
+        for(int i=0;i<arr.size();i++){
+            if(nextsmaller[i]==-1) nextsmaller[i]=n;
+            int op1=nextsmaller[i]-i;
+            int op2=i-prevsmaller[i];
+            int val=(1LL*arr[i]*op1*op2)%mod;
+            sum=(sum+val)%mod;
+        }
+
+        return sum;
+    }
+};
