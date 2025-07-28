@@ -97,6 +97,15 @@ class Solution {
     }
 };
 
+
+
+
+
+
+
+
+this one is preferred code ------------------------
+
 class Solution {
   public: 
     void solve(Node *root,int len,int sum,int &maxsum,int &maxlen){
