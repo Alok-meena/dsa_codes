@@ -11,6 +11,141 @@ If there are multiple nodes passing through a vertical line, then they should be
 Output: 
 4 2 1 5 6 3 8 7 9 
 
+
+
+brute force
+
+class Solution {
+  public:
+    void preorder(Node *root,int x,map<int,vector<int>>&mapping){
+        if(root==NULL) return;
+        
+        mapping[x].push_back(root->data);
+        
+        preorder(root->left,x-1,mapping);
+        preorder(root->right,x+1,mapping);
+    }
+    vector<vector<int>> verticalOrder(Node *root) {
+        // Your code here
+        map<int,vector<int>>mapping;
+        
+        int x=0;
+        
+        preorder(root,x,mapping);
+        
+        vector<vector<int>>ans;
+        
+        for(auto i:mapping){
+            ans.push_back(i.second);
+        }
+        
+        return ans;
+    }
+};
+
+
+bhai ye to bilkul galat hai because basis hi hmara x aor level hai 
+
+
+
+
+2nd try
+
+
+vector<vector<int>> verticalOrder(Node *root) {
+        // Your code here
+        return d(root);
+        map<int,vector<int>>mapping;
+        
+        int x=0;
+        
+        queue<pair<Node*,int>>q;
+        q.push({root,0});
+        
+        while(!q.empty()){
+            Node *front=q.front().first;
+            int x=q.front().second;
+            q.pop();
+            
+            mapping[x].push_back(front->data);
+            
+            if(front->left) q.push({front->left,x-1});
+            if(front->right) q.push({front->right,x+1});
+        }
+        
+        
+        vector<vector<int>>ans;
+        
+        for(auto i:mapping){
+            ans.push_back(i.second);
+        }
+        
+        return ans;
+    }
+
+
+ye shi hai for gfg as vha bs hme level ke according chaihhe and vo hai no sorting etc alright
+
+
+
+
+aor leetcode pe kya hai x ke according to chaihhe hi but suppose x=0 pe level 1 pe 3 nodes aa rhi okk to vo sorted honi chaiahe and niche vali level ki
+bad me hi ayegi  so do like below
+
+
+only this is accepted at leetcode at same level should be sorted alright
+
+class Solution {
+public:
+    vector<vector<int>> verticalOrder(TreeNode *root) {
+        // Your code here
+        vector<vector<int>>answer;
+        if(root==NULL) return answer;
+        
+        map<int,map<int,vector<int>>>ans; //hz dist ke corresponding ans store can use multiset also in place of vector then no sorting required 
+        
+        queue<pair<int,pair<int,TreeNode*>>>q;
+        q.push({0,{0,root}});
+        
+        while(!q.empty()){
+            int hz=q.front().first;
+            int level=q.front().second.first;
+            TreeNode *temp=q.front().second.second;
+            q.pop();
+            
+            ans[hz][level].push_back(temp->val);
+            
+            if(temp->left) q.push({hz-1,{level+1,temp->left}});
+            if(temp->right) q.push({hz+1,{level+1,temp->right}});
+        }
+        
+
+        for(auto i:ans){
+            vector<int>v;
+            for(auto j:i.second){ //to i jo tha i.first me x ke corresponding hai aor values sorted chaihe to map hi use kro unordered nhi 
+              //and yha j.first me level hai to same level hogi to unhe sort krke dal rhe that's it okk 
+              //or can use multiset also to get all values instead of unique and sorted also at same level 
+                sort(j.second.begin(),j.second.end());
+                for(auto val:j.second) v.push_back(val);
+            }
+            answer.push_back(v);
+        }
+        
+        return answer;
+        
+    }
+    vector<vector<int>> verticalTraversal(TreeNode* root) {
+        return verticalOrder(root);
+    }
+};
+
+
+bhai bahut imp hai acche se krna 
+
+
+
+
+
 class solution {
     public:
     //Function to find the vertical order traversal of Binary Tree.
@@ -69,124 +204,4 @@ Expected Auxiliary Space: O(N)
 t.c:-O(n*logm) and s.c:-O(n) due to the map and queue also
 m is the unique horizonatal distance okk
 
-we have to use bfs (level order) o/w the order of elements from top to bottom will on be maintained
-class Solution
-{
-    public:
-    //Function to find the vertical order traversal of Binary Tree.
-    vector<int> verticalOrder(Node *root)
-    {
-        //Your code here
-        vector<int>ans;
-        if(root==NULL) return ans;
-        map<int,vector<int>>m;
-        queue<pair<Node*,int>>q;
-        
-        q.push({root,0});
-        
-        while(!q.empty()){
-            pair<Node*,int>p = q.front();
-            q.pop();
-            
-            m[p.second].push_back(p.first->data);
-            
-            if(p.first->left) q.push({p.first->left,p.second-1});
-            if(p.first->right) q.push({p.first->right,p.second+1});
-        }
-        
-        for(auto i:m){
-            for(auto j:i.second){
-                ans.push_back(j);
-            }
-        }
-        
-        return ans;
-    }
-    
-};
 
-
-Expected Time Complexity: O(NlogN)
-Expected Auxiliary Space: O(N).
-
-2nd time
-
-
-class Solution {
-  public:
-    vector<vector<int>> verticalOrder(Node *root) {
-        // Your code here
-        vector<vector<int>>answer;
-        if(root==NULL) return answer;
-        
-        map<int,vector<int>>ans; //hz dist ke corresponding ans store
-        
-        queue<pair<int,Node*>>q;
-        q.push({0,root});
-        
-        while(!q.empty()){
-            int hz=q.front().first;
-            Node *temp=q.front().second;
-            q.pop();
-            
-            ans[hz].push_back(temp->data);
-            
-            if(temp->left) q.push({hz-1,temp->left});
-            if(temp->right) q.push({hz+1,temp->right});
-        }
-        
-
-        for(auto i:ans){
-            answer.push_back(i.second);
-        }
-        
-        return answer;
-        
-    }
-};
-
-
-
-only this is accepted at leetcode at same level should be sorted alright
-
-class Solution {
-public:
-    vector<vector<int>> verticalOrder(TreeNode *root) {
-        // Your code here
-        vector<vector<int>>answer;
-        if(root==NULL) return answer;
-        
-        map<int,map<int,vector<int>>>ans; //hz dist ke corresponding ans store
-        
-        queue<pair<int,pair<int,TreeNode*>>>q;
-        q.push({0,{0,root}});
-        
-        while(!q.empty()){
-            int hz=q.front().first;
-            int level=q.front().second.first;
-            TreeNode *temp=q.front().second.second;
-            q.pop();
-            
-            ans[hz][level].push_back(temp->val);
-            
-            if(temp->left) q.push({hz-1,{level+1,temp->left}});
-            if(temp->right) q.push({hz+1,{level+1,temp->right}});
-        }
-        
-
-        for(auto i:ans){
-            vector<int>v;
-            for(auto j:i.second){
-                sort(j.second.begin(),j.second.end());
-                for(auto val:j.second) v.push_back(val);
-            }
-            answer.push_back(v);
-        }
-        
-        return answer;
-        
-    }
-    vector<vector<int>> verticalTraversal(TreeNode* root) {
-        return verticalOrder(root);
-    }
-};
