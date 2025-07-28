@@ -1,37 +1,85 @@
+to bhai suno normal kya krna chaihe hame har node pe jake left ki height right ki height add kro 
 
-#approach 1: but it will include T.C:-O(N2)
-
-#include <algorithm>
 class Solution {
-    private:
-      int height(Node* node){
-        if(node==NULL){
-            return 0;
-        }
+  public:
+    int height(Node* root){
+        if(root==NULL) return -1; //height in terms of edges nikal rhe hai right to -1 return kiya 
         
-        int left=height(node->left);
-        int right=height(node->right);
-        
+        int left=height(root->left);
+        int right=height(root->right);
         int ans=max(left,right)+1;
         return ans;
     }
-    
-  public:
-    // Function to return the diameter of a Binary Tree.
+    void solve(Node* root,int &maxi){
+        if(root==NULL) return ;
+        
+        int left=height(root->left);
+        int right=height(root->right);
+        
+        maxi=max(maxi,left+right+2); //aor jaise ham height me +1 kr rhe the longer height ki side ki ek edge ko include krne ke liye same yha dono ko krna hai
+        //to +2 kiya hai alright 
+        
+        solve(root->left,maxi);
+        solve(root->right,maxi);
+    }
     int diameter(Node* root) {
         // Your code here
-        if(root==NULL){
-            return 0;
-        }
-        
-        int a1=diameter(root->left);
-        int a2=diameter(root->right);
-        int a3=height(root->left)+1+height(root->right);
-        int ans=max(a1,max(a2,a3)); //we have to use max twice to get one max from a2 and a3 or use max({a1,a2,a3});
-        // and then the output with a1 and so on....
-        return ans
+        int maxi=0;
+        solve(root,maxi);
+        return maxi;
     }
 };
+
+t.c:-O(N^2) and s.c:-O(height)
+
+
+and isika optimized version
+
+
+class Solution {
+  public:
+    pair<int,int> solve(Node* root){
+        if(root==NULL) return {-1,0};
+        
+        pair<int,int> left=solve(root->left);
+        pair<int,int> right=solve(root->right);
+        
+        int currheight=max(left.first,right.first)+1;
+        
+        int diameter=left.first+right.first+2;
+        
+        pair<int,int> ans;
+        ans.first=currheight;
+        ans.second=max({left.second,right.second,diameter});
+        
+        return ans;
+    }
+    int diameter(Node* root) {
+        // Your code here
+        return solve(root).second;
+    }
+};
+
+
+
+t.c:-O(n) and s.c:-O(h) 
+
+to bhai ye hai code jo smja hai not learnt like pahle diametr call kro then right etec isse smajo niche ese hi hai
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 or written differently
 
