@@ -3,6 +3,7 @@ to bhai suno normal kya krna chaihe hame har node pe jake left ki height right k
 class Solution {
   public:
     int height(Node* root){
+        //aor ager nodes ki terms me pucha ho to just 0 return kro yha pe because n nodes hai to n-1 edges hogi to ek km ke liye -1 bhej rhe the ham
         if(root==NULL) return -1; //height in terms of edges nikal rhe hai right to -1 return kiya 
         
         int left=height(root->left);
@@ -39,14 +40,15 @@ and isika optimized version
 class Solution {
   public:
     pair<int,int> solve(Node* root){
-        if(root==NULL) return {-1,0};
+        if(root==NULL) return {-1,0}; //return {0,0} if count in terms of nodes alright
         
         pair<int,int> left=solve(root->left);
         pair<int,int> right=solve(root->right);
         
         int currheight=max(left.first,right.first)+1;
         
-        int diameter=left.first+right.first+2;
+        int diameter=left.first+right.first+2; //yha pe left se height 2 aa rhi right se 1 to 2 add krna pdega dono taraf ke edges ko add krne ke liye alright
+        //and nodes ki term me krte to just add 1 
         
         pair<int,int> ans;
         ans.first=currheight;
