@@ -41,3 +41,30 @@ vector<int> diagonal(Node *root)
 
 Expected Time Complexity: O(N).
 Expected Auxiliary Space: O(N)
+
+or can do like below also alright
+
+
+class Solution {
+  public:
+    vector<int> diagonal(Node *root) {
+        // code here
+        Node *curr=root;
+        vector<int>ans;
+        queue<Node*>q;
+        
+        while(root!=NULL){
+            if(root!=NULL){
+                if(root->left) q.push(root->left);
+                ans.push_back(root->data);
+                root=root->right;
+                if(!q.empty() and root==NULL){
+                    root=q.front();
+                    q.pop();
+                }
+            }
+        }
+        
+        return ans;
+    }
+};
