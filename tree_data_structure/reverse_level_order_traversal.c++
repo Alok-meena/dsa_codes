@@ -1,94 +1,44 @@
-class Solution {
-  public:
-    // Function to return the level order traversal of a tree.
-    vector<vector<int>> levelOrder(Node *root) {
-        // code here
-        vector<vector<int>>ans;
-        vector<int>k;
-        queue<Node*>q;
-        q.push(root);
-        q.push(NULL);
-    
-        // q.push(root);
-    
-        while(!q.empty()){
-            Node *temp=q.front();
-            q.pop();
-    
-            if(temp==NULL){
-                ans.push_back(k);
-                k.clear();
-                if(!q.empty()){
-                    q.push(NULL);
-                }
-            }
-            else{
-                k.push_back(temp->data);
-                if(temp->left){
-                    q.push(temp->left);
-                }
-                
-                if(temp->right){
-                    q.push(temp->right);
-                }
+void reverse_levelordertraversal(node *root){
+    queue<node*>q;
+    q.push(root);
+    q.push(NULL);
+    vector<vector<int>>v;
+    vector<int>c;
+
+
+    while(!q.empty()){
+        node *front=q.front();
+        q.pop();
+
+        if(front==NULL){
+            v.push_back(c);
+            c.clear();
+            cout<<endl;
+            if(!q.empty()){
+                q.push(NULL);
             }
         }
-        return ans;
+        else{
+            c.push_back(front->data);
+
+            if(front->left) q.push(front->left);
+            if(front->right) q.push(front->right);
+        }
     }
-};
 
-reverse_level_order_traversal
+    reverse(v.begin(),v.end());
 
-class Solution {
-  public:
-    vector<int> reverseLevelOrder(Node *root) {
-        // code here
-         vector<vector<int>>ans;
-        vector<int>k;
-        queue<Node*>q;
-        q.push(root);
-        q.push(NULL);
-    
-        // q.push(root);
-    
-        while(!q.empty()){
-            Node *temp=q.front();
-            q.pop();
-    
-            if(temp==NULL){
-                ans.push_back(k);
-                k.clear();
-                if(!q.empty()){
-                    q.push(NULL);
-                }
-            }
-            else{
-                k.push_back(temp->data);
-                if(temp->left){
-                    q.push(temp->left);
-                }
-                
-                if(temp->right){
-                    q.push(temp->right);
-                }
-            }
-        }
-        
-        vector<int>rev;
-        int n=ans.size();
-        
-        for(int i=n-1;i>=0;i--){
-            for(auto j:ans[i]){
-                rev.push_back(j);
-            }
-        }
-        
-        return rev;
+    for(auto i:v){
+        for(auto j:i) cout<<j<<" ";
+        cout<<endl;
     }
-};
+}
 
 
-3rd approach :
+
+
+
+2nd approach :
 
 class Solution {
   public:
