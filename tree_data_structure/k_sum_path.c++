@@ -50,6 +50,40 @@ class Solution {
     }
 };
 
+or
+
+class Solution {
+  public:
+    void check(Node *root,int k,int sum,int &cnt){
+        if(root==NULL) return;
+        
+        sum+=root->data;
+        if(sum==k) cnt++;
+        
+        check(root->left,k,sum,cnt);
+        check(root->right,k,sum,cnt);
+    }
+    void solve(Node *root,int k,int &maxi){
+        if(root==NULL){
+            return ;
+        }
+        
+        int cnt=0;
+        
+        check(root,k,0,cnt);
+        maxi+=cnt;
+        
+        solve(root->left,k,maxi);
+        solve(root->right,k,maxi);
+    }
+    int sumK(Node *root, int k) {
+        // code here
+        int maxi=0;
+        solve(root,k,maxi);
+        return maxi;
+    }
+};
+
 t.c:-O(n^2) and s.c:O(n) alright
 
 class Solution{
@@ -75,7 +109,7 @@ class Solution{
         for(int i = size-1; i>=0; i--)  {
             sum += path[i];
             if(sum == k)
-                count++;
+                count++; //dont break because there can be more than one path with this k alright
         }
         
         path.pop_back();//at last jb return honge is node se to pop bhi kr dena
