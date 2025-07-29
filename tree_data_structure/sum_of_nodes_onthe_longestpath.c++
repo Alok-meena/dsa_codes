@@ -16,6 +16,35 @@ Output:
 13
 
 
+easy
+
+class Solution {
+  public:
+    void solve(Node *root,pair<int,int>&p,int level,int currsum){
+        if(root==NULL) return;
+        
+        currsum+=root->data;
+        if(level>p.first){
+            p.first=level;
+            p.second=currsum;
+        }
+        else if(level==p.first) p.second=max(p.second,currsum);
+        
+        solve(root->left,p,level+1,currsum);
+        solve(root->right,p,level+1,currsum);
+    }
+    int sumOfLongRootToLeafPath(Node *root) {
+        // code here
+        pair<int,int>p;//level,sum
+        
+        solve(root,p,0,0);
+        
+        return p.second;
+    }
+};
+
+
+
 
 class Solution
 {
