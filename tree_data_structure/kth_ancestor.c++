@@ -197,3 +197,38 @@ class Solution {
 };
 
 here we are passing bool to stop and not calculating further alright
+
+
+
+or can do 
+
+
+bool solve(Node* root,int node,vector<int>&v){
+        if(root==NULL) return false;
+        
+        v.push_back(root->data);
+        
+        if(root->data==node) return true;
+        
+        bool op1=solve(root->left,node,v);
+        bool op2=solve(root->right,node,v);
+        
+        if(op1 or op2) return true;
+        
+        v.pop_back();
+        
+        return false;
+    }
+    int kthAncestor(Node *root, int k, int node) {
+        // Code here
+        vector<int>v;
+        bool found=solve(root,node,v);
+        
+        if(!found) return -1;
+        
+        int n=v.size();
+        
+        if(k>=n) return -1;
+        
+        return v[n-k-1];
+    }
