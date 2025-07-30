@@ -14,7 +14,7 @@ Input :
 Output : 8 10 14 3 6 7 13 1 4
 
 
-
+prefer this code it is more better 
 
 vector<int> diagonal(Node *root)
 {
