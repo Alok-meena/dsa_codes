@@ -164,7 +164,7 @@ same t.c and s.c
   but dont know why partially accepted
 
 
-ek bnde ne kiya tha ye code O(n) and s.c:-O(1)
+ek bnde ne kiya tha ye code O(n) and s.c:-O(h)
 
  void makelist(TreeNode<int>* root, TreeNode<int>* &head)
 
@@ -217,7 +217,9 @@ TreeNode<int>* flatten(TreeNode<int>* root)
 bhai ye to smj nhi aaya 
 
 
-now i tried using morris traversal but didnt work
+now i tried using morris traversal but didnt work 
+
+this is wrong look 
 
 TreeNode<int>* flatten(TreeNode<int>* root)
 {
@@ -241,7 +243,7 @@ TreeNode<int>* flatten(TreeNode<int>* root)
             }
             else{
                 if(!root1) root1=temp;
-                curr1->left=NULL;
+                curr1->left=NULL; // if i am doing it then the links will be lost 
                 curr1=curr1->right;
             }
         }
