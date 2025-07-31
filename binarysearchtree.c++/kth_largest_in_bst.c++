@@ -1,5 +1,47 @@
 morris traversal is not possible in this case
 
+nhi bhai possible hai look
+
+
+class Solution {
+  public:
+    int kthLargest(Node *root, int k) {
+        // Your code here
+      int i=0;
+    int ans=-1;
+    Node * curr=root;
+
+    while(curr!=NULL){
+        if(curr->right){
+            Node* temp=curr->right;
+            while(temp->left!=NULL and temp->left!=curr){
+                temp=temp->left;
+            }
+
+            if(temp->left==NULL){
+                temp->left=curr;
+                curr=curr->right;
+            }
+            else{
+                i++;
+                if(i==k) ans=curr->data;
+                temp->left=NULL;
+                curr=curr->left;
+            }
+        }
+        else{
+            i++;
+            if(i==k) ans=curr->data;
+            curr=curr->left;
+        }
+    }
+
+    return ans;
+    }
+};
+
+t.c:-O(n) and s.c:-O(1)
+
 
 void rec(TreeNode<int>*root,int& k,int &cnt,int &ans)
 {
