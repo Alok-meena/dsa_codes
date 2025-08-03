@@ -57,6 +57,12 @@ class Solution {
             i++;
             return;
         }
+
+           if(s[i]=='-'){
+                       i++;
+                       sign=-1;
+                   }
+        
         
         int sum=0;
         
@@ -65,6 +71,8 @@ class Solution {
                 sum+=s[i]-'0';
                 i++;
             }
+
+       sum*=sign;
         
         root=new Node(sum);
         
