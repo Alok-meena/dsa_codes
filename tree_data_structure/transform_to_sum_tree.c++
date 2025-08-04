@@ -111,3 +111,34 @@ class Solution {
 };
 
 isme bs ham oldvalue store kr rhe hai alright har ek level ki 
+
+
+or 
+
+class Solution {
+  public:
+
+    // Convert a given tree to a tree where every node contains sum of values of
+    // nodes in left and right subtrees in the original tree
+    pair<int,int> solve(Node* &root){
+        if(root==NULL) return {0,0};
+        
+        pair<int,int> left=solve(root->left);
+        pair<int,int> right=solve(root->right);
+        
+        pair<int,int>ans;
+        
+        int sum=left.second+right.second;
+        
+        ans.first=root->data;
+        ans.second=sum+root->data;
+        
+        root->data=sum;
+        
+        return ans;
+    }
+    void toSumTree(Node *node) {
+        // Your code here
+        solve(node);
+    }
+};
