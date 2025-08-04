@@ -69,3 +69,42 @@ class Solution {
         return solve(root,len,cnt);
     }
 };
+
+
+best
+
+class Solution {
+  public:
+    /*You are required to complete this method*/
+    bool check(Node *root) {
+        // Your code here
+        queue<pair<int,Node*>>q;
+        q.push({0,root});
+        
+        int leaflevel=0;
+        bool first=true;
+        
+        while(!q.empty()){
+            int level=q.front().first;
+                Node *front=q.front().second;
+                q.pop();
+                
+                if(front->left==NULL and front->right==NULL){
+                    if(!first and level!=leaflevel) return false;
+                    leaflevel=level;
+                    first=false;
+                }
+                
+                if(front->left){
+                    q.push({level+1,front->left});
+                }
+                if(front->right){
+                    q.push({level+1,front->right});
+                }
+        }
+        
+        return true;
+    }
+};
+
+t.c:-O(n) and s.c:-O(max nodes at level)
