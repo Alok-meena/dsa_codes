@@ -63,3 +63,24 @@ class Solution {
 t.c:- O(n) and s.c:- O(h)
 
 Yes, when we use swap(node->left, node->right), we are swapping the pointers (addresses) to the left and right child nodes, but the actual links between the nodes remain intact. Let's break it down.
+
+
+but if we have to return new mirror tree
+
+class Solution {
+  public:
+    Node* createMirror(Node* root){
+        if (root == NULL) return NULL;
+
+        Node* mirror = new Node(root->data);
+
+        mirror->left = createMirror(root->right);
+        mirror->right = createMirror(root->left);
+
+        return mirror;
+    }
+
+    Node* mirror(Node* node) {
+        return createMirror(node); // returns a new mirrored root
+    }
+};
