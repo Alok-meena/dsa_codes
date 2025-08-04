@@ -53,7 +53,7 @@ class Solution {
         Node *right=findlca(root->right,a,b);
         
         if(left and right) return root;
-        
+            
         return left!=NULL?left:right;
     }
     int finddist(Node *root,int a,int level){
@@ -74,5 +74,64 @@ class Solution {
         int d1=finddist(lca,a,0);
         int d2=finddist(lca,b,0);
         return d1+d2;
+    }
+};
+
+
+
+optimized approach : store path to each find lca then just return dist from each node to that lca alright 
+
+t.c:-O(n) and s.c:-O(n)
+
+/* A binary tree node
+struct Node
+{
+    int data;
+    Node* left, * right;
+}; */
+
+class Solution {
+  public:
+    /* Should return minimum distance between a and b
+    in a tree with given root*/
+    void solve(Node *root,int val,vector<int>&v){
+        if(root==NULL) return;
+        
+        v.push_back(root->data);
+        
+        if(root->data==val) return;
+        
+        solve(root->left,val,v);
+        solve(root->right,val,v);
+        
+        if(v[v.size()-1]!=val) v.pop_back();
+    }
+    int findDist(Node* root, int a, int b) {
+        // Your code here
+        vector<int>path1;
+        vector<int>path2;
+        
+        solve(root,a,path1);
+        solve(root,b,path2);
+        
+        int i=0;
+        while(i<path1.size()){
+            if(path1[i]!=path2[i]){
+                break;
+            }
+            i++;
+        }
+        
+        
+        for(auto i:path1) cout<<i<<" ";
+        cout<<endl;
+        for(auto i:path2) cout<<i<<" ";
+        cout<<endl;
+        cout<<i<<endl;
+        
+        int val1=path1.size()-i;
+        int val2=path2.size()-i;
+        
+        return val1+val2;
     }
 };
