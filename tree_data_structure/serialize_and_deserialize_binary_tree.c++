@@ -116,3 +116,200 @@ public:
 // Your Codec object will be instantiated and called as such:
 // Codec ser, deser;
 // TreeNode* ans = deser.deserialize(ser.serialize(root));
+
+
+now can do this in inorder or postorder form also alright
+
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Codec {
+public:
+
+    // Encodes a tree to a single string.
+    string solve1(TreeNode* root){
+        if(root==NULL) return "";
+
+        string res="";
+
+        if(root->left or root->right){
+            res+="("+solve1(root->left)+")";
+        }
+
+        res+=to_string(root->val);
+
+        if(root->right){
+            res+="("+solve1(root->right)+")";
+        }
+
+        return res;
+    }
+    string serialize(TreeNode* root) {
+        string s=solve1(root);
+        cout<<s<<" ";
+        return s;
+    }
+
+    // Decodes your encoded data to tree.
+     void solve(TreeNode* &root,string &s,int &i,int n){
+        if(i>=n or s[i]==')'){
+            i++;
+            return;
+        }
+
+        TreeNode *leftchild=NULL;
+        TreeNode *rightchild=NULL;
+        
+        if(i<n and s[i]=='('){
+            i++;
+            solve(leftchild,s,i,n);
+        }
+
+        int sign=1;
+        if(i<n and s[i]=='-'){
+            sign=-1;
+            i++;
+        }
+        
+        int sum=0;
+        while(i<n and isdigit(s[i])){
+            sum*=10;
+            sum+=s[i]-'0';
+            i++;
+        }
+        
+        sum*=sign;
+
+        root=new TreeNode(sum);
+        
+        if(i<n and s[i]=='('){
+            i++;
+            solve(rightchild,s,i,n);
+        }
+        
+        if(i<n and s[i]==')'){
+            i++;
+        }
+
+        root->left=leftchild;
+        root->right=rightchild;
+    }
+    TreeNode* deserialize(string data) {
+        TreeNode *root=NULL;
+        int i=0;
+        solve(root,data,i,data.length());
+        return root;
+    }
+};
+
+// Your Codec object will be instantiated and called as such:
+// Codec ser, deser;
+// TreeNode* ans = deser.deserialize(ser.serialize(root));
+
+
+bs serialize me to root creation ko beech me kr diya and deserialize me hme root beech me chaihe but pahle root->left ki call ja rhi but root is null right
+to ek alg left ritght child bna lo unhe pass kr do and attach at last that's it
+
+
+
+and post form bhi dekh lo
+
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Codec {
+public:
+
+    // Encodes a tree to a single string.
+    string solve1(TreeNode* root){
+        if(root==NULL) return "";
+
+        string res="";
+
+        if(root->left or root->right){
+            res+="("+solve1(root->left)+")";
+        }
+
+        if(root->right){
+            res+="("+solve1(root->right)+")";
+        }
+
+        res+=to_string(root->val);
+
+        return res;
+    }
+    string serialize(TreeNode* root) {
+        string s=solve1(root);
+        cout<<s<<" ";
+        return s;
+    }
+
+    // Decodes your encoded data to tree.
+     void solve(TreeNode* &root,string &s,int &i,int n){
+        if(i>=n or s[i]==')'){
+            i++;
+            return;
+        }
+
+        TreeNode *leftchild=NULL;
+        TreeNode *rightchild=NULL;
+        
+        if(i<n and s[i]=='('){
+            i++;
+            solve(leftchild,s,i,n);
+        }
+        
+        if(i<n and s[i]=='('){
+            i++;
+            solve(rightchild,s,i,n);
+        }
+
+        int sign=1;
+        if(i<n and s[i]=='-'){
+            sign=-1;
+            i++;
+        }
+        
+        int sum=0;
+        while(i<n and isdigit(s[i])){
+            sum*=10;
+            sum+=s[i]-'0';
+            i++;
+        }
+        
+        sum*=sign;
+
+        root=new TreeNode(sum);
+        
+        if(i<n and s[i]==')'){
+            i++;
+        }
+
+        root->left=leftchild;
+        root->right=rightchild;
+    }
+    TreeNode* deserialize(string data) {
+        TreeNode *root=NULL;
+        int i=0;
+        solve(root,data,i,data.length());
+        return root;
+    }
+};
+
+// Your Codec object will be instantiated and called as such:
+// Codec ser, deser;
+// TreeNode* ans = deser.deserialize(ser.serialize(root));
