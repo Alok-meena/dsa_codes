@@ -1,12 +1,8 @@
-
-
-
-
-
 1922. Count Good Numbers
 Solved
 Medium
 Topics
+premium lock icon
 Companies
 Hint
 A digit string is good if the digits (0-indexed) at even indices are even and the digits at odd indices are prime (2, 3, 5, or 7).
@@ -39,26 +35,79 @@ Constraints:
 
 
 
+brute force:  t.c:-O(10^n * n) and s.c:-O(n)
+
+
 class Solution {
-  public:
-    const int MOD = 1e9 + 7;
-
-    long long power(long long base, long long exp) {
-        long long result = 1;
-        while (exp > 0) {
-            if (exp % 2 == 1)
-                result = (result * base) % MOD;
-            base = (base * base) % MOD; //when the exp is even then just do square and if it is odd then to make the exponent even first do result*base then continue
-            exp /= 2;
+public:
+    int mod=1e9+7;
+    int power(int x,int n){
+        long long ans=1;
+        while(n>0){
+            if(n&1){
+                ans=(1LL*ans*x)%mod;
+                n=n-1;
+            }
+            else{
+                x=(1LL*x*x)%mod;
+                n=n/2;
+            }
         }
-        return result;
-    }
 
-    int countGoodNumbers(long long n) {
-        long long even = (n + 1) / 2;
-        long long odd = n / 2;
-        long long ans = (power(5, even) * power(4, odd)) % MOD;
         return ans;
+    }
+    int countGoodNumbers(long long n) {
+        long total = power(10, n);
+        int ans = 0;
+
+        for (int i = 0; i < total; i++) {
+            string s = to_string(i);
+            while (s.length() < n) s = "0" + s; // pad with leading 0s
+
+            bool isGood = true;
+            for (int j = 0; j < s.size(); j++) {
+                int digit = s[j] - '0';
+                if (j % 2 == 0 && digit % 2 != 0) isGood = false;
+                if (j % 2 == 1 && !(digit == 2 || digit == 3 || digit == 5 || digit == 7)) isGood = false;
+            }
+
+            if (isGood) ans = (ans + 1) % mod;
+        }
+
+        return ans;
+    }
+};
+
+
+optimized:
+
+t.c:-O(5^(n+1/2) * 4^(n/2)) and s.c:-O(1)
+
+class Solution {
+public:
+    int mod=1e9+7;
+    long long power(long long x,long long n){
+        long long ans=1;
+        while(n>0){
+            if(n&1){
+                ans=(ans*x)%mod;
+                n=n-1;
+            }
+            else{
+                x=(x*x)%mod;
+                n=n/2;
+            }
+        }
+
+        return ans;
+    }
+    int countGoodNumbers(long long n) {
+       long long evenpos=(n+1)/2;
+       long long oddpos=(n)/2;
+       long long a=power(5,evenpos)%mod;
+       long long b=power(4,oddpos)%mod;
+       long long ans=(a*b)%mod;
+       return ans;
     }
 };
 
