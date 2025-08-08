@@ -95,3 +95,45 @@ int minCut(string s) {
         }
         return dp[0]-1;
     }
+
+
+
+this is running on leetcode
+
+
+class Solution {
+public:
+    int minCut(string s) {
+        int n = s.length();
+        vector<vector<bool>> isPalindrome(n, vector<bool>(n, false));
+        vector<int> dp(n + 1, 0);
+
+        // Precompute isPalindrome[i][j]
+        for (int i = n - 1; i >= 0; --i) {
+            for (int j = i; j < n; ++j) {
+                if (s[i] == s[j]) {
+                    if (j - i <= 1) {
+                        isPalindrome[i][j] = true;
+                    } else {
+                        isPalindrome[i][j] = isPalindrome[i + 1][j - 1];
+                    }
+                }
+            }
+        }
+
+        // Bottom-up DP
+        for (int i = n - 1; i >= 0; --i) {
+            int cuts = INT_MAX;
+            for (int j = i; j < n; ++j) {
+                if (isPalindrome[i][j]) {
+                    int cut = 1 + dp[j + 1];
+                    cuts = min(cuts, cut);
+                }
+            }
+            dp[i] = cuts;
+        }
+
+        return dp[0] - 1; // subtract 1 because we count an extra cut
+    }
+};
+
