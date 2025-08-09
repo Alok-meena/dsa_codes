@@ -127,3 +127,46 @@ class Solution {
 };
 
 t.c:-O(n+m) and s.c:-O(n+m)
+
+
+if already sorted given 
+
+class Solution {
+  public:
+    vector<int> findUnion(vector<int> &a, vector<int> &b) {
+        // code here
+        int n=a.size();
+        int m=b.size();
+        vector<int>ans;
+        
+        int i=0,j=0;
+        
+        while(i<n and j<m){
+            if(a[i]<=b[j]){
+                if(ans.empty() or ans.back()!=a[i]) ans.push_back(a[i]);
+                i++;
+            }
+            else{
+                if(ans.empty() or ans.back()!=b[j]) ans.push_back(b[j]);
+                j++;
+            }
+        }
+        
+        while(i<n){
+            if(ans.empty() or ans.back()!=a[i]){
+                ans.push_back(a[i]);
+            }
+            i++;
+        }
+        
+        while(j<m){
+            if(ans.empty() or ans.back()!=b[j]){
+                ans.push_back(b[j]);
+            }
+            j++;
+        }
+        
+        return ans;
+    }
+};
+t.c:-O(N+m) and s.c:-O(n+m) alright
