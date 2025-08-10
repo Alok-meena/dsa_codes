@@ -14,7 +14,40 @@ Input: intervals = [[1,4],[4,5]]
 Output: [[1,5]]
 Explanation: Intervals [1,4] and [4,5] are considered overlapping.
 
+brute force : O(n^2)
 
+class Solution {
+public:
+    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        vector<vector<int>>ans;
+
+        sort(intervals.begin(),intervals.end());
+
+        int n=intervals.size();
+
+        for(int i=0;i<n;i++){
+            int start=intervals[i][0];
+            int end=intervals[i][1];
+
+            if(!ans.empty() and ans.back()[1]>=end){
+                continue;
+            }
+
+            for(int j=i+1;j<n;j++){
+                if(intervals[j][0]<=end){
+                    end=max(end,intervals[j][1]);
+                }
+                else break;
+            }
+
+            ans.push_back({start,end});
+        }
+
+        return ans;
+    }
+};
+
+optimized O(n) t.c 
 
 class Solution {
 public:
@@ -122,4 +155,6 @@ int main(){
     
     
 } 
- 
+
+
+
