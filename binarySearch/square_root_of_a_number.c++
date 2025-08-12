@@ -103,7 +103,42 @@ int main() {
     cout<<ans;
 }
 
-t.c:-O(nlog(m)) alright
+t.c:-O(nlog(m)) alright  can do like this but if we want exact ans and if not possible return -1 then use below code
+
+
+class Solution {
+  public:
+    int nthRoot(int n, int m) {
+        // Code here
+        int l=1;
+        int h=m;
+        if(n>m) return 0;
+
+        while(l<=h){
+            int mid=l+(h-l)/2;
+            long long val=1;
+            for(int i=1;i<=n;i++){
+                val=val*mid;
+                if(val>m) break;
+            }
+
+            if(val==m){
+                return mid;
+            }
+            else if(val<m){
+                l=mid+1;
+            }
+            else h=mid-1;
+        }
+        
+        return -1;
+    }
+};
+
+more optimized  t.c:-O(nlogm) because logm to hai hi sath me each time there is a loop of n alright so take care of it
+
+and if u use power exponentaition in power(mid,n) so t.c : O(logm * logn) both are diff cannot write O(log(m+n)) wrong ho jayega but it can overflow
+so use the above method only
 
 
 for ans with decimal also
