@@ -170,3 +170,8 @@ long long maxSubarraySum(vector<int> arr, int n)
 }
 
 kadane's algo
+
+
+but if we have to print only positive val sum
+
+
