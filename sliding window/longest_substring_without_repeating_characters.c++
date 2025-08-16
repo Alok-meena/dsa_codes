@@ -56,7 +56,7 @@ public:
                 }
             }
 
-            len=max(len,j-i);
+            len=max(len,j-i); //did j-i not j-i+1 because j will be ahead if invalid break and if reached end then also it will be at n alright
         }
 
         return len;
