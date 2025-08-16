@@ -3,6 +3,21 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+void bubblesort(int n,vector<int>&arr){
+    if(n==0) return;
+
+    for(int j=0;j<n-1;j++){
+        if(arr[j]>arr[j+1]){
+            swap(arr[j],arr[j+1]);
+        }
+    }
+    
+    bubblesort(n-1,arr);
+}
+
+recursive bubble sort :
+
+
 int main(){
     vector<int>v={5,4,3,2,1};
 
