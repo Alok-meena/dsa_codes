@@ -51,7 +51,19 @@ but the above one is more efficient
 #include <bits/stdc++.h>
 using namespace std;
 
+recursive one
 
+void insertionsort(int i,int n,vector<int>&arr){
+    if(i==n) return;
+
+    int j=i;
+    while(j>0 and arr[j-1]>arr[j]){
+        swap(arr[j],arr[j-1]);
+        j--;
+    }
+
+    insertionsort(i+1,n,arr);
+}
 
 int main(){
     vector<int>v={5,4,3,2,1};
