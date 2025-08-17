@@ -56,3 +56,28 @@ t.c:-O(n^2) and s.c:-O(1) alright
 optimized: t.c:-O(2*n) and s.c:-O(1)
 
 to do in O(n) use if instead of inner while alright
+
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int len=0;
+        int n=s.length();
+
+        int l=0,r=0;
+        unordered_map<char,int>mp;
+
+        while(r<n){
+            if(mp.find(s[r])!=mp.end()){
+                l=max(l,mp[s[r]]+1);
+            }
+
+            mp[s[r]]=r;
+
+            len=max(len,r-l+1);
+            r++;
+        }
+
+        return len;
+    }
+};
