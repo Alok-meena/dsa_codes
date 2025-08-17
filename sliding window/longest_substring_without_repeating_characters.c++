@@ -63,6 +63,31 @@ public:
     }
 };
 
+or
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int len=0;
+        int n=s.length();
+
+        for(int i=0;i<n;i++){
+            unordered_map<char,int>mp;
+            for(int j=i;j<n;j++){
+                mp[s[j]]++;
+                if(mp[s[j]]>1){
+                    break;
+                }
+                else{
+                    len=max(len,j-i+1);
+                }
+            }
+        }
+
+        return len;
+    }
+};
+
 
 optimizd: t.c:-O(2*n) and s.c:-O(256)
 
