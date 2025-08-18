@@ -2,7 +2,9 @@ bool isbst(BinaryTreeNode<int> *root,int min,int max){
     if(root==NULL){
         return true;
     }
-    if(root->data>=min && root->data<=max){// mtlb ager -infinite aor +infinite ki range me hai to insert kr lo left ki call then right ki then return both
+
+    //equal to k sign hta do bs
+    if(root->data>min && root->data<max){// mtlb ager -infinite aor +infinite ki range me hai to insert kr lo left ki call then right ki then return both
         bool left=isbst(root->left,min,root->data);
         bool right=isbst(root->right,root->data,max);
         return left && right;
