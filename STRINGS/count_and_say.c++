@@ -194,4 +194,30 @@ public:
 };
 
 my code t.c:-O(exponential)
- 
+
+
+or can do
+
+ class Solution {
+public:
+    string countAndSay(int n) {
+        string ans="1";
+
+        for(int i=2;i<=n;i++){
+            string s="";
+            int j=0;
+            while(j<ans.length()){
+                int cnt=1;
+                while(j+1<ans.length() and ans[j]==ans[j+1]){
+                    cnt++;
+                    j++;
+                }
+                s+=to_string(cnt)+ans[j];
+                j++;
+            }
+            ans=s;
+        }
+
+        return ans;
+    }
+};
