@@ -287,3 +287,50 @@ O(N), Where ‘N’ is the length of the rod.
 As we created a ‘DP’ array for storing the values.
 
 and no space optimmiztion is possible okk
+
+
+
+class Solution {
+  public:
+    // Function to find the maximum number of cuts.
+    int solve(int tar,int x,int y,int z,vector<int>&dp){
+        if(tar==0){
+            return 0;
+        }
+        
+        if(tar<0) return INT_MIN;
+        
+        if(dp[tar]!=-1) return dp[tar];
+        
+        int op1=INT_MIN,op2=INT_MIN,op3=INT_MIN;
+        
+        if(tar>=x){
+            int ans=solve(tar-x,x,y,z,dp);
+            if(ans!=INT_MIN){
+                op1=1+ans;
+            }
+        }
+        
+        if(tar>=y){
+            int ans=solve(tar-y,x,y,z,dp);
+            if(ans!=INT_MIN){
+                op2=1+ans;
+            }
+        }
+        
+        if(tar>=z){
+            int ans=solve(tar-z,x,y,z,dp);
+            if(ans!=INT_MIN){
+                op3=1+ans;
+            }
+        }
+        
+        return dp[tar]=max({op1,op2,op3});
+    }
+    int maximizeTheCuts(int n, int x, int y, int z) {
+        // Your code here
+        vector<int>dp(n+1,-1);
+        int ans=solve(n,x,y,z,dp);
+        return ans<0?0:ans;
+    }
+};
