@@ -85,3 +85,39 @@ public:
     }
 };
 
+
+or
+
+class Solution {
+public:
+    int solve(int i,int j,int n,int m,vector<vector<int>>&mat,int &count,vector<vector<int>>&dp){
+        if(i>=n or j>=m) return 0;
+
+        if(dp[i][j]!=-1) return dp[i][j];
+
+        int right=solve(i,j+1,n,m,mat,count,dp);
+        int diagonal=solve(i+1,j+1,n,m,mat,count,dp);
+        int down=solve(i+1,j,n,m,mat,count,dp);
+        
+        if(mat[i][j]==1){
+            int ans=1+min({right,diagonal,down});
+            return dp[i][j]=ans;
+        }
+        else return dp[i][j]=0;
+    }
+    int countSquares(vector<vector<int>>& mat) {
+        int n=mat.size();
+        int m=mat[0].size();
+        int count=0;
+        vector<vector<int>>dp(n+1,vector<int>(m+1,-1));
+        // solve(0,0,n,m,mat,count,dp);
+
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                count+=solve(i,j,n,m,mat,count,dp);
+            }
+        }
+
+        return count;
+    }
+};
