@@ -72,7 +72,7 @@ class Solution {
         
         for(int i=0;i<n-1;i++){
             for(int j=i+1;j<n;j++){
-                int cnt=2;
+                int cnt=2; //because 2 ele's will always be in ap alright
                 int diff=arr[j]-arr[i];
                 int curr=arr[i];
                 
