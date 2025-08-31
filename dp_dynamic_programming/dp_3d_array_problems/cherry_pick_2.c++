@@ -146,3 +146,39 @@ int cherryPickup(vector<vector<int>>& grid) {
         }
         return dp[0][0][c-1];
     }
+
+
+2nd time
+int cherryPickup(vector<vector<int>>& grid) {
+        vector<vector<vector<int>>>dp(grid.size()+1,vector<vector<int>>(grid[0].size()+1,vector<int>(grid[0].size()+1,-1)));
+        int n=grid.size();
+        int m=grid[0].size();
+        for(int j1=0;j1<grid[0].size();j1++){
+            for(int j2=0;j2<grid[0].size();j2++){
+                if(j1==j2) dp[n-1][j1][j2]=grid[n-1][j1];
+                else dp[n-1][j1][j2]=grid[n-1][j1]+grid[n-1][j2];
+            }
+        }
+
+        for(int i=grid.size()-2;i>=0;i--){
+            for(int j1=grid[0].size()-1;j1>=0;j1--){
+                for(int j2=grid[0].size()-1;j2>=0;j2--){
+                    int ans=INT_MIN;
+
+        for(int dir=-1;dir<=1;dir++){
+            for(int dir2=-1;dir2<=1;dir2++){
+                int val1=grid[i][j1];
+                int val2=grid[i][j2];
+
+                if(j1==j2){
+                    if(i+1<n and j1+dir>=0 and j1+dir<m and j2+dir2>=0 and j2+dir2<m) ans=max(ans,val1+dp[i+1][j1+dir][j2+dir2]);
+                }
+                else if(i+1<n and j1+dir>=0 and j1+dir<m and j2+dir2>=0 and j2+dir2<m) ans=max(ans,val1+val2+dp[i+1][j1+dir][j2+dir2]);
+                    }
+                }
+
+                dp[i][j1][j2]=ans;
+                }
+            }
+        }
+        return dp[0][0][grid[0].size()-1];
