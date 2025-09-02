@@ -11,6 +11,49 @@ Explanation: The maximum length of a side of the square sub-matrix is 2. The mat
 
 
 
+bo bhai bat ye hai ko 0,0 bhejne pe bhi ye pure matrix ko traverse kr rha until out of bound and if curr cell is 0 then it is returning 0 only at end so that's
+why it is correct but if it do return before then ans will be wrong alright but then we have to call the fun for every pos alright
+
+// User function Template for C++
+
+class Solution {
+  public:
+    int solve(int i,int j,int n,int m,int &maxi,vector<vector<int>>&mat,vector<vector<int>>&dp){
+        if(i>=n or j>=m) return 0;
+        if(mat[i][j]==0) return 0;
+        if(dp[i][j]!=-1) return dp[i][j];
+        
+        int right=solve(i,j+1,n,m,maxi,mat,dp);
+        int diagonal=solve(i+1,j+1,n,m,maxi,mat,dp);
+        int down=solve(i+1,j,n,m,maxi,mat,dp);
+
+        if(mat[i][j]==1){
+            int ans=1+min({right,diagonal,down});
+            maxi=max(maxi,ans);
+            return dp[i][j]=ans;
+        }
+        else return dp[i][j]=0;
+    }
+    int maximalSquare(vector<vector<int>>& matrix) {
+        int n=matrix.size();
+        int m=matrix[0].size();
+        int maxi=0;
+        vector<vector<int>>dp(n+1,vector<int>(m+1,-1));
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                solve(i,j,n,m,maxi,matrix,dp);
+            }
+        }
+        return maxi;
+    }
+    int maxSquare(vector<vector<int>>& mat) {
+        // code here
+        return maximalSquare(mat);
+    }
+};
+
+like this and in both cases t.c is O(n*m) due to memo alright
+
 1:recursion
 
 
