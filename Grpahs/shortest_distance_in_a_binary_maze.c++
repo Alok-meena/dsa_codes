@@ -56,7 +56,50 @@ The source and destination cells are always inside the given matrix.
 
 
 
+simplest of all
 
+// User function Template for C++
+
+class Solution {
+  public:
+    int shortestPath(vector<vector<int>> &grid, pair<int, int> source,
+                     pair<int, int> destination) {
+        // code here
+        int n=grid.size();
+        int m=grid[0].size();
+        
+        queue<pair<int,pair<int,int>>>q;
+        q.push({0,{source.first,source.second}});
+        
+        while(!q.empty()){
+            int dist=q.front().first;
+            int i=q.front().second.first;
+            int j=q.front().second.second;
+            q.pop();
+            
+            if(i==destination.first and j==destination.second) return dist;
+            
+            int dirx[4]={-1,0,0,1};
+            int diry[4]={0,-1,1,0};
+            
+            for(int d=0;d<4;d++){
+                int newi=i+dirx[d];
+                int newj=j+diry[d];
+                
+                if(newi>=0 and newi<n and newj>=0 and newj<m and grid[newi][newj]==1){
+                    grid[newi][newj]=0;
+                    q.push({dist+1,{newi,newj}});
+                }
+            }
+        }
+        
+        return -1;
+    }
+};
+
+
+
+            
 
 
 
