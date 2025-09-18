@@ -75,3 +75,39 @@ public:
         return true;
     }
 };
+
+
+or can use 3 conditions
+
+class Solution {
+public:
+    bool isAlienSorted(vector<string>& words, string order) {
+        vector<int>v(26,0);
+        for(int i=0;i<order.size();i++){
+            v[order[i]-'a']=i;
+        }
+
+        for(int i=1;i<words.size();i++){
+            string a=words[i-1];
+            string b=words[i];
+
+            int len=min(a.length(),b.length());
+            bool found=false;
+            int j=0;
+            while(j<len){
+                if(v[a[j]-'a']>v[b[j]-'a']){
+                    return false;
+                }
+                else if(a[j]!=b[j]){
+                    found=true;
+                    break;
+                }
+                j++;
+            }
+
+            if(!found and a.length()>b.length()) return false;
+        }
+
+        return true;
+    }
+};
