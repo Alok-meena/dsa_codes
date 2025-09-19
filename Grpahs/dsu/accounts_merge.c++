@@ -138,6 +138,93 @@ public:
 
 t.c:-O(mlogm) and s.c:-O(n+m) alright
 
+2nd time
+
+
+class Solution {
+public:
+    class DisjointSet{
+        public:
+        vector<int>parent,rank;
+
+        DisjointSet(int size){
+            parent.resize(size+1);
+            rank.resize(size+1,0);
+
+            for(int i=0;i<=size;i++){
+                parent[i]=i;
+            }
+        };
+
+        int findUPar(int u){
+            if(parent[u]==u) return u;
+            return parent[u]=findUPar(parent[u]);
+        }
+
+        void unionByRank(int u,int v){
+            int up=findUPar(u);
+            int vp=findUPar(v);
+
+            if(up==vp) return;
+
+            if(rank[up]<rank[vp]){
+                parent[up]=vp;
+            }
+            else if(rank[vp]<rank[up]){
+                parent[vp]=up;
+            }
+            else{
+                parent[vp]=up;
+                rank[up]++;
+            }
+        };
+    };
+
+    vector<vector<string>> accountsMerge(vector<vector<string>>& accounts) {
+        int n=accounts.size();
+
+        DisjointSet ds(n);
+
+        unordered_map<string,int>mailtoNode;
+
+        for(int i=0;i<accounts.size();i++){
+            for(int j=1;j<accounts[i].size();j++){
+                string s=accounts[i][j];
+
+                if(mailtoNode.find(s)==mailtoNode.end()){
+                    mailtoNode[s]=i;
+                }
+                else{
+                    ds.unionByRank(mailtoNode[s],i);
+                }
+            }
+        }
+
+        unordered_map<int,vector<string>>adj;
+
+        for(auto i:mailtoNode){
+            string mail=i.first;
+            int node=i.second;
+
+            adj[ds.findUPar(node)].push_back(mail);
+        }
+
+        vector<vector<string>>ans;
+
+        for(auto i:adj){
+            vector<string>v;
+            for(auto mail:i.second){
+                v.push_back(mail);
+            }
+            sort(v.begin(),v.end());
+            v.insert(v.begin(),accounts[i.first][0]);
+            ans.push_back(v);
+        }
+
+        return ans;
+    }
+};
+
 
 to run the gfg code we have to make 2 changes dont know why ?
 
