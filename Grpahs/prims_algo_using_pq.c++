@@ -119,7 +119,7 @@ vector<pair<pair<int, int>, int>> calculatePrimsMST(int n, int m, vector<pair<pa
 
         vis[node]=1;
         cost+=wt;
-        mst.push_back({parent,node,wt});
+        if(parent!=-1) mst.push_back({parent,node,wt});
 
         for(auto neigh:adj[node]){
             if(!vis[neigh.first]){
@@ -134,7 +134,7 @@ vector<pair<pair<int, int>, int>> calculatePrimsMST(int n, int m, vector<pair<pa
         int parent=mst[i][0];
         int node=mst[i][1];
         int wt=mst[i][2];
-        if(parent!=-1) ans.push_back({{parent,node},wt});
+        ans.push_back({{parent,node},wt});
     }
 
     return ans;
