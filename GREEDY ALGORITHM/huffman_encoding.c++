@@ -130,3 +130,82 @@ class Solution
 
 t.c:-O(nlogn) and s.c:-O(n)
 
+
+and if we have to store this mapping with each char then we can just add char in node and use mapping
+
+like below:
+
+class Solution {
+  public:
+  
+    class node{
+        public:
+        int data;
+        char ch;
+        node *left;
+        node *right;
+        
+        node(int data,char ch){
+            this->data=data;
+            this->ch=ch;
+            this->left=NULL;
+            this->right=NULL;
+        }
+    };
+    
+    class cmp{
+        public:
+        
+        bool operator()(node *a,node *b){
+            return a->data>b->data;
+        }
+    };
+    
+    void preorder(node *root,map<char,string>&mapping,string path){
+        if(root->left==NULL and root->right==NULL){
+            mapping[root->ch]=path;
+            return;
+        }
+        
+        preorder(root->left,mapping,path+'0');
+        preorder(root->right,mapping,path+'1');
+    }
+    
+    vector<string> huffmanCodes(string S, vector<int> f, int N) {
+        // Code here
+        priority_queue<node*,vector<node*>,cmp>pq;
+        
+        for(int i=0;i<S.length();i++){
+            node *temp=new node(f[i],S[i]);
+            pq.push(temp);
+        }
+        
+        while(pq.size()>1){
+            node *a=pq.top();pq.pop();
+            node *b=pq.top();pq.pop();
+            
+            node *root=new node(a->data+b->data,'$');
+            
+            root->left=a;
+            root->right=b;
+            
+            pq.push(root);
+        }
+        
+        map<char,string>mapping;
+        
+        node* root=pq.top();
+        string path;
+        
+        preorder(root,mapping,path);
+        
+        vector<string>ans;
+        
+        for(int i=0;i<S.length();i++){
+            ans.push_back(mapping[S[i]]);
+        }
+        
+        return ans;
+    }
+};
+
