@@ -82,3 +82,23 @@ class Solution {
         return ans;
     }
 };
+
+
+
+// User function Template for C++
+
+class Solution {
+  public:
+    int minimumDays(int s, int n, int m) {
+        // code here
+        if(((7*m)>(6*n) and s>6) or n<m) return -1;
+        
+        int totalfood=s*m;
+        int sundays=s/7;
+        int buyingdays=s-sundays;
+        
+        if(totalfood>(buyingdays*n)) return -1;
+        
+        return (totalfood+n-1)/n;
+    }
+};
