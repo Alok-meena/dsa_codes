@@ -78,7 +78,16 @@ class Solution {
             temp=right;
             right=right->next;
         }
-        
+
+
+        above no need of while loop if one of the a or b is ended just connect the list to other that's it 
+
+        // if(b!=NULL){
+        // ans->next=b;
+        // }
+        // if(a!=NULL){
+        //     ans->next=a;
+        // }
         
         temp=dummy->next;
         dummy->next=NULL;
