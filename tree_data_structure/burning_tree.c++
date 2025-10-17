@@ -31,6 +31,102 @@ It takes 7s to burn the complete tree.
 
 
 
+best code
+
+/*
+class Node {
+  public:
+    int data;
+    Node *left;
+    Node *right;
+
+    Node(int val) {
+        data = val;
+        left = right = NULL;
+    }
+};
+*/
+
+class Solution {
+  public: 
+    Node* mapping(Node *root,map<Node*,Node*>&nodetoParent,int tar){
+        queue<Node*>q;
+        q.push(root);
+        
+        Node *ans=NULL;
+        
+        nodetoParent[root]=NULL;
+        
+        while(!q.empty()){
+            Node *front=q.front();
+            q.pop();
+            
+            if(front->data==tar) ans=front;
+            
+            if(front->left){
+                q.push(front->left);
+                nodetoParent[front->left]=front;
+            }
+            
+            if(front->right){
+                q.push(front->right);
+                nodetoParent[front->right]=front;
+            }
+        }
+        
+        return ans;
+    }
+    
+    int solve(Node *root,map<Node*,Node*>&nodetoParent,Node* tar){
+        queue<pair<int,Node*>>q;
+        map<Node*,bool>vis;
+        q.push({0,tar});
+        
+        vis[tar]=true;
+        
+        int ans=0;
+        
+        while(!q.empty()){
+            int time=q.front().first;
+            Node *front=q.front().second;
+            q.pop();
+            
+            ans=max(ans,time);
+            
+            if(front->left and !vis[front->left]){
+                vis[front->left]=true;
+                q.push({time+1,front->left});
+            }
+            
+            if(front->right and !vis[front->right]){
+                vis[front->right]=true;
+                q.push({time+1,front->right});
+            }
+            
+            if(nodetoParent[front]!=NULL and !vis[nodetoParent[front]]){
+                vis[nodetoParent[front]]=true;
+                q.push({time+1,nodetoParent[front]});
+            }
+        }
+        
+        return ans;
+    }
+    
+    int minTime(Node* root, int target) {
+        // code here
+        map<Node*,Node*>nodetoParent;
+        
+        Node *tar=mapping(root,nodetoParent,target);
+        
+        return solve(root,nodetoParent,tar);
+    }
+};
+
+other
+
+
+
+
 class Solution {
     private:
     Node *createNodetoparentmapping(Node *root,int target,map<Node*,Node*>&nodetoparent){
