@@ -21,7 +21,7 @@ BinaryTreeNode<int>* preorderToBST(vector<int> &preorder) {
     return root;
 }
 
-t.c:-O(n^2) and s.c:-O(n)
+t.c:-O(n^2) for skew tree o/w it would be O(nlogn) okk and s.c:-O(n)
 
 
 approach 2:---
