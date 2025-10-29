@@ -142,3 +142,30 @@ class Solution {
         solve(node);
     }
 };
+
+below one is the best solution
+
+class Solution {
+  public:
+
+    // Convert a given tree to a tree where every node contains sum of values of
+    // nodes in left and right subtrees in the original tree
+    pair<int,int> solve(Node *root){
+        if(root==NULL){
+            return {0,0};
+        }
+        
+        pair<int,int> left=solve(root->left);
+        pair<int,int> right=solve(root->right);
+        
+        int sum=left.first+right.first+left.second+right.second;
+        int val=root->data;
+        root->data=sum;
+        
+        return {sum,val};
+    }
+    void toSumTree(Node *node) {
+        // Your code here
+        solve(node);
+    }
+};
