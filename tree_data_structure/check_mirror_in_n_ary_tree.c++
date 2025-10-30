@@ -90,3 +90,38 @@ class Solution {
 };
 
 t.c:-O(e) and s.c:-O(e)
+
+
+can do this instead this direct access using auto 
+
+class Solution {
+  public:
+    int checkMirrorTree(int n, int e, int A[], int B[]) {
+        // code here
+        unordered_map<int,queue<int>>a;
+        unordered_map<int,stack<int>>b;
+        
+        int i=0;
+        while(i<2*e){
+            a[A[i]].push(A[i+1]);
+            b[B[i]].push(B[i+1]);
+            i=i+2;
+        }
+        
+        
+        for(auto i:a){
+            int node=i.first;
+            queue<int>q=i.second;
+            stack<int>s=b[node];
+            
+            while(!q.empty() and !s.empty()){
+                int front=q.front();q.pop();
+                int top=s.top();s.pop();
+                
+                if(front!=top) return 0;
+            }
+        }
+        
+        return 1;
+    }
+};
