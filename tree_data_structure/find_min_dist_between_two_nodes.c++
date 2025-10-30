@@ -135,3 +135,84 @@ class Solution {
         return val1+val2;
     }
 };
+
+
+
+and most simple is burning tree like solution okk
+
+/* A binary tree node
+struct Node
+{
+    int data;
+    Node* left, * right;
+}; */
+
+class Solution {
+  public:
+    /* Should return minimum distance between a and b
+    in a tree with given root*/
+    Node* mapping(Node *root,int a,unordered_map<Node*,Node*>&nodetoparent){
+        queue<Node*>q;
+        q.push(root);
+        
+        Node *tar=NULL;
+        
+        while(!q.empty()){
+            Node *front=q.front();
+            q.pop();
+            
+            if(front->data==a) tar=front;
+            
+            if(front->left){
+                nodetoparent[front->left]=front;
+                q.push(front->left);
+            }
+            if(front->right){
+                nodetoparent[front->right]=front;
+                q.push(front->right);
+            }
+        }
+        
+        return tar;
+    }
+    
+    int solve(Node *tar,unordered_map<Node*,Node*>nodetoparent,int b){
+        queue<pair<Node*,int>>q;
+        unordered_map<Node*,bool>vis;
+        vis[tar]=true;
+        q.push({tar,0});
+        
+        while(!q.empty()){
+            Node *front=q.front().first;
+            int dist=q.front().second;
+            q.pop();
+            
+            if(front->data==b) return dist;
+            
+            if(front->left and !vis[front->left]){
+                vis[front->left]=true;
+                q.push({front->left,dist+1});
+            }
+            
+            if(front->right and !vis[front->right]){
+                vis[front->right]=true;
+                q.push({front->right,dist+1});
+            }
+            
+            if(nodetoparent[front]!=NULL and !vis[nodetoparent[front]]){
+                vis[nodetoparent[front]]=true;
+                q.push({nodetoparent[front],dist+1});
+            }
+        }
+        
+        return -1;
+    }
+    
+    int findDist(Node* root, int a, int b) {
+        // Your code here
+        unordered_map<Node*,Node*>nodetoparent;
+        Node *target=mapping(root,a,nodetoparent);
+        
+        return solve(target,nodetoparent,b);
+    }
+};
