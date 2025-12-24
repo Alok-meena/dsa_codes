@@ -105,3 +105,31 @@ int minimumTotal(vector<vector<int>>& v) {
         return dp[0][0];
     }
 
+
+or we can also copy the top dwon appproach as it is with b.c etc
+
+ int minimumTotal(vector<vector<int>>& v) {
+        int n=v.size();
+        vector<vector<int>>dp(n+1,vector<int>(n+1,0));
+
+        int m=0;
+        for(int i=0;i<n;i++){
+            int sz=v[i].size();
+            m=max(m,sz);
+        }
+
+        for(int j=0;j<m;j++){
+            dp[n-1][j]=v[n-1][j];
+        }
+
+        for(int i=n-2;i>=0;i--){
+            for(int j=i;j>=0;j--){
+                int op1=v[i][j]+dp[i+1][j];
+                int op2=v[i][j]+dp[i+1][j+1];
+
+                dp[i][j]=min(op1,op2);
+            }
+        }
+        return dp[0][0];
+    }
+
